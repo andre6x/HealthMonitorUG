@@ -194,24 +194,26 @@ public class LoginDataThreeFragment extends Fragment {
 
     public void postExecutionPaises(){
         if (rowsPaises != null) {
-            if (rowsPaises.getRows().size() > 0) {
-                showLayout();
-                String[] arrayPaises = getPaises(rowsPaises.getRows());
-                setSpinner(arrayPaises);
+            if (rowsPaises.getRows() != null ) {
+                if ( rowsPaises.getRows().size() > 0) {
+                    showLayout();
+                    String[] arrayPaises = getPaises(rowsPaises.getRows());
+                    setSpinner(arrayPaises);
 
-                BtnContinuar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //if(camposLlenos()) {
-                            callGuardarData();
-                            restarLoading();
-                          //  SavePreferencesCallMainActivity();
-                            //Toast.makeText(getActivity(), "GUARDAR EN PREFERENCES", Toast.LENGTH_SHORT).show();
-                       // }
+                    BtnContinuar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //if(camposLlenos()) {
+                                callGuardarData();
+                                restarLoading();
+                              //  SavePreferencesCallMainActivity();
+                                //Toast.makeText(getActivity(), "GUARDAR EN PREFERENCES", Toast.LENGTH_SHORT).show();
+                           // }
 
-                    }
-                });
-
+                        }
+                    });
+                }else
+                    showRetry();
             }else
                 showRetry();
         }else
