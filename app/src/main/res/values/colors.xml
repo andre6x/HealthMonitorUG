@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#FFFFFF</color>
+    <color name="fuchsia">#FF00FF</color>
+    <color name="red2">#FF0000</color>
+    <color name="red3">#E31F1A</color>
+    <color name="red_ligth">#EF5350</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="gray">#808080</color>
+    <color name="olive">#808000</color>
+    <color name="maroon">#800000</color>
+    <color name="aqua">#00FFFF</color>
+    <color name="gree_ligth">#81C784</color>
+    <color name="navy">#000080</color>
+    <color name="black">#000000</color>
+    <color name="black_ligth">#EEEEEE</color>
+    <color name="transparent">#00000000</color>
+    <color name="negro_semitransparente">#B2000000</color>
+    <color name="colorPrimary">#2FA2C1</color>
+    <color name="colorPrimaryDark">#2FA2C1</color>
+    <color name="colorAccent">#0886B1</color>
+
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+
+    <color name="greenMenu">#B2CD48</color>
+    <color name="purpleMenu">#C00077</color>
+    <color name="silverText">#51565C</color>
+    <color name="silver_fondo">#DFE2E7</color>
+
+    <color name="silver_expandle">#F0F1F5</color>
+    <color name="yellow_expandle">#FFB700</color>
+    <color name="silver_card_expandle">#7F888D</color>
+    <color name="greenSetting">#51B900</color>
+    <color name="silver_button_Setting">#D9DDDE</color>
+    <color name="verdePager">#A8D137</color>
+
+    <color name="silver_lesson_lock">#9699A0</color>
+
+    <color name="blackSubMenu">#2A3137</color>
+    <color name="yellowMenu">#EBB730</color>
+    <color name="yellowligth">#FFEA00</color>
+
+    <color name="colorbackground">#E1E4E9</color>
+
+    <color name="black_trans80">#14000000</color>
+    <color name="primary_500">#3F51B5</color>
+
+    <color name="textColor">#ffffff</color>
+    <color name="btn_login">#556080</color>
+    <color name="blue_intro">#1d3766</color>
+
+    <color name="status_orange">#EB9007</color>
+    <color name="status_green">#45A063</color>
+    <color name="status_purple">#9656AC</color>
+    <color name="status_blue">#5B76A5</color>
+    <color name="status_silver">#5D6B74</color>
+
+    <color name="gluco_red">#EA6453</color>
+    <color name="peso_blue">#2D527C</color>
+
+    <color name="text_silver">#4A545D</color>
+
+    <color name="fab1_color">#2FA2C1</color>
+    <color name="fab2_color">#2FA2C0</color>
+
+
+    <color name="white_transparent">#99FFFFFF</color>
+
+    <color name="asma_red">#EF5350</color>
+    <color name="asma_yellow">#FDD835</color>
+    <color name="asma_green">#8BC34A</color>
+    <color name="indicator_unselected">#4D000000</color>
+
+    <color name="blue_grey">#455A64</color>
+    <color name="red">#F44336</color>
+    <color name="pink">#E91E63</color>
+    <color name="purple">#9C27B0</color>
+    <color name="deep_purple">#673AB7</color>
+    <color name="indigo">#3F51B5</color>
+    <color name="blue">#2196F3</color>
+    <color name="light_blue">#03A9F4</color>
+    <color name="cyan">#00BCD4</color>
+    <color name="teal">#009688</color>
+    <color name="green">#4CAF50</color>
+    <color name="light_green">#8BC34A</color>
+    <color name="lime">#CDDC39</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="amber">#FFC107</color>
+    <color name="orange">#FF9800</color>
+    <color name="deep_orange">#FF5722</color>
+    <color name="brown">#795548</color>
+    <color name="grey">#E0E0E0</color>
+
+</resources>

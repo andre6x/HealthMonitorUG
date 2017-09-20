@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <com.grupocisc.healthmonitor.Pulse.activities.HeartbeatView
+                xmlns:tools="http://schemas.android.com/tools" android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                tools:targetApi="n" />
+        </shape>
+    </item>
+</selector>
+

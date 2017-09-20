@@ -1,0 +1,512 @@
+<resources>
+    <string name="app_name">Health Monitor</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="facebook_app_id">822675304560282</string>
+    <string name="fb_login_protocol_scheme">fb1231568213620414</string>
+
+    <string name="link_text">La mejor app para el control de tu salud, ingresa ahora y regístrate</string>
+    <string name="linkGoogleplay">https://play.google.com/store/apps/details?id=com.grupocisc.healthmonitor</string>
+
+
+    <!-- desarrollo http://192.168.10.10:8180/ -->
+    <!-- produccion http://healthmonitorug.com:8080/ -->
+    <!-- Request -->
+    <string name="base_path_v2">http://healthmonitorug.com:8080/controlServices/</string>
+    <string name="base_path_v2_ip">http://healthmonitorug.com:8080/</string>
+
+    <string name="base_path_cisc">http://healthmonitorug.com:8080/control/diabetes/</string>
+    <string name="base_path_procesos">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>
+
+    <string name="base_path_recomendacion">http://healthmonitorug.com:8080/ControlD/rest/recomendciones/</string>
+    <string name="base_path_ciscp">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>
+    <string name="base_path_ciscrep">http://healthmonitorug.com:8080/ControlD/rest/</string>
+    <string name="base_path_ciscrepp">http://healthmonitorug.com:8080/ControlDP/diabetes/recomendaciones/</string>
+    <string name="base_path_cisc_animo">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>
+
+    <string name="base_path">http://api.edukte.net/services/meducation/mxmov/</string>
+    <string name="txt_reintenter">Reintentar</string>
+    <string name="txt_no_data">No hay datos</string>
+    <string name="txt_compartir">Compartir</string>
+
+    <!-- TWITTER JESENIA QUITO -->
+
+    <!-- Configuration: EDIT THE FOLLOWING STRINGS ACCORDING TO YOUR NEEDS-->
+    <!-- <string name="app_name_tw">Salud Ecuador </string>-->
+    <!-- <string name="hashtag" translatable="false">#TapIntoTwitter</string> -->  <!-- Hashtag to suggest when composing a tweet -->
+    <string name="hashtag" translatable="false"> #TapIntoTwitter </string>
+    <!--   <string name="twitter_search" translatable="false">#TapIntoTwitter OR from:twitterdev OR twittercommunity.com</string> --><!-- Learn to build search queries at https://dev.twitter.com/rest/public/search -->
+    <string name="twitter_search" translatable="false">from:@HealthmonitorD </string>
+    <!--  <string name="account_to_follow">HealthMonitorV2</string> --><!-- Will appear as an option in the actionbar menu -->
+    <!-- END OF Configuration (don't forget to set translatable strings in other locales) -->
+
+
+    <!-- TWITTER FRIENDS -->
+    <string name="twitter_search_friends" translatable="false"> from:HealthMonitor OR  #SaludParaGuayas OR #diabetes OR #asma </string>
+
+
+    <!-- Main Activity -->
+    <string name="menu_create_tweet">Create Tweet</string>
+    <string name="menu_follow">Follow via QR Code</string>
+    <string name="menu_share_handle">Share your handle</string>
+    <string name="menu_about">About</string>
+    <string name="menu_account_to_follow">Follow</string>
+    <string name="menu_sign_out">Sign out</string>
+    <string name="toast_follow_user_success">You are now following</string>
+    <string name="toast_follow_user_error">Failed to follow user, try again later.</string>
+    <string name="toast_sign_out">User signed out successfully.</string>
+
+    <string name="qrcode_label">QR Code</string>
+    <string name="scan_prompt">The QR Code can be found in the meetup badge or the "Share handle" option in this app.\nScan the QR code to follow someone.</string>
+    <string name="loading">Loading…</string>
+
+    <!-- Share Handle Activity -->
+    <string name="title_activity_share_handle">Share handle</string>
+    <string name="instructions">Ask your friend to scan this QR code with this app.</string>
+    <string name="message">Scan this to follow</string>
+
+    <!-- AboutActivity -->
+    <string name="title_activity_about_tw">About</string>
+    <string name="app_built_with">This app was built using</string>
+    <string name="twitter_kit">Twitter Kit 3.0</string>
+    <string name="learn_more">Learn more at\nhttps://t.co/twitterkit</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--inicio datos spinner-->
+    <string name="planets_prompt">Medido</string>
+    <string-array name="planets_array">
+        <item>Selecciona uno…</item>  <!-- Prompt item -->
+        <item>Antes del desayuno</item>
+        <item>Después del desayuno</item>
+        <item>Antes del almuerzo</item>
+        <item>Después del almuerzo</item>
+        <item>Antes de la cena</item>
+        <item>Después de la cena</item>
+        <item>Temtempié</item>
+        <item>Hora de dormir</item>
+        <item>Noche</item>
+        <item>Glucosa en ayunas</item>
+        <item>Otros</item>
+    </string-array>
+    <!--fin datos spinner-->
+    <!--inicio datos spinner Categoria-->
+    <string name="feeding_prompt">Categoría</string>
+    <string-array name="feeding_categoria_array">
+        <item>Selecciona uno…</item>
+        <item>Productos lácteos</item>
+        <item>Grasas y Aceites</item>
+        <item>Frutas y hortalizas</item>
+        <item>Confitería</item>
+        <item>Cereales</item>
+        <item>Productos de Panadería</item>
+        <item>Carnes</item>
+        <item>Pescado y productos pesqueros</item>
+        <item>Huevos</item>
+        <item>Edulcorantes</item>
+        <item>Sales, salsas y ensaladas</item>
+        <item>Edulcorantes</item>
+        <item>Bebidas</item>
+    </string-array>
+    <!--fin datos spinner-->
+    <!--inicio datos spinner Calorias-->
+    <string name="caloria_prompt">Categoría</string>
+    <string-array name="feeding_caloria_array">
+        <item>Seleccione un valor…</item>
+        <item>1800</item>
+        <item>2000</item>
+        <item>2200</item>
+        <item>2400</item>
+    </string-array>
+    <!--fin datos spinner-->
+    <!--inicio datos spinner Porcion Alimento-->
+    <string name="porcion_prompt">Porción</string>
+    <string-array name="feeding_porcion_array">
+        <item>Seleccione un valor…</item>
+        <item>Unidad(es)</item>
+        <item>Taza(s)</item>
+        <item>Gramo(s)</item>
+        <item>Mililitro(s)</item>
+        <item>Vaso(s)</item>
+        <item>Cucharada(s)</item>
+        <item>Cucharadita(s)</item>
+        <item>Ración(s)</item>
+        <item>Rebanada(s)</item>
+    </string-array>
+    <!--fin datos spinner-->
+    <string-array name="pluse_array">
+        <item>Seleccionar Estado Actual</item>  <!-- Prompt item -->
+        <item>General</item>
+        <item>Descanso</item>
+        <item>Después de ejercicio</item>
+        <item>Antes de ejercicio</item>
+        <item>Cansado</item>
+        <item>Enfermo</item>
+    </string-array>
+    <!--fin datos spinner-->
+    <!--inicio datos spinner-->
+
+    <string-array name="pluse_GraStado">
+        <item>Todos</item>  <!-- Prompt item -->
+        <item>Pulsos mas Bajos</item>
+        <item>Pulsos mas Altos</item>
+    </string-array>
+
+    <!--INI datos spinner content_state_main-->
+    <string name="state_prompt">Estados</string>
+    <string-array name="state_GraStado">
+        <item>Todos</item>  <!-- Prompt item -->
+        <item>Increíble (1) </item>
+
+        <item>Bien (2)      </item>
+        <item>Normal (3)    </item>
+        <item>Mal (4)       </item>
+        <item>Horrible (5)  </item>
+    </string-array>
+    <!--FIN datos spinner content_state_main-->
+    <!--INI datos spinner content_state_main-->
+    <string name="medico_prompt">Buscar Por:</string>
+    <string-array name="medico_GraStado">
+        <item>Nombre    </item>  <!-- Prompt item -->
+        <item>Correo  </item>
+    </string-array>
+    <!--inicio datos spinner presion-->
+    <string name="planets_promptpr">Presion</string>
+    <string-array name="pressure_GraStado">
+        <item>Todos</item>  <!-- Prompt item -->
+        <item>Presion mas Baja</item>
+        <item>Presion mas Alta</item>
+    </string-array>
+    <!--inicio datos spinner peso-->
+    <string name="planets_promptp">Peso</string>
+    <string-array name="weight_GraStado">
+        <item>Todos</item>  <!-- Prompt item -->
+        <item>Pesos mas Bajos</item>
+        <item>Pesos mas Altos</item>
+    </string-array>
+    <!--FIN datos spinner content_state_main-->
+    <!--inicio datos spinner insulina-->
+    <string-array name="insulin_GraStado">
+        <item>Todos</item>  <!-- Prompt item -->
+        <item>Dosis mas Bajas</item>
+        <item>Dosis mas Altas</item>
+    </string-array>
+    <!--FIN datos spinner content_state_main-->
+
+    <!--inicio notificaciom-->
+    <string name="preferencias_inicio">inicioPreferences</string>
+    <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
+        send downstream messages to this app.</string>
+    <string name="token_error_message">An error occurred while either fetching the InstanceID token,
+        sending the fetched token to the server or subscribing to the PubSub topic. Please try
+        running the sample again.</string>
+    <!--fin notificacion-->
+
+    <string name="sin_conexion">Sin conexión a Internet. Por favor, compruebe WiFi o 3G.</string>
+    <string name="ingrese">Por favor, ingrese un valor válido.</string>
+    <string name="ingresew">Por favor, ingrese peso válido.</string>
+    <string name="text_especialidad">Especialidad:</string><!-- CAMBIO AJOB-->
+    <string name="estado">Por favor, seleccione su estado de ánimo</string>
+
+    <string name="txt_inciar">Por favor, seleccione su estado de ánimo</string>
+    <string name="txt_contrasena">Se te olvidó tu contraseña?</string>
+
+    <string name="txt_sta_increible">Increíble</string><!--CAMBIO-->
+    <string name="txt_sta_bien">Bien</string>
+    <string name="txt_sta_normal">Normal</string>
+    <string name="txt_sta_mal">Mal</string>
+    <string name="txt_sta_horrible">Horrible</string>
+
+    <string name="txt_perfil_title_1">Datos Personales</string>
+    <string name="subscribe">Suscripción</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="guardar">Guardar</string>
+    <string name="txt_omitir">Omitir</string>
+    <string name="txt_terminar">Terminar</string>
+    <string name="txt_siguiente">Siguiente</string>
+    <string name="txt_atras">Atrás</string>
+    <string name="txt_enviar">Enviar</string>
+    <string name="txt_iniciar">Iniciar sesión</string>
+    <string name="txt_cerrar">Cerrar sesión</string>
+    <string name="txt_change_pass">Cambiar la contraseña</string>
+    <string name="text_recuperarCon">Solo necesitamos su identificación de correo electrónico registrada para restablecer su contraseña</string>
+    <string name="text_btn_recuperar">RESTABLECER CONTRASEÑA</string>
+    <string name="txt_iniciarM">INICIAR SESIÓN</string>
+    <string name="txt_crearM">CREAR CUENTA</string>
+    <string name="error_login">Debe iniciar sesión para poder ingresar a esta sección</string>
+    <string name="text_seldoc">Estimado, Para una mejor atención, seleccione el Doctor el cual usted considere confiable para que lo acompañe en su tratamiento</string>
+
+    <string name="text_error_metodo">Ha ocurrido un problema, por favor inténtalo nuevamente</string> <!--CAMBIO-->
+    <string name="text_error_metodo_email">Ha ocurrido un problema, no se encuentra el Email, por favor inténtalo nuevamente</string> <!--CAMBIO-->
+
+    <string name="txt_mensaje_noti">No ha recibido notificaciones</string>
+    <string name="txt_mensaje_tips">No ha recibido tips</string>
+    <string name="txt_atencion">Atención</string>
+
+    <string name="txt_error">Error</string>
+    <string name="txt_ok">Éxito</string>
+    <string name="txt_hombre">Hombre</string>
+    <string name="txt_mujer">Mujer</string>
+
+
+    <string name="txt_select_especiality">Seleccione especialidad</string>
+    <string name="txt_vincular">VINCULAR DOCTOR</string>
+    <string name="txt_desvincular">DESVINCULAR DOCTOR</string>
+
+    <!--inicio perfil-->
+    <string name="text_datos">Datos personales</string>
+    <string name="text_nombres">Nombres:</string>
+    <string name="text_apellidos">Apellidos:</string>
+    <string name="text_celular"># Celular:</string>
+    <string name="text_email">E-mail:</string>
+    <string name="text_fecha">Fecha de Nacimiento:</string>
+    <string name="text_sexo">Sexo:</string>
+    <string name="text_altura">Altura:</string>
+    <string name="text_peso">Peso inicial:</string>
+    <string name="text_estcivil">Estado Civil:</string> <!-- CAMBIO AJOB-->
+    <string name="text_telefono">Número Celular:</string> <!-- CAMBIO AJOB-->
+    <string name="text_pais">País:</string> <!-- CAMBIO AJOB-->
+    <string name="text_logout">¿Está seguro que desea cerrar sesión?</string>
+    <!--fin perfil-->
+    <string name="text_datos_doctor">Datos del Doctor</string>
+
+    <string name="maximo">100</string>
+    <string name="minimo">10</string>
+    <string name="text_error_fecnac">Fecha de Nacimiento Inválida</string>
+
+    <string name="maximo_peso">200</string>
+    <string name="minimo_peso">35</string>
+
+    <string name="minimo_telefono">10</string> <!--cambio-->
+
+    <string name="maximo_altura">2.10</string>
+    <string name="minimo_altura">1.40</string>
+
+    <string name="back_pass">Su nueva contraseña fue enviada a su correo electrónico.</string>
+    <string name="txt_back_pass">Ingrese su nueva contraseña</string>
+    <string name="txt_back">Por favor, Ingrese su nueva contraseña.</string>
+    <!-- Comentario para Rutinas de Ejercicios y Dietas-->
+    <string name="txt_com_rutina">Las recomendaciones de rutinas de ejercicios se realizarón basadas en condiciones de manera general para Diabéticos Tipo I y Tipo II como tratamiento preventivo</string>
+    <string name="txt_com_dieta">Las recomendaciones de dietas se realizarón basadas en condiciones de manera general para Diabéticos Tipo I y Tipo II como tratamiento preventivo higiénico dietético</string>
+    <string name="txt_aviso_state">Elegir Estado de Animo </string>
+    <string name="txt_actulizado">Se ha actualizado con éxito! </string>
+    <string name="txt_guardado">Se ha guardado con éxito! </string>
+    <string name="title_activity_about">AboutActivity</string>
+ <!--INI_MPO-->
+    <integer name="int_setOffscreenPageLimit">4</integer>
+
+
+    <string name="txt_Insulin">INSULINA</string>
+    <string-array name="array_InsulinTitles">
+        <item>REGISTRO</item>  <!-- Prompt item -->
+        <item>ESTADÍSTICA</item>
+    </string-array>
+
+    <string name="txt_DateFormat103">dd/MM/yyyy</string>
+    <string name="txt_DateFormat102">MM/dd/yyyy</string>
+    <string name="txt_DateFormat101">yyyy/MM/dd</string>
+    <string name="txt_DateFormat101_24HHmm">yyyy/MM/dd HH:mm</string>
+    <string name="txt_DateFormat101_24HHmmss">yyyy/MM/dd HH:mm:ss</string>
+    <string name="txt_DateFormat101_12HHmmss">yyyy/MM/dd hh:mm:ss</string>
+    <string name="msg_PleaseWait">Please, wait.</string>
+    <string name="msg_DoseValueIncorrect">Valor incorrecto de dosis.</string> <!--Valor de DOSIS incorrecto.-->
+    <string name="msg_DoseValueEmpty">Valor de insulina no puede ser vacío.</string><!--Valor de DOSIS no puede ser vacío.-->
+    <string name="msg_InsulinParagraph"> La insulina es como una llave que abre la cerradura de las puertas de las células del cuerpo
+ para que la glucosa (azúcar en la sangre) pueda entrar y sea utilizada como energía.
+ La insulina ayuda a la glucosa a entrar a las células del cuerpo. Si la glucosa no puede entrar en
+ las células, se acumula en la sangre. Si se deja sin tratamiento, la
+ acumulación de azúcar en la sangre pueden causar complicaciones a largo plazo. "></string>
+
+    <string name="num_MinValueInsulin">1</string>
+    <string name="num_MaxValueInsulin">100</string>
+    <string name="lbl_InsulinAdd">Agregar Registro de Insulina.</string>
+    <string name="lbl_InsulinEdit">Editar Registro de Insulina.</string>
+
+    <string name="lbl_InsulinUnit">Unidades</string>
+    <string name="lbl_InsulinUnitAbrv">unids.</string>
+    <string name="lbl_InsulinDate">Fecha</string>
+    <string name="lbl_InsulinHour">Hora</string>
+    <string name="txt_InsulinInitDate">01/01/2017</string>
+    <string name="lbl_InsulinHHmmAbrv">HH:mm</string>
+    <string name="txt_InsulinObs">Observaciones</string>
+
+
+    <string name="msg_DoseValueMoreThan">Valor incorrecto de dosis.</string> <!--Valor de DOSIS incorrecto.-->
+    <string name="msg_DoseValueLessThan">Valor incorrecto de dosis.</string> <!--Valor de DOSIS incorrecto.-->
+
+
+
+    <string name="txt_Medicines">MEDICINAS</string>
+    <string-array name="array_MedicinesTitles">
+        <item>CONTROL</item>  <!-- Prompt item -->
+        <item>REGISTRO</item>
+        <item>ESTADÍSTICAS</item>
+    </string-array>
+
+    <!-- Medicamento-->
+    <string name="lbl_SpinerMedicine">Medicina</string>
+    <!-- Control de Medicamentos-->
+    <string name="lbl_MedicationControlAdd">Control de Medicamento</string>
+    <string name="lbl_MedicationControlUpd">Editar Control de Medicamento</string>
+    <string name="txt_MedicationControlTimesDays">Veces en el día</string>
+    <string name="lbl_MedicationControlDate">Fecha</string>
+    <string name="txt_MedicationControlDefaultDate">01/01/2017</string>
+    <string name="lbl_MedicationControlHour">Hora</string>
+    <string name="txt_MedicationControlHourFormat">HH:mm</string>
+    <string name="txt_MedicationControlObs">Observaciones</string>
+
+
+    <string name="msg_SaveRegisterQuestion">Desea guardar el registro?.</string>
+    <string name="txt_Save">GUARDAR</string>
+    <string name="txt_Accept">ACEPTAR</string>
+    <string name="txt_Cancel">CANCELAR</string>
+    <string name="msg_NotExistsMedicinesRegistered">No existen medicamentos registrados.</string>
+    <string name="msg_UpdateRegisterQuestion">Desea actualizar el registro?.</string>
+    <!--Medicines_INI -->
+    <string name="lbl_Register">Registro</string>
+    <string name="lbl_Control">Control</string>
+
+
+    <string-array name="array_MedicineTypesCode">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="array_MedicineTypesDesc">
+        <item>DIABETES</item>
+        <item>ASMA</item>
+        <item>GENERAL</item>
+    </string-array>
+
+    <!--Medicines_END -->
+
+    <!--Alarms INI-->
+
+    <string name="txt_Alarm">ALARMAS</string>
+    <string-array name="array_AlarmsTitles">
+        <item>MAÑANA</item>
+        <item>MEDIODÍA</item>
+        <item>TARDE</item>
+        <item>NOCHE</item>
+    </string-array>
+
+    <string-array name="array_WeekDaysCode">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="array_WeekDaysDesc">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
+
+    <string name="lblSpinner_ReminderTypes">Tiempos de Recordatorio</string>
+    <string-array name="array_ReminderTypesCode">
+        <item idType="1" >F</item>
+        <item idType="2" >I</item>
+    </string-array>
+    <string-array name="array_ReminderTypesDesc">
+        <item idType="F" >Frecuencia</item>
+        <item idType="I" >Intervalos</item>
+    </string-array>
+
+    <string name="lblSpinner_ReminderTimes">Tiempos de Recordatorio</string>
+    <string-array name="array_ReminderTimesGeneral">
+        <item idType="F" idTime="1" >Una vez al día</item>
+        <item idType="F" idTime="2" >Dos veces al día</item>
+        <item idType="F" idTime="3" >3 veces al día</item>
+        <item idType="F" idTime="4" >4 veces al día</item>
+        <item idType="F" idTime="5" >5 veces al día</item>
+        <item idType="F" idTime="6" >6 veces al día</item>
+        <item idType="F" idTime="7" >7 veces al día</item>
+        <item idType="F" idTime="8" >8 veces al día</item>
+        <item idType="F" idTime="9" >9 veces al día</item>
+        <item idType="F" idTime="10" >10 veces al día</item>
+        <item idType="F" idTime="11" >11 veces al día</item>
+        <item idType="F" idTime="12" >12 veces al día</item>
+        <item idType="I" idTime="1" >Cada 12 horas</item>
+        <item idType="I" idTime="2" >Cada 8 horas</item>
+        <item idType="I" idTime="3" >Cada 6 horas</item>
+        <item idType="I" idTime="4" >Cada 4 horas</item>
+        <item idType="I" idTime="5" >Cada 3 horas</item>
+        <item idType="I" idTime="6" >Cada 2 horas</item>
+        <item idType="I" idTime="7" >Cada hora</item>
+    </string-array>
+    <string-array name="array_ReminderTimesFCode">
+        <item idType="F" idTime="1" >1</item>
+        <item idType="F" idTime="2" >2</item>
+        <item idType="F" idTime="3" >3</item>
+        <item idType="F" idTime="4" >4</item>
+        <item idType="F" idTime="5" >5</item>
+        <item idType="F" idTime="6" >6</item>
+        <item idType="F" idTime="7" >7</item>
+        <item idType="F" idTime="8" >8</item>
+        <item idType="F" idTime="9" >9</item>
+        <item idType="F" idTime="10" >10</item>
+        <item idType="F" idTime="11" >11</item>
+        <item idType="F" idTime="12" >12</item>
+    </string-array>
+    <string-array name="array_ReminderTimesFDesc">
+        <item idType="F" idTime="1" >Una vez al día</item>
+        <item idType="F" idTime="2" >Dos veces al día</item>
+        <item idType="F" idTime="3" >3 veces al día</item>
+        <item idType="F" idTime="4" >4 veces al día</item>
+        <item idType="F" idTime="5" >5 veces al día</item>
+        <item idType="F" idTime="6" >6 veces al día</item>
+        <item idType="F" idTime="7" >7 veces al día</item>
+        <item idType="F" idTime="8" >8 veces al día</item>
+        <item idType="F" idTime="9" >9 veces al día</item>
+        <item idType="F" idTime="10" >10 veces al día</item>
+        <item idType="F" idTime="11" >11 veces al día</item>
+        <item idType="F" idTime="12" >12 veces al día</item>
+    </string-array>
+    <string-array name="array_ReminderTimesICode">
+        <item idType="I" idTime="1" >1</item>
+        <item idType="I" idTime="2" >2</item>
+        <item idType="I" idTime="3" >3</item>
+        <item idType="I" idTime="4" >4</item>
+        <item idType="I" idTime="5" >5</item>
+        <item idType="I" idTime="6" >6</item>
+        <item idType="I" idTime="7" >7</item>
+    </string-array>
+    <string-array name="array_ReminderTimesIDesc">
+        <item idType="I" idTime="1" >Cada 12 horas</item>
+        <item idType="I" idTime="2" >Cada 8 horas</item>
+        <item idType="I" idTime="3" >Cada 6 horas</item>
+        <item idType="I" idTime="4" >Cada 4 horas</item>
+        <item idType="I" idTime="5" >Cada 3 horas</item>
+        <item idType="I" idTime="6" >Cada 2 horas</item>
+        <item idType="I" idTime="7" >Cada hora</item>
+    </string-array>
+
+
+    <!--Alarms END-->
+
+    <!--END_MPO-->
+
+    <!--IMPORTAR DATA INI -->
+    <string name="txt_import_1">Restaur Registros </string>
+    <string name="txt_import_2">Restaura los registros de tus controles de </string>
+    <string name="txt_import_3">salud desde el servidor de Health Monitor. </string>
+    <string name="txt_import_4">Si no los restauras ahora, no podrás hacerlo después.</string>
+
+    <!--IMPORTAR DATA FIN -->
+
+    <string name="text_mensaje_select">Seleccione sus síntomas</string>
+
+    <string name="section_format">Page %1$d</string>
+
+</resources>

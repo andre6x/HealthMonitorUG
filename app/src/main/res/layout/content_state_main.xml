@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?><android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:id="@+id/lyt_fecha"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Fecha Desde:"
+                    android:layout_marginBottom="5dp"
+                    android:clickable="false"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_fecha_desde"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="01/10/2015"
+                    android:clickable="false"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/silver_fondo"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lyt_hora"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Fecha Hasta:"
+                    android:clickable="false"
+                    />
+                <TextView
+                    android:id="@+id/txt_fecha_hasta"
+                    android:layout_width="135dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="01/10/2015"
+                    android:clickable="false"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/silver_fondo"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:id="@+id/btBuscar"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Buscar"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_above="@+id/seekBar1" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:weightSum="1">
+
+       <TextView
+           android:layout_width="20dp"
+           android:layout_height="wrap_content"
+           android:background="@color/status_orange"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Increible"
+                android:textSize="12sp"
+                android:textColor="@color/status_orange"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="4dp" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:background="@color/status_green"/>
+
+            <TextView
+                android:layout_width="26dp"
+                android:layout_height="wrap_content"
+                android:text="Bien"
+                android:textSize="12sp"
+                android:textColor="@color/status_green"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.23" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:background="@color/status_purple" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Normal"
+                android:textSize="12sp"
+                android:textColor="@color/status_purple"
+                android:layout_marginLeft="1dp" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@color/status_blue"/>
+
+            <TextView
+                android:layout_width="26dp"
+                android:layout_height="wrap_content"
+                android:text="Mal"
+                android:textSize="12sp"
+                android:textColor="@color/status_blue"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.14" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:background="@color/status_silver"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_marginLeft="3dp"
+                android:textSize="12sp"
+                android:textColor="@color/status_silver"
+                android:text="Horrible" />
+
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</android.support.v4.widget.NestedScrollView>

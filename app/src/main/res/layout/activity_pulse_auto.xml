@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorbackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id ="@+id/push_button"
+            android:layout_width="189dp"
+            android:layout_height="188dp"
+            android:text="Pulse para empezar"
+            android:textColor="@android:color/background_light"
+            android:background="@drawable/button_bg_round"
+            android:drawableTop="@drawable/ic_heart_pulse_white_48dp"
+            android:drawablePadding="1dp"
+            android:elevation="13dp"
+            android:textSize="11sp"
+            android:textAlignment="center"
+            android:padding="50dp"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:layout_marginTop="105dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="end|bottom">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="189dp"
+            app:srcCompat="@mipmap/thelp"
+            android:id="@+id/imageView4" />
+        <TextView
+            android:text="Coloca ligeramnete el lado índice en el lente y el flash de la cámara, en la parte posterior de tu teléfono. Asegúrate de que el lente y el flash estén totalmente cubiertos. Sostenlo hasta que la medición haya terminado."
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:id="@+id/textView4"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textAlignment="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

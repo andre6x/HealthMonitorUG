@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "772956944521",
+    "project_id": "health-monitor-1d133"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772956944521:android:9493b288d872d83a",
+        "android_client_info": {
+          "package_name": "com.grupocisc.healthmonitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772956944521-n7olinc49pjaqg1ukqu5q4th8k5u6pij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.grupocisc.healthmonitor",
+            "certificate_hash": "d8cc4364a04d46e32cc0843069af72b7d278fc4c"
+          }
+        },
+        {
+          "client_id": "772956944521-2j74kfva3av8bh0s4k3ip4aeeup9qf89.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "772956944521-mcp2bq316rgpprd7b663aqb8ds1p613k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.grupocisc.healthmonitor",
+            "certificate_hash": "8787fdee7e6719d724d4284fe270cbfb2e38fefe"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoj14zsHGAHfVkfaOq_QSNyNoHRseYY5s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

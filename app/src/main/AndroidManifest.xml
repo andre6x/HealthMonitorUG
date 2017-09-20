@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.grupocisc.healthmonitor">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <permission
+        android:name="com.grupocisc.healthmonitor.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.grupocisc.healthmonitor.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REAL_GET_TASKS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name=".HealthMonitorApplicattion"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:node="replace"
+        tools:replace="android:label,android:icon,android:theme">
+        <activity
+            android:name=".splashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Home.activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
+        <activity
+            android:name=".login.activities.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.activities.LoginAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.activities.LoginAccountBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.activities.LoginBackPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.activities.ImportDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Glucose.activities.GlucoseActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Glucose.activities.GlucoseRegistyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Pulse.activities.PulseActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Pulse.activities.PulseRegistyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Pulse.activities.HeartRateMonitor"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Pulse.activities.PulseActivityAuto"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Pressure.activities.PressureActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Pressure.activities.PressureRegistyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Weight.activities.WeightActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Weight.activities.WeightRegistyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Insulin.activities.InsulinActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Insulin.activities.InsulinRegistry"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Medicines.activities.MedicinesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Medicines.activities.MedicineRegistry"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Medicines.activities.MedicinesRegisteredActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".State.activities.StateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".State.activities.StateRegistyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Disease.activities.DiseaseActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Disease.activities.DiseaseRegistry"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NotificationsMedical.activities.NotificationsMedicalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Routines.activities.RoutinesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Feeding.activities.FeedingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Feeding.activities.FeedingRegistyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Feeding.activities.FeedingDietActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Feeding.activities.FeedingLessonActivityU"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Recommendations.activities.RecommendationsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Report.activities.ReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Routines.activities.RoutinesLessonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Routines.activities.RoutineDetalleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Profile.ProfileDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Advertising.PublicidadWebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Doctor.activities.DoctorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Doctor.activities.SelectedDoctorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Doctor.activities.DoctorRegistre"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Complementary.activities.ComplActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Complementary.activities.ComplCholesterolRegistyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Complementary.activities.ComplHba1cRegistyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Medicines.activities.MedicineUpdate"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Settings.activities.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Settings.activities.TutorialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SocialNetworks.activities.SocialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Asthma.activities.PickFlowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Asthma.activities.AsthmaRegistry"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Asthma.activities.PickFlowRegistry"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FitData.activities.FitActivity"
+            android:screenOrientation="portrait" />
+
+
+        <!-- inicio FACEBOOK -->
+        <activity
+            android:name=".login.activities.LoginFacebookActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+        <!-- fin FACEBOOK -->
+
+        <!-- ALARMS_INI-->
+        <activity
+            android:name=".Alarm.activities.AlarmActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Alarm.activities.AlarmRegistry"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Medicines.activities.MedicineTakeActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".Services.AlarmGetAllMedicineService"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver android:name=".Services.AlarmGetAllMedicineReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".Services.AlarmService"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver android:name=".Services.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- ALARMS_END-->
+
+        <!-- inicio servicio enviar data webservice cada x tiempo -->
+        <service
+            android:name=".Services.SendDataMyService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver android:name=".Services.SendDataMyReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".Services.ProgressIntentService"
+            android:exported="false" >
+        </service>
+        <!-- fin servicio enviar data ws -->
+        <!-- inicio notificaciones -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.grupocisc.healthmonitor" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".gcmClasses.MyGcmListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".gcmClasses.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".gcmClasses.RegistrationIntentService"
+            android:exported="false" />
+
+        <!-- fin notificaciones -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBHDxsVNQfxBeJFMn6zuMlsU-UhrTFDyI8"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b63409f7a1bc14eb43fb8cec4ce104d1b8793b61" />
+
+    </application>
+
+</manifest>

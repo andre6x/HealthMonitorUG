@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp">
+  <!--  <ScrollView
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"> -->
+
+    <android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+      <LinearLayout
+          android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:paddingBottom="8dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginBottom="5dp"
+                android:layout_width="40dp"
+                android:src="@mipmap/icon_cake"
+                android:layout_height="40dp" />
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:textColor="@color/btn_login"
+                android:textStyle="normal|bold"
+                android:textSize="15sp"
+                android:text="Nacimiento"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:paddingTop="8dp"
+                android:gravity="center|bottom"
+                android:id="@+id/txt_fecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textColorHint="@color/btn_login"
+                android:hint="Año"
+                android:clickable="false"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/btn_login"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginBottom="5dp"
+                android:layout_width="40dp"
+                android:src="@mipmap/icon_peso"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:textColor="@color/btn_login"
+                android:textStyle="normal|bold"
+                android:textSize="15sp"
+                android:text="Mi Peso es"
+                android:layout_height="20dp"
+                android:id="@+id/textView2" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                android:padding="8dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/edt_peso"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Peso"
+                android:maxLength="6"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/btn_login"
+                android:inputType="numberDecimal"
+                />
+                <TextView
+                    android:text="Kg"
+                    android:id="@+id/spinnerPeso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+            </LinearLayout>
+         </LinearLayout>
+      </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginRight="5dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="40dp"
+                    android:src="@mipmap/icon_medida"
+                    android:layout_height="40dp" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/btn_login"
+                    android:textStyle="normal|bold"
+                    android:textSize="15sp"
+                    android:text="Mi altura es"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/btn_login"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:id = "@+id/edt_altura"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:hint = "Altura"
+                        android:maxLength="4"
+                        android:padding="8dp"
+                        android:inputType="numberDecimal" />
+                    <TextView
+                        android:text="m"
+                        android:id="@+id/spinnerAltura"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:gravity="left"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="45dp"
+                        android:src="@mipmap/icon_man"
+                        android:layout_height="45dp"
+                        android:id="@+id/imageView3" />
+
+                    <ImageView
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
+                        android:src="@mipmap/icon_woman"
+                        android:id="@+id/imageView2" />
+
+                </LinearLayout>
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/rdb_male"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="normal|bold"
+                        android:text="@string/txt_hombre"
+                        android:textSize="15sp"
+                        android:textColor="@color/btn_login"
+                        android:layout_marginBottom="15dp"/>
+                    <RadioButton
+                        android:id="@+id/rdb_female"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/btn_login"
+                        android:textStyle="normal|bold"
+                        android:textSize="15sp"
+                        android:text="@string/txt_mujer"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginRight="5dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="130dp">
+                <ImageView
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="40dp"
+                    android:src="@mipmap/pager_gluco"
+                    android:layout_height="40dp" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/btn_login"
+                    android:textStyle="normal|bold"
+                    android:textSize="15sp"
+                    android:text="Tipo de Diabetes"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/spinnerDiabetes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginRight="5dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="130dp">
+                <ImageView
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="40dp"
+                    android:src="@mipmap/icon_inhalator"
+                    android:layout_height="40dp" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/btn_login"
+                    android:textStyle="normal|bold"
+                    android:textSize="15sp"
+                    android:text="Padece Asma?"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/chkAsma"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+            </LinearLayout>
+
+    <!--</ScrollView>-->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_atras"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            app:cardBackgroundColor="@color/btn_login"
+            app:cardElevation="1dp"
+            app:cardCornerRadius="5dp" >
+            <TextView
+                android:background="@drawable/bar_selector_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/txt_atras"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
+        </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_next"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/btn_login"
+        app:cardElevation="1dp"
+        app:cardCornerRadius="5dp" >
+        <TextView
+            android:background="@drawable/bar_selector_white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/txt_siguiente"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+    </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>
