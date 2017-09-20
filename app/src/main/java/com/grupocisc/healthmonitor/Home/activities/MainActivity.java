@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 if (Utils.getEmailFromPreference(this) != null) {
                     if (Utils.getAvisoTempFromPreference(this) != null) { //CAMBIO
                         String mmm = Utils.getAvisoTempFromPreference(this);
-                        String mail_temp = Utils.getEmailTempFromPreference(MainActivity.this);
+                        String mail_temp = Utils.getEmailFromPreference(MainActivity.this);
                         String user_email = Utils.getEmailFromPreference(MainActivity.this);
                         if (user_email.equals(mail_temp)) {
                             i = new Intent(MainActivity.this, LoginBackPassword.class);

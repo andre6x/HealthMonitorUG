@@ -54,8 +54,8 @@ public class LoginBackPassword extends AppCompatActivity {
 
 
         //OBTENER DATA DE PREFERENCIA
-        if (Utils.getEmailTempFromPreference(this) != null) {
-            Email = Utils.getEmailTempFromPreference(this);
+        if (Utils.getEmailFromPreference(this) != null) {
+            Email = Utils.getEmailFromPreference(this);
         }
 
         //edt_email.setText(Email); //setear editText
@@ -151,10 +151,10 @@ public class LoginBackPassword extends AppCompatActivity {
         showLayoutDialog();
 
         if (mLoginUser != null) {
-            if (mLoginUser.getCodigo() == 0) {
+            if (mLoginUser.getIdCodResult() == 0) {
                 //oka
-                Log.e(TAG, "postExecutionLogin; LoginBackPassword :: " + mLoginUser.getCodigo());
-                generateAlertDialogChangePass( getString(R.string.txt_atencion), mLoginUser.getRespuesta());
+                Log.e(TAG, "postExecutionLogin; LoginBackPassword :: " + mLoginUser.getIdCodResult() );
+                generateAlertDialogChangePass( getString(R.string.txt_atencion), mLoginUser.getResultDescription() );
 
 
                 /*SharedPreferencesManager.setValor(LoginBackPassword.this, Utils.PREFERENCIA_USER, null, Utils.KEY_RECUPERA_CTA);
@@ -166,7 +166,7 @@ public class LoginBackPassword extends AppCompatActivity {
 
 
             } else {
-                Utils.generarSweetAlertDialogError(LoginBackPassword.this, getString(R.string.txt_atencion), mLoginUser.getRespuesta());
+                Utils.generarSweetAlertDialogError(LoginBackPassword.this, getString(R.string.txt_atencion), mLoginUser.getResultDescription());
             }
         } else {
             Utils.generarSweetAlertDialogError(LoginBackPassword.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo));
@@ -174,7 +174,7 @@ public class LoginBackPassword extends AppCompatActivity {
     }
 
     public void generateAlertDialogChangePass(String Title, String message) {
-        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText("" + Title)
                 .setContentText("" + message)
                 .setConfirmText("Confirmar")

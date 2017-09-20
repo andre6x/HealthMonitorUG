@@ -47,8 +47,8 @@ public class ImportDataActivity extends AppCompatActivity {
 
 
         //OBTENER DATA DE PREFERENCIA
-        if (Utils.getEmailTempFromPreference(this) != null) {
-            Email = Utils.getEmailTempFromPreference(this);
+        if (Utils.getEmailFromPreference(this) != null) {
+            Email = Utils.getEmailFromPreference(this);
         }
         Log.e(TAG,"Email:"+ Email);
 

@@ -13,11 +13,11 @@ public class ObjNewPass {
     private String identifier ;
     @Getter
     @Setter
-    private String password;
+    private String newPassword;
 
-    public ObjNewPass(String identifier, String password) {
+    public ObjNewPass(String identifier, String newPassword) {
         this.identifier = identifier;
-        this.password = password;
+        this.newPassword = newPassword;
     }
 
 }

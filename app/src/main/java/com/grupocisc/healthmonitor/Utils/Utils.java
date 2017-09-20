@@ -667,9 +667,9 @@ public class Utils {
     }
 
     /*return EMAIL TEMPORAL que se tiene en la preferencia*/ //CAMBIO
-    public static String getEmailTempFromPreference(Context ctx){
+   /* public static String getEmailTempFromPreference(Context ctx){
         return SharedPreferencesManager.getValorEsperado(ctx, PREFERENCIA_USER, KEY_EMAIL_TEMP);
-    }
+    }*/
 
     /*return PICTURE que se tiene en la preferencia*/
     public static String getPictureUriFromPreference(Context ctx){

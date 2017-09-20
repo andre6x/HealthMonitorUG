@@ -1,5 +1,7 @@
 package com.grupocisc.healthmonitor.entities;
 
+import lombok.Getter;
+import lombok.Setter;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -13,43 +15,13 @@ public interface IConfirmBackPass {
     Call<RegistroNuevaPass> RegPass(@Body ObjNewPass objNewPass);
 
     public class RegistroNuevaPass {
-        int codigo;
-        String respuesta;
-        String email;
-        String credencial;
+        @Getter
+        @Setter
+        int idCodResult;
+        @Getter
+        @Setter
+        String resultDescription;
 
-
-        public int getCodigo() {
-            return codigo;
-        }
-
-        public void setCodigo(int codigo) {
-            this.codigo = codigo;
-        }
-
-        public String getRespuesta() {
-            return respuesta;
-        }
-
-        public void setRespuesta(String respuesta) {
-            this.respuesta = respuesta;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getCredencial() {
-            return credencial;
-        }
-
-        public void setCredencial(String credencial) {
-            this.credencial = credencial;
-        }
 
     }
 }
