@@ -186,6 +186,9 @@
             android:name=".Settings.activities.TutorialActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Settings.activities.TutorialActivityV2"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".SocialNetworks.activities.SocialActivity"
             android:screenOrientation="portrait" />
         <activity

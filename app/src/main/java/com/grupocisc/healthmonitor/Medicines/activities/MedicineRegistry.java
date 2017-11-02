@@ -68,7 +68,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -117,47 +117,47 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
     private String [] ReminderTimesIntervals;
 
 
-    @Bind(R.id.layoutMainMedCtrlUpd)            LinearLayout layoutMain ;
-    @Bind(R.id.toolbar)                         Toolbar toolbar;
-    @Bind(R.id.layoutContentMedCtrlUpd)         RelativeLayout layoutContent ;
-    @Bind(R.id.cardMedCtrlUpd)                 CardView cardMedCtrlUpd;
+    @BindView(R.id.layoutMainMedCtrlUpd)            LinearLayout layoutMain ;
+    @BindView(R.id.toolbar)                         Toolbar toolbar;
+    @BindView(R.id.layoutContentMedCtrlUpd)         RelativeLayout layoutContent ;
+    @BindView(R.id.cardMedCtrlUpd)                 CardView cardMedCtrlUpd;
 
-    @Bind(R.id.fabMedCtrlUpd)                  FloatingActionButton fabMedCtrlUpd;
-    @Bind(R.id.llv_MedCtrlUpd)                  LinearLayout llv_MedCtrlUpd ;
-    @Bind(R.id.txt_MedNombreMedCtrlUpd)        TextView txt_MedNombreMedCtrlUpd;
-    @Bind(R.id.txt_dosisMedCtrlUpd)            TextView txt_dosisMedCtrlUpd;
+    @BindView(R.id.fabMedCtrlUpd)                  FloatingActionButton fabMedCtrlUpd;
+    @BindView(R.id.llv_MedCtrlUpd)                  LinearLayout llv_MedCtrlUpd ;
+    @BindView(R.id.txt_MedNombreMedCtrlUpd)        TextView txt_MedNombreMedCtrlUpd;
+    @BindView(R.id.txt_dosisMedCtrlUpd)            TextView txt_dosisMedCtrlUpd;
 
-    @Bind(R.id.lyt_startDateMedCtrlUpd)        LinearLayout lyt_startDateMedCtrlUpd;
-    @Bind(R.id.txt_startDateMedCtrlUpd)        TextView txt_startDateMedCtrlUpd;
-    @Bind(R.id.lyt_startHourMedCtrlUpd)        LinearLayout lyt_startHourMedCtrlUpd;
-    @Bind(R.id.txt_startHourMedCtrlUpd)        TextView txt_startHourMedCtrlUpd;
+    @BindView(R.id.lyt_startDateMedCtrlUpd)        LinearLayout lyt_startDateMedCtrlUpd;
+    @BindView(R.id.txt_startDateMedCtrlUpd)        TextView txt_startDateMedCtrlUpd;
+    @BindView(R.id.lyt_startHourMedCtrlUpd)        LinearLayout lyt_startHourMedCtrlUpd;
+    @BindView(R.id.txt_startHourMedCtrlUpd)        TextView txt_startHourMedCtrlUpd;
 
-    @Bind(R.id.txt_Title)                       TextView txt_Title;
-    @Bind(R.id.txt_observacionMedCtrlUpd)      TextView txt_observacionMedCtrlUpd;
-
-
-    @Bind(R.id.lyt_ReminderTypes)               LinearLayout lyt_ReminderTypes;
-    @Bind(R.id.spinner_ReminderTypes)           Spinner spinner_ReminderTypes;
-    @Bind(R.id.spinner_ReminderTimes)           Spinner spinner_ReminderTimes;
-
-    @Bind(R.id.lyt_reminder_times ) LinearLayout lyt_reminder_times;
-    @Bind(R.id.rv_reminder_times)   RecyclerView rv_reminder_times;
-
-    @Bind(R.id.lyt_scheldule )      LinearLayout lyt_scheldule;
-    @Bind(R.id.lyt_duration )       LinearLayout lyt_duration;
-    @Bind(R.id.rgrpDuration)        RadioGroup rgrpDuration;
-    @Bind(R.id.rbtContinuous)       RadioButton rbtContinuous;
-    @Bind(R.id.rbtNumberOfDays)     RadioButton rbtNumberOfDays;
-    @Bind(R.id.lyt_Days)            LinearLayout lyt_Days;
-    @Bind(R.id.rgrpDays)            RadioGroup rgrpDays;
-    @Bind(R.id.rbtEveryDay)         RadioButton rbtEveryDay;
-    @Bind(R.id.rbtSpecificDaysOfWeek)     RadioButton rbtSpecificDaysOfWeek;
+    @BindView(R.id.txt_Title)                       TextView txt_Title;
+    @BindView(R.id.txt_observacionMedCtrlUpd)      TextView txt_observacionMedCtrlUpd;
 
 
-    @Bind(R.id.layoutButtonsMedUpd)          RelativeLayout layoutButtons ;
+    @BindView(R.id.lyt_ReminderTypes)               LinearLayout lyt_ReminderTypes;
+    @BindView(R.id.spinner_ReminderTypes)           Spinner spinner_ReminderTypes;
+    @BindView(R.id.spinner_ReminderTimes)           Spinner spinner_ReminderTimes;
+
+    @BindView(R.id.lyt_reminder_times ) LinearLayout lyt_reminder_times;
+    @BindView(R.id.rv_reminder_times)   RecyclerView rv_reminder_times;
+
+    @BindView(R.id.lyt_scheldule )      LinearLayout lyt_scheldule;
+    @BindView(R.id.lyt_duration )       LinearLayout lyt_duration;
+    @BindView(R.id.rgrpDuration)        RadioGroup rgrpDuration;
+    @BindView(R.id.rbtContinuous)       RadioButton rbtContinuous;
+    @BindView(R.id.rbtNumberOfDays)     RadioButton rbtNumberOfDays;
+    @BindView(R.id.lyt_Days)            LinearLayout lyt_Days;
+    @BindView(R.id.rgrpDays)            RadioGroup rgrpDays;
+    @BindView(R.id.rbtEveryDay)         RadioButton rbtEveryDay;
+    @BindView(R.id.rbtSpecificDaysOfWeek)     RadioButton rbtSpecificDaysOfWeek;
 
 
-    //@Bind(R.id.txt_NumberOfDay)      TextView txt_NumberOfDays;
+    @BindView(R.id.layoutButtonsMedUpd)          RelativeLayout layoutButtons ;
+
+
+    //@BindView(R.id.txt_NumberOfDay)      TextView txt_NumberOfDays;
 
      private IRegisteredMedicines iRegisteredMedicines;
     private String Tid;

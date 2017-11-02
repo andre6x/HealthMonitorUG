@@ -8,6 +8,7 @@ import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.places.internal.ScannerException;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.grupocisc.healthmonitor.database.Database;
 import com.grupocisc.healthmonitor.entities.EAlarmDetails;
 import com.grupocisc.healthmonitor.entities.EAlarmReminderTime;
@@ -106,6 +107,7 @@ public class HealthMonitorApplicattion extends Application {
     private static final String TWITTER_KEY = BuildConfig.CONSUMER_KEY;
     private static final String TWITTER_SECRET = BuildConfig.CONSUMER_SECRET;
     public GuestSession guestAppSession = null;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     public void onCreate() {
@@ -114,6 +116,8 @@ public class HealthMonitorApplicattion extends Application {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
+        //firebase comentar cuando se esta en desarrollo
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         Fabric.with(this, new Crashlytics());
 
@@ -170,9 +174,14 @@ public class HealthMonitorApplicattion extends Application {
 
 
 
-        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisc(true).build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .defaultDisplayImageOptions(options).build();
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration
+                .Builder(getApplicationContext())
+                .defaultDisplayImageOptions(options)
+                .build();
         ImageLoader.getInstance().init(config);
 
 

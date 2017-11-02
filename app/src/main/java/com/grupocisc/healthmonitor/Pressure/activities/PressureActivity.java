@@ -1,16 +1,10 @@
 package com.grupocisc.healthmonitor.Pressure.activities;
 
-import android.animation.Animator;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,26 +13,17 @@ import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
 import com.grupocisc.healthmonitor.Pressure.adapters.PMainPagerAdapter;
 import com.grupocisc.healthmonitor.R;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-import com.grupocisc.healthmonitor.R;
-import com.grupocisc.healthmonitor.Utils.Utils;
-
 public class PressureActivity extends AppCompatActivity {
-    @Bind(R.id.toolbar)    Toolbar toolbar;
-    //@Bind(R.id.fab)        FloatingActionButton fab;
-    @Bind(R.id.tabs)       TabLayout tabs;
-    @Bind(R.id.pager)      ViewPager pager;
-    //@Bind(R.id.lyt_contenedor) ViewGroup mRoot;
+    @BindView(R.id.toolbar)    Toolbar toolbar;
+    //@BindView(R.id.fab)        FloatingActionButton fab;
+    @BindView(R.id.tabs)       TabLayout tabs;
+    @BindView(R.id.pager)      ViewPager pager;
+    //@BindView(R.id.lyt_contenedor) ViewGroup mRoot;
     public static FloatingActionButton fab;
 
 

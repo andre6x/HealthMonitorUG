@@ -34,7 +34,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.grupocisc.healthmonitor.Alarm.adapters.AlarmListReminderTimesCardAdapter;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Medicines.adapters.MedicinesRListAdapter;
@@ -43,14 +42,11 @@ import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.EAlarmDetails;
 import com.grupocisc.healthmonitor.entities.EMedicine;
 import com.grupocisc.healthmonitor.entities.IConsulMedicines;
-
 import com.grupocisc.healthmonitor.entities.OnItemClick;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
-
 import java.sql.SQLDataException;
 import java.sql.SQLException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,13 +59,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static com.grupocisc.healthmonitor.Utils.Utils.UcallCalendar;
 import static com.grupocisc.healthmonitor.Utils.Utils.UcallCalendarTime;
 import static com.grupocisc.healthmonitor.Utils.Utils.generarAlerta;
@@ -95,55 +89,55 @@ public class MedicinesRegisteredActivity extends AppCompatActivity implements On
     private boolean isUpdate = false;
 
     String email = "";
-    @Bind(R.id.fabMedicines)
+    @BindView(R.id.fabMedicines)
     FloatingActionButton getFab;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.txt_nombreMed)
+    @BindView(R.id.txt_nombreMed)
     TextView nombre;
-    @Bind(R.id.txt_descripcion)
+    @BindView(R.id.txt_descripcion)
     TextView Tdescripcion;
-    @Bind(R.id.txt_presentacion)
+    @BindView(R.id.txt_presentacion)
     TextView Tpresentacion;
-    @Bind(R.id.txt_via)
+    @BindView(R.id.txt_via)
     TextView Tvia;
-    @Bind(R.id.txt_id)
+    @BindView(R.id.txt_id)
     TextView Tid;
-    @Bind(R.id.spinner_MedicineTypes)
+    @BindView(R.id.spinner_MedicineTypes)
     Spinner spinner_MedicineTypes;
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    @Bind(R.id.lyt_recycler)
+    @BindView(R.id.lyt_recycler)
     LinearLayout layout;
-    //@Bind(R.id.card_medicines) CardView cardView;
+    //@BindView(R.id.card_medicines) CardView cardView;
 
-    @Bind(R.id.layoutMainMedReg)
+    @BindView(R.id.layoutMainMedReg)
     LinearLayout layoutMain;
-    @Bind(R.id.layoutButtonsMedReg)
+    @BindView(R.id.layoutButtonsMedReg)
     RelativeLayout layoutButtons;
-    @Bind(R.id.layoutContentMedReg)
+    @BindView(R.id.layoutContentMedReg)
     RelativeLayout layoutContent;
-    @Bind(R.id.cardMedReg)
+    @BindView(R.id.cardMedReg)
     CardView cardReg;
 
-    @Bind(R.id.cardMedCtrl)
+    @BindView(R.id.cardMedCtrl)
     CardView cardMedCtrl;
-    @Bind(R.id.fabMedCtrl)
+    @BindView(R.id.fabMedCtrl)
     FloatingActionButton getFabMetCtrl;
-    @Bind(R.id.txt_MedNombreMedCtrl)
+    @BindView(R.id.txt_MedNombreMedCtrl)
     TextView txt_MedNombreMedCtrl;
-    @Bind(R.id.txt_dosisMedCtrl)
+    @BindView(R.id.txt_dosisMedCtrl)
     TextView txt_dosisMedCtrl;
-    //@Bind(R.id.txt_vecesDiaMedCtrl)     TextView txt_vecesDiaMedCtrl;
-    @Bind(R.id.txt_startDateMedCtrl)
+    //@BindView(R.id.txt_vecesDiaMedCtrl)     TextView txt_vecesDiaMedCtrl;
+    @BindView(R.id.txt_startDateMedCtrl)
     TextView txt_startDateMedCtrl;
-    @Bind(R.id.txt_startHourMedCtrl)
+    @BindView(R.id.txt_startHourMedCtrl)
     TextView txt_startHourMedCtrl;
-    @Bind(R.id.txt_observacionMedCtrl)
+    @BindView(R.id.txt_observacionMedCtrl)
     TextView txt_observacionMedCtrl;
-    @Bind(R.id.lyt_startDateMedCtrl)
+    @BindView(R.id.lyt_startDateMedCtrl)
     LinearLayout lyt_startDateMedCtrl;
-    @Bind(R.id.lyt_startHourMedCtrl)
+    @BindView(R.id.lyt_startHourMedCtrl)
     LinearLayout lyt_startHourMedCtrl;
 
     EditText inputSearch;
@@ -181,29 +175,29 @@ public class MedicinesRegisteredActivity extends AppCompatActivity implements On
     private String[] ReminderTimesFrequencies;
     private String[] ReminderTimesIntervals;
 
-    @Bind(R.id.spinner_ReminderTypes)
+    @BindView(R.id.spinner_ReminderTypes)
     Spinner spinner_ReminderTypes;
-    @Bind(R.id.spinner_ReminderTimes)
+    @BindView(R.id.spinner_ReminderTimes)
     Spinner spinner_ReminderTimes;
-    @Bind(R.id.lyt_reminder_times)
+    @BindView(R.id.lyt_reminder_times)
     LinearLayout lyt_reminder_times;
-    @Bind(R.id.rv_reminder_times)
+    @BindView(R.id.rv_reminder_times)
     RecyclerView rv_reminder_times;
 
-    @Bind(R.id.rgrpDuration)
+    @BindView(R.id.rgrpDuration)
     RadioGroup rgrpDuration;
-    @Bind(R.id.rbtContinuous)
+    @BindView(R.id.rbtContinuous)
     RadioButton rbtContinuous;
-    @Bind(R.id.rbtNumberOfDays)
+    @BindView(R.id.rbtNumberOfDays)
     RadioButton rbtNumberOfDays;
 
-    @Bind(R.id.rgrpDays)
+    @BindView(R.id.rgrpDays)
     RadioGroup rgrpDays;
-    @Bind(R.id.rbtEveryDay)
+    @BindView(R.id.rbtEveryDay)
     RadioButton rbtEveryDay;
-    @Bind(R.id.rbtSpecificDaysOfWeek)
+    @BindView(R.id.rbtSpecificDaysOfWeek)
     RadioButton rbtSpecificDaysOfWeek;
-    //@Bind(R.id.txt_NumberOfDay)      TextView txt_NumberOfDays;
+    //@BindView(R.id.txt_NumberOfDay)      TextView txt_NumberOfDays;
 
 
     // Alarms_END

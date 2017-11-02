@@ -3,10 +3,7 @@ package com.grupocisc.healthmonitor.Weight.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,19 +13,17 @@ import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Weight.adapters.WMainPagerAdapter;
 import com.grupocisc.healthmonitor.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WeightActivity extends AppCompatActivity {
-    @Bind(R.id.toolbar)    Toolbar toolbar;
-    //@Bind(R.id.fab)        FloatingActionButton fab;
-    @Bind(R.id.tabs)       TabLayout tabs;
-    @Bind(R.id.pager)      ViewPager pager;
+    @BindView(R.id.toolbar)    Toolbar toolbar;
+    //@BindView(R.id.fab)        FloatingActionButton fab;
+    @BindView(R.id.tabs)       TabLayout tabs;
+    @BindView(R.id.pager)      ViewPager pager;
     //FloatingActionButton fab;
     public static FloatingActionButton fab;
 

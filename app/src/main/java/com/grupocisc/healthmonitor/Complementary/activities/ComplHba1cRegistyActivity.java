@@ -414,7 +414,8 @@ public class ComplHba1cRegistyActivity extends AppCompatActivity implements Date
         }
     }
     //GUARDOS DATOS EN LA TABLA BDSQLITE
-        public  void saveDataHba1cDB(float concent,float cetonas, String fecha, String hora, String observacion, String operacionI){
+        public  void saveDataHba1cDB(float concent,float cetonas, String fecha, String hora,
+                                     String observacion, String operacionI){
             try {
                 //setear datos al objeto y guardar y BD
                 Utils.DbsaveHba1cFromDatabase(-1,
@@ -433,7 +434,8 @@ public class ComplHba1cRegistyActivity extends AppCompatActivity implements Date
         }
 
     //ACTUALIZAR DATOS EN LA TABLA BDSQLITE
-    public  void updateDataHba1cDB(int idAuxHba1c, float concent, float cetonas,String fecha, String hora, String observacion, String operacionU){
+    public  void updateDataHba1cDB(int idAuxHba1c, float concent, float cetonas,String fecha,
+                                   String hora, String observacion, String operacionU){
         try {
             //setear datos al objeto y guardar y BD
             Utils.UpdateHba1cFromDatabase(idAuxHba1c,

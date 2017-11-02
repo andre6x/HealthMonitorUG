@@ -2,22 +2,14 @@
 package com.grupocisc.healthmonitor.entities;
 
 import com.j256.ormlite.field.DatabaseField;
-
-import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.table.DatabaseTable;
-
-
 import java.io.Serializable;
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 
-
 /**
- * Created by HP on 12/01/2017.
+ * Created by aonate on 12/01/2017.
  */
-
 
 @DatabaseTable(tableName = "StateTable")
 

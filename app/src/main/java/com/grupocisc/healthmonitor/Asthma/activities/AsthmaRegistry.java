@@ -25,7 +25,7 @@ import com.grupocisc.healthmonitor.State.adapters.SMainPagerAdapter;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IAsthma;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * Created by Jesenia on 27/07/2017.
@@ -69,7 +69,7 @@ public class AsthmaRegistry extends AppCompatActivity {
 
 
     SMainPagerAdapter adapter;
-    @Bind(R.id.pager)
+    @BindView(R.id.pager)
     ViewPager pager;
 
     public SymptomGridAdapter adapterSymtom;

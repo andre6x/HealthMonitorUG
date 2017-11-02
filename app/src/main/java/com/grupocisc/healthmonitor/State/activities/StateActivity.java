@@ -1,6 +1,5 @@
 package com.grupocisc.healthmonitor.State.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -12,28 +11,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-
-import com.grupocisc.healthmonitor.Doctor.activities.DoctorActivity;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.adapters.SMainPagerAdapter;
-import com.grupocisc.healthmonitor.Utils.Utils;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.grupocisc.healthmonitor.Utils.Utils.isOnline;
-
 public class StateActivity extends AppCompatActivity {
-    @Bind(R.id.toolbar)    Toolbar toolbar;
-    //@Bind(R.id.fab)        FloatingActionButton fab;
-    @Bind(R.id.tabs)       TabLayout tabs;
-    @Bind(R.id.pager)      ViewPager pager;
+    @BindView(R.id.toolbar)    Toolbar toolbar;
+    //@BindView(R.id.fab)        FloatingActionButton fab;
+    @BindView(R.id.tabs)       TabLayout tabs;
+    @BindView(R.id.pager)      ViewPager pager;
    // FloatingActionButton fab;
     public static FloatingActionButton fab;
     SMainPagerAdapter adapter;

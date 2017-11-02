@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.grupocisc.healthmonitor.Disease.adapters.MMainPagerAdapter;
 import com.grupocisc.healthmonitor.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /*Librería para inyectar views (vistas) en Android. Facilitará la tarea de relacionar
@@ -28,9 +28,9 @@ los elementos de las vistas con el código en nuestras aplicaciones Android.*/
 
 public class DiseaseActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.tabs)    TabLayout tabs;
-    @Bind(R.id.pager)   ViewPager pager;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.tabs)    TabLayout tabs;
+    @BindView(R.id.pager)   ViewPager pager;
 
     FloatingActionButton fab;
     MMainPagerAdapter adapter;

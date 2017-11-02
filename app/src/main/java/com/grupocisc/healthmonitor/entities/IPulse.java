@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Created by Raymond on 13/01/2017.
+ * Created by aonate on 13/01/2017.
  */
 
 @DatabaseTable(tableName = "PulseTable")

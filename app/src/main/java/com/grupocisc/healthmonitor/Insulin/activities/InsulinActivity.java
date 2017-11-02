@@ -20,7 +20,7 @@ import com.grupocisc.healthmonitor.Insulin.adapters.IMainPagerAdapter;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Utils.Utils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.grupocisc.healthmonitor.Utils.Utils.isOnline;
@@ -30,9 +30,9 @@ import static com.grupocisc.healthmonitor.Utils.Utils.isOnline;
 public class InsulinActivity extends AppCompatActivity {
     private static final String TAG = "[InsulinActivity]";
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.tabs)    TabLayout tabs;
-    @Bind(R.id.pager)   ViewPager pager;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.tabs)    TabLayout tabs;
+    @BindView(R.id.pager)   ViewPager pager;
     public static FloatingActionButton fab;
     IMainPagerAdapter adapter;
     CharSequence Titles[]={"REGISTRO","ESTADÍSTICAS"};

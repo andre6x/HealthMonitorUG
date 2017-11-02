@@ -13,11 +13,9 @@ import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.grupocisc.healthmonitor.Pulse.adapters.MainPagerAdapter;
 import com.grupocisc.healthmonitor.R;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PulseActivity extends AppCompatActivity {
@@ -25,12 +23,12 @@ public class PulseActivity extends AppCompatActivity {
     public static com.github.clans.fab.FloatingActionMenu principal;
     public static com.github.clans.fab.FloatingActionButton menu1,menu2;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    //@Bind(R.id.fab)        FloatingActionButton fab;
-    @Bind(R.id.tabs)
+    //@BindView(R.id.fab)        FloatingActionButton fab;
+    @BindView(R.id.tabs)
     TabLayout tabs;
-    @Bind(R.id.pager)
+    @BindView(R.id.pager)
     ViewPager pager;
     public static FloatingActionButton fab;
     //FloatingActionButton fab;

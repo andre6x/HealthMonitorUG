@@ -36,7 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.grupocisc.healthmonitor.Utils.Utils.UcallCalendar;
@@ -63,18 +63,18 @@ public class AlarmRegistry extends AppCompatActivity implements DatePickerDialog
     private String [] ReminderTimesFrequencies;
     private String [] ReminderTimesIntervals;
 
-    @Bind(R.id.spinner_ReminderTypes) Spinner spinner_ReminderTypes;
-    @Bind(R.id.spinner_ReminderTimes ) Spinner spinner_ReminderTimes;
+    @BindView(R.id.spinner_ReminderTypes) Spinner spinner_ReminderTypes;
+    @BindView(R.id.spinner_ReminderTimes ) Spinner spinner_ReminderTimes;
 
-    @Bind(R.id.rgrpDuration)  RadioGroup rgrpDuration;
+    @BindView(R.id.rgrpDuration)  RadioGroup rgrpDuration;
 
-    @Bind(R.id.lyt_recycler ) LinearLayout lyt_recycler;
-    @Bind(R.id.rv_reminder_times) RecyclerView recyclerView;
-    @Bind(R.id.lyt_startDate) LinearLayout lyt_startDate;
-    @Bind(R.id.txt_startDate) TextView txt_startDate;
+    @BindView(R.id.lyt_recycler ) LinearLayout lyt_recycler;
+    @BindView(R.id.rv_reminder_times) RecyclerView recyclerView;
+    @BindView(R.id.lyt_startDate) LinearLayout lyt_startDate;
+    @BindView(R.id.txt_startDate) TextView txt_startDate;
 
-    @Bind(R.id.lyt_startHour) LinearLayout lyt_startHour;
-    @Bind(R.id.txt_startHour) TextView txt_startHour;
+    @BindView(R.id.lyt_startHour) LinearLayout lyt_startHour;
+    @BindView(R.id.txt_startHour) TextView txt_startHour;
 
 
     @Override

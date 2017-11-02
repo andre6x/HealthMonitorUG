@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 
 /**
- * Created by Adrian on 07/06/2017.
+ * Created by aonate on 07/06/2017.
  */
 
     @DatabaseTable(tableName = "ColesterolTable")

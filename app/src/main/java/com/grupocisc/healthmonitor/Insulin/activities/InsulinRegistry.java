@@ -45,7 +45,7 @@ import java.util.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,20 +71,20 @@ public class InsulinRegistry extends AppCompatActivity implements DatePickerDial
     private Float fMaxValueInsulin = Float.parseFloat("0") ;
     private EInsulin eInsulin;
 
-    @Bind(R.id.txt_Title) TextView txt_Title;
-    @Bind(R.id.txt_dosis) EditText etxt_dosis;
-    @Bind(R.id.txt_fecha) TextView etxt_fecha;
-    @Bind(R.id.txt_hora)  TextView etxt_hora;
-    @Bind(R.id.txt_observacion) EditText etxt_observacion;
-    @Bind(R.id.lyt_fecha) LinearLayout getLyt_fecha;
-    @Bind(R.id.lyt_hora)  LinearLayout getLyt_hora;
-    @Bind(R.id.fab)       FloatingActionButton get_fab;
-    @Bind(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.txt_Title) TextView txt_Title;
+    @BindView(R.id.txt_dosis) EditText etxt_dosis;
+    @BindView(R.id.txt_fecha) TextView etxt_fecha;
+    @BindView(R.id.txt_hora)  TextView etxt_hora;
+    @BindView(R.id.txt_observacion) EditText etxt_observacion;
+    @BindView(R.id.lyt_fecha) LinearLayout getLyt_fecha;
+    @BindView(R.id.lyt_hora)  LinearLayout getLyt_hora;
+    @BindView(R.id.fab)       FloatingActionButton get_fab;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
-    @Bind(R.id.layoutMainInsulin) LinearLayout layoutMain;
-    @Bind(R.id.layoutButtonsInsulin)  RelativeLayout layoutButtons;
-    @Bind(R.id.layoutContentInsulin)  RelativeLayout layoutContent;
-    @Bind(R.id.cardInsulin)  CardView cardReg;
+    @BindView(R.id.layoutMainInsulin) LinearLayout layoutMain;
+    @BindView(R.id.layoutButtonsInsulin)  RelativeLayout layoutButtons;
+    @BindView(R.id.layoutContentInsulin)  RelativeLayout layoutContent;
+    @BindView(R.id.cardInsulin)  CardView cardReg;
 
     public ProgressDialog Dialog;
     private Call<IRegCrtPacient.RegCrtPacient> call_1;

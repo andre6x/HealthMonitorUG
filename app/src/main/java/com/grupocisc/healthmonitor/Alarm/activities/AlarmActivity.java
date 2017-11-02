@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,7 @@ import android.widget.ImageView;
 import com.grupocisc.healthmonitor.Alarm.adapters.AMainPagerAdapter;
 import com.grupocisc.healthmonitor.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -29,9 +28,9 @@ import butterknife.ButterKnife;
 public class AlarmActivity extends AppCompatActivity {
     private static final String TAG = "[AlarmActivity]";
 
-    @Bind(R.id.toolbar)     Toolbar toolbar;
-    @Bind(R.id.tabs)        TabLayout tabs;
-    @Bind(R.id.pager)       ViewPager pager;
+    @BindView(R.id.toolbar)     Toolbar toolbar;
+    @BindView(R.id.tabs)        TabLayout tabs;
+    @BindView(R.id.pager)       ViewPager pager;
     //public static FloatingActionButton fab;
     private ImageView ImageHeader ;
 

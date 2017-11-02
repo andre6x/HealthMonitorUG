@@ -51,6 +51,7 @@ import com.grupocisc.healthmonitor.Routines.activities.RoutinesActivity;
 import com.grupocisc.healthmonitor.Services.SendDataMyService;
 import com.grupocisc.healthmonitor.Settings.activities.AboutActivity;
 import com.grupocisc.healthmonitor.Settings.activities.TutorialActivity;
+import com.grupocisc.healthmonitor.Settings.activities.TutorialActivityV2;
 import com.grupocisc.healthmonitor.SocialNetworks.activities.SocialActivity;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
 import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
@@ -267,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 i = new Intent(this, AboutActivity.class);
                 break;
             case 21:  // TUTORIAL
-                i = new Intent(this, TutorialActivity.class);
+                i = new Intent(this, TutorialActivityV2.class);
                 break;
             case 22:  // INCIAR SESION
                 i = new Intent(MainActivity.this, LoginActivity.class);

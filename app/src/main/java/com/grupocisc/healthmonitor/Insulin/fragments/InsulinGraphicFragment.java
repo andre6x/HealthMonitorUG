@@ -37,7 +37,7 @@ import java.util.Calendar;
 import java.util.List;
 import android.util.Log;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,11 +58,11 @@ public class InsulinGraphicFragment extends Fragment {
     protected BarChart mChart;
     protected Typeface mTfLight;
 
-    @Bind(R.id.lyt_fechaIni)  LinearLayout lyt_fecha;
-    @Bind(R.id.lyt_fechaFin)  LinearLayout lyt_hora;
-    @Bind(R.id.txt_fecha_desde) TextView txt_fecha_desde;
-    @Bind(R.id.txt_fecha_hasta) TextView txt_fecha_hasta ;
-    @Bind(R.id.btnBuscar) Button btnBuscar;
+    @BindView(R.id.lyt_fechaIni)  LinearLayout lyt_fecha;
+    @BindView(R.id.lyt_fechaFin)  LinearLayout lyt_hora;
+    @BindView(R.id.txt_fecha_desde) TextView txt_fecha_desde;
+    @BindView(R.id.txt_fecha_hasta) TextView txt_fecha_hasta ;
+    @BindView(R.id.btnBuscar) Button btnBuscar;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         String Method ="[onCreateView]";
@@ -183,14 +183,6 @@ public class InsulinGraphicFragment extends Fragment {
 
         String fechaIni = txt_fecha_desde.getText().toString() + " 00:00:00";
         String fechaFin = txt_fecha_hasta.getText().toString() + " 23:59:59";
-        /*
-        String fechaIni = txt_fecha_desde.getText().toString().substring(0, 2)   + "/"
-                + txt_fecha_desde.getText().toString().substring(3, 5) + "/"
-                + txt_fecha_desde.getText().toString().substring(6, 10) + " 00:00:00";
-        String fechaFin = txt_fecha_hasta.getText().toString().substring(0, 2) + "/"
-                + txt_fecha_hasta.getText().toString().substring(3, 5) + "/"
-                + txt_fecha_hasta.getText().toString().substring(6, 10)  + " 23:59:59";
-                */
         String email = Utils.getEmailFromPreference(this.getContext());
         try {
             Log.i(TAG, Method + "Init getting List of Insulin..."  );

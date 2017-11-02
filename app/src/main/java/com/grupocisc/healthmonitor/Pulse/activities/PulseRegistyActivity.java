@@ -511,7 +511,8 @@ public class PulseRegistyActivity extends AppCompatActivity implements DatePicke
         }
     }
     //GUARDOS DATOS EN LA TABLA BDSQLITE
-    public  void saveDataPulseDB(int concent, String maxpressure,String minpressure , String fecha, String hora, String medido, String observacion, String operacionI){
+    public  void saveDataPulseDB(int concent, String maxpressure,String minpressure , String fecha,
+                                 String hora, String medido, String observacion, String operacionI){
         try {
             //setear datos al objeto y guardar y BD
             Utils.DbsavePulseFromDatabase(-1,
@@ -533,7 +534,8 @@ public class PulseRegistyActivity extends AppCompatActivity implements DatePicke
     }
 
     //ACTUALIZAR DATOS EN LA TABLA BDSQLITE
-    public  void updateDataPulseDB(int idAuxPulse, int concent,  String maxpressure, String minpressure , String fecha, String hora, String medido, String observacion, String operacion){
+    public  void updateDataPulseDB(int idAuxPulse, int concent,  String maxpressure, String minpressure ,
+                                   String fecha, String hora, String medido, String observacion, String operacion){
         try {
             //setear datos al objeto y guardar y BD
             Utils.UpdatePulseFromDatabase(idAuxPulse,

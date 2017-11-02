@@ -1,7 +1,7 @@
 package com.grupocisc.healthmonitor.entities;
 
 /**
- * Created by RODRIGUEZ on 12/06/2017.
+ * Created by aonate on 12/06/2017.
  */
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

@@ -1,20 +1,15 @@
 package com.grupocisc.healthmonitor.State.activities;
 
 import android.animation.Animator;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -31,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.adapters.SMainPagerAdapter;
@@ -39,17 +33,11 @@ import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IState;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
-
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.List;
 
-import javax.mail.Quota;
+import butterknife.BindView;
 
-import butterknife.Bind;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class StateRegistyActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
                                                                       ,TimePickerDialog.OnTimeSetListener {
@@ -87,7 +75,7 @@ public class StateRegistyActivity extends AppCompatActivity implements DatePicke
 
     private CardView cardReg;
     SMainPagerAdapter adapter;
-    @Bind(R.id.pager)
+    @BindView(R.id.pager)
     ViewPager pager;
 
     public StateRegistyActivity() {

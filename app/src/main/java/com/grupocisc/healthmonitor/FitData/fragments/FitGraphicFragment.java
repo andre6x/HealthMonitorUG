@@ -9,10 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -27,32 +23,11 @@ import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.Value;
 import com.grupocisc.healthmonitor.FitData.activities.FitActivity;
-import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
-import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
-import com.grupocisc.healthmonitor.Insulin.activities.InsulinActivity;
 import com.grupocisc.healthmonitor.R;
-import com.grupocisc.healthmonitor.Utils.Utils;
-import com.grupocisc.healthmonitor.entities.EInsulin;
-import com.grupocisc.healthmonitor.entities.ICunsulParamet;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import android.util.Log;
-
-import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.grupocisc.healthmonitor.Utils.Utils.isOnline;
-import static com.grupocisc.healthmonitor.Utils.Utils.isOnlineNet;
 
 
 public class FitGraphicFragment extends Fragment {

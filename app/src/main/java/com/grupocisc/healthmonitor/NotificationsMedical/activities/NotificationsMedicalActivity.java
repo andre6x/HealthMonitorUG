@@ -13,14 +13,14 @@ import android.view.View;
 import com.grupocisc.healthmonitor.NotificationsMedical.adapters.NotificationsMedicalAdapter;
 import com.grupocisc.healthmonitor.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NotificationsMedicalActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.tabs)    TabLayout tabs;
-    @Bind(R.id.pager)   ViewPager pager;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.tabs)    TabLayout tabs;
+    @BindView(R.id.pager)   ViewPager pager;
 
     private String TAG = "NotifiMedicalAct";
     CharSequence Titles[]={"Notificaciones","Diabetes","Asma"};

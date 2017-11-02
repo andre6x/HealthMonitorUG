@@ -437,7 +437,8 @@ public class ComplCholesterolRegistyActivity extends AppCompatActivity implement
 
 
     //GUARDOS DATOS EN LA TABLA BDSQLITE
-    public  void saveDataColesterolDB(int colest,int trigl, int colesthdl ,int colestldl, String fecha, String hora, String observacion){
+    public  void saveDataColesterolDB(int colest,int trigl, int colesthdl ,int colestldl,
+                                      String fecha, String hora, String observacion){
         try {
             //setear datos al objeto y guardar y BD
             Utils.DbsaveColesterolFromDatabase(-1,
@@ -459,7 +460,8 @@ public class ComplCholesterolRegistyActivity extends AppCompatActivity implement
     }
 
     //ACTUALIZAR DATOS EN LA TABLA BDSQLITE
-    public  void updateDataColesterolDB(int idAuxPresure, int colest, int trigl,int colestldl, int colesthdl, String fecha, String hora, String observacion, String operacion){
+    public  void updateDataColesterolDB(int idAuxPresure, int colest, int trigl,int colestldl,
+                                        int colesthdl, String fecha, String hora, String observacion, String operacion){
         try {
             //setear datos al objeto y guardar y BD
             Utils.UpdateColesterolFromDatabase(idAuxPresure,

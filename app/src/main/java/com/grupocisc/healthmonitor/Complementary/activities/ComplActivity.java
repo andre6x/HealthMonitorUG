@@ -17,16 +17,16 @@ import android.view.View;
 import com.grupocisc.healthmonitor.Complementary.adapters.MainPagerAdapter;
 import com.grupocisc.healthmonitor.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ComplActivity extends AppCompatActivity {
 
     com.github.clans.fab.FloatingActionButton colesterol,trigliceridos,hba1c,cetonas ;
-    @Bind(R.id.toolbar)    Toolbar toolbar;
-    //@Bind(R.id.fab)        FloatingActionButton fab2;
-    @Bind(R.id.tabs)       TabLayout tabs;
-    @Bind(R.id.pager)      ViewPager pager;
+    @BindView(R.id.toolbar)    Toolbar toolbar;
+    //@BindView(R.id.fab)        FloatingActionButton fab2;
+    @BindView(R.id.tabs)       TabLayout tabs;
+    @BindView(R.id.pager)      ViewPager pager;
     FloatingActionButton fab;
 
     MainPagerAdapter adapter;

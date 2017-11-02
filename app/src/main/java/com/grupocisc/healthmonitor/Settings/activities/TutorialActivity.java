@@ -37,39 +37,28 @@ public class TutorialActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
     ImageButton mNextBtn;
     Button mSkipBtn, mFinishBtn;
-
     ImageView zero, one, two, three, four;
     ImageView[] indicators;
-
     int lastLeftValue = 0;
-
     CoordinatorLayout mCoordinator;
-
-
     static final String TAG = "PagerActivity";
-
     int page = 0;   //  to track page position
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        //Transparent Status Bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans80));
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-
         setContentView(R.layout.activity_pager);
-
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -111,6 +100,7 @@ public class TutorialActivity extends AppCompatActivity {
 
         final ArgbEvaluator evaluator = new ArgbEvaluator();
 
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -232,11 +222,11 @@ public class TutorialActivity extends AppCompatActivity {
                 R.mipmap.tuto_4,
                 R.mipmap.tuto_5};
 
-        String[] bgsTitle = new String[]{"Al iniciar tu sesión en cualquier dispositivo podrás realizar la restauracion de toda tu información registrada en la aplicación.",
-                "Registra tus datos podras encontrar contenido guia",
-                "Registra tus datos la app sabra que recomendarte",
-                "Podras ver tus doctores preferidos y desvicularlos",
-                "Registrar tus enfermedades."};
+        String[] bgsTitle = new String[]{"1",
+                "2",
+                "3",
+                "4",
+                "5"};
 
         public PlaceholderFragment() {
         }

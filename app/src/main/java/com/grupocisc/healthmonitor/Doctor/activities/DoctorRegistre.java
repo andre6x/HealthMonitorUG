@@ -29,14 +29,14 @@ import com.grupocisc.healthmonitor.entities.ObjDoctorSelect;
 import java.sql.SQLException;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DoctorRegistre extends AppCompatActivity {
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     private CardView cv_desvincula;
     String TAG = "DoctorRegistre";

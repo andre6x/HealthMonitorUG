@@ -509,4 +509,29 @@
 
     <string name="section_format">Page %1$d</string>
 
+
+    <!--tutoril-->
+    <string-array name="images_tutorial_v2">
+        <item>tuto_1</item>
+        <item>tuto_2</item>
+        <item>tuto_3</item>
+        <item>tuto_4</item>
+        <item>tuto_5</item>
+    </string-array>
+    <string-array name="footer_tutorial_v2">
+        <item>Al iniciar tu sesión en cualquier dispositivo podrás realizar la restauracion de toda tu información registrada en la aplicación.</item>
+        <item>Registra tus datos podras encontrar contenido guia.</item>
+        <item>Registra tus datos la app sabra que recomendarte.</item>
+        <item>Podras ver tus doctores preferidos y desvicularlos.</item>
+        <item>Registrar tus enfermedades.</item>
+    </string-array>
+
+    <string-array name="titles_tutorial_v2">
+        <item>RESTAURA TUS DATOS</item>
+        <item>REGISTRO</item>
+        <item>RECOMENDACIONES</item>
+        <item>MIS DOCTORES</item>
+        <item>ENFERMEDADES</item>
+    </string-array>
+
 </resources>

@@ -14,14 +14,11 @@ import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-
 import com.grupocisc.healthmonitor.Alarm.activities.AlarmActivity;
 import com.grupocisc.healthmonitor.Medicines.adapters.MMainPagerAdapter;
 import com.grupocisc.healthmonitor.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /*Librería para inyectar views (vistas) en Android. Facilitará la tarea de relacionar
@@ -34,9 +31,9 @@ public class MedicinesActivity extends AppCompatActivity {
 
     com.github.clans.fab.FloatingActionButton fb1,fb2;
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.tabs)    TabLayout tabs;
-    @Bind(R.id.pager)   ViewPager pager;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.tabs)    TabLayout tabs;
+    @BindView(R.id.pager)   ViewPager pager;
     public static FloatingActionButton fab;
 
 //    public static com.github.clans.fab.FloatingActionButton fabRegistro;

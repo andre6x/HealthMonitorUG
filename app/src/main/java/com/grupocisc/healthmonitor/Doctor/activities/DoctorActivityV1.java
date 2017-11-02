@@ -32,14 +32,14 @@ import com.grupocisc.healthmonitor.entities.IRegistreDoctor;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DoctorActivityV1 extends AppCompatActivity {
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     private String respuesta;
     EditText inputSearch;

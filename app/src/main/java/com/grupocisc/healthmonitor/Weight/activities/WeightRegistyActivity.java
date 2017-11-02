@@ -582,7 +582,8 @@ public class WeightRegistyActivity extends AppCompatActivity implements DatePick
 
 
     //GUARDOS DATOS EN LA TABLA BDSQLITE
-    public  void saveDataPesoDB(float peso, float masaMuscular,float tmb, float dmo, float porcentajeAgua, float porcentajeGrasa, String fecha, String hora, String observacion){
+    public  void saveDataPesoDB(float peso, float masaMuscular,float tmb, float dmo, float porcentajeAgua,
+                                float porcentajeGrasa, String fecha, String hora, String observacion){
         try {
             //setear datos al objeto y guardar y BD
             Utils.DbsaveWeightFromDatabase(-1,
@@ -605,7 +606,8 @@ public class WeightRegistyActivity extends AppCompatActivity implements DatePick
     }
 
     //ACTUALIZAR DATOS EN LA TABLA BDSQLITE
-    public  void updateDataPesoDB(float peso, float masaMuscular,float tmb, float dmo, float porcentajeAgua, float porcentajeGrasa, String fecha, String hora, String observacion, String operacion){
+    public  void updateDataPesoDB(float peso, float masaMuscular,float tmb, float dmo, float porcentajeAgua,
+                                  float porcentajeGrasa, String fecha, String hora, String observacion, String operacion){
         try {
             //setear datos al objeto y guardar y BD
             Utils.UpdateWeightFromDatabase(idAuxWeight,

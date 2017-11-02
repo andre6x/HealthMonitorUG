@@ -27,7 +27,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,17 +43,17 @@ public class MedicineUpdate extends AppCompatActivity implements DatePickerDialo
 
     int idMed = 0;
 
-    @Bind(R.id.NombreUpdate) TextView nombre;
-    @Bind(R.id.IdMed) TextView idMedicamento;
-    @Bind(R.id.updt_dosis) EditText txt_dosis ;
-    @Bind(R.id.updt_vecesDia) EditText txt_veces ;
-    @Bind(R.id.updt_fecha) TextView txt_fecha;
-    @Bind(R.id.lyt_fecha) LinearLayout lyt_fecha;
-    @Bind(R.id.updt_hora)TextView txt_hora;
-    @Bind(R.id.lyt_hora) LinearLayout lyt_hora;
-    @Bind(R.id.updt_obs) EditText txt_observacion;
-    @Bind(R.id.btnSave) Button actualizar ;
-    @Bind(R.id.btnClose) Button salir ;
+    @BindView(R.id.NombreUpdate) TextView nombre;
+    @BindView(R.id.IdMed) TextView idMedicamento;
+    @BindView(R.id.updt_dosis) EditText txt_dosis ;
+    @BindView(R.id.updt_vecesDia) EditText txt_veces ;
+    @BindView(R.id.updt_fecha) TextView txt_fecha;
+    @BindView(R.id.lyt_fecha) LinearLayout lyt_fecha;
+    @BindView(R.id.updt_hora)TextView txt_hora;
+    @BindView(R.id.lyt_hora) LinearLayout lyt_hora;
+    @BindView(R.id.updt_obs) EditText txt_observacion;
+    @BindView(R.id.btnSave) Button actualizar ;
+    @BindView(R.id.btnClose) Button salir ;
 
     private Toolbar toolbar;
     public ProgressDialog Dialog;

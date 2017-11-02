@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Manifest;
 import com.grupocisc.healthmonitor.R;
@@ -44,7 +43,6 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -58,8 +56,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -117,24 +114,24 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
             , rango               // true-> Rango, false->Todo
             , enviar = false ;
 
-    @Bind(R.id.rdbIndividual) RadioButton rdbIndividual;
-    @Bind(R.id.rdbGeneral) RadioButton rdbGeneral;
-    @Bind(R.id.rdbExportRango) RadioButton rdbExportRango;
-    @Bind(R.id.rdbExportTodo) RadioButton rdbExportTodo;
+    @BindView(R.id.rdbIndividual) RadioButton rdbIndividual;
+    @BindView(R.id.rdbGeneral) RadioButton rdbGeneral;
+    @BindView(R.id.rdbExportRango) RadioButton rdbExportRango;
+    @BindView(R.id.rdbExportTodo) RadioButton rdbExportTodo;
 
-    @Bind(R.id.txt_fechaini) TextView txt_fechaIni;
-    @Bind(R.id.txt_fechafin) TextView txt_fechaFin;
+    @BindView(R.id.txt_fechaini) TextView txt_fechaIni;
+    @BindView(R.id.txt_fechafin) TextView txt_fechaFin;
 
-    @Bind(R.id.lyt_fechaini) LinearLayout lytInicio;
-    @Bind(R.id.lyt_fechafin) LinearLayout lytFin;
-    @Bind(R.id.lyt_InformeRango) LinearLayout lytExportRango;
-    @Bind(R.id.lyt_InformeTodo) LinearLayout lytExportTodo;
+    @BindView(R.id.lyt_fechaini) LinearLayout lytInicio;
+    @BindView(R.id.lyt_fechafin) LinearLayout lytFin;
+    @BindView(R.id.lyt_InformeRango) LinearLayout lytExportRango;
+    @BindView(R.id.lyt_InformeTodo) LinearLayout lytExportTodo;
 
-    @Bind(R.id.chkInsulin) CheckBox  chkInsulina;
-    @Bind(R.id.chkGlucose) CheckBox  chkGlucosa;
-    @Bind(R.id.chkPressureP) CheckBox chkPresionP;
-    @Bind(R.id.chkPeso) CheckBox    chkPeso;
-    @Bind(R.id.chkAsma) CheckBox   chkAsma;
+    @BindView(R.id.chkInsulin) CheckBox  chkInsulina;
+    @BindView(R.id.chkGlucose) CheckBox  chkGlucosa;
+    @BindView(R.id.chkPressureP) CheckBox chkPresionP;
+    @BindView(R.id.chkPeso) CheckBox    chkPeso;
+    @BindView(R.id.chkAsma) CheckBox   chkAsma;
 
     com.github.clans.fab.FloatingActionButton menu1,menu2;
 
