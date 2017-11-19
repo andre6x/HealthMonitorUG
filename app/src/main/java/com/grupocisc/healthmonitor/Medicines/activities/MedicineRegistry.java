@@ -137,7 +137,10 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
 
 
     @BindView(R.id.lyt_ReminderTypes)               LinearLayout lyt_ReminderTypes;
-    @BindView(R.id.spinner_ReminderTypes)           Spinner spinner_ReminderTypes;
+    @BindView(R.id.rgrpReminderTypes)        RadioGroup rgrpReminderTypes;
+    @BindView(R.id.rbtFrecuency)       RadioButton rbtFrecuency;
+    @BindView(R.id.rbtInterval)     RadioButton rbtInterval;
+    //@BindView(R.id.spinner_ReminderTypes)           Spinner spinner_ReminderTypes;
     @BindView(R.id.spinner_ReminderTimes)           Spinner spinner_ReminderTimes;
 
     @BindView(R.id.lyt_reminder_times ) LinearLayout lyt_reminder_times;
@@ -257,20 +260,34 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
 
         txt_startHourMedCtrlUpd.setText("08:00");
 
-        this.spinner_ReminderTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//        this.spinner_ReminderTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                //Object item = parent.getItemAtPosition(position);
+//                positionSRTp=position;
+//                //setSpinner(position);
+//                //fillSpinner(spinner_ReminderTimes,1,position);
+//                switch (position){
+//                    case 0:{fillSpinner(spinner_ReminderTimes,"ReminderTimesF");break;}
+//                    case 1:{fillSpinner(spinner_ReminderTimes,"ReminderTimesI");break;}
+//                }
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
+        this.rbtFrecuency.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Object item = parent.getItemAtPosition(position);
-                positionSRTp=position;
-                //setSpinner(position);
-                //fillSpinner(spinner_ReminderTimes,1,position);
-                switch (position){
-                    case 0:{fillSpinner(spinner_ReminderTimes,"ReminderTimesF");break;}
-                    case 1:{fillSpinner(spinner_ReminderTimes,"ReminderTimesI");break;}
-                }
+            public void onClick(View v) {
+                positionSRTp=0;
+                fillSpinner(spinner_ReminderTimes,"ReminderTimesF");
             }
+        });
+        this.rbtInterval.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onClick(View v) {
+                positionSRTp=1;
+                fillSpinner(spinner_ReminderTimes,"ReminderTimesI");
             }
         });
 
@@ -278,6 +295,7 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 positionSRTm=position;
+                Log.i(TAG, "[onItemSelected] positionSRTm="+positionSRTm +" position="+position );
                 setListAlarm(position);
             }
             @Override
@@ -304,6 +322,7 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
             public void onClick(View v) {
                 String txt="Días específicos:";
                 rbtSpecificDaysOfWeek.setText(txt);
+                lstWeekDaysSelected.clear();
             }
         });
 
@@ -380,7 +399,7 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
     }
 
     private void loadSpinner(){
-        fillSpinner(spinner_ReminderTypes,"ReminderTypes");
+        //fillSpinner(spinner_ReminderTypes,"ReminderTypes");
         fillSpinner(spinner_ReminderTimes,"ReminderTimesF");
     }
 
@@ -447,19 +466,21 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
 
         int idxReminderTypes = getSelectedValueIndex("ReminderTypes",iRegisteredMedicines.getReminderTypeCode());
         Log.i(TAG, Method + "spinner_ReminderTypes.setSelection(idxReminderTypes) = " + idxReminderTypes );
-        this.spinner_ReminderTypes.setSelection(idxReminderTypes,true);
+        //this.spinner_ReminderTypes.setSelection(idxReminderTypes,true);
 
         String strKey="ReminderTimesF";
         positionSRTp=idxReminderTypes;
         switch (idxReminderTypes){
-            case 0:{strKey="ReminderTimesF" ;break;}
-            case 1:{strKey="ReminderTimesI" ;break;}
+            case 0:{strKey="ReminderTimesF" ; this.rbtFrecuency.setChecked(true); this.rbtInterval.setChecked(false); break;}
+            case 1:{strKey="ReminderTimesI" ; this.rbtFrecuency.setChecked(false); this.rbtInterval.setChecked(true); break;}
         }
-        //fillSpinner(spinner_ReminderTimes,strKey);
+        fillSpinner(spinner_ReminderTimes,strKey);
         int idxReminderTimes = getSelectedValueIndex(strKey,iRegisteredMedicines.getReminderTimeCode()+"");
         Log.i(TAG, Method + "spinner_ReminderTimes.setSelection(idxReminderTimes) = " + idxReminderTimes );
-        this.spinner_ReminderTimes.setSelection(idxReminderTimes,true);
-
+        //this.spinner_ReminderTimes.setSelection(idxReminderTimes,true);
+        this.spinner_ReminderTimes.setSelection(idxReminderTimes);
+        this.spinner_ReminderTimes.refreshDrawableState();
+        Log.i(TAG, Method + "spinner_ReminderTimes.setSelection(idxReminderTimes) = ............" + idxReminderTimes );
         try{
             lstAlarmDetails = Utils.getEAlarmDetailsFromDataBaseLocal(HealthMonitorApplicattion.getApplication().getEAlarmDetailsDao(),iRegisteredMedicines.getId(),0,"","","","" );
         }catch (Exception e){e.printStackTrace();}
@@ -537,7 +558,8 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
         final boolean existsMedicine = true ;//fnExistsMediceRegistred(idMedicine);
         //validar campos llenos
 
-        final String reminderTypeCode = getSelectedValue ( this.spinner_ReminderTypes, "ReminderTypes").toString() ; // ObtenerValor de Spinner Frecuencia.
+        //final String reminderTypeCode = getSelectedValue ( this.spinner_ReminderTypes, "ReminderTypes").toString() ; // ObtenerValor de Spinner Frecuencia.
+        final String reminderTypeCode = this.rbtFrecuency.isChecked() ? "F" : "I";   // ObtenerValor de Spinner Frecuencia.
         String optionSpinnerKey = reminderTypeCode.equals("F")?"ReminderTimesF":"ReminderTimesI";
         Log.i(TAG, Method + "optionSpinnerKey = " + optionSpinnerKey);
         final int reminderTimeCode = Integer.parseInt( getSelectedValue ( this.spinner_ReminderTimes, optionSpinnerKey).toString()) ; //Obtener valor de 2do Spinner
@@ -733,7 +755,7 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
     }
 
     private void circleAnimationOpen() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int x = layoutContent.getRight();
             int y = layoutContent.getBottom();
             int startRadius = 0;
@@ -746,7 +768,7 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
     }
 
     private void circleAnimationClose() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int x = layoutButtons.getRight();
             int y = layoutButtons.getBottom();
             int startRadius = Math.max(layoutContent.getWidth(), layoutContent.getHeight());
@@ -943,7 +965,7 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
         List<EAlarmDetails> lstAlarmList = new ArrayList<>();
         EAlarmDetails alarmDetails;
         if ( positionSRTp == 0){
-            Log.i(TAG, Method +  "Intervalos positionSRTm=" + positionSRTm  );
+            Log.i(TAG, Method +  "Frecuencia - positionSRTm=" + positionSRTm  );
             int intvervalo=1;
             time = txt_startHourMedCtrlUpd.getText().toString()+":00";
             switch (positionSRTm){
@@ -968,7 +990,7 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
 
         }else if (positionSRTp == 1 ){
             int intvervalo=1;
-            Log.i(TAG, Method +  "Intervalos positionSRTm=" + positionSRTm  );
+            Log.i(TAG, Method +  "Intervalos - positionSRTm=" + positionSRTm  );
             switch (positionSRTm){
                 case 0: {intvervalo = 2 ; break;}
                 case 1: {intvervalo = 3 ; break;}
@@ -1042,19 +1064,70 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
         Log.i(TAG, Method + "End..."  );
     }
 
+    private boolean [] fn_itemsCheckArray(){
+        String Method = "[fn_itemsCheckArray]";
+        Log.i(TAG, Method + " Init...");
+        String tmp [] = rbtSpecificDaysOfWeek.getText().toString().split(":");
+        boolean [] itemsCheck = {false, false, false, false, false, false, false};
+        if (tmp.length==1){
+            Log.i(TAG, Method + " tmp.length==1");
+            Log.i(TAG, Method + " End...");
+            return  itemsCheck;
+        }
+        else{
+            String Days = getSelectedDayValue();
+            Log.i(TAG, Method + " Days "  + Days );
+            if ("0".equals(Days)){
+                return  itemsCheck;
+            }
+            for (int i=0;i<Days.length();i++){
+                Log.i(TAG, Method + " Days.substring(i,i+1)..."  + Days.substring(i,i+1));
+                int dayIdx =  Integer.parseInt( Days.substring(i,i+1) ) -1;
+                itemsCheck[dayIdx] = true;
+            }
+        }
+        Log.i(TAG, Method + " End...");
+        return itemsCheck;
+    }
+
+    private ArrayList<?> fn_itemsCheckArrayList(){
+        String Method = "[fn_itemsCheckArrayList]";
+        Log.i(TAG, Method + " Init...");
+        ArrayList seletedItems=new ArrayList();
+        String tmp [] = rbtSpecificDaysOfWeek.getText().toString().split(":");
+        Log.i(TAG, Method + " End...");
+        if (tmp.length==1){
+            Log.i(TAG, Method + " tmp.length==1");
+            //for (int i=0;i<7;i++){
+            //    seletedItems.add(i);
+            //}
+        }else{
+            String Days = getSelectedDayValue();
+            Log.i(TAG, Method + " Days "  + Days );
+            for (int i=0;i<Days.length();i++){
+                Log.i(TAG, Method + " Days.substring(i,i+1)..."  + Days.substring(i,i+1));
+                int dayIdx =  Integer.parseInt( Days.substring(i,i+1) ) -1;
+                seletedItems.add(dayIdx);
+            }
+
+        }
+        Log.i(TAG, Method + " End...");
+        return seletedItems;
+    }
+
     private void fn_showAlertDialogNameOfDays() {
         final String textRbt="Días específicos: ";
         String Method ="[fn_showAlertDialogNameOfDays]";
         Log.i(TAG, Method + "Init..."  );
         //final CharSequence[] items = {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado ","Domingo"};
         final CharSequence[] items = getResources().getStringArray(R.array.array_WeekDaysDesc) ;//{"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado ","Domingo"};
-        boolean [] itemsCheck = {false, false, true, true, false, true, false};
+        boolean [] itemsCheck = fn_itemsCheckArray();
         // arraylist to keep the selected items
-        final ArrayList seletedItems=new ArrayList();
+        final ArrayList seletedItems=fn_itemsCheckArrayList();
         //seletedItems.add(2); seletedItems.add(3); seletedItems.add(5);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Seleccione los días de la semana");
-        builder.setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+        builder.setMultiChoiceItems(items, itemsCheck, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
                 if (isChecked) {
@@ -1072,13 +1145,14 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
                 //  Your code when user clicked on OK
                 //  You can write the code  to save the selected item here
                 String Days = "ALL";
+                Collections.sort(seletedItems);
                 Days = getDaySelected(seletedItems);
                 if (Days.equals("ALL")) {
                     rbtEveryDay.setChecked(true);
                     rbtSpecificDaysOfWeek.setText(textRbt);
-                } else {
+                }
+                else {
                     rbtSpecificDaysOfWeek.setText(textRbt + Days);
-
                 }
 
             }
@@ -1087,6 +1161,10 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 //  Your code when user clicked on Cancel
+                String [] tmp = rbtSpecificDaysOfWeek.getText().toString().split(":");
+                if (tmp.length==1){
+                    rbtEveryDay.setChecked(true);
+                }
             }
         });
         AlertDialog dialog = builder.create();
@@ -1137,6 +1215,7 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
         String weekDays="";
         ArrayList itemsTmp = new ArrayList();
         itemsTmp = items;
+
         lstWeekDaysSelected.clear();
         if (items.size()==7){
             WeekDays wk = new WeekDays(0,"ALL");
@@ -1164,8 +1243,10 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
                 }
             }
         }
+
         Log.i(TAG, Method + "lstWeekDaysSelected.size(): " + lstWeekDaysSelected.size() );
         Log.i(TAG, Method + "weekDays: " + weekDays );
+        if (lstWeekDaysSelected.size() == 0) weekDays="ALL,";
         weekDays = weekDays.substring(0, weekDays.length() -1 );
         Log.i(TAG, Method + "weekDays: " + weekDays );
         Log.i(TAG, Method + "End..." );
@@ -1214,6 +1295,12 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
             fechaI = new Date(2017,07,1);
             fechaF = new Date(2017,07,30);
             daysDiff = getDateDiff(fechaI,fechaF, TimeUnit.DAYS);
+            String [] tmp = rbtNumberOfDays.getText().toString().split(":");
+            daysDiff = 0;
+            if (tmp.length > 1 ){
+                daysDiff =  Integer.parseInt( tmp[1].trim() ) ;
+                Log.i(TAG, Method + "daysDiff = " + daysDiff);
+            }
         }catch (Exception e){daysDiff = 0;e.printStackTrace();}
 
         userInput.setText( String.valueOf( daysDiff) );
@@ -1224,17 +1311,29 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                // get user input and set it to result
-                                // edit text
-                                //result.setText(userInput.getText());
-                                //txt_NumberOfDays.setText(userInput.getText());
-                                rbtNumberOfDays.setText( textRbt + userInput.getText());
+                                // get user input and set it to result edit text
+                                Log.i(TAG,  "[onClick] userInput.getText() = " + userInput.getText().toString().trim());
+                                if (! "0".equals(userInput.getText().toString().trim())){
+                                    rbtNumberOfDays.setText( textRbt + userInput.getText() );
+                                }else{
+                                    rbtNumberOfDays.setText(textRbt);
+                                    rbtContinuous.setChecked(true);
+                                }
                             }
                         })
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                //txt_NumberOfDays.setText("");
+
+                                String [] tmp = rbtNumberOfDays.getText().toString().split(":");
+                                if (tmp.length==1){
+                                    rbtContinuous.setChecked(true);
+                                }else if (tmp.length==2){
+                                    if ("0".equals(tmp[1].trim())){
+                                        rbtNumberOfDays.setText(textRbt);
+                                        rbtContinuous.setChecked(true);
+                                    }
+                                }
                                 dialog.cancel();
                             }
                         });
@@ -1358,7 +1457,13 @@ public class MedicineRegistry extends AppCompatActivity implements  DatePickerDi
         }
     }
 
+    class strComparator implements Comparator<String>{
+        @Override
+        public int compare(String a, String b){
+            return a.compareTo(b);
+        }
 
+    }
 
 
 

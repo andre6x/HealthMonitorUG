@@ -130,9 +130,6 @@ public class MedicineGraphicFragment extends Fragment implements  LabelledSpinne
         rightAxis.setSpaceTop(1);
 
 
-
-        // setearSpinnerMedicamento(Utils.getEmailFromPreference(getContext()));
-        setSpinnerMedicineDBLocal(Utils.getEmailFromPreference(getContext()),"" );
         //selectDataMecicinesDB();
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +161,13 @@ public class MedicineGraphicFragment extends Fragment implements  LabelledSpinne
         });
         return root;
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // setearSpinnerMedicamento(Utils.getEmailFromPreference(getContext()));
+        setSpinnerMedicineDBLocal(Utils.getEmailFromPreference(getContext()),"" );
     }
 
     private void  setSpinnerMedicineDBLocal(String UserMail, String UserLogin){
@@ -258,12 +262,6 @@ public class MedicineGraphicFragment extends Fragment implements  LabelledSpinne
 
             }
         });
-
-    }
-
-        @Override
-    public void onResume() {
-        super.onResume();
 
     }
 

@@ -396,11 +396,27 @@
                             android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
-                            <Spinner
-                                android:id="@+id/spinner_ReminderTypes"
+                            <RadioGroup
+                                android:id="@+id/rgrpReminderTypes"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checkedButton="@+id/rbtFrecuency">
+
+                                <RadioButton
+                                    android:id="@+id/rbtFrecuency"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Frecuencia" />
+
+                                <RadioButton
+                                    android:id="@+id/rbtInterval"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Intervalos" />
+                            </RadioGroup>
 
                         </LinearLayout>
 

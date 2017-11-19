@@ -207,10 +207,10 @@ public class InsulinRegistry extends AppCompatActivity implements DatePickerDial
             public void validate(EditText editText, String text) {
                 if(!text.isEmpty() && Utils.isNumeric(text))
                 {
-                    if( Float.parseFloat(text) > fMaxValueInsulin ){
+                   /* if( Float.parseFloat(text) > fMaxValueInsulin ){
                         etxt_dosis.setError( getResources().getString(R.string.msg_DoseValueMoreThan) + fMaxValueInsulin  + " units." );//etxt_dosis.setError( "No puede ser mayor a 100 unidades." );
                         etxt_dosis.setText("");
-                    }
+                    }*/
                     if( Float.parseFloat(text) < fMinValueInsulin ){
                         etxt_dosis.setError( getResources().getString(R.string.msg_DoseValueMoreThan) + fMinValueInsulin  + " unit." );//etxt_dosis.setError( "No puede ser menor a 1 unidad." );
                         etxt_dosis.setText("");
@@ -239,7 +239,7 @@ public class InsulinRegistry extends AppCompatActivity implements DatePickerDial
             public void onClick(View view) {
                 if( !  etxt_dosis.getText().toString().isEmpty() ) {
 
-                    if( Float.parseFloat(etxt_dosis.getText().toString()) >= 1 && Float.parseFloat(etxt_dosis.getText().toString()) <= 100  ){
+                    if( Float.parseFloat(etxt_dosis.getText().toString()) >= 1 /*&& Float.parseFloat(etxt_dosis.getText().toString()) <= 100*/  ){
                         saveData(view);
                     }
                     else

@@ -30,7 +30,6 @@ import com.grupocisc.healthmonitor.entities.IV2ConsultWeight;
 import com.grupocisc.healthmonitor.entities.ObjUser;
 import com.grupocisc.healthmonitor.entities.ObjUserdate;
 
-import java.sql.SQLException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -198,8 +197,11 @@ public class ProgressIntentService extends IntentService {
     //GUARDOS DATOS EN LA TABLA BDSQLITE
     public  void saveDataGlucosaDB(IV2ConsultGlucosa.rows  rows){
         try {
-            String fecha= rows.getDate().substring(8,10)+ "/"+ rows.getDate().substring(5,7)+"/" +rows.getDate().substring(0,4);
-            String hora =  rows.getDate().substring(11,16);
+            String fecha = "";
+            String hora = "";
+            //if (rows.getDate() != null){
+                fecha = rows.getDate().substring(8, 10) + "/" + rows.getDate().substring(5, 7) + "/" + rows.getDate().substring(0, 4);
+                hora = rows.getDate().substring(11, 16);
             //setear datos al objeto y guardar y BD
             Utils.DbsaveGlucoseFromDatabase(rows.getIdRegisterDB() ,
                     rows.getMeasureUnit(),
@@ -211,7 +213,7 @@ public class ProgressIntentService extends IntentService {
                     HealthMonitorApplicattion.getApplication().getGlucoseDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -297,7 +299,7 @@ public class ProgressIntentService extends IntentService {
                                             HealthMonitorApplicattion.getApplication().getPulseDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -385,7 +387,7 @@ public class ProgressIntentService extends IntentService {
                     HealthMonitorApplicattion.getApplication().getWeightDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -471,7 +473,7 @@ public class ProgressIntentService extends IntentService {
                     HealthMonitorApplicattion.getApplication().getInsulinDao()  );
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -557,7 +559,7 @@ public class ProgressIntentService extends IntentService {
                                                 HealthMonitorApplicattion.getApplication().getColesterolDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -641,7 +643,7 @@ public class ProgressIntentService extends IntentService {
                                         HealthMonitorApplicattion.getApplication().getHba1cDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -738,7 +740,7 @@ public class ProgressIntentService extends IntentService {
                                             HealthMonitorApplicattion.getApplication().getStateDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -822,7 +824,7 @@ public class ProgressIntentService extends IntentService {
                                             HealthMonitorApplicattion.getApplication().getAsthmaDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -902,7 +904,7 @@ public class ProgressIntentService extends IntentService {
                     HealthMonitorApplicattion.getApplication().getDoctorDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1056,7 +1058,7 @@ public class ProgressIntentService extends IntentService {
             Utils.DeleterowsAllMedicinesAlarm(HealthMonitorApplicattion.getApplication().getEAlarmDetailsDao());
             Utils.DeleterowsAllMedicinesTake(HealthMonitorApplicattion.getApplication().getEAlarmTakeMedicineDao());
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

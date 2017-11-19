@@ -93,23 +93,27 @@ public class AlarmListFragment extends Fragment implements AlarmListAdapter.View
         dateF = toDate; //"2030/01/01";
         switch (op){
             case 0:{
-                hourI ="04:00:00";
-                hourF ="11:59:59";
+                // Morning 04:00 - 12:00
+                hourI ="03:59:59";
+                hourF ="12:00:00";
                 break;
             }
             case 1:{
-                hourI ="12:00:00";
-                hourF ="17:59:59";
+                // Afternoon 12:00 - 18:00
+                hourI ="11:59:59";
+                hourF ="18:00:00";
                 break;
             }
             case 2:{
-                hourI ="18:00:00";
-                hourF ="23:59:59";
+                // Evening 18:00 - 00:00
+                hourI ="17:59:59";
+                hourF ="24:00:00";
                 break;
             }
             case 3:{
+                // Night 00:00 - 04:00
                 hourI ="00:00:00";
-                hourF ="03:59:59";
+                hourF ="04:00:00";
                 break;
             }
         }
@@ -195,30 +199,36 @@ public class AlarmListFragment extends Fragment implements AlarmListAdapter.View
 
         List<EAlarmDetails> lst = new ArrayList<EAlarmDetails>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date dateI = new Date();
-        Date dateF = new Date();
-        Date dateDB= new Date();
-        try {
-            dateI = simpleDateFormat.parse(date + " " + hourI);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        try {
-            dateF = simpleDateFormat.parse(date + " " + hourF);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        String dateI = "";//new Date();
+        String dateF = "";//new Date();
+        String dateDB= "";//new Date();
+        //try {
+//            dateI = simpleDateFormat.parse(date + " " + hourI);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            dateF = simpleDateFormat.parse(date + " " + hourF);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+        dateI = date + " " + hourI;
+        dateF = date + " " + hourF;
         for (EAlarmDetails ead : lstEAlarmDetails) {
-            try {
-                Log.i(TAG, Method +  "ead.toString()=" + ead.toString()  );
-                dateDB = simpleDateFormat.parse(ead.getAlarmDetailDate() + " " + ead.getAlarmDetailHour());
-                if ( dateDB.after(dateI) && dateDB.before(dateF)  ){
+            //try {
+                //dateDB = simpleDateFormat.parse(ead.getAlarmDetailDate() + " " + ead.getAlarmDetailHour());
+                dateDB = ead.getAlarmDetailDate() + " " + ead.getAlarmDetailHour();
+                //Log.i(TAG, Method +  "[dateDB="+simpleDateFormat.format( dateDB )+"][dateI=" + simpleDateFormat.format(dateI)+"][dateF=" + simpleDateFormat.format(dateF) +"] - [ead.toString()=" + ead.toString() +"]" );
+            Log.i(TAG, Method +  "[dateDB="+dateDB+"][dateI="+dateI+"][dateF="+dateF+"] - [ead.toString()=" + ead.toString() +"]" );
+                //if(dateDB.compareTo(dateI)>=0) Log.i(TAG, Method +  "{[dateDB >= dateI] -> [" + simpleDateFormat.format(dateDB)+">="+simpleDateFormat.format(dateI) +"]" );
+                //if(dateDB.compareTo(dateF)<0) Log.i(TAG, Method +  "{[dateDB < dateF] -> [" + simpleDateFormat.format(dateDB)+"<"+simpleDateFormat.format(dateF) +"]" );
+                if( dateDB.compareTo(dateI)>=0 && dateDB.compareTo(dateF)<0 ){//if ( dateDB.after(dateI) && dateDB.before(dateF)  ){
                     lst.add(ead);
                     Log.i(TAG, Method +  "add to list ead.toString()=" + ead.toString()  );
                 }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            //} catch (ParseException e) {
+            //    e.printStackTrace();
+            //}
 
         }
 

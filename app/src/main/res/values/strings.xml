@@ -498,7 +498,7 @@
     <!--END_MPO-->
 
     <!--IMPORTAR DATA INI -->
-    <string name="txt_import_1">Restaur Registros </string>
+    <string name="txt_import_1">Restaurar Registros </string>
     <string name="txt_import_2">Restaura los registros de tus controles de </string>
     <string name="txt_import_3">salud desde el servidor de Health Monitor. </string>
     <string name="txt_import_4">Si no los restauras ahora, no podrás hacerlo después.</string>

@@ -26,8 +26,8 @@ android {
         applicationId "com.grupocisc.healthmonitor"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 11
-        versionName "2.9"
+        versionCode 13
+        versionName "2.11"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         // Stops the Gradle plugin’s automatic rasterization of vectors

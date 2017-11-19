@@ -487,67 +487,81 @@ public class HeartRateMonitor extends AppCompatActivity implements LabelledSpinn
 
     //GUARDOS DATOS EN LA TABLA BD
     public  void saveDataPulseDB(View view){
-        String maxpressureS =  txt_maxpressure.getText().toString() ;
-        String minpressureS =  txt_minpressure.getText().toString() ;
-        String concentracion =  text.getText().toString() ;
-        String medido = selectTextSpinner;
-        String observacion = txt_observation.getText().toString() ;
-        int concent = Integer.parseInt(concentracion);
-        //validar campos llenos
-        if(concentracion.length() > 0 && selectPosicionSpinner != 0  ) {
-            try {
-                if(!txt_maxpressure.getText().toString().isEmpty() &&Utils.isNumeric(txt_maxpressure.getText().toString())&&
-                        !txt_minpressure.getText().toString().isEmpty() &&Utils.isNumeric(txt_minpressure.getText().toString())   ) {
-                    float maxpressure = Float.parseFloat(txt_maxpressure.getText().toString());//Float.parseFloat(txt_concentration.getText().toString())
-                    float minpressure = Float.parseFloat(txt_minpressure.getText().toString());
-                    if (validaRangos(maxpressure, minpressure)) {
-                        //setear datos al objeto y guardar y BD
-                        Utils.DbsavePulseFromDatabase(-1,
-                                                    concent,
-                                                    maxpressureS,
-                                                    minpressureS,
-                                                    medido,
-                                                    fecha,
-                                                    hora,
-                                                    observacion,
-                                                    enviadoServer,
-                                                    operacionI,
-                                                    HealthMonitorApplicattion.getApplication().getPulseDao());
+        if(camposLlenos()) {
+            String maxpressureS = txt_maxpressure.getText().toString();
+            String minpressureS = txt_minpressure.getText().toString();
+            String concentracion = text.getText().toString();
+            String medido = selectTextSpinner;
+            String observacion = txt_observation.getText().toString();
+            int concent = Integer.parseInt(concentracion);
+            //validar campos llenos
+            if (concentracion.length() > 0 && selectPosicionSpinner != 0) {
+                try {
+                    if (!txt_maxpressure.getText().toString().isEmpty() && Utils.isNumeric(txt_maxpressure.getText().toString()) &&
+                            !txt_minpressure.getText().toString().isEmpty() && Utils.isNumeric(txt_minpressure.getText().toString())) {
+                        float maxpressure = Float.parseFloat(txt_maxpressure.getText().toString());//Float.parseFloat(txt_concentration.getText().toString())
+                        float minpressure = Float.parseFloat(txt_minpressure.getText().toString());
+
+                        if (validaRangos(maxpressure, minpressure)) {
+                            //setear datos al objeto y guardar y BD
+                            Utils.DbsavePulseFromDatabase(-1,
+                                    concent,
+                                    maxpressureS,
+                                    minpressureS,
+                                    medido,
+                                    fecha,
+                                    hora,
+                                    observacion,
+                                    enviadoServer,
+                                    operacionI,
+                                    HealthMonitorApplicattion.getApplication().getPulseDao());
 
 
-                        nextAction();
-                    }
-                }else{
-                    Snackbar.make(view, "\n" + "Su P.A esta mal ingresada: "+"\n"+getString(R.string.ingrese), Snackbar.LENGTH_LONG)
-                            .setAction("Ok", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
+                            nextAction();
+                        } else {
+                            Snackbar.make(view, "\n" + "Su P.A esta mal ingresada: " + "\n" + getString(R.string.ingrese), Snackbar.LENGTH_LONG)
+                                    .setAction("Ok", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                /*Intent it = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                                startActivity(it);*/
+                                        }
+                                    })
+                                    .setActionTextColor(this.getResources().getColor(R.color.greenMenu))
+                                    .show();
+                        }
+                    } else {
+                        Snackbar.make(view, "\n" + "Su P.A esta mal ingresada: " + "\n" + getString(R.string.ingrese), Snackbar.LENGTH_LONG)
+                                .setAction("Ok", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
                             /*Intent it = new Intent(Settings.ACTION_WIFI_SETTINGS);
                             startActivity(it);*/
-                                }
-                            })
-                            .setActionTextColor(this.getResources().getColor(R.color.greenMenu))
-                            .show();
+                                    }
+                                })
+                                .setActionTextColor(this.getResources().getColor(R.color.greenMenu))
+                                .show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                //finalizar matar la actividad
+                finish();
+            } else {
 
-            //finalizar matar la actividad
-            finish();
-        }else{
-
-            Snackbar.make(view, "\n" +"Por favor seleccionar una opción" , Snackbar.LENGTH_LONG)
-                    .setAction("Ok", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                Snackbar.make(view, "\n" + "Por favor seleccionar una opción", Snackbar.LENGTH_LONG)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
                             /*Intent it = new Intent(Settings.ACTION_WIFI_SETTINGS);
                             startActivity(it);*/
-                        }
-                    })
-                    .setActionTextColor(this.getResources().getColor(R.color.greenMenu))
-                    .show();
+                            }
+                        })
+                        .setActionTextColor(this.getResources().getColor(R.color.greenMenu))
+                        .show();
+            }
         }
     }
 
@@ -596,6 +610,21 @@ public class HeartRateMonitor extends AppCompatActivity implements LabelledSpinn
             cardReg.setVisibility(View.INVISIBLE);
             anim.start();
         }
+    }
+
+    private boolean camposLlenos() {
+        if (text.getText().toString() == null || text.getText().toString().length() == 0){
+            Utils.generarSweetAlertDialogWarning(this, getString(R.string.txt_atencion), "El valor es obligatorio");
+            return false;
+        }else if (txt_maxpressure.getText().toString() == null || txt_maxpressure.getText().toString().length() == 0){
+            Utils.generarSweetAlertDialogWarning(this, getString(R.string.txt_atencion), "El campo P.A Sistólica es obligatorio");
+            return false;
+        }
+        else if (txt_minpressure.getText().toString() == null || txt_minpressure.getText().toString().length() == 0){
+            Utils.generarSweetAlertDialogWarning(this, getString(R.string.txt_atencion),"El campo P.A Diastólica es obligatorio");
+            return false;
+        }
+        return true;
     }
 
     private boolean validaRangos(float sistolica, float Diastolica ) {
