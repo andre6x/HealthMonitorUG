@@ -42,7 +42,7 @@ public class AlarmListTakeMedicineCardAdapter extends RecyclerView.Adapter <Alar
     private RecyclerViewAnimator mAnimator;
     private boolean  isAnimRebound;
     public Context context;
-    private AlarmListTakeMedicineCardAdapter.ViewHolder.ClickListener clickListener;
+    private ViewHolder.ClickListener clickListener;
     private LayoutInflater mLayoutInflater;
     private List<EAlarmDetails> lstAlarmList;
 
@@ -107,7 +107,8 @@ public class AlarmListTakeMedicineCardAdapter extends RecyclerView.Adapter <Alar
         try {
             Log.i(TAG, Method + "Saving Take " + alarmDetails.toString()  );
             if (Utils.saveAlarmTakeMedicineToDataBaseLocal(HealthMonitorApplicattion.getApplication().getEAlarmTakeMedicineDao()
-                    ,alarmDetails.getRegisteredMedicinesId(),alarmDetails.getAlarmDetailId(),alarmDetails.getEmail()  ) > 0){
+                    ,alarmDetails.getRegisteredMedicinesId(), alarmDetails.getAlarmDetailId(),Utils.getDate("yyyy/MM/dd HH:mm:ss")
+                    ,alarmDetails.getEmail() ,"I","N" ) > 0){
 
                 callSaveTakeMedicine=true;
             }
@@ -166,7 +167,7 @@ public class AlarmListTakeMedicineCardAdapter extends RecyclerView.Adapter <Alar
         String Method ="[onCreateViewHolder]";
         Log.i(TAG, Method +  "Init..."  );
         View v = mLayoutInflater.inflate(R.layout.alarm_take_medicine_card_adapter, viewGroup, false);
-        AlarmListTakeMedicineCardAdapter.ViewHolder vh = new AlarmListTakeMedicineCardAdapter.ViewHolder(v,clickListener);
+        ViewHolder vh = new ViewHolder(v,clickListener);
         setAnimReboundonCreateViewHolder(v);
         Log.i(TAG, Method +  "End..."  );
         return vh;

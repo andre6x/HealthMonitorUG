@@ -478,10 +478,10 @@ public class Utils {
         path=file.getPath();
         Uri bmpUri = Uri.parse("file://"+path);
         Intent shareIntent = new Intent();
-        shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+        shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, text);
         shareIntent.setType("image/jpg");
         context.startActivity(Intent.createChooser(shareIntent,"Share with"));
 
@@ -2542,7 +2542,7 @@ public  static  void UpdateStateFromDatabase(int idstate,
             iRegisteredMedicines.setRegisteredMedicinesStatus("A");
             iRegisteredMedicines.setOperationDb ( idServerDb == 0 ? "I" : "U"  );
             // if (idServerDb == 0){iRegisteredMedicines.setOperationDb("I");}else{iRegisteredMedicines.setOperationDb("U");}
-            iRegisteredMedicines.setSentWs("N");
+            iRegisteredMedicines.setSentWs(idServerDb == 0 ? "N" : "S");
             iRegisteredMedicines.setIdServerDb(idServerDb);
             iRegisteredMedicines.setEmail(email);
             iRows = RegisteredMedicinesDao.create(iRegisteredMedicines);
@@ -3380,7 +3380,7 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
 	    //Verifica Conexión a internet
     public static Boolean isOnlineNet() {
         try {
-            Process p = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.es");
+            Process p = Runtime.getRuntime().exec("ping -c 1 www.google.es");
             int val           = p.waitFor();
             boolean reachable = (val == 0);
             return reachable;
@@ -4468,7 +4468,10 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
             Dao<EAlarmTakeMedicine, Integer> ObjDao,
             int registeredMedicinesId,
             int alarmDetailId ,
+            String MedicineTakeDate,
             String email
+            ,String operationDB
+            ,String sentServer
 
 //            ,int registeredMedicinesIdServerDB,
 //            int alarmDetailIdServerDB
@@ -4481,11 +4484,11 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
             EAlarmTakeMedicine obj = new EAlarmTakeMedicine() ;
             obj.setRegisteredMedicinesId(registeredMedicinesId);
             obj.setAlarmDetailId(alarmDetailId);
-            obj.setAlarmTakeMedicineDate(getDate("yyyy/MM/dd HH:mm:ss"));
+            obj.setAlarmTakeMedicineDate(MedicineTakeDate);
             obj.setAlarmTakeMedicineStatus("A");
             obj.setEmail(email);
-            obj.setOperationDb("I");
-            obj.setSentWs("N");
+            obj.setOperationDb(operationDB);
+            obj.setSentWs(sentServer);
 
 //            if (registeredMedicinesIdServerDB != 0 ){
 //                obj.setRegisteredMedicinesIdServerDB(registeredMedicinesIdServerDB);
@@ -4886,5 +4889,78 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
 
         return getDateStr;
     }
+
+//    public static float getRegisteredMedicinesIdFromDataBaseLocal(
+//            Dao<IRegisteredMedicines, Integer> RegisteredMedicinesDao,
+//            int idServerDb) throws java.sql.SQLException {
+//        String Method ="[getRegisteredMedicinesIdFromDataBaseLocal]";
+//        Log.i(TAG, Method + "Init..."  );
+//        float fRows = 0;
+//        try {
+//            String query="SELECT id AS registeredMedicinesId FROM RMedicinesTable " +
+//                    "WHERE idServerDb="+idServerDb;
+//            Log.i(TAG, Method + "query=" + query  );
+//            Log.i(TAG, Method + "Init executing query..."  );
+//            fRows = RegisteredMedicinesDao.queryRawValue(query);
+//            Log.i(TAG, Method + "End executing query..."  );
+//            Log.i(TAG, Method + "fRows=" +fRows );
+//
+//            Log.i(TAG, Method + " IRegisteredMedicines.id="+fRows  );
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        Log.i(TAG, Method + "End..."  );
+//        return  fRows;
+//    }
+//
+//    public static float getAlarmDetailIdFromDataBaseLocal(
+//            Dao<EAlarmDetails, Integer> EAlarmDetailsDao,
+//            int idServerDb) throws java.sql.SQLException {
+//        String Method ="[getAlarmDetailIdFromDataBaseLocal]";
+//        Log.i(TAG, Method + "Init..."  );
+//        float fRows = 0;
+//        try {
+//            String query="SELECT id AS registeredMedicinesId FROM EAlarmDetails " +
+//                    "WHERE idServerDb="+idServerDb;
+//            Log.i(TAG, Method + "query=" + query  );
+//            Log.i(TAG, Method + "Init executing query..."  );
+//            fRows = EAlarmDetailsDao.queryRawValue(query);
+//            Log.i(TAG, Method + "End executing query..."  );
+//            Log.i(TAG, Method + "fRows=" +fRows );
+//
+//            Log.i(TAG, Method + " IRegisteredMedicines.id="+fRows  );
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        Log.i(TAG, Method + "End..."  );
+//        return  fRows;
+//    }
+
+    public static EAlarmDetails getAlarmDetailIdFromDataBaseLocal(
+            Dao<EAlarmDetails, Integer> EAlarmDetailsDao,
+            int idServerDb) throws java.sql.SQLException {
+        String Method ="[getAlarmDetailIdFromDataBaseLocal]";
+        Log.i(TAG, Method + "Init..."  );
+        EAlarmDetails eAlarmDetails = null;
+        try {
+            String query="SELECT * FROM EAlarmDetails WHERE idServerDb=" + idServerDb ;
+            Log.i(TAG, Method + "query=" + query  );
+            Log.i(TAG, Method + "Init executing query..."  );
+            GenericRawResults<EAlarmDetails> rawResults = EAlarmDetailsDao.queryRaw(query, EAlarmDetailsDao.getRawRowMapper());
+            Log.i(TAG, Method + "End executing query..."  );
+            List<EAlarmDetails> lstAlarmDetails = rawResults.getResults();
+            Log.i(TAG, Method + "lstAlarmDetails.size()=" +lstAlarmDetails.size() );
+            eAlarmDetails = null;
+            if (lstAlarmDetails != null)
+                if(lstAlarmDetails.size()>0)
+                    eAlarmDetails = lstAlarmDetails.get(0);
+        } catch (SQLException e) {
+            eAlarmDetails = null;
+            e.printStackTrace();
+        }
+        Log.i(TAG, Method + "End..."  );
+        return eAlarmDetails;
+    }
+
 
 }

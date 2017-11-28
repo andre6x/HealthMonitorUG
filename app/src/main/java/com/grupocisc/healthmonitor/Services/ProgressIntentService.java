@@ -17,6 +17,7 @@ import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.EAlarmDetails;
 import com.grupocisc.healthmonitor.entities.EAlarmTakeMedicine;
 import com.grupocisc.healthmonitor.entities.IRegisteredMedicines;
+import com.grupocisc.healthmonitor.entities.IV2ConsulControlMedication;
 import com.grupocisc.healthmonitor.entities.IV2ConsulMedicationAlarm;
 import com.grupocisc.healthmonitor.entities.IConsulMyDoctors;
 import com.grupocisc.healthmonitor.entities.IV2ConsultCholesterol;
@@ -30,7 +31,9 @@ import com.grupocisc.healthmonitor.entities.IV2ConsultWeight;
 import com.grupocisc.healthmonitor.entities.ObjUser;
 import com.grupocisc.healthmonitor.entities.ObjUserdate;
 
+import java.sql.SQLException;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,7 +65,8 @@ public class ProgressIntentService extends IntentService {
 	
 	private Call<IV2ConsulMedicationAlarm.Obj> call_12;
     private IV2ConsulMedicationAlarm.Obj mDataMedAlm;
-
+    private Call<IV2ConsulControlMedication.Obj> call_13;
+    private IV2ConsulControlMedication.Obj mDataCtrlMed;
     public Boolean run;
     public String Email = "";
     private static final String sendServerOK = "true";
@@ -121,7 +125,7 @@ public class ProgressIntentService extends IntentService {
             importDataPickFlow();
             importDataDoctors();
             importDataMedicineAlarm();
-			  //importDataMedicineAlarm();
+            //importDataMedicineTakeAlarm();
 
             // Bucle de simulación
             for (int i = 1; i <= 30; i++) {
@@ -197,11 +201,8 @@ public class ProgressIntentService extends IntentService {
     //GUARDOS DATOS EN LA TABLA BDSQLITE
     public  void saveDataGlucosaDB(IV2ConsultGlucosa.rows  rows){
         try {
-            String fecha = "";
-            String hora = "";
-            //if (rows.getDate() != null){
-                fecha = rows.getDate().substring(8, 10) + "/" + rows.getDate().substring(5, 7) + "/" + rows.getDate().substring(0, 4);
-                hora = rows.getDate().substring(11, 16);
+            String fecha= rows.getDate().substring(8,10)+ "/"+ rows.getDate().substring(5,7)+"/" +rows.getDate().substring(0,4);
+            String hora =  rows.getDate().substring(11,16);
             //setear datos al objeto y guardar y BD
             Utils.DbsaveGlucoseFromDatabase(rows.getIdRegisterDB() ,
                     rows.getMeasureUnit(),
@@ -213,7 +214,7 @@ public class ProgressIntentService extends IntentService {
                     HealthMonitorApplicattion.getApplication().getGlucoseDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -299,7 +300,7 @@ public class ProgressIntentService extends IntentService {
                                             HealthMonitorApplicattion.getApplication().getPulseDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -387,7 +388,7 @@ public class ProgressIntentService extends IntentService {
                     HealthMonitorApplicattion.getApplication().getWeightDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -473,7 +474,7 @@ public class ProgressIntentService extends IntentService {
                     HealthMonitorApplicattion.getApplication().getInsulinDao()  );
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -559,7 +560,7 @@ public class ProgressIntentService extends IntentService {
                                                 HealthMonitorApplicattion.getApplication().getColesterolDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -643,7 +644,7 @@ public class ProgressIntentService extends IntentService {
                                         HealthMonitorApplicattion.getApplication().getHba1cDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -740,7 +741,7 @@ public class ProgressIntentService extends IntentService {
                                             HealthMonitorApplicattion.getApplication().getStateDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -824,7 +825,7 @@ public class ProgressIntentService extends IntentService {
                                             HealthMonitorApplicattion.getApplication().getAsthmaDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -904,7 +905,7 @@ public class ProgressIntentService extends IntentService {
                     HealthMonitorApplicattion.getApplication().getDoctorDao());
 
             //Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -969,6 +970,8 @@ public class ProgressIntentService extends IntentService {
                 bitacoraErrorMedicineAlarm(msj2 );
         }else
             bitacoraErrorMedicineAlarm(msj1);
+
+        importDataMedicineTakeAlarm();
     }
 
     //GUARDOS DATOS EN LA TABLA BDSQLITE
@@ -1018,7 +1021,95 @@ public class ProgressIntentService extends IntentService {
         //getApplicationContext()
         //LLAMAR METODO WS NUEVO DE BITACORA ERRORES
     }
-    ///**********************************FIN PICKFLOW******************************//
+    ///**********************************FIN MEDICACION_ALARMA******************************//
+
+    ///***********************************INICIO MEDICINE_TAKE_ALARM***********************//
+    public void importDataMedicineTakeAlarm(){
+        IV2ConsulControlMedication IConsul = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsulControlMedication.class);
+        call_13 = IConsul.queryControlMedication (new IV2ConsulControlMedication.ObjQueryControlMedication(Email) );
+
+        call_13.enqueue(new Callback<IV2ConsulControlMedication.Obj>() {
+            @Override
+            public void onResponse(Call<IV2ConsulControlMedication.Obj> call, Response<IV2ConsulControlMedication.Obj> response) {
+                if (response.isSuccessful() ) {
+                    Log.e(TAG, "CONTROL MEDICINE Respuesta exitosa: response true  ");
+                    mDataCtrlMed = null;
+                    mDataCtrlMed = response.body();
+                    postExecutionSaveDataMedicineTakeAlarm();
+
+                } else {
+                    String msj = "CONTROL MEDICINE Error en la petición: response false";
+                    bitacoraErrorMedicineTakeAlarm (msj);
+                    Log.e(TAG, msj);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IV2ConsulControlMedication.Obj> call, Throwable t) {
+                String msj = "MEDICINE ALARM Error en la petición: onFailure";
+                bitacoraErrorMedicineTakeAlarm(msj);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postExecutionSaveDataMedicineTakeAlarm(){
+        Log.e(TAG, "CONTROL MEDICINE postExecution Data");
+        String msj1 = "Error: Object is null";
+        String msj2 = "Error: codigo != 0";
+        String msj3 = "Error: lista  Rows  is null or size is 0";
+        if (mDataCtrlMed != null) {
+            if (mDataCtrlMed.getIdCodResult() == 0 ) {
+                if(mDataCtrlMed.getRows() != null && mDataCtrlMed.getRows().size() > 0){
+                    Log.e(TAG, "CONTROL MEDICINE obtener data server oK ");
+                    //enviar datos a guardar
+                    for (IV2ConsulControlMedication.Rows  rows :  mDataCtrlMed.getRows() ){
+                        saveDataMedicineTakeAlarmDB(rows);
+                    }
+                }else{
+                    bitacoraErrorMedicineTakeAlarm(msj3 );
+                }
+            }else
+                bitacoraErrorMedicineTakeAlarm(msj2 );
+        }else
+            bitacoraErrorMedicineTakeAlarm(msj1);
+    }
+
+    //GUARDOS DATOS EN LA TABLA BDSQLITE
+    public  void saveDataMedicineTakeAlarmDB(IV2ConsulControlMedication.Rows rows){
+        try {
+            Log.e(TAG, "CONTROL MEDICINE saveDataMedicineTakeAlarmDB" + rows.toString());
+//            String sRegisteredMedicinesId= String.valueOf(Utils.getRegisteredMedicinesIdFromDataBaseLocal(HealthMonitorApplicattion.getApplication().getRegisteredMedicinesDao(),rows.getIdRegisterDB() ));
+//            String sAlarmDetailId = String.valueOf(Utils.getAlarmDetailIdFromDataBaseLocal(HealthMonitorApplicattion.getApplication().getEAlarmDetailsDao(),rows.getIdAlarmMedication() ));
+//            int registeredMedicinesId = Integer.parseInt(sRegisteredMedicinesId);
+//            int alarmDetailId = Integer.parseInt(sAlarmDetailId) ;
+            EAlarmDetails eAlarmDetails = Utils.getAlarmDetailIdFromDataBaseLocal(HealthMonitorApplicattion.getApplication().getEAlarmDetailsDao(),rows.getIdAlarmMedication() );
+            Log.e(TAG, "CONTROL MEDICINE saveDataMedicineTakeAlarmDB eAlarmDetails " + eAlarmDetails.toString());
+            int registeredMedicinesId = 0 ;
+            int alarmDetailId = 0;
+            int regMed=0;
+            if (eAlarmDetails != null){
+                registeredMedicinesId = eAlarmDetails.getRegisteredMedicinesId();
+                alarmDetailId = eAlarmDetails.getAlarmDetailId();
+                String fecha=rows.getDate().substring(0,19).replace("-","/");
+                regMed = Utils.saveAlarmTakeMedicineToDataBaseLocal( HealthMonitorApplicattion.getApplication().getEAlarmTakeMedicineDao(),
+                        registeredMedicinesId,alarmDetailId,fecha,Email,"U","S"
+                );
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //BITACORA
+    public void bitacoraErrorMedicineTakeAlarm(String msj){
+        String tipo = "MedicineTakeAlarm";
+        Log.e(TAG, tipo +" "+ msj );
+        //getApplicationContext()
+        //LLAMAR METODO WS NUEVO DE BITACORA ERRORES
+    }
+    ///**********************************FIN TAKE_MEDICINE******************************//
 
     @Override
     public void onDestroy() {
@@ -1058,7 +1149,7 @@ public class ProgressIntentService extends IntentService {
             Utils.DeleterowsAllMedicinesAlarm(HealthMonitorApplicattion.getApplication().getEAlarmDetailsDao());
             Utils.DeleterowsAllMedicinesTake(HealthMonitorApplicattion.getApplication().getEAlarmTakeMedicineDao());
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
