@@ -136,7 +136,7 @@ public class RegistrationIntentService extends IntentService {
 
     private void SendTokenEnServidor(final int index , String token){
         Log.e(TAG, "enviando");
-        IPushNotification notifi = HealthMonitorApplicattion.getApplication().getmRestPushAdapter().create(IPushNotification.class);
+        IPushNotification notifi = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
         /*if (index == 1)
             call_2 = notifi.getPushNotification_2(token);
         else //2

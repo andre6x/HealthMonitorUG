@@ -14,10 +14,10 @@ import retrofit2.http.POST;
 
 public interface ISendPulsePresion {
 
-    @POST("diabetes/patientUsers/registerPressure")
+    @POST("controlServices/diabetes/patientUsers/registerPressure")
     Call<SendPulsePresion> setSendPulsePresionFrom(@Body rowPulsePresion rPressure);
 
-    @POST("diabetes/patientUsers/updatePressure")
+    @POST("controlServices/diabetes/patientUsers/updatePressure")
     Call<SendPulsePresion> setSendPulsePresionUpdateFrom(@Body rowPulsePresionUpdate rPeso);
 
 

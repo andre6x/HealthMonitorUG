@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 
 
 public interface ISendBackAccount {
-    @GET("personas/envio_email_act_credencial")
+    @GET("control/diabetes/personas/envio_email_act_credencial")
     Call<SendBackAccount> EnvioEmail(@Query("email") String email);
     public class SendBackAccount{
         int codigo;

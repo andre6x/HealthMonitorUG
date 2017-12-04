@@ -62,7 +62,7 @@ public class RoutinesAsthmaGridFragment extends Fragment {
     private void restartLoadingCourses2() {
         showLoading();
         int id_enfermedad = 2; // asma
-        IRutinasU iRutinasU = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IRutinasU.class);
+        IRutinasU iRutinasU = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRutinasU.class);
         call_2 = iRutinasU.getIdRutinas(id_enfermedad);
         call_2.enqueue(new Callback<ArrayList<Integer>>() {
             @Override
@@ -85,7 +85,7 @@ public class RoutinesAsthmaGridFragment extends Fragment {
 
     private void restartLoadingCourses2R() {
         String email = Utils.getEmailFromPreference(getActivity());
-        IRutinasR iRutinasR = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterAnimo().create(IRutinasR.class);
+        IRutinasR iRutinasR = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRutinasR.class);
         call_2R = iRutinasR.getIdRutinas(email);
         call_2R.enqueue(new Callback<ArrayList<String>>() {
             @Override

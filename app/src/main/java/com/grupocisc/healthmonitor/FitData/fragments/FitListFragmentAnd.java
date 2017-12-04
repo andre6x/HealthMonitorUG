@@ -458,7 +458,7 @@ public class FitListFragmentAnd extends Fragment implements FitListAdapterAnd.My
         Log.e(TAG, "Fit - Email " + Email + "Fit - Fecha Inicio " + fechaI + "Fit - Fecha Fin " + fechaF);
 
         try {
-            IV2Fit CrtPacientFit = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2Fit.class);
+            IV2Fit CrtPacientFit = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2Fit.class);
             call_fit = CrtPacientFit.setSendFitFrom(new rowV2Fit(Email, fechaI, fechaF, activity, value));
             call_fit.enqueue(new Callback<IV2Fit.Fit>() {
 

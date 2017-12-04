@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 
 public interface IDietU {
 
-    @GET("dieta")
+    @GET("control/diabetes/dieta")
     Call<ArrayList<IDietU.Diet>> getListDiet();
 
     //@DatabaseTable(tableName = "DietTable")

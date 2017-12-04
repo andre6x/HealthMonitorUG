@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 
 public interface IV2Fit {
 
-    @POST("diabetes/patientUsers/registerGoogleFit")
+    @POST("controlServices/diabetes/patientUsers/registerGoogleFit")
     Call<Fit> setSendFitFrom(@Body rowV2Fit rFit);
 
 

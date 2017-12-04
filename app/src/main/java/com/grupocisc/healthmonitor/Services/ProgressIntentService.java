@@ -147,7 +147,7 @@ public class ProgressIntentService extends IntentService {
 
     ///**********************************INNICIO GLUCOSA**************************//
     public void importDataGlucosa(){
-        IV2ConsultGlucosa Iglucosa = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsultGlucosa.class);
+        IV2ConsultGlucosa Iglucosa = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsultGlucosa.class);
         call_3 = Iglucosa.getConsultGlucosa(new ObjUserdate(Email, null, null ));
         call_3.enqueue(new Callback<IV2ConsultGlucosa.Obj>() {
             @Override
@@ -230,7 +230,7 @@ public class ProgressIntentService extends IntentService {
 
     ///**********************************INNICIO PULSOPRESION**************************//
     public void importDataPulsoPresion(){
-        IV2ConsultPulsePressure pulse = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsultPulsePressure.class);
+        IV2ConsultPulsePressure pulse = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsultPulsePressure.class);
         call_10 = pulse.getConsultPulsePressure(new ObjUserdate(Email, null, null ));
         call_10.enqueue(new Callback<IV2ConsultPulsePressure.Obj>() {
             @Override
@@ -316,7 +316,7 @@ public class ProgressIntentService extends IntentService {
 
     ///**********************************INNICIO PESO**************************//
     public void importDataPeso(){
-        IV2ConsultWeight Iglucosa = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsultWeight.class);
+        IV2ConsultWeight Iglucosa = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsultWeight.class);
         call_5 = Iglucosa.getConsultWeight(new ObjUserdate(Email, null, null ));
         call_5.enqueue(new Callback<IV2ConsultWeight.Obj>() {
             @Override
@@ -404,7 +404,7 @@ public class ProgressIntentService extends IntentService {
 
     ///**********************************INNICIO INSULINA**************************//
     public void importDataInsulina(){
-        IV2ConsultInsulin insulin = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsultInsulin.class);
+        IV2ConsultInsulin insulin = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsultInsulin.class);
         call_6 = insulin.getConsultInsulin(new ObjUserdate(Email, null, null ));
         call_6.enqueue(new Callback<IV2ConsultInsulin.Obj>() {
             @Override
@@ -490,7 +490,7 @@ public class ProgressIntentService extends IntentService {
 
     ///**********************************INNICIO COLESTEROL**************************//
     public void importDataColesterol(){
-        IV2ConsultCholesterol colest = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsultCholesterol.class);
+        IV2ConsultCholesterol colest = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsultCholesterol.class);
         call_7 = colest.getConsultCholesterol(new ObjUserdate(Email, null, null ));
         call_7.enqueue(new Callback<IV2ConsultCholesterol.Obj>() {
             @Override
@@ -576,7 +576,7 @@ public class ProgressIntentService extends IntentService {
 
     ///**********************************INNICIO HBACETONA**************************//
     public void importDataHbaCetona(){
-        IV2ConsultHbaCetona hba = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsultHbaCetona.class);
+        IV2ConsultHbaCetona hba = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsultHbaCetona.class);
         call_8 = hba.getConsultGlucosa(new ObjUserdate(Email, null, null ));
         call_8.enqueue(new Callback<IV2ConsultHbaCetona.Obj>() {
             @Override
@@ -660,7 +660,7 @@ public class ProgressIntentService extends IntentService {
 
     ///**********************************INNICIO ESTADOANIMO**************************//
     public void importDataEstadoAnimo(){
-        IV2ConsultMood estadoAnim = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsultMood.class);
+        IV2ConsultMood estadoAnim = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsultMood.class);
         call_9 = estadoAnim.getConsultMood(new ObjUserdate(Email, null, null ));
         call_9.enqueue(new Callback<IV2ConsultMood.Obj>() {
             @Override
@@ -758,7 +758,7 @@ public class ProgressIntentService extends IntentService {
 
     ///***********************************INNICIO PICKFLOW***********************//
     public void importDataPickFlow(){
-        IV2ConsultPickFlow Iglucosa = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsultPickFlow.class);
+        IV2ConsultPickFlow Iglucosa = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsultPickFlow.class);
         call_4 = Iglucosa.getConsultPickFlow(new ObjUserdate(Email, null, null ));
         call_4.enqueue(new Callback<IV2ConsultPickFlow.Obj>() {
             @Override
@@ -841,7 +841,7 @@ public class ProgressIntentService extends IntentService {
 
     ///***********************************INNICIO DOCTORES***********************//
     public void importDataDoctors(){
-        IConsulMyDoctors Iglucosa = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IConsulMyDoctors.class);
+        IConsulMyDoctors Iglucosa = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulMyDoctors.class);
         call_11 = Iglucosa.getConsultMyDoctors(new ObjUser(Email));
         call_11.enqueue(new Callback<IConsulMyDoctors.Obj>() {
             @Override
@@ -922,7 +922,7 @@ public class ProgressIntentService extends IntentService {
 
     ///***********************************INICIO MEDICACION_ALARMA***********************//
     public void importDataMedicineAlarm(){
-        IV2ConsulMedicationAlarm IConsul = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsulMedicationAlarm.class);
+        IV2ConsulMedicationAlarm IConsul = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsulMedicationAlarm.class);
         call_12 = IConsul.queryMedicationAlarmLog (new IV2ConsulMedicationAlarm.ObjQueryMedicationAlarmLog(Email)  );
 
         call_12.enqueue(new Callback<IV2ConsulMedicationAlarm.Obj>() {
@@ -1025,7 +1025,7 @@ public class ProgressIntentService extends IntentService {
 
     ///***********************************INICIO MEDICINE_TAKE_ALARM***********************//
     public void importDataMedicineTakeAlarm(){
-        IV2ConsulControlMedication IConsul = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsulControlMedication.class);
+        IV2ConsulControlMedication IConsul = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsulControlMedication.class);
         call_13 = IConsul.queryControlMedication (new IV2ConsulControlMedication.ObjQueryControlMedication(Email) );
 
         call_13.enqueue(new Callback<IV2ConsulControlMedication.Obj>() {

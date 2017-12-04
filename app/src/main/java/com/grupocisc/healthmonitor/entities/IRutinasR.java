@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface IRutinasR {
 
-    @GET("procesos_oap/ejecuta_RecRutina")
+    @GET("controlProcesos/diabetes/procesos_oap/ejecuta_RecRutina")
     Call<ArrayList<String>> getIdRutinas(@Query("email") String email);
 
     public class RutinasR{

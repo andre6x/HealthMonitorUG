@@ -99,7 +99,7 @@ public class LoginBackPassword extends AppCompatActivity {
         Log.e(TAG, "LoginBackPassword :: restartLoadingEnviarData: " + pass);
         //enviar webservice
         //APUNTANDO AA METODO CISC
-        IConfirmBackPass login = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IConfirmBackPass.class);
+        IConfirmBackPass login = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConfirmBackPass.class);
         call_1 = login.RegPass(new ObjNewPass(Email, pass));
         call_1.enqueue(new Callback<IConfirmBackPass.RegistroNuevaPass>() {
             @Override

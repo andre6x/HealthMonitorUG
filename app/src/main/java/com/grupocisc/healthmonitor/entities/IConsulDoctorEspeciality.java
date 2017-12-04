@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 
 public interface IConsulDoctorEspeciality {
 
-    @POST("diabetes/patientUsers/querySpecialties")
+    @POST("controlServices/diabetes/patientUsers/querySpecialties")
     Call<Obj> CunsulParametEspeciality();
 
 

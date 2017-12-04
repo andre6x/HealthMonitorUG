@@ -216,7 +216,7 @@ public class MedicineGraphicFragment extends Fragment implements  LabelledSpinne
 
 
     public void setearSpinnerMedicamento(String UserMail) {
-        IConsulMedicines iConsulMedicines = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterP().create(IConsulMedicines.class);
+        IConsulMedicines iConsulMedicines = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulMedicines.class);
         Call<List<IConsulMedicines.ListadoMedReg>> call = iConsulMedicines.LISTADO_CALL(UserMail);
         call.enqueue(new Callback<List<IConsulMedicines.ListadoMedReg>>() {
             @Override
@@ -358,7 +358,7 @@ public class MedicineGraphicFragment extends Fragment implements  LabelledSpinne
 
         final String nombreMed = selectTextSpinner; //spinnerMed.getSpinner().getItemAtPosition(0).toString();
 
-        IRegCrtMedicamentos iRegCrtMedicamentos = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterP().create(IRegCrtMedicamentos.class);
+        IRegCrtMedicamentos iRegCrtMedicamentos = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegCrtMedicamentos.class);
         Call<List<IRegCrtMedicamentos.ConsulCtrlMedicamentos>> call = iRegCrtMedicamentos.CONSULTA_CTRL_MED_CALL(email, fechaDesde, fechaHasta );
         call.enqueue(new Callback<List<IRegCrtMedicamentos.ConsulCtrlMedicamentos>>() {
             @Override

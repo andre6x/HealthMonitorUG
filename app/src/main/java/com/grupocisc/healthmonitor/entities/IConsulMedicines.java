@@ -131,7 +131,7 @@ public interface IConsulMedicines {
     }
 
     //Registra el medicamento al usuario mRestCISCAdapterp
-    @PUT("procesos_oap/vincula_medicamento_paciente") //email=mail@hotmail.com&id_medicamento=4&fecha_registro=2017/03/12%2017:33:45
+    @PUT("controlProcesos/diabetes/procesos_oap/vincula_medicamento_paciente") //email=mail@hotmail.com&id_medicamento=4&fecha_registro=2017/03/12%2017:33:45
     Call<RegMedicacion> RegMedicacion( @Query("email") String email,
                                        @Query("id_medicamento") int id,
                                        @Query("fecha_registro") String fecha);
@@ -276,7 +276,7 @@ public interface IConsulMedicines {
 
     //Consulta Medicamentos registrados para Control
     //http://181.39.136.237:5678/controlProcesos/diabetes/procesos_oap/medicaciones_paciente_andr?email=laura@hotmail.com
-    @GET("procesos_oap/medicaciones_paciente_andr")
+    @GET("controlProcesos/diabetes/procesos_oap/medicaciones_paciente_andr")
     Call<List<ListadoMedReg>> LISTADO_CALL (@Query("email") String email);
 
     class ListadoMedReg implements Comparable<ListadoMedReg>{

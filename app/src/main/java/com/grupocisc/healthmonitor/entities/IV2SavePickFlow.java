@@ -19,7 +19,7 @@ import retrofit2.http.Query;
 
 public interface IV2SavePickFlow {
 
-    @POST("diabetes/patientUsers/registerPeakFlow")
+    @POST("controlServices/diabetes/patientUsers/registerPeakFlow")
     Call<SavePickFlow> setSaveSavePickFlow(@Body ObjtSavePickFlow objtSavePickFlow );
 
     public class SavePickFlow {

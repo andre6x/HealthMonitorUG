@@ -340,7 +340,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     private void enviartoken(String userMail, String gcmToken) {
-        IPushNotification notifi = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IPushNotification.class);
+        IPushNotification notifi = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
         final Call<IPushNotification.InsertNotification> insertNotificationCall = notifi.INSERT_NOTIFICATION_CALL(userMail, gcmToken);
         insertNotificationCall.enqueue(new Callback<IPushNotification.InsertNotification>() {
             @Override

@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 public interface IRegistrePerson {
 //http://157.55.171.107:8080/controlServices/diabetes/patientUsers/registerPatientUser
 
-    @POST("diabetes/patientUsers/registerPatientUser")
+    @POST("controlServices/diabetes/patientUsers/registerPatientUser")
     Call<RegistroPersona> RegistroPersona1(@Body ObjDataUserLogin objetoDataUserLogin);
 
     class RegistroPersona{

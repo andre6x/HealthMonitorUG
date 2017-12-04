@@ -183,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //enviar webservice
         //APUNTANDO AA METODO CISC
-        IUserLogin login = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IUserLogin.class);
+        IUserLogin login = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IUserLogin.class);
         Log.i(TAG, "restartLoadingEnviarData: " + user_email +" - "+ user_pass  );
         call_1 = login.LoginUser( new ObjLogin(user_email,user_pass)  );
         call_1.enqueue(new Callback<IUserLogin.UserLogin>() {

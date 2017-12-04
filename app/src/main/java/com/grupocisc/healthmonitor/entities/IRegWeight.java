@@ -12,10 +12,10 @@ import retrofit2.http.POST;
 
 public interface IRegWeight {
 
-    @POST("diabetes/patientUsers/registerWeight")
+    @POST("controlServices/diabetes/patientUsers/registerWeight")
     Call<RegWeight> setSendregisterWeightFrom(@Body rowPeso rPeso);
 
-    @POST("diabetes/patientUsers/updateWeight")
+    @POST("controlServices/diabetes/patientUsers/updateWeight")
     Call<RegWeight> setSendWeightUpdateFrom(@Body rowPesoUpdate rPeso);
 
     public class RegWeight{

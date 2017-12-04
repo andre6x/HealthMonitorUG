@@ -8,10 +8,10 @@ import retrofit2.http.POST;
 
 public interface IV2RegistreState {
 
-    @POST("diabetes/patientUsers/registerMood")
+    @POST("controlServices/diabetes/patientUsers/registerMood")
     Call<RegistroState> setSendStateFrom(@Body rowV2State rState);
 
-    @POST("diabetes/patientUsers/updateMood")
+    @POST("controlServices/diabetes/patientUsers/updateMood")
     Call<RegistroState> setSendStateUpdateFrom(@Body rowV2StateUpdate rState);
 
 

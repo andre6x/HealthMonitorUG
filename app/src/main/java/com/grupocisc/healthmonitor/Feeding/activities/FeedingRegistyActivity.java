@@ -312,7 +312,7 @@ public class FeedingRegistyActivity extends AppCompatActivity implements DatePic
 
         Log.e(TAG, "?email"+ email + "&descripcion" +alimento +"&porcion"+ porcion +"&calorias"+ caloria +"&proteinas"+ proteina +"&grasas"+ grasa +"&carbohidratos"+ carbohidrato +"&fecha"+ newDateString + " " + hora );
 
-        IRegistreAlimento iRegistreAlimento = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IRegistreAlimento.class);
+        IRegistreAlimento iRegistreAlimento = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegistreAlimento.class);
         alimentoCall = iRegistreAlimento.putAlimento(email, alimento, porcion, caloria, proteina, grasa, carbohidrato, newDateString + " " + hora);
         alimentoCall.enqueue(new Callback<IRegistreAlimento.RegistroAlimento>() {
             @Override
