@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\andres\\AndroidStudioProjects\\HealthMonitor\\librarySweetAlert\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-lv\\values-lv.xml",
+            "outputFile": "/home/alex/StudioProjects/HealthMonitorUG/C:\\Users\\andres\\AndroidStudioProjects\\HealthMonitor\\librarySweetAlert\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-lv\\values-lv.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\andres\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.0.aar\\35651f60d733e7ba0e42bf3f936b2b6b\\res\\values-lv\\values.xml",
+                    "source": "/home/alex/StudioProjects/HealthMonitorUG/C:\\Users\\andres\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.0.aar\\35651f60d733e7ba0e42bf3f936b2b6b\\res\\values-lv\\values.xml",
                     "from": {
                         "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,10 +23,32 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Alex\\Documents\\TFSGIT\\HealthMonitorUG\\librarySweetAlert\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-lv\\values-lv.xml",
+            "outputFile": "/home/alex/StudioProjects/HealthMonitorUG/librarySweetAlert/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-lv/values-lv.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Alex\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.0.aar\\9aaaed79e60c15ba07eb157ef544f7e7\\res\\values-lv\\values.xml",
+                    "source": "/home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-21.0.0.aar/06515ef4498fd306b34c773e01e228c2/res/values-lv/values.xml",
+                    "from": {
+                        "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "56,176,284,407,515,624,710,814,936,1045,1157,1256,1367,1476,1581",
+                        "endColumns": "119,107,122,107,108,85,103,121,108,111,98,110,108,104,118",
+                        "endOffsets": "171,279,402,510,619,705,809,931,1040,1152,1251,1362,1471,1576,1695"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,175,283,406,514,623,709,813,935,1044,1156,1255,1366,1475,1580",
+                        "endColumns": "119,107,122,107,108,85,103,121,108,111,98,110,108,104,118",
+                        "endOffsets": "170,278,401,509,618,704,808,930,1039,1151,1250,1361,1470,1575,1694"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/alex/StudioProjects/HealthMonitorUG/C:\\Users\\Alex\\Documents\\TFSGIT\\HealthMonitorUG\\librarySweetAlert\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-lv\\values-lv.xml",
+            "map": [
+                {
+                    "source": "/home/alex/StudioProjects/HealthMonitorUG/C:\\Users\\Alex\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.0.aar\\9aaaed79e60c15ba07eb157ef544f7e7\\res\\values-lv\\values.xml",
                     "from": {
                         "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

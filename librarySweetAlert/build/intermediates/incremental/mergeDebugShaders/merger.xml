@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\Alex\Documents\TFSGIT\HealthMonitorUG\librarySweetAlert\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\Alex\Documents\TFSGIT\HealthMonitorUG\librarySweetAlert\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/alex/StudioProjects/HealthMonitorUG/librarySweetAlert/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/home/alex/StudioProjects/HealthMonitorUG/librarySweetAlert/src/debug/shaders"/></dataSet></merger>
