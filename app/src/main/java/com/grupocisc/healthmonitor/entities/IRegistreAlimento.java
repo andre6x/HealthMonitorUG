@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface IRegistreAlimento {
 
-    @PUT("alimento_paciente/vincula")
+    @PUT("control/diabetes/alimento_paciente/vincula")
     Call<RegistroAlimento> putAlimento(@Query("email") String email,
                                        @Query("descripcion") String descripcion,
                                        @Query("porcion") float porcion,

@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface IPaises {
 
-    @POST("diabetes/login/queryCountries")
+    @POST("controlServices/diabetes/login/queryCountries")
     Call<Paises> getFromPaises();
 
     class Paises{

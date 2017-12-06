@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface IDietR {
 
-    @GET("procesos_oap/ejecuta_RecAlimentacion")
+    @GET("controlProcesos/diabetes/procesos_oap/ejecuta_RecAlimentacion")
     Call<ArrayList<IDietR.DietR>> getDietR(@Query("email") String email);
 
     public class DietR{

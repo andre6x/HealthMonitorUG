@@ -18,7 +18,7 @@ import retrofit2.http.Query;
 public interface IPushNotification {
 
 
-    @PUT("notificaciones/inserta_actualiza_token")
+    @PUT("control/diabetes/notificaciones/inserta_actualiza_token")
     Call<InsertNotification> INSERT_NOTIFICATION_CALL( @Query("email") String email,
                                                        @Query("push") String push);
 

@@ -212,7 +212,7 @@ public class DoctorRegistre extends AppCompatActivity {
         showLoadingDialog();
 
         Log.e(TAG, "email paciente: " + email);
-        IDesvinculaDr DesvDoctor = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IDesvinculaDr.class);
+        IDesvinculaDr DesvDoctor = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IDesvinculaDr.class);
         call_3 = DesvDoctor.DesvDoctor(new ObjDoctorSelect(email, idAuxDoctorBDServer));
         call_3.enqueue(new Callback<IDesvinculaDr.DesvinculaDoctor>() {
             @Override

@@ -16,7 +16,7 @@ import retrofit2.http.POST;
 
 public interface IV2ConsultWeight {
 
-    @POST("diabetes/patientUsers/queryWeightLog")
+    @POST("controlServices/diabetes/patientUsers/queryWeightLog")
     Call<Obj> getConsultWeight(@Body ObjUserdate objUser);
 
     public class Obj {

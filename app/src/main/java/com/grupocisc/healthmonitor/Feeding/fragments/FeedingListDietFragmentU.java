@@ -67,7 +67,7 @@ public class FeedingListDietFragmentU extends Fragment {
 
     public void restartLoadingDiets() {
         showLoading();
-        IDietU diets = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IDietU.class);
+        IDietU diets = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IDietU.class);
         listCall = diets.getListDiet();
         listCall.enqueue(new Callback<ArrayList<IDietU.Diet>>() {
             @Override
@@ -92,7 +92,7 @@ public class FeedingListDietFragmentU extends Fragment {
     public void restartLoadingDietsRec() {
         showLoading();
         String email = Utils.getEmailFromPreference(getActivity());
-        IDietR dietsR = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterAnimo().create(IDietR.class);
+        IDietR dietsR = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IDietR.class);
         listCallR = dietsR.getDietR(email);
         listCallR.enqueue(new Callback<ArrayList<IDietR.DietR>>() {
             @Override

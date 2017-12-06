@@ -159,7 +159,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         rango = true; //por rango
         lytExportRango.setVisibility(View.VISIBLE);
 
-        //famReport.setOnClickListener(this);
         menu1.setOnClickListener(this);
         menu2.setOnClickListener(this);
         lytInicio.setOnClickListener(this);
@@ -861,7 +860,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                 tableAsthma.addCell(rowsAsthma.get(cont).getObservacion());
                 cont++;
             } while (cont < ListSize);
-            //ConsultaGral("asma", fechaIni, fechaFin, myFile);
         }
 
         //Pulso presion

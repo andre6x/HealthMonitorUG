@@ -19,7 +19,7 @@ import retrofit2.http.Query;
 
 public interface IRegCrtMedicamentos {
     //http://181.39.136.237:5678/controlProcesos/diabetes/procesos_oap/mostrar_control_paciente?email=laura@hotmail.com&fechaDesde=2017/03/12%2017:42:00&fechaHasta=2017/03/12%2023:10:00
-    @GET("procesos_oap/mostrar_control_paciente")
+    @GET("controlProcesos/diabetes/procesos_oap/mostrar_control_paciente")
     Call<List<ConsulCtrlMedicamentos>> CONSULTA_CTRL_MED_CALL(@Query("email") String email,
                                                               @Query("fechaDesde") String fechaDesde,
                                                               @Query("fechaHasta") String fechaHasta);
@@ -133,7 +133,7 @@ public interface IRegCrtMedicamentos {
     //Actualiza Registro de Control de Medicamentos
     //http://181.39.136.237:5678/controlProcesos/diabetes/procesos_oap/actualiza_medicacion?
     // id_medicacion=1&dosis=3&veces_dia=3&fecha_consumo=2017/05/21&observaciones=webservices
-    @PUT("procesos_oap/actualiza_medicacion")
+    @PUT("controlProcesos/diabetes/procesos_oap/actualiza_medicacion")
     Call<ActCtrlMedicamento> ACTUALIZA_CTRL_MED_CALL(@Query("id_medicacion") int id,
                                                      @Query("dosis") int dosis,
                                                      @Query("veces_dia") int vecesDia,

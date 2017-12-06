@@ -14,17 +14,17 @@
     <!-- desarrollo http://192.168.10.10:8180/ -->
     <!-- produccion http://healthmonitorug.com:8080/ -->
     <!-- Request -->
-    <string name="base_path_v2">http://healthmonitorug.com:8080/controlServices/</string>
-    <string name="base_path_v2_ip">http://healthmonitorug.com:8080/</string>
+    <!--<string name="base_path_v2">http://healthmonitorug.com:8080/controlServices/</string>-->
+    <!--<string name="base_path_v2_ip">http://healthmonitorug.com:8080/</string>-->
 
-    <string name="base_path_cisc">http://healthmonitorug.com:8080/control/diabetes/</string>
-    <string name="base_path_procesos">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>
+    <!--<string name="base_path_cisc">http://healthmonitorug.com:8080/control/diabetes/</string>-->
+    <!--<string name="base_path_procesos">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>-->
 
-    <string name="base_path_recomendacion">http://healthmonitorug.com:8080/ControlD/rest/recomendciones/</string>
-    <string name="base_path_ciscp">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>
-    <string name="base_path_ciscrep">http://healthmonitorug.com:8080/ControlD/rest/</string>
-    <string name="base_path_ciscrepp">http://healthmonitorug.com:8080/ControlDP/diabetes/recomendaciones/</string>
-    <string name="base_path_cisc_animo">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>
+    <!--<string name="base_path_recomendacion">http://healthmonitorug.com:8080/ControlD/rest/recomendciones/</string>-->
+    <!--<string name="base_path_ciscp">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>-->
+    <!--<string name="base_path_ciscrep">http://healthmonitorug.com:8080/ControlD/rest/</string>-->
+    <!--<string name="base_path_ciscrepp">http://healthmonitorug.com:8080/ControlDP/diabetes/recomendaciones/</string>-->
+    <!--<string name="base_path_cisc_animo">http://healthmonitorug.com:8080/controlProcesos/diabetes/</string>-->
 
     <string name="base_path">http://api.edukte.net/services/meducation/mxmov/</string>
     <string name="txt_reintenter">Reintentar</string>

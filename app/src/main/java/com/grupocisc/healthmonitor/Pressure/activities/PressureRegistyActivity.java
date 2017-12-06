@@ -626,7 +626,7 @@ public class PressureRegistyActivity extends AppCompatActivity implements DatePi
         String user_email = Utils.getEmailFromPreference(this);
         //enviar webservice
         //APUNTANDO AA METODO CISC
-        IRecomenPressure RecomenPressure = HealthMonitorApplicattion.getApplication().getmRestPushAdapterRecpre().create(IRecomenPressure.class);
+        IRecomenPressure RecomenPressure = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRecomenPressure.class);
         call_2 = RecomenPressure.RecomenPressure(user_email);
         Log.e(TAG,"estoy aki ");
         call_2.enqueue(new Callback<IRecomenPressure.Objeto>() {

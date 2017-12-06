@@ -13,7 +13,7 @@ import retrofit2.http.Query;
  */
 public interface ICunsulParamet {
 
-    @GET("personas/obtiene_estadistica")
+    @GET("control/diabetes/personas/obtiene_estadistica")
     Call<List<Objeto>> CunsulParamet(@Query("email") String email,
                                      @Query("parametro") String parametro,
                                      @Query("fecha_inicio") String fecha_inicio,
@@ -21,7 +21,7 @@ public interface ICunsulParamet {
     ) ;
 
     //http://181.39.136.237:5678/control/diabetes/personas/obtiene_estadistica_total?email=laura@hotmail.com&parametro=glucosa&fecha_inicio=2017/01/01%2012:30:00&fecha_fin=2017/03/09%2012:30:00
-    @GET("personas/obtiene_estadistica_total")
+    @GET("control/diabetes/personas/obtiene_estadistica_total")
     Call<List<Objeto>> HistorialDatos(@Query("email") String email,
                                      @Query("parametro") String parametro,
                                      @Query("fecha_inicio") String fecha_inicio,

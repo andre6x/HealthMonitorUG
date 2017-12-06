@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface IConsulDoctor {
 
-    @POST("diabetes/patientUsers/queryDoctorsBySpecialty")
+    @POST("controlServices/diabetes/patientUsers/queryDoctorsBySpecialty")
     Call<Obj> CunsulParamet(@Body ObjSpeciality objSpeciality);
 
 

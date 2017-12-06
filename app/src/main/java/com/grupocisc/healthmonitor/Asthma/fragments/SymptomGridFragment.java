@@ -168,7 +168,7 @@ public class SymptomGridFragment extends Fragment implements SymptomGridAdapter.
 
     private void restartLoadingCategories(){
 
-        IV2Symptom posiciones = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2Symptom.class);
+        IV2Symptom posiciones = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2Symptom.class);
         call_0 = posiciones.getSymptomFrom( new ObjPickFlow ( PickFlowRegistry.FlujoMax ) );
         call_0.enqueue(new Callback<IV2Symptom.Obj>() {
             @Override

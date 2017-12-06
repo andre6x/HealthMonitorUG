@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface IRutinasU {
 
-    @GET("rutina/obtiene_rutina")
+    @GET("control/diabetes/rutina/obtiene_rutina")
     Call<ArrayList<Integer>> getIdRutinas(@Query("id_enfermedad") int id);
 
 

@@ -138,7 +138,7 @@ public class RoutinesLessonActivity extends AppCompatActivity {
     private void insertRoutine() {
         showLoading();
         String email = Utils.getEmailFromPreference(this);
-        IRegistreRoutine iRegistreRoutine = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IRegistreRoutine.class);
+        IRegistreRoutine iRegistreRoutine = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegistreRoutine.class);
         routineCall = iRegistreRoutine.putRoutine(email, idRutina, Math.round(ratingBar.getRating()));
         routineCall.enqueue(new Callback<IRegistreRoutine.RegistroRoutine>() {
             @Override
@@ -158,7 +158,7 @@ public class RoutinesLessonActivity extends AppCompatActivity {
 
     private void restartLoadingLesson(final int contadorList) {
         showLoading();
-        IRoutinesLessonU iRoutinesLessonU = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IRoutinesLessonU.class);
+        IRoutinesLessonU iRoutinesLessonU = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRoutinesLessonU.class);
         call_1 = iRoutinesLessonU.getRoutineExercice(idRutina);
         call_1.enqueue(new Callback<ArrayList<IRoutinesLessonU.RoutineExercice>>() {
             @Override

@@ -15,7 +15,7 @@ import retrofit2.http.POST;
 
 public interface IV2ConsulControlMedication {
     
-    @POST("diabetes/patientUsers/queryControlMedication")
+    @POST("controlServices/diabetes/patientUsers/queryControlMedication")
     Call<Obj> queryControlMedication(@Body ObjQueryControlMedication obj);
     @ToString
     class Obj {

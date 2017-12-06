@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface IRegistreDoctor {
 
-    @POST("diabetes/patientUsers/associateDoctorPatient")
+    @POST("controlServices/diabetes/patientUsers/associateDoctorPatient")
     Call<RegistroDoctor> RegDoctor(@Body ObjDoctorSelect objDoctorSelect);
 
     public class RegistroDoctor{

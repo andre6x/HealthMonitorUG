@@ -197,7 +197,7 @@ public class CausesGridFragment extends Fragment implements CausesGridAdapter.Vi
     }
 
     private void restartLoadingCauses(){
-        IV2Causes posiciones = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2Causes.class);
+        IV2Causes posiciones = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2Causes.class);
         call_0 = posiciones.getCategoryFrom( new ObjPickFlow( PickFlowRegistry.FlujoMax ) );
         call_0.enqueue(new Callback<IV2Causes.Obj>() {
             @Override
@@ -340,7 +340,7 @@ public class CausesGridFragment extends Fragment implements CausesGridAdapter.Vi
         try{
             showLoadingDialog();
 
-            IV2SavePickFlow saveFav = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2SavePickFlow.class);
+            IV2SavePickFlow saveFav = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2SavePickFlow.class);
             call_1 = saveFav.setSaveSavePickFlow( objSavePick );
             call_1.enqueue(new Callback<IV2SavePickFlow.SavePickFlow>() {
                 @Override

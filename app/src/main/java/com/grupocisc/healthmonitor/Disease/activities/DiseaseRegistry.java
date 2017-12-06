@@ -283,7 +283,7 @@ public class DiseaseRegistry extends AppCompatActivity implements DatePickerDial
     }
     private void restartLoadingconsultaEnf() {
         Log.e(TAG, "METODO consultaEnf ");
-        IConsulEnfermedad CunsulParamet = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2IP().create(IConsulEnfermedad.class);
+        IConsulEnfermedad CunsulParamet = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulEnfermedad.class);
         call_2 = CunsulParamet.CunsulParamet();
         call_2.enqueue(new Callback<List<IConsulEnfermedad.Enfermedad>>() {
             @Override
@@ -327,7 +327,7 @@ public class DiseaseRegistry extends AppCompatActivity implements DatePickerDial
 
     private void restartLoadingEnviarData() {
         //enviar webservice
-        IRegistreDisease RegistreDisease = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2IP().create(IRegistreDisease.class);
+        IRegistreDisease RegistreDisease = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegistreDisease.class);
         String fecha = txt_fecha.getText().toString().substring(6,10)+"/"+txt_fecha.getText().toString().substring(3,5)+"/"+txt_fecha.getText().toString().substring(0,2);
         String observacion = txt_observacion.getText().toString();
         Log.e(TAG, "fercha "+ fecha);

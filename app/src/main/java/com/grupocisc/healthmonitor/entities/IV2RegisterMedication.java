@@ -11,7 +11,7 @@ import retrofit2.http.POST;
  */
 public interface IV2RegisterMedication {
 
-    @POST("diabetes/patientUsers/registerMedication")
+    @POST("controlServices/diabetes/patientUsers/registerMedication")
     Call<MedicationRegister> RegisterMedication(@Body ObjRegisterMedication rPeso);
     class MedicationRegister{
         @Getter

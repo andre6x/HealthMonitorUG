@@ -16,7 +16,7 @@ import retrofit2.http.POST;
 
 public interface IV2ConsultPickFlow {
 
-    @POST("diabetes/patientUsers/queryPeakFlowLog")
+    @POST("controlServices/diabetes/patientUsers/queryPeakFlowLog")
     Call<Obj> getConsultPickFlow(@Body ObjUserdate objUser);
 
     public class Obj {

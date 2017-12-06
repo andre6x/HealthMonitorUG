@@ -10,11 +10,11 @@ import retrofit2.http.POST;
 public interface IConsulHba1c {
 
 
-    @POST("diabetes/patientUsers/registerComplementaryExams")
+    @POST("controlServices/diabetes/patientUsers/registerComplementaryExams")
     Call<Hba> setSendregisterHba1cFrom(@Body rowV2Hba1 rowV2Hba1);
 
 
-    @POST("diabetes/patientUsers/updateComplementaryExams")
+    @POST("controlServices/diabetes/patientUsers/updateComplementaryExams")
     Call<Hba> setSendregisterHba1cUpdateFrom(@Body rowV2Hba1Update rowV2Hba1Update);
 
     public class Hba{

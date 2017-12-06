@@ -96,7 +96,7 @@ public class LoginAccountBackActivity extends AppCompatActivity {
 
         //enviar webservice
         //APUNTANDO AA METODO CISC
-        ISendBackAccount send = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(ISendBackAccount.class);
+        ISendBackAccount send = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(ISendBackAccount.class);
         call_1 = send.EnvioEmail(user_email);
         call_1.enqueue(new Callback<ISendBackAccount.SendBackAccount>() {
             @Override

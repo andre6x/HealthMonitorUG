@@ -131,7 +131,7 @@ public class LoginDataOneFragment extends Fragment {
         Log.e(TAG,"restartLoadingEnviarData telefono: "+telefono);
         //APUNTANDO AA METODO CISC
 
-        IV2ConsulNum consulta = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2ConsulNum.class);
+        IV2ConsulNum consulta = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2ConsulNum.class);
         call_3 = consulta.ConsultaNumero( new IV2ConsulNum.ObjUserNum(email,telefono) );
         call_3.enqueue(new Callback<IV2ConsulNum.ConsulNum>() {
             @Override
