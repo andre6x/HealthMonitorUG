@@ -1,1 +1,1 @@
-include ':app', ':librarySweetAlert'
+include ':app'

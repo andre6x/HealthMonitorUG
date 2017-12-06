@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/andres/AndroidStudioProjects/HealthMonitor/librarySweetAlert/src/main/assets"/><source path="/Users/andres/AndroidStudioProjects/HealthMonitor/librarySweetAlert/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/andres/AndroidStudioProjects/HealthMonitor/librarySweetAlert/src/release/assets"/></dataSet></merger>
