@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -48,6 +49,7 @@ import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Recommendations.activities.RecommendationsActivity;
 import com.grupocisc.healthmonitor.Report.activities.ReportActivity;
 import com.grupocisc.healthmonitor.Routines.activities.RoutinesActivity;
+import com.grupocisc.healthmonitor.Services.NetworkStateReceiver;
 import com.grupocisc.healthmonitor.Services.SendDataMyService;
 import com.grupocisc.healthmonitor.Settings.activities.AboutActivity;
 import com.grupocisc.healthmonitor.Settings.activities.TutorialActivity;
@@ -87,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
+
+    private BroadcastReceiver _networkStateReceiver;
+
     private String token = "";
 
     private Call<IDoctorVinculado.DoctorVinculado> call_1; //CAMBIO
@@ -130,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         String email = Utils.getEmailFromPreference(this) == null ? "" : Utils.getEmailFromPreference(this);
         notificaciones(email);
+
+        RegisterNetworkStateReceiver();
 
         iniciarServicio();
 
@@ -393,6 +400,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     protected void onDestroy() {
         super.onDestroy();
 
+        if(_networkStateReceiver!=null)
+            unregisterReceiver(_networkStateReceiver);
+
     }
 
 
@@ -421,6 +431,14 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }
+    }
+
+    void RegisterNetworkStateReceiver()
+    {
+        IntentFilter intent= new IntentFilter();
+        intent.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        _networkStateReceiver = new NetworkStateReceiver();
+        this.registerReceiver(_networkStateReceiver,intent);
     }
 
     /**
