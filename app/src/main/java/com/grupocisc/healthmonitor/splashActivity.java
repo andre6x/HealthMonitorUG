@@ -7,25 +7,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
-import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
-import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
-import com.grupocisc.healthmonitor.Utils.Utils;
-import com.grupocisc.healthmonitor.login.activities.LoginAccountActivity;
 
-import me.wangyuwei.particleview.ParticleView;
-
-/**
- * Created by GrupoLink on 08/04/2015.
- */
 public class splashActivity extends AppCompatActivity {
 
     private final static int TIMEXSPLASH = 3000;
     private String TAG = "splashActivity";
     private Handler handler;
     private Runnable runnable;
-    private ParticleView ptv_anim;
+    private ImageView ugLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +32,7 @@ public class splashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         //animacion ug
 
-        ptv_anim = (ParticleView) findViewById(R.id.pv);
+        /*ptv_anim = (ParticleView) findViewById(R.id.pv);
         ptv_anim.startAnim();
         ptv_anim.setOnParticleAnimListener(new ParticleView.ParticleAnimListener() {
             @Override
@@ -50,23 +42,20 @@ public class splashActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
                 finish();
             }
-        });
+        });*/
 
+        //NUEVO METODO PARA REDUCIR EL TIEMPO DE CARGA DE SPLASH SCREENvAPP V3
 
-
-       /* handler = new Handler();
-        runnable = new Runnable() {
+        ugLogo = (ImageView) findViewById(R.id.UgLogo);
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 Intent intent = new Intent(splashActivity.this, MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
                 finish();
-
             }
-        };
-        */
+        },1200);
     }
 
     @Override
@@ -78,15 +67,10 @@ public class splashActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
         if(handler != null)
             handler.removeCallbacks(runnable);
     }
-
-
-
-
 }
