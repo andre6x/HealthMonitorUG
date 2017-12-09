@@ -12,28 +12,35 @@
     <LinearLayout
         android:background="@color/transparent"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:id="@+id/linear_second"
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
-        <me.wangyuwei.particleview.ParticleView
-            android:id="@+id/pv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            app:pv_background_color="@color/white"
-            app:pv_host_text="Universidad de"
-            app:pv_particle_text="Guayaquil"
-            app:pv_particle_text_size="25sp"
-            app:pv_host_text_size="23sp"
-            app:pv_text_color="@color/blue_intro"
-            app:pv_text_anim_time="1000"
-            app:pv_spread_anim_time="2000"
-            app:pv_host_text_anim_time="1000"/>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/logo_ug_v3"
+            android:id="@+id/UgLogo"/>
+
+        <!--<me.wangyuwei.particleview.ParticleView-->
+            <!--android:id="@+id/pv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/transparent"-->
+            <!--app:pv_background_color="@color/white"-->
+            <!--app:pv_host_text="Universidad de"-->
+            <!--app:pv_particle_text="Guayaquil"-->
+            <!--app:pv_particle_text_size="25sp"-->
+            <!--app:pv_host_text_size="23sp"-->
+            <!--app:pv_text_color="@color/blue_intro"-->
+            <!--app:pv_text_anim_time="1000"-->
+            <!--app:pv_spread_anim_time="2000"-->
+            <!--app:pv_host_text_anim_time="1000"/>-->
 
 
     </LinearLayout>

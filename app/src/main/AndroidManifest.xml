@@ -24,6 +24,8 @@
     <uses-permission android:name="android.permission.REAL_GET_TASKS" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".HealthMonitorApplicattion"
         android:allowBackup="false"
@@ -323,6 +325,18 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="b63409f7a1bc14eb43fb8cec4ce104d1b8793b61" />
+
+        <receiver android:name=".Services.NetworkStateReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".Services.AssistantService"
+            android:exported="true"
+            android:enabled="true"/>
 
     </application>
 
