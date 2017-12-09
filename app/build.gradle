@@ -43,7 +43,8 @@ android {
         debug {
             buildConfigField "String", "CONSUMER_KEY", "\"${props.getProperty("twitterConsumerKey")}\""
             buildConfigField "String", "CONSUMER_SECRET", "\"${props.getProperty("twitterConsumerSecret")}\""
-            buildConfigField "String", "URL_SERVER", '"http://132.148.136.217:8080/"'
+            buildConfigField "String", "URL_SERVER", '"http://192.168.10.21:8080/"'
+            //buildConfigField "String", "URL_SERVER", '"http://132.148.136.217:8080/"'
         }
         release {
             buildConfigField "String", "CONSUMER_KEY", "\"${props.getProperty("twitterConsumerKey")}\""

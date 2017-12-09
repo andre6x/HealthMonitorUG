@@ -10,6 +10,5 @@ public class SendDataMyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context ctx, Intent intent) {
         ctx.startService(new Intent(ctx, SendDataMyService.class));
-
     }
 }
