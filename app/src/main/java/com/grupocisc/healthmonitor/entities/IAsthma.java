@@ -4,6 +4,7 @@ package com.grupocisc.healthmonitor.entities;
  * Created by Jesenia on 29/07/2017.
  */
 
+ import com.grupocisc.healthmonitor.Utils.Constantes;
  import com.j256.ormlite.field.DatabaseField;
 
  import com.j256.ormlite.stmt.query.In;
@@ -13,7 +14,9 @@ package com.grupocisc.healthmonitor.entities;
  import java.io.Serializable;
  import java.sql.Date;
 
- @DatabaseTable(tableName = "AsthmaTable")
+ //@DatabaseTable(tableName = "AsthmaTable")
+ @DatabaseTable(tableName = Constantes.TABLA_ASTHMA)
+
  public class IAsthma implements Serializable {
 
     @DatabaseField(generatedId=true)

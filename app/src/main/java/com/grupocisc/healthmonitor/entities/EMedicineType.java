@@ -2,6 +2,7 @@ package com.grupocisc.healthmonitor.entities;
 
 import android.support.annotation.NonNull;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -11,7 +12,9 @@ import java.io.Serializable;
  * Created by mpolo on 07/26/2017.
  */
 
-@DatabaseTable(tableName = "MedicineType")
+//@DatabaseTable(tableName = "MedicineType")
+@DatabaseTable(tableName = Constantes.TABLA_MEDICINE_TYPE)
+
 public class EMedicineType implements Comparable <EMedicineType> , Serializable {
     @DatabaseField
     private int medicineTypeCode;

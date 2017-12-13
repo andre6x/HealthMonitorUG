@@ -4,12 +4,15 @@ package com.grupocisc.healthmonitor.entities;
 /**
  * Created by Mariuxi on 13/01/2017.
  */
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
-@DatabaseTable(tableName = "PressureTable")
+//@DatabaseTable(tableName = "PressureTable")
+@DatabaseTable(tableName = Constantes.TABLA_PRESSURE)
+
 public class IPressure implements Serializable {
     @DatabaseField(generatedId=true)
     private int id;

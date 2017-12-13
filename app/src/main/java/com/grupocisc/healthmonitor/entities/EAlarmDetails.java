@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -9,7 +10,9 @@ import java.io.Serializable;
  * Created by mpolo on 07/31/2017.
  */
 
-@DatabaseTable(tableName = "EAlarmDetails")
+//@DatabaseTable(tableName = "EAlarmDetails")
+@DatabaseTable(tableName = Constantes.TABLA_EALARM_DETAILS)
+
 public class EAlarmDetails implements Serializable {
     @DatabaseField(generatedId=true)
     private int alarmDetailId;
