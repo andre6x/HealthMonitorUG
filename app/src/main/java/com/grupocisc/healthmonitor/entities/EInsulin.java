@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -37,7 +38,9 @@ import lombok.Setter;
 /****************************************************************************/
 
 
-@DatabaseTable (tableName = "InsulinTable")
+//@DatabaseTable (tableName = "InsulinTable")
+@DatabaseTable (tableName = Constantes.TABLA_INSULIN)
+
 public class EInsulin implements Serializable {
 
     @DatabaseField(generatedId=true)
