@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -31,7 +32,9 @@ import com.j256.ormlite.table.DatabaseTable;
 /*                                                                          */
 /****************************************************************************/
 
-@DatabaseTable(tableName = "MedicineUserTable")
+//@DatabaseTable(tableName = "MedicineUserTable")
+@DatabaseTable(tableName = Constantes.TABLA_MEDICINE_USER)
+
 public class EMedicineUser {
     @DatabaseField(generatedId=true)
     private int id;

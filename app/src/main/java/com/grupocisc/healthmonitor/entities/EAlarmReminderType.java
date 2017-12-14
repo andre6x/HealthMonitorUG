@@ -2,6 +2,7 @@ package com.grupocisc.healthmonitor.entities;
 
 import android.support.annotation.NonNull;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -10,7 +11,9 @@ import java.io.Serializable;
 /**
  * Created by mpolo on 07/26/2017.
  */
-@DatabaseTable(tableName = "AlarmReminderType")
+//@DatabaseTable(tableName = "AlarmReminderType")
+@DatabaseTable(tableName = Constantes.TABLA_ALARM_REMINDER_TYPE)
+
 public class EAlarmReminderType implements Comparable<EAlarmReminderType> , Serializable {
 
     @DatabaseField

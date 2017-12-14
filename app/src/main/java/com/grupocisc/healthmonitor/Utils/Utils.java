@@ -4973,5 +4973,9 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
         return eAlarmDetails;
     }
 
-
+    public static <T> T getLastRecordWithDate(Dao<T,Integer> data, String tableName) throws java.sql.SQLException {
+        String query ="SELECT fecha, id FROM "+tableName+" ORDER By id DESC LIMIT 1";
+        GenericRawResults<T> rawResults = data.queryRaw(query, data.getRawRowMapper());
+        return rawResults.getFirstResult();
+    }
 }

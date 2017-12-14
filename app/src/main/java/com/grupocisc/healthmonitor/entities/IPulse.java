@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -12,7 +13,9 @@ import lombok.Setter;
  * Created by aonate on 13/01/2017.
  */
 
-@DatabaseTable(tableName = "PulseTable")
+//@DatabaseTable(tableName = "PulseTable")
+@DatabaseTable(tableName = Constantes.TABLA_PULSE)
+
 public class IPulse  implements Serializable {
 
     @Getter

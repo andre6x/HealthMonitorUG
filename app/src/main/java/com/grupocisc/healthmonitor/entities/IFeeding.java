@@ -1,12 +1,15 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by Walter on 01/02/2017.
  */
-@DatabaseTable(tableName = "FeedingTable")
+//@DatabaseTable(tableName = "FeedingTable")
+@DatabaseTable(tableName = Constantes.TABLA_FEEDING)
+
 public class IFeeding {
     @DatabaseField(generatedId=true)
     private int id;

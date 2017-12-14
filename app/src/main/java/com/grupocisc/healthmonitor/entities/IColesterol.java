@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -9,7 +10,9 @@ import java.io.Serializable;
  * Created by aonate on 07/06/2017.
  */
 
-    @DatabaseTable(tableName = "ColesterolTable")
+    //@DatabaseTable(tableName = "ColesterolTable")
+    @DatabaseTable(tableName = Constantes.TABLA_COLESTEROL)
+
     public class IColesterol implements Serializable {
 
         @DatabaseField(generatedId = true)

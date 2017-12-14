@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -7,7 +8,9 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by Walter on 17/01/2017.
  */
 
-@DatabaseTable(tableName = "rowsCheckLessonTable")
+//@DatabaseTable(tableName = "rowsCheckLessonTable")
+@DatabaseTable(tableName = Constantes.TABLA_ROWS_CHECK_LESSON)
+
 public class IRoutineCheckLesson {
 
     @DatabaseField(generatedId=true)

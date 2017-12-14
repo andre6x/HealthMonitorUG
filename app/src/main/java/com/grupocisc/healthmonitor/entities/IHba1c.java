@@ -3,6 +3,7 @@ package com.grupocisc.healthmonitor.entities;
 /**
  * Created by aonate on 12/06/2017.
  */
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -11,7 +12,9 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
-@DatabaseTable(tableName = "Hba1cTable")
+//@DatabaseTable(tableName = "Hba1cTable")
+@DatabaseTable(tableName = Constantes.TABLA_HBA1C)
+
 public class IHba1c implements Serializable {
     @Getter
     @Setter
