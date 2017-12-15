@@ -30,28 +30,26 @@ public class NetworkStateReceiver extends BroadcastReceiver {
             Log.i(TAG,"Conexión por wifi");
             connectionType = ConnectivityManager.TYPE_WIFI;
             assistantService.putExtra("connectionType",connectionType);
+            if(!isServiceRunning(AssistantService.class))
+            {
+                Log.i(TAG,"Iniciando el servicio de asistencia");
+                context.startService(assistantService);
+            }
+            else
+            {
+                Log.i(TAG,"El servicio de asistencia ya está en ejecución");
+                Log.i(TAG,"Se va a detener el servicio");
+                context.stopService(assistantService);
+                Log.i(TAG,"Se va a reiniciar el servicio");
+
+                context.startService(assistantService);
+            }
         }
         else
         {
-            Log.i("NetworkStateReceiver","Otro tipo de conexión");
+            /*Log.i("NetworkStateReceiver","Otro tipo de conexión");
             connectionType = ConnectivityManager.TYPE_MOBILE | ConnectivityManager.TYPE_MOBILE_DUN | ConnectivityManager.TYPE_VPN | ConnectivityManager.TYPE_WIMAX;
-            assistantService.putExtra("connectionType", connectionType);
-        }
-
-        if(!isServiceRunning(AssistantService.class))
-        {
-            Log.i(TAG,"Iniciando el servicio de asistencia");
-            context.startService(assistantService);
-        }
-        else
-        {
-            Log.i(TAG,"El servicio de asistencia ya está en ejecución");
-            Log.i(TAG,"Se va a detener el servicio");
-            context.stopService(assistantService);
-            Log.i(TAG,"Se va a reiniciar el servicio");
-
-            context.startService(assistantService);
-            //context.bindService(assistantService,,Context.BIND_AUTO_CREATE);
+            assistantService.putExtra("connectionType", connectionType);*/
         }
     }
 

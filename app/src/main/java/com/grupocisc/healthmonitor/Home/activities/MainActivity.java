@@ -403,7 +403,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         if(_networkStateReceiver!=null)
             unregisterReceiver(_networkStateReceiver);
-
     }
 
 
