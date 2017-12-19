@@ -4,10 +4,13 @@ package com.grupocisc.healthmonitor.entities;
  * Created by RODRIGUEZ on 14/06/2017.
  */
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import  com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
-@DatabaseTable(tableName = "KetonesTable")
+//@DatabaseTable(tableName = "KetonesTable")
+@DatabaseTable(tableName = Constantes.TABLA_KETONES)
+
 public class IKetone implements Serializable {
     @DatabaseField(generatedId = true)
     private int id;

@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -8,7 +9,9 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
-@DatabaseTable(tableName = "DoctorTable")
+//@DatabaseTable(tableName = "DoctorTable")
+@DatabaseTable(tableName = Constantes.TABLA_DOCTOR)
+
 public class IDoctor implements Serializable {
 
     @Getter

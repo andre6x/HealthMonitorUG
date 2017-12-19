@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -7,7 +8,9 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by GrupoLink on 28/10/2015.
  */
 
-@DatabaseTable(tableName = "NotifcationsMedicalTable")
+//@DatabaseTable(tableName = "NotifcationsMedicalTable")
+@DatabaseTable(tableName = Constantes.TABLA_NOTIFICATION_MEDICA)
+
 public class INotifcationsMedical {
 	
 	@DatabaseField(generatedId=true)

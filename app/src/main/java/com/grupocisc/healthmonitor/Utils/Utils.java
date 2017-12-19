@@ -947,6 +947,17 @@ public class Utils {
         return pulse;
     }
 
+    //Obtiene los registros para verificar si no se han ingreado datos recientemente V3
+    public static List<IPulse> GetPulseFromDataBase(Dao<IPulse,Integer> _pulseDao) throws SQLException, java.sql.SQLException
+    {
+        List<IPulse> _pulseCollection = null;
+        String query="SELECT fecha FROM PulseTable";
+
+        GenericRawResults<IPulse> result = _pulseDao.queryRaw(query,_pulseDao.getRawRowMapper());
+        _pulseCollection = result.getResults();
+        return  _pulseCollection;
+    }
+
     /*OBTEBER REGISTROS DE LA TABLA BD*/
     public static List<IPulse> GetPulseFromDatabase(Dao<IPulse, Integer> PulseDao) throws SQLException, java.sql.SQLException {
         List<IPulse> pulse = null;
@@ -3163,7 +3174,7 @@ public  static  void UpdateStateFromDatabase(int idstate,
     public static List<IPulse> GetPulseFromDatabaseInf(Dao<IPulse, Integer> PulseDao) throws SQLException, java.sql.SQLException {
         String query = "SELECT  id , idBdServer , concentracion , maxPressure , minPressure " +
                 ", " + getDateStr("fecha","") +
-                ", hora , medido , observacion , enviadoServer , operacion " +
+                ", hora , medido , observacion , enviadoServ        er , operacion " +
                 " FROM PulseTable order by id DESC"; //LIMIT
         GenericRawResults<IPulse> rawResults = PulseDao.queryRaw(query, PulseDao.getRawRowMapper());
         return rawResults.getResults();
@@ -4962,5 +4973,9 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
         return eAlarmDetails;
     }
 
-
+    public static <T> T getLastRecordWithDate(Dao<T,Integer> data, String tableName) throws java.sql.SQLException {
+        String query ="SELECT fecha, id FROM "+tableName+" ORDER By id DESC LIMIT 1";
+        GenericRawResults<T> rawResults = data.queryRaw(query, data.getRawRowMapper());
+        return rawResults.getFirstResult();
+    }
 }
