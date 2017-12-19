@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
-    private BroadcastReceiver _networkStateReceiver;
+    private BroadcastReceiver _networkStateReceiver; //V3
 
     private String token = "";
 
@@ -136,7 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         String email = Utils.getEmailFromPreference(this) == null ? "" : Utils.getEmailFromPreference(this);
         notificaciones(email);
 
-        RegisterNetworkStateReceiver();
+        //
+        //RegisterNetworkStateReceiver();
 
         iniciarServicio();
 
@@ -402,7 +403,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         if(_networkStateReceiver!=null)
             unregisterReceiver(_networkStateReceiver);
-
     }
 
 
