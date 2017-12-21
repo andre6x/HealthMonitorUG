@@ -2,7 +2,9 @@ package com.grupocisc.healthmonitor;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Debug;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
@@ -128,6 +130,9 @@ public class HealthMonitorApplicattion extends Application {
         Twitter.initialize(configg);
 
         databaseHelper = new Database(this);
+
+        //String path = databaseHelper.getReadableDatabase().getPath();
+        //Log.i("HELPER",path);
 
         mRestAdapter = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path))

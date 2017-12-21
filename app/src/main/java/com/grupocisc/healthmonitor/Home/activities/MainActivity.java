@@ -401,8 +401,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     protected void onDestroy() {
         super.onDestroy();
 
-        if(_networkStateReceiver!=null)
-            unregisterReceiver(_networkStateReceiver);
+//        if(_networkStateReceiver!=null)
+//            unregisterReceiver(_networkStateReceiver);
     }
 
 
@@ -433,13 +433,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
-    void RegisterNetworkStateReceiver()
-    {
-        IntentFilter intent= new IntentFilter();
-        intent.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        _networkStateReceiver = new NetworkStateReceiver();
-        this.registerReceiver(_networkStateReceiver,intent);
-    }
+//    void RegisterNetworkStateReceiver()
+//    {
+//        IntentFilter intent= new IntentFilter();
+//        intent.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+//        _networkStateReceiver = new NetworkStateReceiver();
+//        this.registerReceiver(_networkStateReceiver,intent);
+//    }
 
     /**
      * Método que valida si se tiene instalado y con la versión requerida el Google Play Service
