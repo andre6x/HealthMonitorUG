@@ -27,8 +27,8 @@ android {
         applicationId "com.grupocisc.healthmonitor"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 14
-        versionName "2.12"
+        versionCode 15
+        versionName "2.13"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         // Stops the Gradle plugin’s automatic rasterization of vectors
@@ -43,13 +43,15 @@ android {
         debug {
             buildConfigField "String", "CONSUMER_KEY", "\"${props.getProperty("twitterConsumerKey")}\""
             buildConfigField "String", "CONSUMER_SECRET", "\"${props.getProperty("twitterConsumerSecret")}\""
-            buildConfigField "String", "URL_SERVER", '"http://192.168.10.32:8080/"'
+            //buildConfigField "String", "URL_SERVER", '"http://192.168.10.32:8080/"'
             //buildConfigField "String", "URL_SERVER", '"http://132.148.136.217:8080/"'
+            buildConfigField "String", "URL_SERVER", '"http://209.182.204.74:8180/"'
         }
         release {
             buildConfigField "String", "CONSUMER_KEY", "\"${props.getProperty("twitterConsumerKey")}\""
             buildConfigField "String", "CONSUMER_SECRET", "\"${props.getProperty("twitterConsumerSecret")}\""
-            buildConfigField "String", "URL_SERVER", '"http://healthmonitorug.com:8080/'
+            //buildConfigField "String", "URL_SERVER", '"http://healthmonitorug.com:8080/"'
+            buildConfigField "String", "URL_SERVER", '"http://209.182.204.74:8180/"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

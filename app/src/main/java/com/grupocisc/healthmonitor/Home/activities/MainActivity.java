@@ -49,6 +49,7 @@ import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Recommendations.activities.RecommendationsActivity;
 import com.grupocisc.healthmonitor.Report.activities.ReportActivity;
 import com.grupocisc.healthmonitor.Routines.activities.RoutinesActivity;
+import com.grupocisc.healthmonitor.Services.AssistantService;
 import com.grupocisc.healthmonitor.Services.NetworkStateReceiver;
 import com.grupocisc.healthmonitor.Services.SendDataMyService;
 import com.grupocisc.healthmonitor.Settings.activities.AboutActivity;
@@ -140,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         //RegisterNetworkStateReceiver();
 
         iniciarServicio();
+        InitAssitantService();
 
         showHashKey(this);
     }
@@ -152,6 +154,16 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             Log.e(TAG, "Send Data WS Service started");
         } else {
             Log.e(TAG, "Send Data WS Service already running");
+        }
+    }
+
+    public void InitAssitantService(){
+        if(!isMyServiceRunning(AssistantService.class)){
+            Intent assistantService = new Intent(this, AssistantService.class); //serv de tipo Intent
+            this.startService(assistantService); //ctx de tipo Context
+            Log.e(TAG, "Assistant service started");
+        } else {
+            Log.e(TAG, "Assistant service is already running");
         }
     }
 
