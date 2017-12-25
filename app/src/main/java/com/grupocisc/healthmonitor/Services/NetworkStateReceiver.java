@@ -24,12 +24,12 @@ public class NetworkStateReceiver extends BroadcastReceiver {
         int connectionType=0;
         _ctx=context;
         Intent assistantService = new Intent(context, AssistantService.class);
-        _connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(_connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState()== NetworkInfo.State.CONNECTED)
-        {
-            Log.i(TAG,"Conexión por wifi");
-            connectionType = ConnectivityManager.TYPE_WIFI;
-            assistantService.putExtra("connectionType",connectionType);
+        //_connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if(_connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState()== NetworkInfo.State.CONNECTED)
+//        {
+            //Log.i(TAG,"Conexión por wifi");
+            //connectionType = ConnectivityManager.TYPE_WIFI;
+            //assistantService.putExtra("connectionType",connectionType);
             if(!isServiceRunning(AssistantService.class))
             {
                 Log.i(TAG,"Iniciando el servicio de asistencia");
@@ -44,13 +44,13 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
                 context.startService(assistantService);
             }
-        }
-        else
-        {
+//        }
+//        else
+//        {
             /*Log.i("NetworkStateReceiver","Otro tipo de conexión");
             connectionType = ConnectivityManager.TYPE_MOBILE | ConnectivityManager.TYPE_MOBILE_DUN | ConnectivityManager.TYPE_VPN | ConnectivityManager.TYPE_WIMAX;
             assistantService.putExtra("connectionType", connectionType);*/
-        }
+        //}
     }
 
 
