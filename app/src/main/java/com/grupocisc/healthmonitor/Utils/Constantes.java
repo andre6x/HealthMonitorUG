@@ -30,4 +30,13 @@ public class Constantes {
     public static final String TABLA_EALARM_DETAILS = "EAlarmDetails";
     public static final String TABLA_EALARM_TAKE_MEDICINE = "EAlarmTakeMedicine";
     public static final String TABLA_ASTHMA = "AsthmaTable";
+
+    public static final String WEIGHT_NOTIFICATION_TITLE = "Registrar peso";
+    public static final String PULSE_NOTIFICATION_TITLE ="Registrar pulso";
+    public static final String STATE_NOTIFICATION_TITLE = "Registrar estado de ánimo";
+    public static final String GLUCOSE_NOTIFICATION_TITLE ="Registrar glucosa";
+    public static final String CHOLESTEROL_NOTIFICATION_TITLE = "Registrar colesterol";
+    public static final String PRESSURE_NOTIFICATION_TITLE ="Registrar presión";
+    public static final String HBA1C_NOTIFICATION_TITLE ="Registrar hba1c";
+
 }
