@@ -161,9 +161,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         if(!isMyServiceRunning(AssistantService.class)){
             Intent assistantService = new Intent(this, AssistantService.class); //serv de tipo Intent
             this.startService(assistantService); //ctx de tipo Context
-            Log.e(TAG, "Assistant service started");
+            Log.i(TAG, "Assistant service started");
         } else {
-            Log.e(TAG, "Assistant service is already running");
+            Log.i(TAG, "Assistant service is already running");
         }
     }
 
