@@ -172,9 +172,11 @@ public class DiseaseListAdapterCons extends RecyclerView.Adapter<DiseaseListAdap
 
             for(int i = 0; i < rows.size() ;i++ ){
                 String nombres = rows.get(i).getNombre();
-                if (nombres.toLowerCase().contains(query.toLowerCase())) {
-                    filteredList.add( rows.get(i) ); //añade ala lista la posicion del objeto
-                    Log.e(TAG, "filteredList.add():");
+                if(nombres!=null && !nombres.isEmpty()){
+                    if (nombres.toLowerCase().contains(query.toLowerCase())) {
+                        filteredList.add( rows.get(i) ); //añade ala lista la posicion del objeto
+                        Log.e(TAG, "filteredList.add():");
+                    }
                 }
             }
         }
