@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.grupocisc.healthmonitor.Complementary.activities.ComplActivity;
+import com.grupocisc.healthmonitor.Complementary.activities.ComplCholesterolRegistyActivity;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplHba1cRegistyActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
@@ -19,6 +20,7 @@ import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
 import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.grupocisc.healthmonitor.Utils.NotificationHelper;
+import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Weight.activities.WeightActivity;
 import com.grupocisc.healthmonitor.entities.IColesterol;
@@ -65,7 +67,7 @@ public class AssistantService extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        if(!isServiceRunning(AssistantService.class))
+        if(!ServiceChecker.Current.isServiceRunning(getApplicationContext(),AssistantService.class))
         {
             Log.i(TAG,"Iniciando el servicio de asistencia");
             Intent restartServiceIntent = new Intent(getApplicationContext(),this.getClass());
@@ -80,7 +82,7 @@ public class AssistantService extends Service {
         super.onTaskRemoved(rootIntent);
     }
 
-    private boolean isServiceRunning(Class<?> serviceClass) {
+    /*private boolean isServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
@@ -88,7 +90,7 @@ public class AssistantService extends Service {
             }
         }
         return false;
-    }
+    }*/
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -139,12 +141,6 @@ public class AssistantService extends Service {
 
                 Action<Void> stateAction = new ActionImplement(x->checkState(),10000);
                 stateAction.invoke(null);
-                //checkWeightTable()
-                //checkPulseTable();
-                //checkCholesterol();
-                //checkHBA1C();
-                //checkGlucose();
-                //checkState();
             }
         }
         else {
@@ -221,7 +217,6 @@ public class AssistantService extends Service {
 
     void checkPulseTable()
     {
-        // la fecha del último registro sea diferente sea >=24 horas
         try {
             IPulse data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getPulseDao(), Constantes.TABLA_PULSE);
             if(data!=null)
@@ -314,11 +309,11 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    NotificationHelper.ShowNotification(getApplicationContext(),Constantes.CHOLESTEROL_NOTIFICATION_TITLE,"no ha ingresado su colesterol en varios días","004", ComplHba1cRegistyActivity.class, R.mipmap.icon_coleste);
+                    NotificationHelper.ShowNotification(getApplicationContext(),Constantes.CHOLESTEROL_NOTIFICATION_TITLE,"no ha ingresado su colesterol en varios días","004", ComplCholesterolRegistyActivity.class, R.mipmap.icon_coleste);
                 }
             }
             else {
-                NotificationHelper.ShowNotification(getApplicationContext(),Constantes.CHOLESTEROL_NOTIFICATION_TITLE,"no ha ingresado su colesterol en varios días","004", ComplHba1cRegistyActivity.class, R.mipmap.icon_coleste);
+                NotificationHelper.ShowNotification(getApplicationContext(),Constantes.CHOLESTEROL_NOTIFICATION_TITLE,"no ha ingresado su colesterol en varios días","004", ComplCholesterolRegistyActivity.class, R.mipmap.icon_coleste);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -57,6 +57,7 @@ import com.grupocisc.healthmonitor.Settings.activities.TutorialActivity;
 import com.grupocisc.healthmonitor.Settings.activities.TutorialActivityV2;
 import com.grupocisc.healthmonitor.SocialNetworks.activities.SocialActivity;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
+import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Weight.activities.WeightActivity;
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     //inico servicio enviar data webservice
     public void iniciarServicio() {
-        if (!isMyServiceRunning(SendDataMyService.class)) { //método que determina si el servicio ya está corriendo o no
+        if (!ServiceChecker.Current.isServiceRunning(this,SendDataMyService.class)) { //método que determina si el servicio ya está corriendo o no
             Intent serv = new Intent(this, SendDataMyService.class); //serv de tipo Intent
             this.startService(serv); //ctx de tipo Context
             Log.e(TAG, "Send Data WS Service started");
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     public void InitAssitantService(){
-        if(!isMyServiceRunning(AssistantService.class)){
+        if(!ServiceChecker.Current.isServiceRunning(this,AssistantService.class)){
             Intent assistantService = new Intent(this, AssistantService.class); //serv de tipo Intent
             this.startService(assistantService); //ctx de tipo Context
             Log.i(TAG, "Assistant service started");
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
+    /*private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             }
         }
         return false;
-    }
+    }*/
     //fin servicio enviar data webservice
 
     @Override
