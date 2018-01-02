@@ -21,7 +21,7 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int connectionType=0;
+        //int connectionType=0;
         _ctx=context;
         Intent assistantService = new Intent(context, AssistantService.class);
         //_connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -38,11 +38,11 @@ public class NetworkStateReceiver extends BroadcastReceiver {
             else
             {
                 Log.i(TAG,"El servicio de asistencia ya está en ejecución");
-                Log.i(TAG,"Se va a detener el servicio");
-                context.stopService(assistantService);
-                Log.i(TAG,"Se va a reiniciar el servicio");
+                //Log.i(TAG,"Se va a detener el servicio");
+                //context.stopService(assistantService);
+                //Log.i(TAG,"Se va a reiniciar el servicio");
 
-                context.startService(assistantService);
+                //context.startService(assistantService);
             }
 //        }
 //        else
