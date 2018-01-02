@@ -9,6 +9,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.grupocisc.healthmonitor.Utils.ServiceChecker;
+
 /**
  * Created by alex on 12/8/17.
  */
@@ -30,7 +32,7 @@ public class NetworkStateReceiver extends BroadcastReceiver {
             //Log.i(TAG,"Conexión por wifi");
             //connectionType = ConnectivityManager.TYPE_WIFI;
             //assistantService.putExtra("connectionType",connectionType);
-            if(!isServiceRunning(AssistantService.class))
+            if(!ServiceChecker.Current.isServiceRunning(context,AssistantService.class))
             {
                 Log.i(TAG,"Iniciando el servicio de asistencia");
                 context.startService(assistantService);
@@ -54,7 +56,7 @@ public class NetworkStateReceiver extends BroadcastReceiver {
     }
 
 
-    private boolean isServiceRunning(Class<?> serviceClass) {
+    /*private boolean isServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) _ctx.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
@@ -62,5 +64,5 @@ public class NetworkStateReceiver extends BroadcastReceiver {
             }
         }
         return false;
-    }
+    }*/
 }
