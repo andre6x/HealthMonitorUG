@@ -1,8 +1,12 @@
 package com.grupocisc.healthmonitor.Services;
 
+import android.app.ActivityManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -27,6 +31,8 @@ import com.grupocisc.healthmonitor.entities.IV2Cholesterol;
 import com.grupocisc.healthmonitor.entities.IWeight;
 import com.j256.ormlite.dao.Dao;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +41,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by alex on 12/8/17.
@@ -53,8 +64,35 @@ public class AssistantService extends Service {
     final String TAG = "AssistantService";
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public void onTaskRemoved(Intent rootIntent) {
+        if(!isServiceRunning(AssistantService.class))
+        {
+            Log.i(TAG,"Iniciando el servicio de asistencia");
+            Intent restartServiceIntent = new Intent(getApplicationContext(),this.getClass());
+            restartServiceIntent.setPackage(getPackageName());
+            startService(restartServiceIntent);
+        }
+        else
+        {
+            Log.i(TAG,"El servicio de asistencia ya está en ejecución");
+        }
 
+        super.onTaskRemoved(rootIntent);
+    }
+
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        onTaskRemoved(intent);
 
         Log.i(TAG, "AssistantService has been started");
 
@@ -68,8 +106,8 @@ public class AssistantService extends Service {
         };
 
         //El servicio se ejecutará cada hora
-        _timer.scheduleAtFixedRate(_timerTask,0,4000*60*60); //se ejecuta cada 4 horas
-        //_timer.scheduleAtFixedRate(_timerTask,0,1000); //se ejecuta cada 1 segundo
+        //_timer.scheduleAtFixedRate(_timerTask,0,4000*60*60); //se ejecuta cada 4 horas
+        _timer.scheduleAtFixedRate(_timerTask,0,1000*60); //se ejecuta cada 1 segundo
 
         return START_STICKY;
     }
@@ -79,18 +117,61 @@ public class AssistantService extends Service {
         if(Utils.getEmailFromPreference(getApplicationContext()) != null)
         {
             int currentHour = getHours();
-            if(currentHour <8 || currentHour>18 || currentHour==0) // se hace esto para que no se ejecute en horas de la noche y la madrugada
+            if(currentHour <8 || currentHour>18) // se hace esto para que no se ejecute en horas de la noche y la madrugada
             {
-                Log.i(TAG,"The service is not available, it's "+currentHour);
+                Log.i(TAG,"The service is not available, it's "+currentHour+" hours");
             }
             else {
-                checkWeightTable();
-                checkPulseTable();
-                checkCholesterol();
-                checkHBA1C();
-                checkGlucose();
-                checkState();
+                Action<Void> weightAction = new ActionImplement(x->checkWeightTable(),0);
+                weightAction.invoke(null);
+
+                Action<Void> pulseAction = new ActionImplement(x->checkPulseTable(),2000);
+                pulseAction.invoke(null);
+
+                Action<Void> cholesterolAction = new ActionImplement(x->checkCholesterol(),4000);
+                cholesterolAction.invoke(null);
+
+                Action<Void> hba1cAction = new ActionImplement(x->checkHBA1C(),6000);
+                hba1cAction.invoke(null);
+
+                Action<Void> glucoseAction = new ActionImplement(x->checkGlucose(),8000);
+                glucoseAction.invoke(null);
+
+                Action<Void> stateAction = new ActionImplement(x->checkState(),10000);
+                stateAction.invoke(null);
+                //checkWeightTable()
+                //checkPulseTable();
+                //checkCholesterol();
+                //checkHBA1C();
+                //checkGlucose();
+                //checkState();
             }
+        }
+        else {
+            Log.i(TAG,"User didn't log in.");
+        }
+    }
+
+    interface Action<T>{
+        void invoke(T args);
+    }
+
+    class ActionImplement<T> implements Action<T>{
+        Action<T> action;
+        int delay;
+        public ActionImplement(Action<T> action, int delay) {
+            this.action = action;
+            this.delay = delay;
+        }
+
+        @Override
+        public void invoke(T args) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    action.invoke(null);
+                }
+            }, this.delay);
         }
     }
 
