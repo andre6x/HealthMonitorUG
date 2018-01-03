@@ -40,11 +40,6 @@ public class NetworkStateReceiver extends BroadcastReceiver {
             else
             {
                 Log.i(TAG,"El servicio de asistencia ya está en ejecución");
-                //Log.i(TAG,"Se va a detener el servicio");
-                //context.stopService(assistantService);
-                //Log.i(TAG,"Se va a reiniciar el servicio");
-
-                //context.startService(assistantService);
             }
 //        }
 //        else
