@@ -344,6 +344,13 @@
             <!--</intent-filter>-->
         </service>
 
+        <receiver android:name=".Services.RestartServiceReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="RestartService"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
