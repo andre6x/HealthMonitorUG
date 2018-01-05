@@ -11,6 +11,8 @@ import android.support.v4.app.NotificationCompat;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplActivity;
 import com.grupocisc.healthmonitor.R;
 
+import java.util.Random;
+
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
@@ -18,30 +20,26 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  */
 
 public final class NotificationHelper {
-    public static void Create(Context ctx, String title, String message, String channelId)
+    public static void ShowNotification(Context ctx, String title, String message, String channelId, Class<?> activity, int icon)
     {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx,channelId)
-                        .setSmallIcon(R.drawable.heart_pulse)
+                        .setSmallIcon(icon)
                         .setContentTitle(title)
-                        .setContentText(message);
+                        .setContentText(message)
+                        .setDefaults(Notification.DEFAULT_SOUND)
+                        .setAutoCancel(true);
 
-        Intent resultIntent = new Intent(ctx, ComplActivity.class);
+        Intent resultIntent = new Intent(ctx, activity);
 
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        ctx,
-                        0,
-                        resultIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(ctx,0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         mBuilder.setContentIntent(resultPendingIntent);
 
-        int mNotificationId = 001;
+        Random randomNumber = new Random();
+        int mNotificationId = randomNumber.nextInt(50)+1;
 
         NotificationManager mNotifyMgr = (NotificationManager) ctx.getSystemService(NOTIFICATION_SERVICE);
 
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
-        mNotifyMgr.cancel(mNotificationId);
     }
 }
