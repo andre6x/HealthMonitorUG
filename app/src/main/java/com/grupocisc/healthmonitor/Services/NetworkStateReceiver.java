@@ -9,6 +9,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.grupocisc.healthmonitor.Utils.ServiceChecker;
+
 /**
  * Created by alex on 12/8/17.
  */
@@ -21,16 +23,16 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int connectionType=0;
+        //int connectionType=0;
         _ctx=context;
         Intent assistantService = new Intent(context, AssistantService.class);
-        _connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(_connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState()== NetworkInfo.State.CONNECTED)
-        {
-            Log.i(TAG,"Conexión por wifi");
-            connectionType = ConnectivityManager.TYPE_WIFI;
-            assistantService.putExtra("connectionType",connectionType);
-            if(!isServiceRunning(AssistantService.class))
+        //_connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if(_connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState()== NetworkInfo.State.CONNECTED)
+//        {
+            //Log.i(TAG,"Conexión por wifi");
+            //connectionType = ConnectivityManager.TYPE_WIFI;
+            //assistantService.putExtra("connectionType",connectionType);
+            if(!ServiceChecker.Current.isServiceRunning(context,AssistantService.class))
             {
                 Log.i(TAG,"Iniciando el servicio de asistencia");
                 context.startService(assistantService);
@@ -38,23 +40,18 @@ public class NetworkStateReceiver extends BroadcastReceiver {
             else
             {
                 Log.i(TAG,"El servicio de asistencia ya está en ejecución");
-                Log.i(TAG,"Se va a detener el servicio");
-                context.stopService(assistantService);
-                Log.i(TAG,"Se va a reiniciar el servicio");
-
-                context.startService(assistantService);
             }
-        }
-        else
-        {
+//        }
+//        else
+//        {
             /*Log.i("NetworkStateReceiver","Otro tipo de conexión");
             connectionType = ConnectivityManager.TYPE_MOBILE | ConnectivityManager.TYPE_MOBILE_DUN | ConnectivityManager.TYPE_VPN | ConnectivityManager.TYPE_WIMAX;
             assistantService.putExtra("connectionType", connectionType);*/
-        }
+        //}
     }
 
 
-    private boolean isServiceRunning(Class<?> serviceClass) {
+    /*private boolean isServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) _ctx.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
@@ -62,5 +59,5 @@ public class NetworkStateReceiver extends BroadcastReceiver {
             }
         }
         return false;
-    }
+    }*/
 }

@@ -25,6 +25,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".HealthMonitorApplicattion"
@@ -329,7 +330,7 @@
         <receiver android:name=".Services.NetworkStateReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
@@ -338,10 +339,17 @@
             android:name=".Services.AssistantService"
             android:exported="true"
             android:enabled="true">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
+            <!--</intent-filter>-->
         </service>
+
+        <receiver android:name=".Services.RestartServiceReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="RestartService"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 
