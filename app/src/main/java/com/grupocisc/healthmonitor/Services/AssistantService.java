@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.grupocisc.healthmonitor.Asthma.activities.AsthmaRegistry;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplCholesterolRegistyActivity;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplHba1cRegistyActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
@@ -21,6 +22,7 @@ import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Utils.WakeLocker;
 import com.grupocisc.healthmonitor.Weight.activities.WeightActivity;
+import com.grupocisc.healthmonitor.entities.IAsthma;
 import com.grupocisc.healthmonitor.entities.IColesterol;
 import com.grupocisc.healthmonitor.entities.IGlucose;
 import com.grupocisc.healthmonitor.entities.IHba1c;
@@ -139,6 +141,9 @@ public class AssistantService extends Service {
 
                 Action<Void> stateAction = new ActionImplement(x->checkState(),20000);
                 stateAction.invoke(null);
+
+                Action<Void> peakFlowAction = new ActionImplement(x->checkPeakFlowTable(),20000);
+                peakFlowAction.invoke(null);
             }
         }
         else {
@@ -407,6 +412,40 @@ public class AssistantService extends Service {
             e.printStackTrace();
         }
     }
+
+
+
+    void checkPeakFlowTable()
+    {
+        try {
+            IAsthma data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getAsthmaDao(), Constantes.TABLA_ASTHMA);
+            int PEAK_NOTIFICATION_ID = 1007;
+            String PEAK_NOTIFICATION_CHANNEL_ID = "007";
+            if(data!=null)
+            {
+                String dateString = data.getFecha()!=null ? data.getFecha():"";
+                int days = getDays(dateString);
+
+                if(days<2){
+                    Log.i(TAG,"Last record on: "+dateString);
+                }
+                else {
+                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PULSE_NOTIFICATION_TITLE,"no ha ingresado su pulso en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
+                    NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.icon_pulse, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su registro de flujo máximo en "+days+" "+getCorrectWord(days));
+                }
+            }
+            else {
+                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PULSE_NOTIFICATION_TITLE,"no ha ingresado su pulso en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
+                NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.icon_pulse, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su registro de flujo máximo");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
         @Override
     public void onDestroy() {
