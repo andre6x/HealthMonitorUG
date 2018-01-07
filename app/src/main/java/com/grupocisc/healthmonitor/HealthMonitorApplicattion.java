@@ -54,8 +54,10 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterSession;
 
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 import io.fabric.sdk.android.Fabric;
+import okhttp3.OkHttpClient;
 import retrofit2.converter.gson.GsonConverterFactory;
 //import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
@@ -75,6 +77,7 @@ public class HealthMonitorApplicattion extends Application {
     //private Retrofit mRestCISCAdapterV2;
     //private Retrofit mRestCISCAdapterV2IP;
     private Retrofit mRetrofitAdapter;
+    private OkHttpClient client;
 
 	
     private Database databaseHelper = null;
@@ -177,8 +180,14 @@ public class HealthMonitorApplicattion extends Application {
         //fin nuevos metodos v2
 
         //-------------METODOS VERSION 3--------------------------
+        client = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30,TimeUnit.SECONDS).build();
+
+
         mRetrofitAdapter = new Retrofit.Builder()
                 .baseUrl(BuildConfig.URL_SERVER)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         //--------------------------------------------------------

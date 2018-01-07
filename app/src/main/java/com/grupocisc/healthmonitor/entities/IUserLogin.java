@@ -15,7 +15,7 @@ public interface IUserLogin {
 
 
     @POST("controlServices/diabetes/patientUsers/validateAccount")
-    Call<UserLogin> LoginUser(@Body ObjLogin rPeso);
+    Call<UserLogin> LoginUser(@Body ObjLogin rLogin);
     /*
     @GET("control/diabetes/personas/verifica_paciente")
     Call<UserLogin> LoginUser(@Query("email") String email,

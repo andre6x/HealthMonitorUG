@@ -1,6 +1,7 @@
 package com.grupocisc.healthmonitor.Glucose.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -52,8 +53,40 @@ public class GlucoseListAdapter extends RecyclerView.Adapter<GlucoseListAdapter.
         else
             myViewHolder.img_cloud.setImageResource(R.mipmap.cloud_on);
 
+        int glucoseValue = rows.get(position).getConcentracion();
+
+        if(glucoseValue<=100){
+            changeCardViewBackgroundColor(myViewHolder,R.color.teal);
+        }
+
+        else if(glucoseValue>=101 && glucoseValue<=126){
+            changeCardViewBackgroundColor(myViewHolder,R.color.yellow_expandle);
+        }
+
+        else if(glucoseValue>126){
+            changeCardViewBackgroundColor(myViewHolder,R.color.red);
+        }
+
         /*set Animation Rebound*/
         setAnimReboundonBindViewHolder(myViewHolder.itemView, position);
+    }
+
+    void changeCardViewBackgroundColor(MyViewHolder viewHolder, int colorId){
+        switch (colorId){
+            case R.color.teal:
+                viewHolder.main_card.setCardBackgroundColor(viewHolder.main_card.getResources().getColor(colorId));
+                viewHolder.txt_fecha.setTextColor(viewHolder.main_card.getResources().getColor(R.color.teal_Light_primary_color));
+                viewHolder.txt_hora.setTextColor(viewHolder.main_card.getResources().getColor(R.color.teal_Light_primary_color));
+                viewHolder.txt_con.setTextColor(viewHolder.main_card.getResources().getColor(R.color.white));
+                break;
+            case R.color.yellow_expandle:
+                viewHolder.main_card.setCardBackgroundColor(viewHolder.main_card.getResources().getColor(colorId));
+                break;
+            case  R.color.red:
+                viewHolder.main_card.setCardBackgroundColor(viewHolder.main_card.getResources().getColor(colorId));
+                viewHolder.txt_con.setTextColor(viewHolder.main_card.getResources().getColor(R.color.red_light_primary_color));
+                break;
+        }
     }
 
     @Override
@@ -86,6 +119,7 @@ public class GlucoseListAdapter extends RecyclerView.Adapter<GlucoseListAdapter.
 
         public MyViewHolder(View v , ClickListener listener) {
             super(v);
+
             img_avatar = (ImageView) v.findViewById(R.id.img_avatar);
             main_card = (CardView) v.findViewById(R.id.main_card);
             txt_con = (TextView) v.findViewById(R.id.txt_concentracion);
@@ -93,6 +127,7 @@ public class GlucoseListAdapter extends RecyclerView.Adapter<GlucoseListAdapter.
             txt_fecha  = (TextView) v.findViewById(R.id.txt_fecha);
             txt_observacion = (TextView) v.findViewById(R.id.txt_observacion);
             img_cloud = (ImageView) v.findViewById(R.id.img_cloud);
+
 
             this.listener = listener;
             v.setOnClickListener(this);
