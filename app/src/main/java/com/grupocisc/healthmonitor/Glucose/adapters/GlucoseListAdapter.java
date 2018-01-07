@@ -1,6 +1,7 @@
 package com.grupocisc.healthmonitor.Glucose.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -52,8 +53,26 @@ public class GlucoseListAdapter extends RecyclerView.Adapter<GlucoseListAdapter.
         else
             myViewHolder.img_cloud.setImageResource(R.mipmap.cloud_on);
 
+        Double glucoseValue = Double.parseDouble(myViewHolder.txt_con.getText().toString());
+
+        if(glucoseValue>=70 && glucoseValue<=100){
+            changeCardViewBackgroundColor(myViewHolder.main_card,R.color.green);
+        }
+
+        else if(glucoseValue>=101 && glucoseValue<=126){
+            changeCardViewBackgroundColor(myViewHolder.main_card,R.color.yellow);
+        }
+
+        else if(glucoseValue>126){
+            changeCardViewBackgroundColor(myViewHolder.main_card,R.color.red);
+        }
+
         /*set Animation Rebound*/
         setAnimReboundonBindViewHolder(myViewHolder.itemView, position);
+    }
+
+    void changeCardViewBackgroundColor(CardView card, int colorId){
+        card.setCardBackgroundColor(card.getResources().getColor(colorId));
     }
 
     @Override
@@ -86,6 +105,7 @@ public class GlucoseListAdapter extends RecyclerView.Adapter<GlucoseListAdapter.
 
         public MyViewHolder(View v , ClickListener listener) {
             super(v);
+
             img_avatar = (ImageView) v.findViewById(R.id.img_avatar);
             main_card = (CardView) v.findViewById(R.id.main_card);
             txt_con = (TextView) v.findViewById(R.id.txt_concentracion);
@@ -94,10 +114,28 @@ public class GlucoseListAdapter extends RecyclerView.Adapter<GlucoseListAdapter.
             txt_observacion = (TextView) v.findViewById(R.id.txt_observacion);
             img_cloud = (ImageView) v.findViewById(R.id.img_cloud);
 
+//            Double glucoseValue = Double.parseDouble(txt_con.getText().toString());
+//
+//            if(glucoseValue>=70 && glucoseValue<=100){
+//                changeCardViewBackgroundColor(main_card,R.color.green);
+//            }
+//
+//            else if(glucoseValue>=101 && glucoseValue<=126){
+//                changeCardViewBackgroundColor(main_card,R.color.yellow);
+//            }
+//
+//            else if(glucoseValue>126){
+//                changeCardViewBackgroundColor(main_card,R.color.red);
+//            }
+
             this.listener = listener;
             v.setOnClickListener(this);
             v.setOnLongClickListener(this);
         }
+
+//        void changeCardViewBackgroundColor(CardView card, int colorId){
+//            card.setCardBackgroundColor(card.getResources().getColor(colorId));
+//        }
 
         @Override
         public void onClick(View v) {
