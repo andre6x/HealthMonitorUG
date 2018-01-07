@@ -163,7 +163,7 @@ public class GlucoseRegistyActivity extends AppCompatActivity implements DatePic
                     if (!text.isEmpty()) {
                         if (Float.parseFloat(text) > 1000)
                             txt_concentration.setError("El valor de su glucosa no puede ser mayor a  1000 mg/dl. Por favor Verifique");
-                        if (Float.parseFloat(text) < 1)
+                        if (Float.parseFloat(text) < 65)
                             txt_concentration.setError("El valor de su glucosa no puede ser menor a 65 mg/dl.  Por favor Verifique");
                     }
                 }

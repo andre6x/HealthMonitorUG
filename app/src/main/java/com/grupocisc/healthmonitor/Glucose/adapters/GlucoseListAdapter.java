@@ -53,26 +53,40 @@ public class GlucoseListAdapter extends RecyclerView.Adapter<GlucoseListAdapter.
         else
             myViewHolder.img_cloud.setImageResource(R.mipmap.cloud_on);
 
-        Double glucoseValue = Double.parseDouble(myViewHolder.txt_con.getText().toString());
+        int glucoseValue = rows.get(position).getConcentracion();
 
-        if(glucoseValue>=70 && glucoseValue<=100){
-            changeCardViewBackgroundColor(myViewHolder.main_card,R.color.green);
+        if(glucoseValue<=100){
+            changeCardViewBackgroundColor(myViewHolder,R.color.teal);
         }
 
         else if(glucoseValue>=101 && glucoseValue<=126){
-            changeCardViewBackgroundColor(myViewHolder.main_card,R.color.yellow);
+            changeCardViewBackgroundColor(myViewHolder,R.color.yellow_expandle);
         }
 
         else if(glucoseValue>126){
-            changeCardViewBackgroundColor(myViewHolder.main_card,R.color.red);
+            changeCardViewBackgroundColor(myViewHolder,R.color.red);
         }
 
         /*set Animation Rebound*/
         setAnimReboundonBindViewHolder(myViewHolder.itemView, position);
     }
 
-    void changeCardViewBackgroundColor(CardView card, int colorId){
-        card.setCardBackgroundColor(card.getResources().getColor(colorId));
+    void changeCardViewBackgroundColor(MyViewHolder viewHolder, int colorId){
+        switch (colorId){
+            case R.color.teal:
+                viewHolder.main_card.setCardBackgroundColor(viewHolder.main_card.getResources().getColor(colorId));
+                viewHolder.txt_fecha.setTextColor(viewHolder.main_card.getResources().getColor(R.color.teal_Light_primary_color));
+                viewHolder.txt_hora.setTextColor(viewHolder.main_card.getResources().getColor(R.color.teal_Light_primary_color));
+                viewHolder.txt_con.setTextColor(viewHolder.main_card.getResources().getColor(R.color.white));
+                break;
+            case R.color.yellow_expandle:
+                viewHolder.main_card.setCardBackgroundColor(viewHolder.main_card.getResources().getColor(colorId));
+                break;
+            case  R.color.red:
+                viewHolder.main_card.setCardBackgroundColor(viewHolder.main_card.getResources().getColor(colorId));
+                viewHolder.txt_con.setTextColor(viewHolder.main_card.getResources().getColor(R.color.red_light_primary_color));
+                break;
+        }
     }
 
     @Override
