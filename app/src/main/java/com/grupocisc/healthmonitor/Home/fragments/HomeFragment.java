@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
 
     private List<ItemHome> getDataItemHome() {
         List<ItemHome> pagerList = new ArrayList<>();
-        //pagerList.add(new ItemHome("UNIVERSIDAD DE GUAYAQUIL\n FACULTAD MATEMÁTICAS Y FÍSICAS\n CINT", R.mipmap.flayerto, 0));
+
         pagerList.add(new ItemHome("Control de Glucosa",         R.mipmap.pager_gluco       , R.mipmap.home_gluco         ,1  , "#57c7d9", "Diabetes" ));
         pagerList.add(new ItemHome("Flujo Máximo",               R.mipmap.pager_inhaler     , R.mipmap.home_inhaler      ,11 , "#f2b118", "Asma")); //CAMBIO f2b118
         pagerList.add(new ItemHome("Control de Insulina",        R.mipmap.pager_insulina    , R.mipmap.home_insulina      ,5  , "#775ba6", "Diabetes"));
