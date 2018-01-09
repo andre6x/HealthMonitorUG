@@ -243,32 +243,6 @@ public class AssistantService extends Service {
         }
     }
 
-    /*void checkPressureTable()
-    {
-        try {
-            IPressure data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getPressureDao(), Constantes.TABLA_PRESSURE);
-            if(data!=null)
-            {
-                String dateString = data.getFecha()!=null ? data.getFecha():"";
-                int days = getDays(dateString);
-
-                if(days<2){
-                    Log.i(TAG,"Last record on: "+dateString);
-                }
-                else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PRESSURE_NOTIFICATION_TITLE,"no ha ingresado su presión en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
-                }
-            }
-            else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PRESSURE_NOTIFICATION_TITLE,"no ha ingresado su presión en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }*/
-
     void checkGlucose()
     {
         try {

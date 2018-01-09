@@ -1,7 +1,6 @@
 package com.grupocisc.healthmonitor.Utils
 
 import android.content.Context
-import android.hardware.Sensor
 import android.hardware.SensorManager
 
 /**

@@ -47,6 +47,7 @@ import com.grupocisc.healthmonitor.Recommendations.activities.RecommendationsAct
 import com.grupocisc.healthmonitor.Report.activities.ReportActivity;
 import com.grupocisc.healthmonitor.Routines.activities.RoutinesActivity;
 import com.grupocisc.healthmonitor.Services.AssistantService;
+import com.grupocisc.healthmonitor.Services.BarometerService;
 import com.grupocisc.healthmonitor.Services.SendDataMyService;
 import com.grupocisc.healthmonitor.Settings.activities.AboutActivity;
 import com.grupocisc.healthmonitor.Settings.activities.TutorialActivityV2;
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
         iniciarServicio();
         InitAssitantService();
+        InitBarometerReaderService();
 
         showHashKey(this);
     }
@@ -163,15 +165,17 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
-    /*private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
+    void InitBarometerReaderService(){
+        if(!ServiceChecker.Current.isServiceRunning(this,BarometerService.class)){
+            Intent barometerService = new Intent(this, BarometerService.class); //serv de tipo Intent
+            this.startService(barometerService); //ctx de tipo Context
+            Log.i(TAG, "Barometer service started");
+        } else {
+            Log.i(TAG, "Barometer service is already running");
         }
-        return false;
-    }*/
+    }
+
+
     //fin servicio enviar data webservice
 
     @Override
