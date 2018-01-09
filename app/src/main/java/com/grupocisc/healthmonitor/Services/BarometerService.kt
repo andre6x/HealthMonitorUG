@@ -34,7 +34,8 @@ class BarometerService: Service(),SensorEventListener {
     override fun onSensorChanged(event: SensorEvent?) {
         val attitude = event?.values?.firstOrNull()
 
-        NotificationHelper.showNotification(applicationContext, 1009, R.mipmap.icon_inhalator, "111", "Medición de presión atmosférica", "El sensor detectó una elevación de ${attitude!!}")
+        Log.i(tag,"La presión es: $attitude")
+        //NotificationHelper.showNotification(applicationContext, 1009, R.mipmap.icon_inhalator, "111", "Medición de presión atmosférica", "El sensor detectó una elevación de ${attitude!!}")
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, intent: Int) {
