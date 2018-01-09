@@ -86,8 +86,8 @@ public class AssistantService extends Service {
             }
         };
 
-        //_timer.scheduleAtFixedRate(_timerTask,0,4000*60*60); //se ejecuta cada 4 horas
-        _timer.scheduleAtFixedRate(_timerTask,0,1000*60); //se ejecuta cada 1 segundo
+        _timer.scheduleAtFixedRate(_timerTask,0,2000*60*60); //se ejecuta cada 2 horas
+        //_timer.scheduleAtFixedRate(_timerTask,0,1000*60); //se ejecuta cada 1 segundo
         WakeLocker.Current.release();
     }
 
@@ -96,20 +96,6 @@ public class AssistantService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "AssistantService has been started");
         onTaskRemoved(intent);
-//        WakeLocker.Current.acquire(getApplicationContext());
-//
-//        Timer _timer = new Timer();
-//        _timerTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                Log.i(TAG,"Executing timer task");
-//                RunService();
-//            }
-//        };
-//
-//        //_timer.scheduleAtFixedRate(_timerTask,0,4000*60*60); //se ejecuta cada 4 horas
-//        _timer.scheduleAtFixedRate(_timerTask,0,1000*60); //se ejecuta cada 1 segundo
-//        WakeLocker.Current.release();
 
         return START_STICKY;
     }
@@ -142,7 +128,7 @@ public class AssistantService extends Service {
                 Action<Void> stateAction = new ActionImplement(x->checkState(),20000);
                 stateAction.invoke(null);
 
-                Action<Void> peakFlowAction = new ActionImplement(x->checkPeakFlowTable(),20000);
+                Action<Void> peakFlowAction = new ActionImplement(x->checkPeakFlowTable(),22000);
                 peakFlowAction.invoke(null);
             }
         }
@@ -431,12 +417,12 @@ public class AssistantService extends Service {
                 }
                 else {
                     //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PULSE_NOTIFICATION_TITLE,"no ha ingresado su pulso en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
-                    NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.icon_pulse, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su registro de flujo máximo en "+days+" "+getCorrectWord(days));
+                    NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.header_asma, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PEAK_FLOW_NOTIFICATION_TITLE,"No ha ingresado su registro de flujo máximo en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
                 //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PULSE_NOTIFICATION_TITLE,"no ha ingresado su pulso en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
-                NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.icon_pulse, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su registro de flujo máximo");
+                NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.header_asma, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PEAK_FLOW_NOTIFICATION_TITLE,"Aún no ha ingresado su registro de flujo máximo");
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -38,5 +38,6 @@ public class Constantes {
     public static final String CHOLESTEROL_NOTIFICATION_TITLE = "Registrar colesterol";
     public static final String PRESSURE_NOTIFICATION_TITLE ="Registrar presión";
     public static final String HBA1C_NOTIFICATION_TITLE ="Registrar hba1c";
+    public static final String PEAK_FLOW_NOTIFICATION_TITLE="Registrar flujo máximo";
 
 }
