@@ -12,7 +12,6 @@ import lombok.Setter;
  * Created by aonate on 12/01/2017.
  */
 
-//@DatabaseTable(tableName = "StateTable")
 @DatabaseTable(tableName = Constantes.TABLA_STATE)
 
 public class IState implements Serializable {

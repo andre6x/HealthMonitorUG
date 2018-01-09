@@ -31,7 +31,6 @@ import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IConsulState;
-import com.grupocisc.healthmonitor.entities.IPulse;
 import com.grupocisc.healthmonitor.entities.IState;
 import com.satsuware.usefulviews.LabelledSpinner;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -39,12 +38,9 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.EmptyStackException;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 //implements SeekBar.OnSeekBarChangeListener,OnChartValueSelectedListener
 public class StateGraphicFragment extends  Fragment implements LabelledSpinner.OnItemChosenListener {

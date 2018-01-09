@@ -13,6 +13,7 @@ import com.grupocisc.healthmonitor.Complementary.activities.ComplCholesterolRegi
 import com.grupocisc.healthmonitor.Complementary.activities.ComplHba1cRegistyActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
+import com.grupocisc.healthmonitor.Insulin.activities.InsulinRegistry;
 import com.grupocisc.healthmonitor.Pulse.activities.PulseActivity;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
@@ -22,11 +23,11 @@ import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Utils.WakeLocker;
 import com.grupocisc.healthmonitor.Weight.activities.WeightActivity;
+import com.grupocisc.healthmonitor.entities.EInsulin;
 import com.grupocisc.healthmonitor.entities.IAsthma;
 import com.grupocisc.healthmonitor.entities.IColesterol;
 import com.grupocisc.healthmonitor.entities.IGlucose;
 import com.grupocisc.healthmonitor.entities.IHba1c;
-import com.grupocisc.healthmonitor.entities.IPressure;
 import com.grupocisc.healthmonitor.entities.IPulse;
 import com.grupocisc.healthmonitor.entities.IState;
 import com.grupocisc.healthmonitor.entities.IWeight;
@@ -72,9 +73,11 @@ public class AssistantService extends Service {
         super.onTaskRemoved(rootIntent);
     }
 
+
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i(TAG, "AssistantService has been started");
+        onTaskRemoved(intent);
         WakeLocker.Current.acquire(getApplicationContext());
 
         Timer _timer = new Timer();
@@ -89,13 +92,6 @@ public class AssistantService extends Service {
         _timer.scheduleAtFixedRate(_timerTask,0,2000*60*60); //se ejecuta cada 2 horas
         //_timer.scheduleAtFixedRate(_timerTask,0,1000*60); //se ejecuta cada 1 segundo
         WakeLocker.Current.release();
-    }
-
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "AssistantService has been started");
-        onTaskRemoved(intent);
 
         return START_STICKY;
     }
@@ -105,7 +101,7 @@ public class AssistantService extends Service {
         if(Utils.getEmailFromPreference(getApplicationContext()) != null)
         {
             int currentHour = getHours();
-            if(currentHour <8 || currentHour>18) // se hace esto para que no se ejecute en horas de la noche y la madrugada
+            if(currentHour <8 || currentHour>18)
             {
                 Log.i(TAG,"The service is not available, it's "+currentHour+" hours");
             }
@@ -113,23 +109,26 @@ public class AssistantService extends Service {
                 Action<Void> weightAction = new ActionImplement(x->checkWeightTable(),0);
                 weightAction.invoke(null);
 
-                Action<Void> pulseAction = new ActionImplement(x->checkPulseTable(),4000);
+                Action<Void> pulseAction = new ActionImplement(x->checkPulseTable(),2500);
                 pulseAction.invoke(null);
 
-                Action<Void> cholesterolAction = new ActionImplement(x->checkCholesterol(),8000);
+                Action<Void> cholesterolAction = new ActionImplement(x->checkCholesterol(),5000);
                 cholesterolAction.invoke(null);
 
-                Action<Void> hba1cAction = new ActionImplement(x->checkHBA1C(),12000);
+                Action<Void> hba1cAction = new ActionImplement(x->checkHBA1C(),7500);
                 hba1cAction.invoke(null);
 
-                Action<Void> glucoseAction = new ActionImplement(x->checkGlucose(),16000);
+                Action<Void> glucoseAction = new ActionImplement(x->checkGlucose(),10000);
                 glucoseAction.invoke(null);
 
-                Action<Void> stateAction = new ActionImplement(x->checkState(),20000);
+                Action<Void> stateAction = new ActionImplement(x->checkState(),12500);
                 stateAction.invoke(null);
 
-                Action<Void> peakFlowAction = new ActionImplement(x->checkPeakFlowTable(),22000);
+                Action<Void> peakFlowAction = new ActionImplement(x->checkPeakFlowTable(),15000);
                 peakFlowAction.invoke(null);
+
+                Action<Void> insulinAction = new ActionImplement(x->checkInsulinTable(),17500);
+                insulinAction.invoke(null);
             }
         }
         else {
@@ -203,12 +202,10 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.WEIGHT_NOTIFICATION_TITLE,"no ha ingresado su peso en varios días","001", WeightActivity.class, R.mipmap.icon_peso);
                     NotificationHelper.Current.showNotification(getApplicationContext(), WeightActivity.class, WEIGHT_NOTIFICATION_ID,R.mipmap.icon_peso, WEIGHT_NOTIFICATION_CHANNEL_ID,Constantes.WEIGHT_NOTIFICATION_TITLE,"No ha ingresado su peso en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.WEIGHT_NOTIFICATION_TITLE,"no ha ingresado su peso en varios días","001", WeightActivity.class, R.mipmap.icon_peso);
                 NotificationHelper.Current.showNotification(getApplicationContext(), WeightActivity.class, WEIGHT_NOTIFICATION_ID,R.mipmap.icon_peso, WEIGHT_NOTIFICATION_CHANNEL_ID,Constantes.WEIGHT_NOTIFICATION_TITLE,"Aún no ha ingresado su peso");
             }
         } catch (SQLException e) {
@@ -233,12 +230,10 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PULSE_NOTIFICATION_TITLE,"no ha ingresado su pulso en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
                     NotificationHelper.Current.showNotification(getApplicationContext(), PulseActivity.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su pulso en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PULSE_NOTIFICATION_TITLE,"no ha ingresado su pulso en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
                 NotificationHelper.Current.showNotification(getApplicationContext(), PulseActivity.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su pulso");
             }
         } catch (SQLException e) {
@@ -248,9 +243,8 @@ public class AssistantService extends Service {
         }
     }
 
-    void checkPressureTable()
+    /*void checkPressureTable()
     {
-        // la fecha del último registro sea diferente sea >=24 horas
         try {
             IPressure data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getPressureDao(), Constantes.TABLA_PRESSURE);
             if(data!=null)
@@ -273,11 +267,10 @@ public class AssistantService extends Service {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     void checkGlucose()
     {
-        // la fecha del último registro sea diferente sea >=24 horas
         try {
             IGlucose data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getGlucoseDao(), Constantes.TABLA_GLUCOSA);
             int GLUCOSE_NOTIFICATION_ID = 1003;
@@ -291,12 +284,10 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.GLUCOSE_NOTIFICATION_TITLE,"no ha ingresado su glucosa en varios días","003", GlucoseActivity.class, R.mipmap.icon_blood);
                     NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"No ha ingresado su glucosa en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.GLUCOSE_NOTIFICATION_TITLE,"no ha ingresado su glucosa en varios días","003", GlucoseActivity.class, R.mipmap.icon_blood);
                 NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"Aún no ha ingresado su glucosa");
             }
         } catch (SQLException e) {
@@ -308,7 +299,6 @@ public class AssistantService extends Service {
 
     void checkCholesterol()
     {
-        // la fecha del último registro sea diferente sea >=24 horas
         try {
             IColesterol data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getColesterolDao(), Constantes.TABLA_COLESTEROL);
             int CHOLESTEROL_NOTIFICATION_ID = 1005;
@@ -322,12 +312,10 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.CHOLESTEROL_NOTIFICATION_TITLE,"no ha ingresado su colesterol en varios días","004", ComplCholesterolRegistyActivity.class, R.mipmap.icon_coleste);
                     NotificationHelper.Current.showNotification(getApplicationContext(), ComplCholesterolRegistyActivity.class, CHOLESTEROL_NOTIFICATION_ID,R.mipmap.icon_coleste, CHOLESTEROL_NOTIFICATION_CHANNEL_ID,Constantes.CHOLESTEROL_NOTIFICATION_TITLE,"No ha ingresado su colesterol en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.CHOLESTEROL_NOTIFICATION_TITLE,"no ha ingresado su colesterol en varios días","004", ComplCholesterolRegistyActivity.class, R.mipmap.icon_coleste);
                 NotificationHelper.Current.showNotification(getApplicationContext(), ComplCholesterolRegistyActivity.class, CHOLESTEROL_NOTIFICATION_ID,R.mipmap.icon_coleste, CHOLESTEROL_NOTIFICATION_CHANNEL_ID,Constantes.CHOLESTEROL_NOTIFICATION_TITLE,"Aún no ha ingresado su colesterol");
             }
         } catch (SQLException e) {
@@ -352,12 +340,10 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.HBA1C_NOTIFICATION_TITLE,"no ha ingresado su HBA1C en varios días","005", ComplHba1cRegistyActivity.class, R.mipmap.icon_hba1c);
                     NotificationHelper.Current.showNotification(getApplicationContext(), ComplHba1cRegistyActivity.class, HBA1C_NOTIFICATION_ID,R.mipmap.icon_hba1c, HBA1C_NOTIFICATION_CHANNEL_ID,Constantes.HBA1C_NOTIFICATION_TITLE,"No ha ingresado su HBA1C en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.HBA1C_NOTIFICATION_TITLE,"no ha ingresado su HBA1C en varios días","005", ComplHba1cRegistyActivity.class, R.mipmap.icon_hba1c);
                 NotificationHelper.Current.showNotification(getApplicationContext(), ComplHba1cRegistyActivity.class, HBA1C_NOTIFICATION_ID,R.mipmap.icon_hba1c, HBA1C_NOTIFICATION_CHANNEL_ID,Constantes.HBA1C_NOTIFICATION_TITLE,"Aún no ha ingresado su HBA1C");
             }
             } catch (SQLException e) {
@@ -370,7 +356,6 @@ public class AssistantService extends Service {
 
     void checkState()
     {
-        // la fecha del último registro sea diferente sea >=24 horas
         try {
             IState data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getStateDao(), Constantes.TABLA_STATE);
             int STATE_NOTIFICATION_ID = 1004;
@@ -384,12 +369,10 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.STATE_NOTIFICATION_TITLE,"no ha ingresado su estado de ánimo en varios días","006", StateActivity.class, R.drawable.estado_feliz_con);
                     NotificationHelper.Current.showNotification(getApplicationContext(), StateActivity.class, STATE_NOTIFICATION_ID,R.drawable.estado_feliz_con, STATE_NOTIFICATION_CHANNEL_ID,Constantes.STATE_NOTIFICATION_TITLE,"No ha ingresado su estado de ánimo en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.STATE_NOTIFICATION_TITLE,"no ha ingresado su estado de ánimo varios días","006", StateActivity.class, R.drawable.estado_feliz_con);
                 NotificationHelper.Current.showNotification(getApplicationContext(), StateActivity.class, STATE_NOTIFICATION_ID,R.drawable.estado_feliz_con, STATE_NOTIFICATION_CHANNEL_ID,Constantes.STATE_NOTIFICATION_TITLE,"Aún no ha ingresado su estado de ánimo");
             }
         } catch (SQLException e) {
@@ -416,13 +399,11 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PULSE_NOTIFICATION_TITLE,"no ha ingresado su pulso en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
-                    NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.header_asma, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PEAK_FLOW_NOTIFICATION_TITLE,"No ha ingresado su registro de flujo máximo en "+days+" "+getCorrectWord(days));
+                    NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.icon_inhalator, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PEAK_FLOW_NOTIFICATION_TITLE,"No ha ingresado su registro de flujo máximo en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PULSE_NOTIFICATION_TITLE,"no ha ingresado su pulso en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
-                NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.header_asma, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PEAK_FLOW_NOTIFICATION_TITLE,"Aún no ha ingresado su registro de flujo máximo");
+                NotificationHelper.Current.showNotification(getApplicationContext(), AsthmaRegistry.class, PEAK_NOTIFICATION_ID,R.mipmap.icon_inhalator, PEAK_NOTIFICATION_CHANNEL_ID,Constantes.PEAK_FLOW_NOTIFICATION_TITLE,"Aún no ha ingresado su registro de flujo máximo");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -431,6 +412,33 @@ public class AssistantService extends Service {
         }
     }
 
+    void checkInsulinTable()
+    {
+        try {
+            EInsulin data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getInsulinDao(), Constantes.TABLA_INSULIN);
+            int INSULIN_NOTIFICATION_ID = 1008;
+            String INSULIN_NOTIFICATION_CHANNEL_ID = "008";
+            if(data!=null)
+            {
+                String dateString = data.getFecha()!=null ? data.getFecha():"";
+                int days = getDays(dateString);
+
+                if(days<1){
+                    Log.i(TAG,"Last record on: "+dateString);
+                }
+                else {
+                    NotificationHelper.Current.showNotification(getApplicationContext(), InsulinRegistry.class, INSULIN_NOTIFICATION_ID,R.mipmap.icon_insulina, INSULIN_NOTIFICATION_CHANNEL_ID,Constantes.INSULIN_NOTIFICATION_TITLE,"No ha ingresado su registro de insulina en "+days+" "+getCorrectWord(days));
+                }
+            }
+            else {
+                NotificationHelper.Current.showNotification(getApplicationContext(), InsulinRegistry.class, INSULIN_NOTIFICATION_ID,R.mipmap.icon_insulina, INSULIN_NOTIFICATION_CHANNEL_ID,Constantes.INSULIN_NOTIFICATION_TITLE,"Aún no ha ingresado su registro de insulina");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
 
         @Override
