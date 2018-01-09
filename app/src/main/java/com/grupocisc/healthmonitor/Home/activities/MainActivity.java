@@ -1,12 +1,10 @@
 package com.grupocisc.healthmonitor.Home.activities;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -32,7 +30,6 @@ import com.grupocisc.healthmonitor.Asthma.activities.PickFlowActivity;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplActivity;
 import com.grupocisc.healthmonitor.Disease.activities.DiseaseActivity;
 import com.grupocisc.healthmonitor.Doctor.activities.DoctorActivity;
-import com.grupocisc.healthmonitor.Doctor.activities.DoctorRegistre;
 import com.grupocisc.healthmonitor.Feeding.activities.FeedingActivity;
 import com.grupocisc.healthmonitor.FitData.activities.FitActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
@@ -50,10 +47,8 @@ import com.grupocisc.healthmonitor.Recommendations.activities.RecommendationsAct
 import com.grupocisc.healthmonitor.Report.activities.ReportActivity;
 import com.grupocisc.healthmonitor.Routines.activities.RoutinesActivity;
 import com.grupocisc.healthmonitor.Services.AssistantService;
-import com.grupocisc.healthmonitor.Services.NetworkStateReceiver;
 import com.grupocisc.healthmonitor.Services.SendDataMyService;
 import com.grupocisc.healthmonitor.Settings.activities.AboutActivity;
-import com.grupocisc.healthmonitor.Settings.activities.TutorialActivity;
 import com.grupocisc.healthmonitor.Settings.activities.TutorialActivityV2;
 import com.grupocisc.healthmonitor.SocialNetworks.activities.SocialActivity;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
@@ -450,7 +445,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 //    {
 //        IntentFilter intent= new IntentFilter();
 //        intent.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-//        _networkStateReceiver = new NetworkStateReceiver();
+//        _networkStateReceiver = new OnBootReceiver();
 //        this.registerReceiver(_networkStateReceiver,intent);
 //    }
 

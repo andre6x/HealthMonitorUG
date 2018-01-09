@@ -25,12 +25,31 @@ class NotificationHelper {
                     .setContentText(message)
                     .setDefaults(Notification.DEFAULT_SOUND)
                     .setAutoCancel(true)
-                    .setVibrate(longArrayOf(1000,1000,1000,1000,1000))
-                    .setLights(Color.RED,3000,3000)
+                    .setVibrate(longArrayOf(300,300,300,300,300))
+                    .setLights(Color.RED,1500,1500)
                     .setContentIntent(resultPendingIntent)
 
             val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(notificationId,notificationBuilder.build())
+        }
+
+        fun showNotification(ctx: Context,notificationId: Int,icon:Int,channelId: String,title: String,message: String) {
+            //val resultIntent =Intent(ctx,activity)
+
+            //val resultPendingIntent = PendingIntent.getActivity(ctx,0,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+            val notificationBuilder = NotificationCompat.Builder(ctx, channelId)
+                    .setSmallIcon(icon)
+                    .setContentTitle(title)
+                    .setContentText(message)
+                    .setDefaults(Notification.DEFAULT_SOUND)
+                    .setAutoCancel(true)
+                    .setVibrate(longArrayOf(300, 300, 300, 300, 300))
+                    .setLights(Color.RED, 1500, 1500)
+            //.setContentIntent(resultPendingIntent)
+
+            val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.notify(notificationId, notificationBuilder.build())
         }
     }
 }

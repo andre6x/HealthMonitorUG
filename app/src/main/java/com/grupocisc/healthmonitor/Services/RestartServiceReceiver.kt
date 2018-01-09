@@ -15,7 +15,7 @@ class RestartServiceReceiver: BroadcastReceiver() {
     override fun onReceive(ctx: Context?, intent: Intent?) {
         if(!ServiceChecker.Current.isServiceRunning(ctx!!,AssistantService::class.java)){
             Log.i(tag,"Reiniciando servicio")
-            ctx?.startService(Intent(ctx.applicationContext,AssistantService::class.java))
+            ctx.startService(Intent(ctx.applicationContext,AssistantService::class.java))
         }
         else
             Log.i(tag,"El servicio no necnsita ser reiniciado")

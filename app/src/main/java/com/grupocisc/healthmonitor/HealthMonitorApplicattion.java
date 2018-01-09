@@ -2,9 +2,7 @@ package com.grupocisc.healthmonitor;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Debug;
 import android.support.multidex.MultiDex;
-import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
@@ -48,10 +46,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.twitter.sdk.android.core.GuestSession;
 import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
-import com.twitter.sdk.android.core.TwitterSession;
 
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
