@@ -81,6 +81,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Peso"
+                            android:maxLength="3"
                             android:textSize="16sp"
                             android:inputType="numberDecimal"/>
                     </android.support.design.widget.TextInputLayout>
@@ -107,6 +108,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Masa Muscular"
+                            android:maxLength="3"
                             android:textSize="16sp"
                             android:inputType="numberDecimal"/>
                     </android.support.design.widget.TextInputLayout>
@@ -130,6 +132,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="TMB"
+                            android:maxLength="4"
                             android:textSize="16sp"
                             android:inputType="numberDecimal"/>
                     </android.support.design.widget.TextInputLayout>
@@ -145,6 +148,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="DMO"
+                            android:maxLength="1"
                             android:textSize="16sp"
                             android:inputType="numberDecimal"/>
                     </android.support.design.widget.TextInputLayout>
@@ -167,6 +171,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="% Agua"
+                            android:maxLength="3"
                             android:textSize="16sp"
                             android:inputType="numberDecimal"/>
                     </android.support.design.widget.TextInputLayout>
@@ -181,6 +186,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="% Grasa"
+                            android:maxLength="3"
                             android:textSize="16sp"
                             android:inputType="numberDecimal"/>
                     </android.support.design.widget.TextInputLayout>
@@ -293,6 +299,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Observaciones"
+                        android:maxLength="150"
                         android:textSize="16sp"
                         android:inputType="textEmailAddress" />
                 </android.support.design.widget.TextInputLayout>

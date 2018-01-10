@@ -150,6 +150,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Ritmo Cardíaco"
                         android:inputType="numberDecimal"
+                        android:maxLength="3"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -303,6 +304,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Observaciones"
+                    android:maxLength="150"
                     android:textSize="16sp"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>

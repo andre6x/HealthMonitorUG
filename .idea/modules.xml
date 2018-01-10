@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Alex\Documents\GIT\HealthMonitorUG\HealthMonitor.iml" filepath="C:\Users\Alex\Documents\GIT\HealthMonitorUG\HealthMonitor.iml" />
       <module fileurl="file://$PROJECT_DIR$/HealthMonitorUG.iml" filepath="$PROJECT_DIR$/HealthMonitorUG.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Alex\Documents\GIT\HealthMonitorUG\librarySweetAlert\librarysweet.iml" filepath="C:\Users\Alex\Documents\GIT\HealthMonitorUG\librarySweetAlert\librarysweet.iml" />
     </modules>
   </component>
 </project>
