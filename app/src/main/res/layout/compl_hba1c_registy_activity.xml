@@ -88,6 +88,7 @@
                         android:layout_height="wrap_content"
                         android:hint="A1C"
                         android:textSize="16sp"
+                        android:maxLength="3"
                         android:inputType="numberDecimal"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -118,6 +119,7 @@
                         android:layout_width="153dp"
                         android:layout_height="wrap_content"
                         android:hint="Cetona"
+                        android:maxLength="4"
                         android:inputType="numberDecimal"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
