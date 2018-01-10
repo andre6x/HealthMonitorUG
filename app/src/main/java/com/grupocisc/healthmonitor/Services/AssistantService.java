@@ -62,7 +62,6 @@ public class AssistantService extends Service {
         {
             Log.i(TAG,"Iniciando el servicio de asistencia");
             Intent restartServiceIntent = new Intent(getApplicationContext(),this.getClass());
-            restartServiceIntent.setPackage(getPackageName());
             startService(restartServiceIntent);
         }
         else
@@ -89,8 +88,8 @@ public class AssistantService extends Service {
             }
         };
 
-        _timer.scheduleAtFixedRate(_timerTask,0,2000*60*60); //se ejecuta cada 2 horas
-        //_timer.scheduleAtFixedRate(_timerTask,0,1000*60); //se ejecuta cada 1 segundo
+        //_timer.scheduleAtFixedRate(_timerTask,0,2000*60*60); //se ejecuta cada 2 horas
+        _timer.scheduleAtFixedRate(_timerTask,0,2000*60); //se ejecuta cada 2 minuto
         WakeLocker.Current.release();
 
         return START_STICKY;
@@ -101,7 +100,7 @@ public class AssistantService extends Service {
         if(Utils.getEmailFromPreference(getApplicationContext()) != null)
         {
             int currentHour = getHours();
-            if(currentHour <8 || currentHour>18)
+            if(currentHour <8 || currentHour>22)
             {
                 Log.i(TAG,"The service is not available, it's "+currentHour+" hours");
             }
@@ -242,32 +241,6 @@ public class AssistantService extends Service {
             e.printStackTrace();
         }
     }
-
-    /*void checkPressureTable()
-    {
-        try {
-            IPressure data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getPressureDao(), Constantes.TABLA_PRESSURE);
-            if(data!=null)
-            {
-                String dateString = data.getFecha()!=null ? data.getFecha():"";
-                int days = getDays(dateString);
-
-                if(days<2){
-                    Log.i(TAG,"Last record on: "+dateString);
-                }
-                else {
-                    //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PRESSURE_NOTIFICATION_TITLE,"no ha ingresado su presión en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
-                }
-            }
-            else {
-                //NotificationHelper.ShowNotification(getApplicationContext(),Constantes.PRESSURE_NOTIFICATION_TITLE,"no ha ingresado su presión en varios días","002", PulseActivity.class, R.mipmap.icon_pulse);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     void checkGlucose()
     {
