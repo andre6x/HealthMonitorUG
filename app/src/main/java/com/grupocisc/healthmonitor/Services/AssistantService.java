@@ -12,17 +12,20 @@ import com.grupocisc.healthmonitor.Asthma.activities.AsthmaRegistry;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplCholesterolRegistyActivity;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplHba1cRegistyActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
+import com.grupocisc.healthmonitor.Glucose.activities.GlucoseRegistyActivity;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Insulin.activities.InsulinRegistry;
 import com.grupocisc.healthmonitor.Pulse.activities.PulseActivity;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
+import com.grupocisc.healthmonitor.State.activities.StateRegistyActivity;
 import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Utils.WakeLocker;
 import com.grupocisc.healthmonitor.Weight.activities.WeightActivity;
+import com.grupocisc.healthmonitor.Weight.activities.WeightRegistyActivity;
 import com.grupocisc.healthmonitor.entities.EInsulin;
 import com.grupocisc.healthmonitor.entities.IAsthma;
 import com.grupocisc.healthmonitor.entities.IColesterol;
@@ -201,11 +204,11 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    NotificationHelper.Current.showNotification(getApplicationContext(), WeightActivity.class, WEIGHT_NOTIFICATION_ID,R.mipmap.icon_peso, WEIGHT_NOTIFICATION_CHANNEL_ID,Constantes.WEIGHT_NOTIFICATION_TITLE,"No ha ingresado su peso en "+days+" "+getCorrectWord(days));
+                    NotificationHelper.Current.showNotification(getApplicationContext(), WeightRegistyActivity.class, WEIGHT_NOTIFICATION_ID,R.mipmap.icon_peso, WEIGHT_NOTIFICATION_CHANNEL_ID,Constantes.WEIGHT_NOTIFICATION_TITLE,"No ha ingresado su peso en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                NotificationHelper.Current.showNotification(getApplicationContext(), WeightActivity.class, WEIGHT_NOTIFICATION_ID,R.mipmap.icon_peso, WEIGHT_NOTIFICATION_CHANNEL_ID,Constantes.WEIGHT_NOTIFICATION_TITLE,"Aún no ha ingresado su peso");
+                NotificationHelper.Current.showNotification(getApplicationContext(), WeightRegistyActivity.class, WEIGHT_NOTIFICATION_ID,R.mipmap.icon_peso, WEIGHT_NOTIFICATION_CHANNEL_ID,Constantes.WEIGHT_NOTIFICATION_TITLE,"Aún no ha ingresado su peso");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -257,11 +260,11 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"No ha ingresado su glucosa en "+days+" "+getCorrectWord(days));
+                    NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseRegistyActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"No ha ingresado su glucosa en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"Aún no ha ingresado su glucosa");
+                NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseRegistyActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"Aún no ha ingresado su glucosa");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -342,11 +345,11 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    NotificationHelper.Current.showNotification(getApplicationContext(), StateActivity.class, STATE_NOTIFICATION_ID,R.drawable.estado_feliz_con, STATE_NOTIFICATION_CHANNEL_ID,Constantes.STATE_NOTIFICATION_TITLE,"No ha ingresado su estado de ánimo en "+days+" "+getCorrectWord(days));
+                    NotificationHelper.Current.showNotification(getApplicationContext(), StateRegistyActivity.class, STATE_NOTIFICATION_ID,R.drawable.estado_feliz_con, STATE_NOTIFICATION_CHANNEL_ID,Constantes.STATE_NOTIFICATION_TITLE,"No ha ingresado su estado de ánimo en "+days+" "+getCorrectWord(days));
                 }
             }
             else {
-                NotificationHelper.Current.showNotification(getApplicationContext(), StateActivity.class, STATE_NOTIFICATION_ID,R.drawable.estado_feliz_con, STATE_NOTIFICATION_CHANNEL_ID,Constantes.STATE_NOTIFICATION_TITLE,"Aún no ha ingresado su estado de ánimo");
+                NotificationHelper.Current.showNotification(getApplicationContext(), StateRegistyActivity.class, STATE_NOTIFICATION_ID,R.drawable.estado_feliz_con, STATE_NOTIFICATION_CHANNEL_ID,Constantes.STATE_NOTIFICATION_TITLE,"Aún no ha ingresado su estado de ánimo");
             }
         } catch (SQLException e) {
             e.printStackTrace();
