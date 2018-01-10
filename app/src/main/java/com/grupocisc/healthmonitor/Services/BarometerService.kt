@@ -9,12 +9,8 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Build
 import android.os.IBinder
-import android.support.annotation.RequiresApi
 import android.util.Log
-import com.grupocisc.healthmonitor.R
-import com.grupocisc.healthmonitor.Utils.NotificationHelper
 import com.grupocisc.healthmonitor.Utils.SensorChecker
 import com.grupocisc.healthmonitor.Utils.ServiceChecker
 import com.grupocisc.healthmonitor.Utils.Utils
@@ -30,7 +26,6 @@ class BarometerService: Service(),SensorEventListener {
 
     lateinit var ctx: Context
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onSensorChanged(event: SensorEvent?) {
         val attitude = event?.values?.firstOrNull()
 
@@ -50,7 +45,7 @@ class BarometerService: Service(),SensorEventListener {
         if (!ServiceChecker.isServiceRunning(applicationContext, BarometerService::class.java)) {
             Log.i(tag, "Iniciando el servicio de lectura de presión")
             val restartServiceIntent = Intent(applicationContext, this.javaClass)
-            restartServiceIntent.`package` = packageName
+            //restartServiceIntent.`package` = packageName
             startService(restartServiceIntent)
         } else {
             Log.i(tag, "El servicio de lectura de presión ya está en ejecución")
@@ -60,11 +55,20 @@ class BarometerService: Service(),SensorEventListener {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         onTaskRemoved(intent)
-        //runService()
-        //ctx = application.applicationContext
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sensor = sensorManager?.getDefaultSensor(Sensor.TYPE_PRESSURE)
-        sensorManager?.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        if(Utils.getEmailFromPreference(applicationContext)!=null)
+        {
+            if(SensorChecker.isSupported(applicationContext,Sensor.TYPE_PRESSURE))
+            {
+                sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+                sensor = sensorManager?.getDefaultSensor(Sensor.TYPE_PRESSURE)
+                sensorManager?.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI)
+            }else{
+                Log.i(tag, "El dispositivo no soporta el sensor de barómetro")
+            }
+        }
+        else{
+            Log.i(tag, "User didn't log in")
+        }
 
         return START_STICKY
     }
@@ -72,21 +76,28 @@ class BarometerService: Service(),SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         sensorManager?.unregisterListener(this)
+        if(SensorChecker.isSupported(applicationContext,Sensor.TYPE_PRESSURE)){
+            runService()
+        }
     }
 
     fun runService() {
-        if (Utils.getEmailFromPreference(applicationContext) != null) {
-            if (SensorChecker.Current.isSupported(applicationContext, Sensor.TYPE_PRESSURE)) {
-                scheduler = applicationContext.getSystemService (Context.ALARM_SERVICE) as AlarmManager
+        try{
+            if (Utils.getEmailFromPreference(applicationContext) != null) {
+                if (SensorChecker.Current.isSupported(applicationContext, Sensor.TYPE_PRESSURE)) {
+                    scheduler = applicationContext.getSystemService (Context.ALARM_SERVICE) as AlarmManager
 
-                val barometerService = Intent(applicationContext, BarometerService::class.java)
-                val pendingIntent:PendingIntent = PendingIntent . getService (applicationContext, 0, barometerService, PendingIntent.FLAG_UPDATE_CURRENT)
+                    val barometerService = Intent(applicationContext, BarometerService::class.java)
+                    val pendingIntent:PendingIntent = PendingIntent . getService (applicationContext, 0, barometerService, PendingIntent.FLAG_UPDATE_CURRENT)
 
-                scheduler?.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), AlarmManager.INTERVAL_HALF_HOUR, pendingIntent);
-            } else {
-                Log.i(tag, "El dispositivo no soporta el sensor de barómetro");
+                    scheduler?.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+                } else {
+                    Log.i(tag, "El dispositivo no soporta el sensor de barómetro")
+                }
             }
-
+        }
+        catch (ex:Exception){
+            Log.e(tag,ex.message)
         }
     }
 }
