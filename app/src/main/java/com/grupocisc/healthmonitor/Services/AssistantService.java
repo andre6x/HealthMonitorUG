@@ -91,8 +91,8 @@ public class AssistantService extends Service {
             }
         };
 
-        //_timer.scheduleAtFixedRate(_timerTask,0,2000*60*60); //se ejecuta cada 2 horas
-        _timer.scheduleAtFixedRate(_timerTask,0,2000*60); //se ejecuta cada 2 minuto
+        _timer.scheduleAtFixedRate(_timerTask,0,2000*60*60); //se ejecuta cada 2 horas
+        //_timer.scheduleAtFixedRate(_timerTask,0,2000*60); //se ejecuta cada 2 minuto
         WakeLocker.Current.release();
 
         return START_STICKY;
@@ -103,7 +103,7 @@ public class AssistantService extends Service {
         if(Utils.getEmailFromPreference(getApplicationContext()) != null)
         {
             int currentHour = getHours();
-            if(currentHour <8 || currentHour>22)
+            if(currentHour <8 || currentHour>18)
             {
                 Log.i(TAG,"The service is not available, it's "+currentHour+" hours");
             }

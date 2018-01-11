@@ -21,7 +21,7 @@ import com.grupocisc.healthmonitor.R
  */
 class NotificationHelper {
     companion object Current{
-        @RequiresApi(Build.VERSION_CODES.O)
+
         fun <T> showNotification(ctx:Context, activity:Class<T>, notificationId:Int, icon:Int, channelId:String, title:String, message:String){
 
             val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -40,21 +40,6 @@ class NotificationHelper {
                 notificationManager.createNotificationChannel(mChannel)
             }
 
-
-//            val builder = NotificationCompat.Builder(ctx, channelId)
-//                    .setSmallIcon(R.mipmap.ic_launcher)
-//                    .setContentTitle(title)
-//                    .setContentText(message)
-//
-//            val resultIntent = Intent(ctx, MainActivity::class.java)
-//            val stackBuilder = TaskStackBuilder.create(ctx)
-//            stackBuilder.addParentStack(MainActivity::class.java)
-//            stackBuilder.addNextIntent(resultIntent)
-//            val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-//
-//            builder.setContentIntent(resultPendingIntent)
-//
-//            notificationManager.notify(notificationId, builder.build())
             val resultIntent =Intent(ctx,activity)
 
             val resultPendingIntent = PendingIntent.getActivity(ctx,0,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT)
@@ -69,11 +54,9 @@ class NotificationHelper {
                     .setLights(Color.RED,1500,1500)
                     .setContentIntent(resultPendingIntent)
 
-            //val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(notificationId,notificationBuilder.build())
         }
 
-        @RequiresApi(Build.VERSION_CODES.O)
         fun showNotification(ctx: Context, notificationId: Int, icon:Int, channelId: String, title: String, message: String) {
 
             val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -91,6 +74,7 @@ class NotificationHelper {
                 mChannel.setShowBadge(false)
                 notificationManager.createNotificationChannel(mChannel)
             }
+
             val notificationBuilder = NotificationCompat.Builder(ctx, channelId)
                     .setSmallIcon(icon)
                     .setContentTitle(title)
@@ -99,9 +83,7 @@ class NotificationHelper {
                     .setAutoCancel(true)
                     .setVibrate(longArrayOf(300, 300, 300, 300, 300))
                     .setLights(Color.RED, 1500, 1500)
-            //.setContentIntent(resultPendingIntent)
 
-            //val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(notificationId, notificationBuilder.build())
         }
     }
