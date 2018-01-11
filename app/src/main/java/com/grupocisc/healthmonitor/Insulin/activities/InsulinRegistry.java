@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Insulin.TextValidator;
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.EInsulin;
 import com.grupocisc.healthmonitor.entities.IRegCrtPacient;
@@ -99,6 +100,11 @@ public class InsulinRegistry extends AppCompatActivity implements DatePickerDial
     public void onCreate(Bundle savedInstanceState) {
         String Method ="[onCreate]";
         Log.i(TAG, Method +  "Init..."  );
+
+        if(getIntent()!=null)
+        {
+            NotificationHelper.Current.cancelNotificationFromActivity(this,getIntent().getExtras());
+        }
 
         // TRANSITIONS
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){

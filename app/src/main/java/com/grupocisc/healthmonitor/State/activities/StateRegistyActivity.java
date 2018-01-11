@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.adapters.SMainPagerAdapter;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IState;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -84,6 +85,12 @@ public class StateRegistyActivity extends AppCompatActivity implements DatePicke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getIntent()!=null)
+        {
+            NotificationHelper.Current.cancelNotificationFromActivity(this,getIntent().getExtras());
+        }
+
         // TRANSITIONS
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             TransitionInflater inflater = TransitionInflater.from(this);

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.Utils;
 
 public class PulseActivityAuto extends AppCompatActivity {
@@ -33,6 +34,11 @@ public class PulseActivityAuto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getIntent()!=null)
+        {
+            NotificationHelper.Current.cancelNotificationFromActivity(this,getIntent().getExtras());
+        }
+
         setContentView(R.layout.activity_pulse_auto);
 
         Utils.SetStyleToolbarLogo(this);
