@@ -22,6 +22,7 @@ import com.grupocisc.healthmonitor.Asthma.adapters.SymptomGridAdapter;
 import com.grupocisc.healthmonitor.Complementary.funtion.TextValidator;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.adapters.SMainPagerAdapter;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IAsthma;
 
@@ -81,6 +82,12 @@ public class AsthmaRegistry extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getIntent()!=null)
+        {
+            NotificationHelper.Current.cancelNotificationFromActivity(this,getIntent().getExtras());
+        }
+
         // TRANSITIONS
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             TransitionInflater inflater = TransitionInflater.from(this);

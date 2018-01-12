@@ -26,6 +26,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
 
     <application
         android:name=".HealthMonitorApplicattion"
@@ -327,7 +328,7 @@
             android:name="io.fabric.ApiKey"
             android:value="b63409f7a1bc14eb43fb8cec4ce104d1b8793b61" />
 
-        <receiver android:name=".Services.NetworkStateReceiver"
+        <receiver android:name=".Services.OnBootReceiver"
             android:enabled="true">
             <intent-filter>
                 <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
@@ -339,9 +340,6 @@
             android:name=".Services.AssistantService"
             android:exported="true"
             android:enabled="true">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
-            <!--</intent-filter>-->
         </service>
 
         <receiver android:name=".Services.RestartServiceReceiver"
@@ -350,6 +348,10 @@
                 <action android:name="RestartService"/>
             </intent-filter>
         </receiver>
+
+        <service android:name=".Services.BarometerService"
+            android:enabled="true"
+            android:exported="true"/>
 
     </application>
 

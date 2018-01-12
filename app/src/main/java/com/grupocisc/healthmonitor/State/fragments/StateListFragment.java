@@ -2,7 +2,6 @@ package com.grupocisc.healthmonitor.State.fragments;
 
 
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,23 +15,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.grupocisc.healthmonitor.Pressure.activities.PressureRegistyActivity;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
 import com.grupocisc.healthmonitor.State.activities.StateRegistyActivity;
 import com.grupocisc.healthmonitor.State.adapters.StateListAdapter;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Utils.Utils;
-import com.grupocisc.healthmonitor.entities.IConsulState;
 import com.grupocisc.healthmonitor.entities.IState;
 
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class StateListFragment extends Fragment implements StateListAdapter.MyViewHolder.ClickListener {
 

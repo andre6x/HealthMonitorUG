@@ -87,6 +87,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Ritmo Cardíaco"
                             android:inputType="numberDecimal"
+                            android:maxLength="3"
                             android:textSize="16sp" />
                     </android.support.design.widget.TextInputLayout>
 
@@ -120,6 +121,7 @@
                             android:layout_width="125dp"
                             android:layout_height="wrap_content"
                             android:hint="P.A Sistólica"
+                            android:maxLength="3"
                             android:inputType="numberDecimal"
                             android:textSize="14sp" />
 
@@ -147,6 +149,7 @@
                             android:layout_width="125dp"
                             android:layout_height="wrap_content"
                             android:hint="P.A Diastólica"
+                            android:maxLength="3"
                             android:inputType="numberDecimal"
                             android:textSize="14sp" />
 

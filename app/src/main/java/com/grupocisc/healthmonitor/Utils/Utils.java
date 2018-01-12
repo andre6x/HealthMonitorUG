@@ -17,7 +17,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,7 +33,6 @@ import android.widget.Toast;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
 import com.grupocisc.healthmonitor.R;
-import com.grupocisc.healthmonitor.Services.AlarmGetAllMedicineReceiver;
 import com.grupocisc.healthmonitor.Services.AlarmGetAllMedicineService;
 import com.grupocisc.healthmonitor.entities.EAlarmDetails;
 import com.grupocisc.healthmonitor.entities.EAlarmReminderTime;
@@ -4974,8 +4972,15 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
     }
 
     public static <T> T getLastRecordWithDate(Dao<T,Integer> data, String tableName) throws java.sql.SQLException {
-        String query ="SELECT fecha, id FROM "+tableName+" ORDER By id DESC LIMIT 1";
+        String query ="SELECT fecha FROM "+tableName+" ORDER By date(fecha) DESC LIMIT 1";
         GenericRawResults<T> rawResults = data.queryRaw(query, data.getRawRowMapper());
+
+        return rawResults.getFirstResult();
+    }
+
+    public static <T> T getLastRecord(Dao<T,Integer> data,String tableName) throws java.sql.SQLException {
+        String query = "SELECT * FROM "+tableName+" ORDER By date(fecha) DESC LIMIT 1";
+        GenericRawResults<T> rawResults = data.queryRaw(query,data.getRawRowMapper());
         return rawResults.getFirstResult();
     }
 }
