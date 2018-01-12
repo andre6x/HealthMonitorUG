@@ -2,7 +2,6 @@ package com.grupocisc.healthmonitor.Services;
 
 import android.app.Service;
 import android.content.Intent;
-import android.hardware.Sensor;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -15,7 +14,6 @@ import com.grupocisc.healthmonitor.Complementary.activities.ComplHba1cRegistyAct
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseRegistyActivity;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Insulin.activities.InsulinRegistry;
-import com.grupocisc.healthmonitor.Pulse.activities.PulseActivity;
 import com.grupocisc.healthmonitor.Pulse.activities.PulseActivityAuto;
 import com.grupocisc.healthmonitor.Pulse.activities.PulseRegistyActivity;
 import com.grupocisc.healthmonitor.R;
@@ -75,7 +73,7 @@ public class AssistantService extends Service {
 
         super.onTaskRemoved(rootIntent);
     }
-    Integer period = 2000*60;
+    Integer period = 2000*60*60;
 
 
     @Override
@@ -90,16 +88,12 @@ public class AssistantService extends Service {
             @Override
             public void run() {
                 Log.i(TAG,"Executing timer task");
-                RunService();
-
-                if(Utils.getEmailFromPreference(getApplicationContext())!=null){
-                    period=2000*60*60; //se ejecuta cada 2 horas
-                    return;
-                }
-                else {
-                    period=2000*60; //se ejecuta cada 2 minutos
-                    return;
-                }
+                //if(Utils.getEmailFromPreference(getApplicationContext())!=null){
+                    RunService();
+                //}
+                //else {
+                //    stopSelf();
+                //}
             }
         };
 
@@ -115,7 +109,7 @@ public class AssistantService extends Service {
         if(Utils.getEmailFromPreference(getApplicationContext()) != null)
         {
             int currentHour = getHours();
-            if(currentHour <8 || currentHour>18)
+            if(currentHour <8 || currentHour>20)
             {
                 Log.i(TAG,"The service is not available, it's "+currentHour+" hours");
             }
@@ -244,21 +238,21 @@ public class AssistantService extends Service {
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    if(SensorChecker.Current.isSupported(getApplicationContext(),Sensor.TYPE_HEART_BEAT)){
+                    //if(SensorChecker.Current.isSupported(getApplicationContext(),Sensor.TYPE_HEART_BEAT)){
                         NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class, PulseActivityAuto.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su pulso en "+days+" "+getCorrectWord(days),"Registro manual","Registro automático");
-                    }
-                    else {
-                        NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su pulso en "+days+" "+getCorrectWord(days));
-                    }
+                    //}
+                    //else {
+                    //    NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su pulso en "+days+" "+getCorrectWord(days));
+                    //}
                 }
             }
             else {
-                if(SensorChecker.Current.isSupported(getApplicationContext(),Sensor.TYPE_HEART_BEAT)){
+                //if(SensorChecker.Current.isSupported(getApplicationContext(),Sensor.TYPE_HEART_BEAT)){
                     NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class, PulseActivityAuto.class,PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID, Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su pulso","Registro manual","Registro automático");
-                }
-                else {
-                    NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class,PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID, Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su pulso");
-                }
+                //}
+                //else {
+                //    NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class,PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID, Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su pulso");
+                //}
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -16,6 +16,7 @@ import com.grupocisc.healthmonitor.Utils.NotificationHelper
 import com.grupocisc.healthmonitor.Utils.SensorChecker
 import com.grupocisc.healthmonitor.Utils.ServiceChecker
 import com.grupocisc.healthmonitor.Utils.Utils
+import kotlin.math.log
 
 /**
  * Created by alex on 1/8/18.

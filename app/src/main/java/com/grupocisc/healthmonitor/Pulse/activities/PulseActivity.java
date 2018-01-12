@@ -92,13 +92,13 @@ public class PulseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(SensorChecker.Current.isSupported(v.getContext(),Sensor.TYPE_HEART_BEAT))
-                {
+                //if(SensorChecker.Current.isSupported(v.getContext(),Sensor.TYPE_HEART_BEAT))
+                //{
                     callActivityRegisterAuto();
-                }
-                else {
-                  Toast.makeText(v.getContext(),"Este dispositivo no tiene incorporado senor de pulso",Toast.LENGTH_SHORT).show();
-                }
+                //}
+                //else {
+                //  Toast.makeText(v.getContext(),"Este dispositivo no tiene incorporado senor de pulso",Toast.LENGTH_SHORT).show();
+                //}
             }
         });
 
