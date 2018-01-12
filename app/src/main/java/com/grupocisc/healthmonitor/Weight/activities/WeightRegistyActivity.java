@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Pulse.activities.PulseRegistyActivity;
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IRegCrtPacient;
@@ -81,6 +83,12 @@ public class WeightRegistyActivity extends AppCompatActivity implements DatePick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getIntent()!=null)
+        {
+            NotificationHelper.Current.cancelNotificationFromActivity(this,getIntent().getExtras());
+        }
+
         // TRANSITIONS
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
             TransitionInflater inflater = TransitionInflater.from( this );

@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Insulin.TextValidator;
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IColesterol;
 import com.grupocisc.healthmonitor.entities.IRegCrtPacient;
@@ -71,6 +72,11 @@ public class ComplCholesterolRegistyActivity extends AppCompatActivity implement
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getIntent()!=null)
+        {
+            NotificationHelper.Current.cancelNotificationFromActivity(this,getIntent().getExtras());
+        }
 
         // TRANSITIONS
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){

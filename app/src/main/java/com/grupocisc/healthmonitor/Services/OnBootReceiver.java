@@ -1,21 +1,11 @@
 package com.grupocisc.healthmonitor.Services;
 
-import android.app.ActivityManager;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.hardware.Sensor;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.support.v4.app.AlarmManagerCompat;
 import android.util.Log;
 
-import com.grupocisc.healthmonitor.Utils.SensorChecker;
 import com.grupocisc.healthmonitor.Utils.ServiceChecker;
-import com.grupocisc.healthmonitor.Utils.Utils;
 
 /**
  * Created by alex on 12/8/17.

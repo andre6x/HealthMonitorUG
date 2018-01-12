@@ -296,7 +296,7 @@
     <string name="txt_actulizado">Se ha actualizado con éxito! </string>
     <string name="txt_guardado">Se ha guardado con éxito! </string>
     <string name="title_activity_about">AboutActivity</string>
- <!--INI_MPO-->
+    <!--INI_MPO-->
     <integer name="int_setOffscreenPageLimit">4</integer>
 
 
@@ -337,7 +337,6 @@
 
     <string name="msg_DoseValueMoreThan">Valor incorrecto de dosis.</string> <!--Valor de DOSIS incorrecto.-->
     <string name="msg_DoseValueLessThan">Valor incorrecto de dosis.</string> <!--Valor de DOSIS incorrecto.-->
-
 
 
     <string name="txt_Medicines">MEDICINAS</string>
@@ -415,81 +414,81 @@
 
     <string name="lblSpinner_ReminderTypes">Tiempos de Recordatorio</string>
     <string-array name="array_ReminderTypesCode">
-        <item idType="1" >F</item>
-        <item idType="2" >I</item>
+        <item idType="1">F</item>
+        <item idType="2">I</item>
     </string-array>
     <string-array name="array_ReminderTypesDesc">
-        <item idType="F" >Frecuencia</item>
-        <item idType="I" >Intervalos</item>
+        <item idType="F">Frecuencia</item>
+        <item idType="I">Intervalos</item>
     </string-array>
 
     <string name="lblSpinner_ReminderTimes">Tiempos de Recordatorio</string>
     <string-array name="array_ReminderTimesGeneral">
-        <item idType="F" idTime="1" >Una vez al día</item>
-        <item idType="F" idTime="2" >Dos veces al día</item>
-        <item idType="F" idTime="3" >3 veces al día</item>
-        <item idType="F" idTime="4" >4 veces al día</item>
-        <item idType="F" idTime="5" >5 veces al día</item>
-        <item idType="F" idTime="6" >6 veces al día</item>
-        <item idType="F" idTime="7" >7 veces al día</item>
-        <item idType="F" idTime="8" >8 veces al día</item>
-        <item idType="F" idTime="9" >9 veces al día</item>
-        <item idType="F" idTime="10" >10 veces al día</item>
-        <item idType="F" idTime="11" >11 veces al día</item>
-        <item idType="F" idTime="12" >12 veces al día</item>
-        <item idType="I" idTime="1" >Cada 12 horas</item>
-        <item idType="I" idTime="2" >Cada 8 horas</item>
-        <item idType="I" idTime="3" >Cada 6 horas</item>
-        <item idType="I" idTime="4" >Cada 4 horas</item>
-        <item idType="I" idTime="5" >Cada 3 horas</item>
-        <item idType="I" idTime="6" >Cada 2 horas</item>
-        <item idType="I" idTime="7" >Cada hora</item>
+        <item idTime="1" idType="F">Una vez al día</item>
+        <item idTime="2" idType="F">Dos veces al día</item>
+        <item idTime="3" idType="F">3 veces al día</item>
+        <item idTime="4" idType="F">4 veces al día</item>
+        <item idTime="5" idType="F">5 veces al día</item>
+        <item idTime="6" idType="F">6 veces al día</item>
+        <item idTime="7" idType="F">7 veces al día</item>
+        <item idTime="8" idType="F">8 veces al día</item>
+        <item idTime="9" idType="F">9 veces al día</item>
+        <item idTime="10" idType="F">10 veces al día</item>
+        <item idTime="11" idType="F">11 veces al día</item>
+        <item idTime="12" idType="F">12 veces al día</item>
+        <item idTime="1" idType="I">Cada 12 horas</item>
+        <item idTime="2" idType="I">Cada 8 horas</item>
+        <item idTime="3" idType="I">Cada 6 horas</item>
+        <item idTime="4" idType="I">Cada 4 horas</item>
+        <item idTime="5" idType="I">Cada 3 horas</item>
+        <item idTime="6" idType="I">Cada 2 horas</item>
+        <item idTime="7" idType="I">Cada hora</item>
     </string-array>
     <string-array name="array_ReminderTimesFCode">
-        <item idType="F" idTime="1" >1</item>
-        <item idType="F" idTime="2" >2</item>
-        <item idType="F" idTime="3" >3</item>
-        <item idType="F" idTime="4" >4</item>
-        <item idType="F" idTime="5" >5</item>
-        <item idType="F" idTime="6" >6</item>
-        <item idType="F" idTime="7" >7</item>
-        <item idType="F" idTime="8" >8</item>
-        <item idType="F" idTime="9" >9</item>
-        <item idType="F" idTime="10" >10</item>
-        <item idType="F" idTime="11" >11</item>
-        <item idType="F" idTime="12" >12</item>
+        <item idTime="1" idType="F">1</item>
+        <item idTime="2" idType="F">2</item>
+        <item idTime="3" idType="F">3</item>
+        <item idTime="4" idType="F">4</item>
+        <item idTime="5" idType="F">5</item>
+        <item idTime="6" idType="F">6</item>
+        <item idTime="7" idType="F">7</item>
+        <item idTime="8" idType="F">8</item>
+        <item idTime="9" idType="F">9</item>
+        <item idTime="10" idType="F">10</item>
+        <item idTime="11" idType="F">11</item>
+        <item idTime="12" idType="F">12</item>
     </string-array>
     <string-array name="array_ReminderTimesFDesc">
-        <item idType="F" idTime="1" >Una vez al día</item>
-        <item idType="F" idTime="2" >Dos veces al día</item>
-        <item idType="F" idTime="3" >3 veces al día</item>
-        <item idType="F" idTime="4" >4 veces al día</item>
-        <item idType="F" idTime="5" >5 veces al día</item>
-        <item idType="F" idTime="6" >6 veces al día</item>
-        <item idType="F" idTime="7" >7 veces al día</item>
-        <item idType="F" idTime="8" >8 veces al día</item>
-        <item idType="F" idTime="9" >9 veces al día</item>
-        <item idType="F" idTime="10" >10 veces al día</item>
-        <item idType="F" idTime="11" >11 veces al día</item>
-        <item idType="F" idTime="12" >12 veces al día</item>
+        <item idTime="1" idType="F">Una vez al día</item>
+        <item idTime="2" idType="F">Dos veces al día</item>
+        <item idTime="3" idType="F">3 veces al día</item>
+        <item idTime="4" idType="F">4 veces al día</item>
+        <item idTime="5" idType="F">5 veces al día</item>
+        <item idTime="6" idType="F">6 veces al día</item>
+        <item idTime="7" idType="F">7 veces al día</item>
+        <item idTime="8" idType="F">8 veces al día</item>
+        <item idTime="9" idType="F">9 veces al día</item>
+        <item idTime="10" idType="F">10 veces al día</item>
+        <item idTime="11" idType="F">11 veces al día</item>
+        <item idTime="12" idType="F">12 veces al día</item>
     </string-array>
     <string-array name="array_ReminderTimesICode">
-        <item idType="I" idTime="1" >1</item>
-        <item idType="I" idTime="2" >2</item>
-        <item idType="I" idTime="3" >3</item>
-        <item idType="I" idTime="4" >4</item>
-        <item idType="I" idTime="5" >5</item>
-        <item idType="I" idTime="6" >6</item>
-        <item idType="I" idTime="7" >7</item>
+        <item idTime="1" idType="I">1</item>
+        <item idTime="2" idType="I">2</item>
+        <item idTime="3" idType="I">3</item>
+        <item idTime="4" idType="I">4</item>
+        <item idTime="5" idType="I">5</item>
+        <item idTime="6" idType="I">6</item>
+        <item idTime="7" idType="I">7</item>
     </string-array>
     <string-array name="array_ReminderTimesIDesc">
-        <item idType="I" idTime="1" >Cada 12 horas</item>
-        <item idType="I" idTime="2" >Cada 8 horas</item>
-        <item idType="I" idTime="3" >Cada 6 horas</item>
-        <item idType="I" idTime="4" >Cada 4 horas</item>
-        <item idType="I" idTime="5" >Cada 3 horas</item>
-        <item idType="I" idTime="6" >Cada 2 horas</item>
-        <item idType="I" idTime="7" >Cada hora</item>
+        <item idTime="1" idType="I">Cada 12 horas</item>
+        <item idTime="2" idType="I">Cada 8 horas</item>
+        <item idTime="3" idType="I">Cada 6 horas</item>
+        <item idTime="4" idType="I">Cada 4 horas</item>
+        <item idTime="5" idType="I">Cada 3 horas</item>
+        <item idTime="6" idType="I">Cada 2 horas</item>
+        <item idTime="7" idType="I">Cada hora</item>
     </string-array>
 
 

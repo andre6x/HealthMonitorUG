@@ -11,20 +11,19 @@ import android.util.Log;
 import com.grupocisc.healthmonitor.Asthma.activities.AsthmaRegistry;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplCholesterolRegistyActivity;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplHba1cRegistyActivity;
-import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseRegistyActivity;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Insulin.activities.InsulinRegistry;
-import com.grupocisc.healthmonitor.Pulse.activities.PulseActivity;
+import com.grupocisc.healthmonitor.Pulse.activities.PulseActivityAuto;
+import com.grupocisc.healthmonitor.Pulse.activities.PulseRegistyActivity;
 import com.grupocisc.healthmonitor.R;
-import com.grupocisc.healthmonitor.State.activities.StateActivity;
 import com.grupocisc.healthmonitor.State.activities.StateRegistyActivity;
 import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.grupocisc.healthmonitor.Utils.NotificationHelper;
+import com.grupocisc.healthmonitor.Utils.SensorChecker;
 import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Utils.WakeLocker;
-import com.grupocisc.healthmonitor.Weight.activities.WeightActivity;
 import com.grupocisc.healthmonitor.Weight.activities.WeightRegistyActivity;
 import com.grupocisc.healthmonitor.entities.EInsulin;
 import com.grupocisc.healthmonitor.entities.IAsthma;
@@ -74,6 +73,7 @@ public class AssistantService extends Service {
 
         super.onTaskRemoved(rootIntent);
     }
+    Integer period = 2000*60*60;
 
 
     @Override
@@ -83,16 +83,22 @@ public class AssistantService extends Service {
         WakeLocker.Current.acquire(getApplicationContext());
 
         Timer _timer = new Timer();
+
         _timerTask = new TimerTask() {
             @Override
             public void run() {
                 Log.i(TAG,"Executing timer task");
-                RunService();
+                //if(Utils.getEmailFromPreference(getApplicationContext())!=null){
+                    RunService();
+                //}
+                //else {
+                //    stopSelf();
+                //}
             }
         };
 
-        //_timer.scheduleAtFixedRate(_timerTask,0,2000*60*60); //se ejecuta cada 2 horas
-        _timer.scheduleAtFixedRate(_timerTask,0,2000*60); //se ejecuta cada 2 minuto
+        _timer.scheduleAtFixedRate(_timerTask,0,period);
+        //_timer.scheduleAtFixedRate(_timerTask,0,2000*60); //se ejecuta cada 2 minutos
         WakeLocker.Current.release();
 
         return START_STICKY;
@@ -103,7 +109,7 @@ public class AssistantService extends Service {
         if(Utils.getEmailFromPreference(getApplicationContext()) != null)
         {
             int currentHour = getHours();
-            if(currentHour <8 || currentHour>22)
+            if(currentHour <8 || currentHour>20)
             {
                 Log.i(TAG,"The service is not available, it's "+currentHour+" hours");
             }
@@ -200,7 +206,7 @@ public class AssistantService extends Service {
                 String dateString = data.getFecha()!=null ? data.getFecha():"";
                 int days = getDays(dateString);
 
-                if(days<3){
+                if(days<=3){
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
@@ -228,15 +234,25 @@ public class AssistantService extends Service {
                 String dateString = data.getFecha()!=null ? data.getFecha():"";
                 int days = getDays(dateString);
 
-                if(days<2){
+                if(days<=2){
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
-                    NotificationHelper.Current.showNotification(getApplicationContext(), PulseActivity.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su pulso en "+days+" "+getCorrectWord(days));
+                    //if(SensorChecker.Current.isSupported(getApplicationContext(),Sensor.TYPE_HEART_BEAT)){
+                        NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class, PulseActivityAuto.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su pulso en "+days+" "+getCorrectWord(days),"Registro manual","Registro automático");
+                    //}
+                    //else {
+                    //    NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"No ha ingresado su pulso en "+days+" "+getCorrectWord(days));
+                    //}
                 }
             }
             else {
-                NotificationHelper.Current.showNotification(getApplicationContext(), PulseActivity.class, PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID,Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su pulso");
+                //if(SensorChecker.Current.isSupported(getApplicationContext(),Sensor.TYPE_HEART_BEAT)){
+                    NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class, PulseActivityAuto.class,PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID, Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su pulso","Registro manual","Registro automático");
+                //}
+                //else {
+                //    NotificationHelper.Current.showNotification(getApplicationContext(), PulseRegistyActivity.class,PULSE_NOTIFICATION_ID,R.mipmap.icon_pulse, PULSE_NOTIFICATION_CHANNEL_ID, Constantes.PULSE_NOTIFICATION_TITLE,"Aún no ha ingresado su pulso");
+                //}
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -256,7 +272,7 @@ public class AssistantService extends Service {
                 String dateString = data.getFecha()!=null ? data.getFecha():"";
                 int days = getDays(dateString);
 
-                if(days<1){
+                if(days<=1){
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
@@ -284,7 +300,7 @@ public class AssistantService extends Service {
                 String dateString = data.getFecha()!=null ? data.getFecha():"";
                 int days = getDays(dateString);
 
-                if(days<4){
+                if(days<=1){
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
@@ -312,7 +328,7 @@ public class AssistantService extends Service {
                 String dateString = data.getFecha()!=null ? data.getFecha():"";
                 int days = getDays(dateString);
 
-                if(days<4){
+                if(days<=2){
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
@@ -341,7 +357,7 @@ public class AssistantService extends Service {
                 String dateString = data.getFecha()!=null ? data.getFecha():"";
                 int days = getDays(dateString);
 
-                if(days<1){
+                if(days<=1){
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
@@ -371,7 +387,7 @@ public class AssistantService extends Service {
                 String dateString = data.getFecha()!=null ? data.getFecha():"";
                 int days = getDays(dateString);
 
-                if(days<2){
+                if(days<=2){
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {
@@ -399,7 +415,7 @@ public class AssistantService extends Service {
                 String dateString = data.getFecha()!=null ? data.getFecha():"";
                 int days = getDays(dateString);
 
-                if(days<1){
+                if(days<=1){
                     Log.i(TAG,"Last record on: "+dateString);
                 }
                 else {

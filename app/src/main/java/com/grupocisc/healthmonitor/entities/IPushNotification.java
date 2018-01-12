@@ -2,6 +2,7 @@ package com.grupocisc.healthmonitor.entities;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Getter;
@@ -61,4 +62,15 @@ public interface IPushNotification {
 
     }
 
+
+
+    class Recomendation implements Serializable{
+        @Getter
+        @Setter
+        String content;
+
+        @Getter
+        @Setter
+        int id;
+    }
 }
