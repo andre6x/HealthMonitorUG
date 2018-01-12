@@ -142,7 +142,6 @@ public class MyGcmListenerService extends GcmListenerService {
 
 
         //setear fecha
-        //String date = ""+day+"/"+(++month)+"/"+year;
          String date = ""+day+"/"+  seteaMes(month+1)  +"/"+year;
         return date;
     }
