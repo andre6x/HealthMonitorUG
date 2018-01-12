@@ -139,10 +139,21 @@ public class MyGcmListenerService extends GcmListenerService {
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
+
+
         //setear fecha
-        String date = ""+day+"/"+(++month)+"/"+year;
+         String date = ""+day+"/"+  seteaMes(month+1)  +"/"+year;
         return date;
     }
+
+    private static String seteaMes(int m){
+         String mes = String.valueOf(m);
+         if(mes.length()==1){
+             mes = "0" + mes;
+         }
+         return mes;
+    }
+
     private static String inicializarHora(){
         int  hour, minute;
         //obtener fechay hroa de Calendar
