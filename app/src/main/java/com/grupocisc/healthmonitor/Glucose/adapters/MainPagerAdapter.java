@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.grupocisc.healthmonitor.Glucose.fragments.GlucoseGraphicFragment;
 import com.grupocisc.healthmonitor.Glucose.fragments.GlucoseListFragment;
-import com.grupocisc.healthmonitor.Glucose.fragments.GlucoseRecomendationsFragment;
+import com.grupocisc.healthmonitor.Glucose.fragments.GlucoseRecommendationsFragment;
 
 
 /**
@@ -43,7 +43,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
             return tab2;
         }
         else {
-            GlucoseRecomendationsFragment tab3 = new GlucoseRecomendationsFragment();
+            GlucoseRecommendationsFragment tab3 = new GlucoseRecommendationsFragment();
             return tab3;
         }
 

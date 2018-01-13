@@ -165,5 +165,9 @@ class NotificationHelper {
                 }
             }
         }
+
+        fun cancelAllNotifications(ctx:Context):Unit{
+            NotificationManagerCompat.from(ctx).cancelAll()
+        }
     }
 }

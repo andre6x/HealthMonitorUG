@@ -17,18 +17,18 @@ import java.util.List;
  * Created by alex on 1/11/18.
  */
 
-public class GlucoseRecomendationsAdapter extends RecyclerView.Adapter<GlucoseRecomendationsAdapter.MyViewHolder> {
+public class GlucoseRecommendationsAdapter extends RecyclerView.Adapter<GlucoseRecommendationsAdapter.MyViewHolder> {
 
     private static final String TAG = "GlucoseRecomAdapter";
     private RecyclerViewAnimator mAnimator;
     private boolean  isAnimRebound;
     private MyViewHolder.ClickListener clickListener;
     public Context context;
-    private List<IPushNotification.Recomendation> rows;
+    private List<IPushNotification.Recommendation> rows;
     private LayoutInflater mLayoutInflater;
 
 
-    public GlucoseRecomendationsAdapter(Context ctx, List<IPushNotification.Recomendation> rawRecomendations, GlucoseRecomendationsAdapter.MyViewHolder.ClickListener clickListener,RecyclerView recyclerView, boolean isAnimRebound)
+    public GlucoseRecommendationsAdapter(Context ctx, List<IPushNotification.Recommendation> rawRecomendations, GlucoseRecommendationsAdapter.MyViewHolder.ClickListener clickListener, RecyclerView recyclerView, boolean isAnimRebound)
     {
         this.context = ctx;
         this.rows = rawRecomendations;
@@ -42,7 +42,7 @@ public class GlucoseRecomendationsAdapter extends RecyclerView.Adapter<GlucoseRe
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         v = mLayoutInflater.inflate(R.layout.notification_card_adapter, parent, false);
-        GlucoseRecomendationsAdapter.MyViewHolder mvh = new GlucoseRecomendationsAdapter.MyViewHolder(v, clickListener);
+        GlucoseRecommendationsAdapter.MyViewHolder mvh = new GlucoseRecommendationsAdapter.MyViewHolder(v, clickListener);
         /*set Animation Rebound*/
         setAnimReboundonCreateViewHolder(v);
         return mvh ;
@@ -66,9 +66,9 @@ public class GlucoseRecomendationsAdapter extends RecyclerView.Adapter<GlucoseRe
 
         private CardView main_card;
         private TextView content;
-        private GlucoseRecomendationsAdapter.MyViewHolder.ClickListener listener;
+        private GlucoseRecommendationsAdapter.MyViewHolder.ClickListener listener;
 
-        public MyViewHolder(View v , GlucoseRecomendationsAdapter.MyViewHolder.ClickListener listener) {
+        public MyViewHolder(View v , GlucoseRecommendationsAdapter.MyViewHolder.ClickListener listener) {
             super(v);
 
             main_card = (CardView) v.findViewById(R.id.main_card);
@@ -100,7 +100,7 @@ public class GlucoseRecomendationsAdapter extends RecyclerView.Adapter<GlucoseRe
     }
 
     //actulizar informacion del adapter
-    public void updateData(List<IPushNotification.Recomendation> rowsRecomendations) {
+    public void updateData(List<IPushNotification.Recommendation> rowsRecomendations) {
         Log.e(TAG,"updateData");
         rows.clear();
         rows.addAll(rowsRecomendations);
