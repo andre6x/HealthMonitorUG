@@ -106,7 +106,7 @@ public class ComplActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayShowTitleEnabled(false); //desactivar title
         toolbar.setNavigationIcon(R.mipmap.back); //buton back tollbar
         getSupportActionBar().setTitle("Exámenes complementarios"); //titulo tollbar
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white)); //color tollbar title
+        toolbar.setTitleTextColor(getResources().getColor(R.color.black)); //color tollbar title
 
     }
 
