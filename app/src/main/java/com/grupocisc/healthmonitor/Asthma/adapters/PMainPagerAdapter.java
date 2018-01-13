@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.grupocisc.healthmonitor.Asthma.fragments.PickFlowGraphicFragment;
 import com.grupocisc.healthmonitor.Asthma.fragments.PickFlowListFragment;
+import com.grupocisc.healthmonitor.Asthma.fragments.PickFlowRecommendationsFragment;
 
 
 public class PMainPagerAdapter extends FragmentStatePagerAdapter {
@@ -35,14 +36,14 @@ public class PMainPagerAdapter extends FragmentStatePagerAdapter {
             PickFlowListFragment tab1 = new PickFlowListFragment();
             return tab1;
         }
-       /* else  if(position==1)           // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position ==1)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-            PressureRecomendFragment tab2 = new PressureRecomendFragment();
-            return tab2;
-        }*/
-        else {
             PickFlowGraphicFragment tab2 = new PickFlowGraphicFragment();
             return tab2;
+        }
+        else {
+            PickFlowRecommendationsFragment tab3 = new PickFlowRecommendationsFragment();
+            return tab3;
         }
 
     }

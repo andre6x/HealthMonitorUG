@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.grupocisc.healthmonitor.Weight.fragments.WeightgraphicFragment;
 import com.grupocisc.healthmonitor.Weight.fragments.WeightListFragment;
+import com.grupocisc.healthmonitor.Weight.fragments.WeightRecomendationsFragment;
 
 
 public class WMainPagerAdapter extends FragmentStatePagerAdapter {
@@ -27,20 +28,24 @@ public class WMainPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if (position == 0) // if the position is 0 we are returning the First tab
+
+
+        if(position == 0) // if the position is 0 we are returning the First tab
         {
             WeightListFragment tab1 = new WeightListFragment();
             return tab1;
-        } /*else if (position == 1) {
-               WeightImcFragment tab2 = new WeightImcFragment();
-                return tab2;
-        } else if (position == 2) {
-           WeightPesoIdealFragment tab3 = new WeightPesoIdealFragment();
-            return tab3;
-        }*/ else{
-           WeightgraphicFragment tab4 = new WeightgraphicFragment();
+        }
+        else if(position ==1)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        {
+            WeightgraphicFragment tab4 = new WeightgraphicFragment();
             return tab4;
         }
+        else {
+            WeightRecomendationsFragment tab3 = new WeightRecomendationsFragment();
+            return tab3;
+        }
+
+
     }
 
 

@@ -571,10 +571,18 @@ public class PulseGraphicFragment extends Fragment implements LabelledSpinner.On
            if (isVisibleToUser) {
                PulseActivity.principal.setVisibility(View.GONE);
                PulseActivity.menu1.setVisibility(View.GONE);
+               PulseActivity.menu2.setVisibility(View.GONE);
            } else {
                PulseActivity.principal.setVisibility(View.VISIBLE);
                PulseActivity.menu1.setVisibility(View.VISIBLE);
+               PulseActivity.menu2.setVisibility(View.VISIBLE);
            }
+
+           /*if (isVisibleToUser) {
+               PulseActivity.fab.setVisibility(View.GONE);
+           } else {
+               PulseActivity.fab.setVisibility(View.VISIBLE);
+           }*/
        }
    }
 

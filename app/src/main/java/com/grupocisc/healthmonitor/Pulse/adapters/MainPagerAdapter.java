@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.grupocisc.healthmonitor.Pulse.fragments.PulseGraphicFragment;
 import com.grupocisc.healthmonitor.Pulse.fragments.PulseListFragment;
+import com.grupocisc.healthmonitor.Pulse.fragments.PulseRecomendationsFragment;
 
 
 /**
@@ -36,12 +37,15 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
             PulseListFragment tab1 = new PulseListFragment();
             return tab1;
         }
-        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position ==1)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             PulseGraphicFragment tab2 = new PulseGraphicFragment();
             return tab2;
         }
-
+        else {
+            PulseRecomendationsFragment tab3 = new PulseRecomendationsFragment();
+            return tab3;
+        }
 
     }
 
