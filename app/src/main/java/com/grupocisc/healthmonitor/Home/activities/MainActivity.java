@@ -11,9 +11,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -67,7 +70,9 @@ import com.grupocisc.healthmonitor.login.activities.LoginBackPassword;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
@@ -89,13 +94,27 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
-    private BroadcastReceiver _networkStateReceiver; //V3
+    //private BroadcastReceiver _networkStateReceiver; //V3
 
     private String token = "";
 
     private Call<IDoctorVinculado.DoctorVinculado> call_1; //CAMBIO
     private IDoctorVinculado.DoctorVinculado mLoginUser; //CAMBIO															   
     private IPushNotification.InsertNotification insertNotification;
+
+    private String StatusName = "";
+    private int IdStatus = 0;
+
+    private static final String enviadoServer = "false";
+    private static final String operacionI = "I";
+
+    private ImageView iv_est_1;
+    private ImageView iv_est_2;
+    private ImageView iv_est_3;
+    private ImageView iv_est_4;
+    private ImageView iv_est_5;
+
+
 
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
 
@@ -135,14 +154,214 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         String email = Utils.getEmailFromPreference(this) == null ? "" : Utils.getEmailFromPreference(this);
         notificaciones(email);
 
-        //
-        //RegisterNetworkStateReceiver();
+        iv_est_1 = (ImageView) findViewById(R.id.img_est_1);
+        iv_est_2 = (ImageView) findViewById(R.id.img_est_2);
+        iv_est_3 = (ImageView) findViewById(R.id.img_est_3);
+        iv_est_4 = (ImageView) findViewById(R.id.img_est_4);
+        iv_est_5 = (ImageView) findViewById(R.id.img_est_5);
+
+
+
+        Imagenes();
 
         iniciarServicio();
         InitAssitantService();
         InitBarometerReaderService();
 
         showHashKey(this);
+    }
+
+    public void saveDataStateDB(String fecha, String hora, int IdStatus, String StatusName, String observacion) {
+        try {
+            //setear datos al objeto y guardar y BD
+            Utils.DbsaveStateFromDatabase(-1,
+                    IdStatus,
+                    StatusName,
+                    fecha,
+                    hora,
+                    observacion,
+                    enviadoServer,
+                    operacionI,
+                    HealthMonitorApplicattion.getApplication().getStateDao());
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    unselectStates();
+                }
+            }, 5000);
+            Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static final class CustomDate{
+
+        private static String _stringDate;
+
+        public static String getStringDate(){
+            return _stringDate;
+        }
+
+        private static String _stringHour;
+        public static String getStringHour(){
+            return _stringHour;
+        }
+
+        static void init(){
+            //obtener fechay hroa de Calendar
+            Calendar c = Calendar.getInstance();
+            Integer year = c.get(Calendar.YEAR);
+            Integer month = c.get(Calendar.MONTH)+1;
+            Integer day = c.get(Calendar.DAY_OF_MONTH);
+            Integer hour = c.get(Calendar.HOUR_OF_DAY);
+            Integer minute = c.get(Calendar.MINUTE);
+            Integer second = c.get(Calendar.SECOND);
+            //setear fecha
+
+            //String mes = (month + 1) < 10 ? "0" + (month + 1) : "" + (month);
+            String mes = month < 10 ? "0" + month : "" + month;
+            String dia = day < 10 ? "0" + day : "" + day;
+            //String date = ""+day+"/"+(++month)+"/"+year;
+            _stringDate = "" + dia + "/" + mes + "/" + year;
+
+            //setear hora
+            String hourString = hour < 10 ? "0" + hour : "" + hour;
+            String minuteString = minute < 10 ? "0" + minute : "" + minute;
+            //String secondString = second < 10 ? "0"+second : ""+second;
+            _stringHour = "" + hourString + ":" + minuteString;
+
+        }
+    }
+
+    public void Imagenes() {
+        iv_est_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_1();
+            }
+        });
+
+        iv_est_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_2();
+
+            }
+        });
+
+        iv_est_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_3();
+
+            }
+        });
+
+        iv_est_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_4();
+
+            }
+        });
+
+        iv_est_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_5();
+
+            }
+        });
+    }
+
+    public void setImage_estatus_1() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_con));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName = getResources().getString(R.string.txt_sta_increible);
+        StatusName= String.format(String.valueOf(getResources().getColor(R.color.status_orange)));
+
+        IdStatus = 1;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+
+    }
+
+    public void setImage_estatus_2() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_con));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName = getResources().getString(R.string.txt_sta_bien);
+        IdStatus = 2;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+
+    }
+
+    public void setImage_estatus_3() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_con));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName = getResources().getString(R.string.txt_sta_normal);
+        IdStatus = 3;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+
+    }
+
+    public void setImage_estatus_4() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_con));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName = getResources().getString(R.string.txt_sta_mal);
+        IdStatus = 4;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+    }
+
+    public void setImage_estatus_5() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_con));
+        StatusName = getResources().getString(R.string.txt_sta_horrible);
+        IdStatus = 5;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+    }
+
+    void unselectStates(){
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName="";
+        IdStatus =0;
+        //StatusName = getResources().getString(R.string.txt_sta_increible);
+        //StatusName= String.format(String.valueOf(getResources().getColor(R.color.status_orange)));
     }
 
     //inico servicio enviar data webservice

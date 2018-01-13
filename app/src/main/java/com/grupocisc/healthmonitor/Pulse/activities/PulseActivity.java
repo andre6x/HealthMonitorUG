@@ -160,7 +160,7 @@ public class PulseActivity extends AppCompatActivity {
     private void setupTabIcons() {
         tabs.getTabAt(0).setIcon(R.mipmap.registro);
         tabs.getTabAt(1).setIcon(R.mipmap.estadistica);
-        tabs.getTabAt(2).setIcon(R.mipmap.ic_notification);
+        tabs.getTabAt(2).setIcon(R.mipmap.medical_history);
     }
 
 

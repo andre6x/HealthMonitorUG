@@ -130,10 +130,6 @@ public class StateRegistyActivity extends AppCompatActivity implements DatePicke
         layoutButton = (RelativeLayout) findViewById(R.id.layoutButton);
         layoutContent = (LinearLayout) findViewById(R.id.container);
         cardReg = (CardView) findViewById(R.id.card);
-        // layoutContent = (RelativeLayout) findViewById(R.id.layoutContent);
-        //Utils.SetStyleToolbarLogo(this);
-        // container= (LinearLayout) findViewById(R.id.container);
-        //Log.e(TAG, "OnCreate");
 
         lyt_fecha = (LinearLayout) findViewById(R.id.lyt_fecha);
         lyt_hora = (LinearLayout) findViewById(R.id.lyt_hora);
@@ -186,21 +182,9 @@ public class StateRegistyActivity extends AppCompatActivity implements DatePicke
             @Override
             public void onClick(View v) {
 
-
                 validarDataState(v);
-
-
-
-
-                //  Toast.makeText(StateRegistyActivity.this, "Elegir Estado de Animo", Toast.LENGTH_SHORT).show();
-              //  Utils.generateToast(StateRegistyActivity.this,getResources().getString(R.string.txt_aviso_state));
-
-
             }
         });
-        //setearMaterialBetterSpinner();
-        //selectDataStateDB();
-
     }
 
     public void actualizarData() {
@@ -247,20 +231,7 @@ public class StateRegistyActivity extends AppCompatActivity implements DatePicke
         //getSupportActionBar().setTitle("Glucosa"); //titulo tollbar
         toolbar.setTitleTextColor(getResources().getColor(R.color.white)); //color tollbar title
 
-    }
-/*
-    public void setearMaterialBetterSpinner(){
-
-        LabelledSpinner labelledSpinner = (LabelledSpinner) findViewById(R.id.spinner_planets);
-        labelledSpinner.setColor(R.color.colorPrimaryDark);
-        labelledSpinner.setItemsArray(R.array.planets_array);
-        labelledSpinner.setDefaultErrorEnabled(true);
-        labelledSpinner.setDefaultErrorText("Este campo es obligatorio.");  // Displayed when first item remains selected
-        labelledSpinner.setOnItemChosenListener(this);
-        //SETEAR LA POSICION DEL SPINNER QUE APARESCA SELECIONADO
-        labelledSpinner.setSelection(2 , true);
-
-    }*/
+     }
 
     private void inicializarFechaHora() {
 
