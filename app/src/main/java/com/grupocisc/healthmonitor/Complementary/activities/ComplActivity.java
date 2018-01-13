@@ -105,8 +105,8 @@ public class ComplActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayShowTitleEnabled(false); //desactivar title
         toolbar.setNavigationIcon(R.mipmap.back); //buton back tollbar
-        getSupportActionBar().setTitle("Exámenes complementarios"); //titulo tollbar
-        toolbar.setTitleTextColor(getResources().getColor(R.color.black)); //color tollbar title
+        getSupportActionBar().setTitle("EXÁMENES COMPLEMENTARIOS"); //titulo tollbar
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white)); //color tollbar title
 
     }
 
@@ -148,12 +148,12 @@ public class ComplActivity extends AppCompatActivity {
     private void setupTabIcons() {
         tabs.getTabAt(0).setIcon(R.mipmap.registro);
 
-        tabs.getTabAt(1).setIcon(R.mipmap.ic_notification);
+        tabs.getTabAt(1).setIcon(R.mipmap.medical_history);
 
        // tabs.getTabAt(1).setIcon(R.mipmap.registro);
         tabs.getTabAt(2).setIcon(R.mipmap.registro);
 
-        tabs.getTabAt(3).setIcon(R.mipmap.ic_notification);
+        tabs.getTabAt(3).setIcon(R.mipmap.medical_history);
 
         //tabs.getTabAt(3).setIcon(R.mipmap.registro);
     }
