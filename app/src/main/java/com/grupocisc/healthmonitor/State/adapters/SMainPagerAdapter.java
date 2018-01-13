@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import com.grupocisc.healthmonitor.State.fragments.StateGraphicFragment;
 import com.grupocisc.healthmonitor.State.fragments.StateListFragment;
+import com.grupocisc.healthmonitor.State.fragments.StateRecommendationsFragment;
 
 public class SMainPagerAdapter extends FragmentStatePagerAdapter {
     CharSequence Titles[];
@@ -21,16 +22,24 @@ public class SMainPagerAdapter extends FragmentStatePagerAdapter {
     //This method return the fragment for the every position in the View Pager
     @Override
     public Fragment getItem(int position) {
+
+
+
         if(position == 0) // if the position is 0 we are returning the First tab
         {
             StateListFragment tab1 = new StateListFragment();
             return tab1;
         }
-        else  // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position ==1)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             StateGraphicFragment tab2 = new StateGraphicFragment();
             return tab2;
         }
+        else {
+            StateRecommendationsFragment tab3 = new StateRecommendationsFragment();
+            return tab3;
+        }
+
     }
 
     // This method return the titles for the Tabs in the Tab Strip

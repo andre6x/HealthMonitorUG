@@ -35,7 +35,7 @@ public class InsulinActivity extends AppCompatActivity {
     @BindView(R.id.pager)   ViewPager pager;
     public static FloatingActionButton fab;
     IMainPagerAdapter adapter;
-    CharSequence Titles[]={"REGISTRO","ESTADÍSTICAS"};
+    CharSequence Titles[]={"REGISTRO","ESTADÍSTICAS","RECOMENDACIONES"};
     //CharSequence [] Titles ;
 
     @Override
@@ -148,6 +148,7 @@ public class InsulinActivity extends AppCompatActivity {
        // tabs.getTabAt(0).setIcon(R.mipmap.registro);
         tabs.getTabAt(0).setIcon(R.mipmap.registro);
         tabs.getTabAt(1).setIcon(R.mipmap.estadistica);
+        tabs.getTabAt(2).setIcon(R.mipmap.ic_notification);
         Log.i(TAG, Method + "End...");
     }
 

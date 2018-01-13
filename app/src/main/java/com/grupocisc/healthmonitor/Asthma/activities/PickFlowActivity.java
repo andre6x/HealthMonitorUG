@@ -33,7 +33,7 @@ public class PickFlowActivity extends AppCompatActivity {
 
 
     PMainPagerAdapter adapter;
-    CharSequence Titles[] = {"REGISTRO", "ESTADISTICAS"};
+    CharSequence Titles[] = {"REGISTRO", "ESTADISTICAS","RECOMENDACIONES"};
 
 
     @Override
@@ -136,6 +136,7 @@ public class PickFlowActivity extends AppCompatActivity {
     private void setupTabIcons() {
         tabs.getTabAt(0).setIcon(R.mipmap.registro);
         tabs.getTabAt(1).setIcon(R.mipmap.estadistica);
+        tabs.getTabAt(2).setIcon(R.mipmap.ic_notification);
     }
 
     public void callActivityRegister() {

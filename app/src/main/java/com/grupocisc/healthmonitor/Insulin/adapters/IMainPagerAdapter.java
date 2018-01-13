@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.grupocisc.healthmonitor.Insulin.fragments.InsulinConcept;
 import com.grupocisc.healthmonitor.Insulin.fragments.InsulinGraphicFragment;
 import com.grupocisc.healthmonitor.Insulin.fragments.InsulinListFragment;
+import com.grupocisc.healthmonitor.Insulin.fragments.InsulinRecommendationsFragment;
 
 
 /**
@@ -33,9 +34,16 @@ public class IMainPagerAdapter extends FragmentStatePagerAdapter {
             case 0:{
                 InsulinListFragment tab2 = new InsulinListFragment();
                 return tab2;
-            }case 1:{
+            }
+            case 1:{
                 InsulinGraphicFragment tab3 = new InsulinGraphicFragment();
                 return tab3;
+            }
+            case 2:{
+                InsulinRecommendationsFragment tab4 = new InsulinRecommendationsFragment();
+                return tab4;
+
+
             }default:
                 return null;
         }

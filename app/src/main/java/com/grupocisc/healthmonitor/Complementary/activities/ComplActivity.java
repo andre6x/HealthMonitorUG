@@ -30,7 +30,7 @@ public class ComplActivity extends AppCompatActivity {
     FloatingActionButton fab;
 
     MainPagerAdapter adapter;
-    CharSequence Titles[]={"COLESTEROL","HBA1C"};
+    CharSequence Titles[]={"COLESTEROL", "RECOMENDACIONES", "HBA1C", "RECOMENDACIONES"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,8 +147,14 @@ public class ComplActivity extends AppCompatActivity {
     //setear iconos para tabs
     private void setupTabIcons() {
         tabs.getTabAt(0).setIcon(R.mipmap.registro);
+
+        tabs.getTabAt(1).setIcon(R.mipmap.ic_notification);
+
        // tabs.getTabAt(1).setIcon(R.mipmap.registro);
-        tabs.getTabAt(1).setIcon(R.mipmap.registro);
+        tabs.getTabAt(2).setIcon(R.mipmap.registro);
+
+        tabs.getTabAt(3).setIcon(R.mipmap.ic_notification);
+
         //tabs.getTabAt(3).setIcon(R.mipmap.registro);
     }
 
