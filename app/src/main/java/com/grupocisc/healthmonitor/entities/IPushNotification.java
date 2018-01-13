@@ -64,7 +64,9 @@ public interface IPushNotification {
 
 
 
-    class Recomendation implements Serializable{
+    @GET("")
+    Call<List<Recommendation>> getRecommendations(@Query("id_patient") String id_patient, @Query("id_section")int id_section);
+    class Recommendation implements Serializable{
         @Getter
         @Setter
         String content;

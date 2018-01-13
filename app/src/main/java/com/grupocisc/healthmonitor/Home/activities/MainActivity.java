@@ -53,6 +53,7 @@ import com.grupocisc.healthmonitor.Settings.activities.AboutActivity;
 import com.grupocisc.healthmonitor.Settings.activities.TutorialActivityV2;
 import com.grupocisc.healthmonitor.SocialNetworks.activities.SocialActivity;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
 import com.grupocisc.healthmonitor.Utils.Utils;
@@ -521,6 +522,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                         sDialog.dismissWithAnimation();
                         //eliminar preferencias
                         DeletePreferencesCallMainActivity();
+                        NotificationHelper.Current.cancelAllNotifications(getApplicationContext());
                     }
                 })
                 .setCancelText("Cancelar")

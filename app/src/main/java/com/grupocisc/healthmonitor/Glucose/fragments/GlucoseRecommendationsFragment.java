@@ -1,8 +1,6 @@
 package com.grupocisc.healthmonitor.Glucose.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,28 +16,23 @@ import android.view.ViewGroup;
 
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseRegistyActivity;
-import com.grupocisc.healthmonitor.Glucose.adapters.GlucoseListAdapter;
-import com.grupocisc.healthmonitor.Glucose.adapters.GlucoseRecomendationsAdapter;
-import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
+import com.grupocisc.healthmonitor.Glucose.adapters.GlucoseRecommendationsAdapter;
 import com.grupocisc.healthmonitor.R;
-import com.grupocisc.healthmonitor.Utils.Utils;
-import com.grupocisc.healthmonitor.entities.IGlucose;
 import com.grupocisc.healthmonitor.entities.IPushNotification;
 
-import java.sql.SQLException;
 import java.util.List;
 
 
-public class GlucoseRecomendationsFragment extends Fragment implements GlucoseRecomendationsAdapter.MyViewHolder.ClickListener {
+public class GlucoseRecommendationsFragment extends Fragment implements GlucoseRecommendationsAdapter.MyViewHolder.ClickListener {
 
     private String TAG = "GlucoseRecoFragment";
     private RecyclerView recyclerView;
-    private GlucoseRecomendationsAdapter adapter;
-    private static List<IPushNotification.Recomendation> rowsRecomendations;
+    private GlucoseRecommendationsAdapter adapter;
+    private static List<IPushNotification.Recommendation> rowsRecommendations;
 
     //private OnFragmentInteractionListener mListener;
 
-    public GlucoseRecomendationsFragment() {
+    public GlucoseRecommendationsFragment() {
         // Required empty public constructor
     }
 
@@ -52,7 +45,7 @@ public class GlucoseRecomendationsFragment extends Fragment implements GlucoseRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View contentView = inflater.inflate(R.layout.fragment_glucose_recomendations, container, false);
+        View contentView = inflater.inflate(R.layout.fragment_recomendations, container, false);
         recyclerView = (RecyclerView) contentView.findViewById(R.id.recycler_view);
 
         return contentView;
@@ -67,10 +60,10 @@ public class GlucoseRecomendationsFragment extends Fragment implements GlucoseRe
 
     @Override
     public void onItemClicked(View view, int position) {
-        int idMenu = rowsRecomendations.get(position).getId() ;
+        int idMenu = rowsRecommendations.get(position).getId() ;
         Intent intent = new Intent(getActivity(), GlucoseRegistyActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("car", rowsRecomendations.get(position) ) ;
+        bundle.putSerializable("car", rowsRecommendations.get(position) ) ;
         intent.putExtras(bundle);
 
         // TRANSITIONS
@@ -95,12 +88,12 @@ public class GlucoseRecomendationsFragment extends Fragment implements GlucoseRe
 //            //validar si en la tabla ahi datos mayor a 0
 //            if (Utils.GetGlucoseFromDatabase(HealthMonitorApplicattion.getApplication().getGlucoseDao() ).size() > 0 ){
 //                //asignamos datos de la tabla a la lista de objeto
-//                rowsRecomendations = Utils.GetGlucoseFromDatabase(HealthMonitorApplicattion.getApplication().getGlucoseDao() );
+//                rowsRecommendations = Utils.GetGlucoseFromDatabase(HealthMonitorApplicattion.getApplication().getGlucoseDao() );
 //                //obtenemos el tamaño de la listaDEobjetos , para recorrerlo
 //                //y presenta los datos de la tabla bd en el LOG
-//                int tamaño = rowsRecomendations.size();
+//                int tamaño = rowsRecommendations.size();
 //                for(int i = 0 ; i < tamaño ; i++){
-//                    Log.e(TAG,"id:" + rowsRecomendations.get(i).getId() +"-" + rowsRecomendations.get(i).getContent());
+//                    Log.e(TAG,"id:" + rowsRecommendations.get(i).getId() +"-" + rowsRecommendations.get(i).getContent());
 //                }
 //                if(tamaño > 0) {
 //                    //setear el adaptador con los datos
@@ -117,12 +110,12 @@ public class GlucoseRecomendationsFragment extends Fragment implements GlucoseRe
         if (adapter != null){
             //actuliza la data del apdater
             Log.e(TAG,"adapter != null");
-            adapter.updateData(rowsRecomendations);
+            adapter.updateData(rowsRecommendations);
 
         }else {//es nulo
             //crea la lista adapter
             Log.e(TAG,"adapter  null");
-            adapter = new GlucoseRecomendationsAdapter(getActivity(), rowsRecomendations, this, recyclerView, true);
+            adapter = new GlucoseRecommendationsAdapter(getActivity(), rowsRecommendations, this, recyclerView, true);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
