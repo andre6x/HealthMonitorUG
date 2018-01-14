@@ -81,6 +81,9 @@ public class GlucoseListAdapter extends RecyclerView.Adapter<GlucoseListAdapter.
                 break;
             case R.color.yellow_expandle:
                 viewHolder.main_card.setCardBackgroundColor(viewHolder.main_card.getResources().getColor(colorId));
+                viewHolder.txt_fecha.setTextColor(viewHolder.main_card.getResources().getColor(R.color.white));
+                viewHolder.txt_hora.setTextColor(viewHolder.main_card.getResources().getColor(R.color.white));
+                viewHolder.txt_con.setTextColor(viewHolder.main_card.getResources().getColor(R.color.red_ligth));
                 break;
             case  R.color.red:
                 viewHolder.main_card.setCardBackgroundColor(viewHolder.main_card.getResources().getColor(colorId));
