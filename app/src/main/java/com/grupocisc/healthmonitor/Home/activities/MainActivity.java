@@ -173,16 +173,25 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     public void saveDataStateDB(String fecha, String hora, int IdStatus, String StatusName, String observacion) {
         try {
-            //setear datos al objeto y guardar y BD
-            Utils.DbsaveStateFromDatabase(-1,
-                    IdStatus,
-                    StatusName,
-                    fecha,
-                    hora,
-                    observacion,
-                    enviadoServer,
-                    operacionI,
-                    HealthMonitorApplicattion.getApplication().getStateDao());
+            if(Utils.getEmailFromPreference(getApplicationContext())!=null){
+                //setear datos al objeto y guardar y BD
+                Utils.DbsaveStateFromDatabase(-1,
+                        IdStatus,
+                        StatusName,
+                        fecha,
+                        hora,
+                        observacion,
+                        enviadoServer,
+                        operacionI,
+                        HealthMonitorApplicattion.getApplication().getStateDao());
+
+                Utils.generateToast(this, "Su estado de ánimo se ha guardado con éxito");
+
+            }
+            else {
+                generarAlertaNoRegistrado("No iniciado sesión");
+
+            }
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -190,8 +199,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 public void run() {
                     unselectStates();
                 }
-            }, 5000);
-            Utils.generateToast(this, getResources().getString(R.string.txt_guardado));
+            }, 500);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -699,6 +708,25 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("" + getString(R.string.txt_atencion))
                 .setContentText("" + getString(R.string.error_login))
+                .setConfirmText("OK")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+
+                        notificaciones("");//CAMBIO
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);  // envia al login
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
+                })
+                .show();
+    }
+
+    public void generarAlertaNoRegistrado(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("" + getString(R.string.txt_atencion))
+                .setContentText(message)
                 .setConfirmText("OK")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
