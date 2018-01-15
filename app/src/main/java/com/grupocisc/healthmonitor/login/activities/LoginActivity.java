@@ -218,6 +218,7 @@ public class LoginActivity extends AppCompatActivity {
             if (mLoginUser.getIdCodResult()== 0 ) {
                 if(mLoginUser.getEmail() != null){
                     SavePreferencesCallMainActivity();
+                    MainActivity.InitControlPanel(getApplicationContext());
                 }else{
                     Utils.generarSweetAlertDialogError(LoginActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo_email) );
                 }

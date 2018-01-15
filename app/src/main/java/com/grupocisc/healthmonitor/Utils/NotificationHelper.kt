@@ -10,7 +10,23 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
+import android.util.Log
+import android.widget.LinearLayout
+import android.widget.RemoteViews
+import com.grupocisc.healthmonitor.Asthma.activities.AsthmaRegistry
+import com.grupocisc.healthmonitor.Asthma.activities.PickFlowRegistry
+import com.grupocisc.healthmonitor.Complementary.activities.ComplCholesterolRegistyActivity
+import com.grupocisc.healthmonitor.Complementary.activities.ComplHba1cRegistyActivity
+import com.grupocisc.healthmonitor.Disease.activities.DiseaseActivity
+import com.grupocisc.healthmonitor.Doctor.activities.DoctorRegistre
+import com.grupocisc.healthmonitor.Glucose.activities.GlucoseRegistyActivity
+import com.grupocisc.healthmonitor.Insulin.activities.InsulinRegistry
+import com.grupocisc.healthmonitor.Medicines.activities.MedicineRegistry
+import com.grupocisc.healthmonitor.NotificationsMedical.activities.NotificationsMedicalActivity
+import com.grupocisc.healthmonitor.Pulse.activities.PulseActivity
 import com.grupocisc.healthmonitor.R
+import com.grupocisc.healthmonitor.State.activities.StateRegistyActivity
+import com.grupocisc.healthmonitor.Weight.activities.WeightRegistyActivity
 
 
 /**
@@ -147,7 +163,7 @@ class NotificationHelper {
             notificationManager.notify(notificationId, notificationBuilder.build())
         }
 
-        fun cancelNotificationFromActivity(ctx:Context,bundle: Bundle?):Unit{
+        fun cancelNotificationFromActivity(ctx:Context,bundle: Bundle?){
 
             if(bundle!=null){
                 if(bundle.containsKey("notificationId")){
@@ -159,8 +175,96 @@ class NotificationHelper {
             }
         }
 
-        fun cancelAllNotifications(ctx:Context):Unit{
+        fun cancelAllNotifications(ctx:Context){
             NotificationManagerCompat.from(ctx).cancelAll()
+        }
+
+        fun showAssitantPanel(ctx:Context, channelId:String):Unit{
+            try {
+                val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                    val importance = NotificationManager.IMPORTANCE_HIGH
+                    val mChannel = NotificationChannel(channelId, "Notificacion", importance)
+                    //mChannel.description = message
+                    mChannel.enableLights(true)
+                    mChannel.lightColor = Color.RED
+                    mChannel.enableVibration(true)
+                    mChannel.vibrationPattern = longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+                    mChannel.setShowBadge(false)
+                    notificationManager.createNotificationChannel(mChannel)
+                }
+
+                //val notification = Notification(R.drawable.transparent,"",System.currentTimeMillis())
+
+                val remoteView = RemoteViews(ctx.packageName,R.layout.control_panel)
+
+                setControlPanelClickListener(ctx,remoteView)
+
+                val notificationBuilder = NotificationCompat.Builder(ctx, channelId)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("Panel de control Healthmonitor")
+                        .setCustomBigContentView(remoteView)
+                        .setStyle(NotificationCompat.BigTextStyle().bigText(""))
+                        .setOngoing(true)
+
+                notificationManager.notify(5800, notificationBuilder.build())
+            }
+            catch (ex:Exception){
+                Log.e("NotificationHelper",ex.message)
+            }
+        }
+
+        private fun setControlPanelClickListener(ctx:Context,remoteView:RemoteViews){
+            val animStateIntent = Intent(ctx,StateRegistyActivity::class.java)
+            val animStatePendingIntent =PendingIntent.getActivity(ctx,0,animStateIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opAnim,animStatePendingIntent)
+
+            val weightIntent = Intent(ctx,WeightRegistyActivity::class.java)
+            val weightPendingIntent =PendingIntent.getActivity(ctx,0,weightIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opWeight,weightPendingIntent)
+
+            val glucoseIntent = Intent(ctx,GlucoseRegistyActivity::class.java)
+            val glucosePendingIntent =PendingIntent.getActivity(ctx,0,glucoseIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opGlucose,glucosePendingIntent)
+
+            val insulinIntent = Intent(ctx,InsulinRegistry::class.java)
+            val insulinPendingIntent =PendingIntent.getActivity(ctx,0,insulinIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opInsulin,insulinPendingIntent)
+
+            val pulseIntent = Intent(ctx,PulseActivity::class.java)
+            val pulsePendingIntent =PendingIntent.getActivity(ctx,0,pulseIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opPulse,pulsePendingIntent)
+
+            val asthmaIntent = Intent(ctx,PickFlowRegistry::class.java)
+            val asthmaPendingIntent =PendingIntent.getActivity(ctx,0,asthmaIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opAsthma,asthmaPendingIntent)
+
+            val cholesterolIntent = Intent(ctx,ComplCholesterolRegistyActivity::class.java)
+            val cholesterolPendingIntent =PendingIntent.getActivity(ctx,0,cholesterolIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opCholesterol,cholesterolPendingIntent)
+
+            val hba1cIntent = Intent(ctx,ComplHba1cRegistyActivity::class.java)
+            val hba1cPendingIntent =PendingIntent.getActivity(ctx,0,hba1cIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opHba1c,hba1cPendingIntent)
+
+            val medicineIntent = Intent(ctx,MedicineRegistry::class.java)
+            val medicinePendingIntent =PendingIntent.getActivity(ctx,0,medicineIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opMedicine,medicinePendingIntent)
+
+            val doctorIntent = Intent(ctx,DoctorRegistre::class.java)
+            val doctorPendingIntent =PendingIntent.getActivity(ctx,0,doctorIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opDoctor,doctorPendingIntent)
+
+            val diseaseIntent = Intent(ctx,DiseaseActivity::class.java)
+            val diseasePendingIntent =PendingIntent.getActivity(ctx,0,diseaseIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opDisease,diseasePendingIntent)
+
+            val recommendationsIntent = Intent(ctx,NotificationsMedicalActivity::class.java)
+            val recommendationsPendingIntent =PendingIntent.getActivity(ctx,0,recommendationsIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteView.setOnClickPendingIntent(R.id.opRecommendations,recommendationsPendingIntent)
+
         }
     }
 }

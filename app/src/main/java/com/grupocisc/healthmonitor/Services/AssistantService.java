@@ -80,6 +80,11 @@ public class AssistantService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "AssistantService has been started");
         onTaskRemoved(intent);
+
+        if(Utils.getEmailFromPreference(getApplicationContext())!=null){
+            NotificationHelper.Current.showAssitantPanel(getApplicationContext(),"1115");
+        }
+
         WakeLocker.Current.acquire(getApplicationContext());
 
         Timer _timer = new Timer();
