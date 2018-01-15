@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         iv_est_4 = (ImageView) findViewById(R.id.img_est_4);
         iv_est_5 = (ImageView) findViewById(R.id.img_est_5);
 
-
+        InitControlPanel(getApplicationContext());
 
         Imagenes();
 
@@ -169,6 +169,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         InitBarometerReaderService();
 
         showHashKey(this);
+    }
+
+    public static void InitControlPanel(Context ctx){
+        if(Utils.getEmailFromPreference(ctx)!=null){
+            NotificationHelper.Current.showAssitantPanel(ctx,"1115");
+        }
     }
 
     public void saveDataStateDB(String fecha, String hora, int IdStatus, String StatusName, String observacion) {
