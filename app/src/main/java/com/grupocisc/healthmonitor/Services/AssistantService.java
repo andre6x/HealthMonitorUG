@@ -129,7 +129,7 @@ public class AssistantService extends Service {
         if(Utils.getEmailFromPreference(getApplicationContext()) != null)
         {
             int currentHour = getHours();
-            if(currentHour <8 || currentHour>20)
+            if(currentHour <8 || currentHour>18)
             {
                 Log.i(TAG,"The service is not available, it's "+currentHour+" hours");
             }
