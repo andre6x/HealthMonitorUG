@@ -1,5 +1,6 @@
 package com.grupocisc.healthmonitor.Services;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
@@ -20,7 +21,6 @@ import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.activities.StateRegistyActivity;
 import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.grupocisc.healthmonitor.Utils.NotificationHelper;
-import com.grupocisc.healthmonitor.Utils.SensorChecker;
 import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Utils.WakeLocker;
@@ -59,6 +59,13 @@ public class AssistantService extends Service {
     final String TAG = "AssistantService";
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+
+
+    @Override
     public void onTaskRemoved(Intent rootIntent) {
         if(!ServiceChecker.Current.isServiceRunning(getApplicationContext(),AssistantService.class))
         {
@@ -82,7 +89,7 @@ public class AssistantService extends Service {
         onTaskRemoved(intent);
 
         if(Utils.getEmailFromPreference(getApplicationContext())!=null){
-            NotificationHelper.Current.showAssitantPanel(getApplicationContext(),"1115");
+            NotificationHelper.Current.showAssistantPanel(getApplicationContext(),"1115");
         }
 
         WakeLocker.Current.acquire(getApplicationContext());
@@ -106,6 +113,14 @@ public class AssistantService extends Service {
         //_timer.scheduleAtFixedRate(_timerTask,0,2000*60); //se ejecuta cada 2 minutos
         WakeLocker.Current.release();
 
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                startForeground(101, NotificationHelper.Current.createAssistanNotification(getApplicationContext(),"5900"));
+            }
+        };
+
+        task.run();
         return START_STICKY;
     }
 
@@ -442,7 +457,7 @@ public class AssistantService extends Service {
     public void onDestroy() {
             Log.i(TAG, "Stopping service");
             _timerTask.cancel();
-            sendBroadcast(new Intent("RestartService"));
+            //sendBroadcast(new Intent("RestartService"));
             super.onDestroy();
         }
 }

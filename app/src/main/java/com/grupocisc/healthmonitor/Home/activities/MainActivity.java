@@ -70,7 +70,6 @@ import com.grupocisc.healthmonitor.login.activities.LoginBackPassword;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 
@@ -173,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     public static void InitControlPanel(Context ctx){
         if(Utils.getEmailFromPreference(ctx)!=null){
-            NotificationHelper.Current.showAssitantPanel(ctx,"1115");
+            NotificationHelper.Current.showAssistantPanel(ctx,"1115");
         }
     }
 

@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.NotificationCompat
@@ -179,7 +180,7 @@ class NotificationHelper {
             NotificationManagerCompat.from(ctx).cancelAll()
         }
 
-        fun showAssitantPanel(ctx:Context, channelId:String):Unit{
+        fun showAssistantPanel(ctx:Context, channelId:String):Unit{
             try {
                 val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -196,8 +197,6 @@ class NotificationHelper {
                     notificationManager.createNotificationChannel(mChannel)
                 }
 
-                //val notification = Notification(R.drawable.transparent,"",System.currentTimeMillis())
-
                 val remoteView = RemoteViews(ctx.packageName,R.layout.control_panel)
 
                 setControlPanelClickListener(ctx,remoteView)
@@ -207,6 +206,7 @@ class NotificationHelper {
                         .setContentTitle("Panel de control Healthmonitor")
                         .setCustomBigContentView(remoteView)
                         .setStyle(NotificationCompat.BigTextStyle().bigText(""))
+                        .setShowWhen(false)
                         .setOngoing(true)
 
                 notificationManager.notify(5800, notificationBuilder.build())
@@ -265,6 +265,34 @@ class NotificationHelper {
             val recommendationsPendingIntent =PendingIntent.getActivity(ctx,0,recommendationsIntent,PendingIntent.FLAG_UPDATE_CURRENT)
             remoteView.setOnClickPendingIntent(R.id.opRecommendations,recommendationsPendingIntent)
 
+        }
+
+        fun createAssistanNotification(ctx: Context,channelId:String):Notification{
+
+            val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                val importance = NotificationManager.IMPORTANCE_HIGH
+                val mChannel = NotificationChannel(channelId, "Notificacion", importance)
+                //mChannel.description = message
+                mChannel.enableLights(true)
+                mChannel.lightColor = Color.RED
+                mChannel.enableVibration(true)
+                mChannel.vibrationPattern = longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+                mChannel.setShowBadge(false)
+                notificationManager.createNotificationChannel(mChannel)
+            }
+
+            val notificationBuilder = NotificationCompat.Builder(ctx, channelId)
+                    .setSmallIcon(R.drawable.logo_ug_v3)
+                    .setContentTitle("Healthmonitor está corriendo")
+                    //.setCustomBigContentView(remoteView)
+                    //.setStyle(NotificationCompat.BigTextStyle().bigText(""))
+                    .setShowWhen(false)
+                    .setOngoing(true)
+
+            return notificationBuilder.build()
         }
     }
 }

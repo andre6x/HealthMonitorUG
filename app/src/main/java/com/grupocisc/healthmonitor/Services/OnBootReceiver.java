@@ -18,20 +18,6 @@ public class OnBootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-//        if(Utils.getEmailFromPreference(context.getApplicationContext()) != null){
-//            if (SensorChecker.Current.isSupported(context.getApplicationContext(), Sensor.TYPE_PRESSURE)){
-//                scheduler = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-//
-//                Intent barometerService = new Intent(context.getApplicationContext(),BarometerService.class);
-//                PendingIntent pendingIntent = PendingIntent.getService(context.getApplicationContext(),0,barometerService,PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//                scheduler.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_HALF_HOUR,pendingIntent);
-//            }
-//            else {
-//                Log.i(TAG,"El dispositivo no soporta el sensor de barómetro");
-//            }
-//        }
-
         Intent barometerService = new Intent(context, BarometerService.class);
 
         if(!ServiceChecker.Current.isServiceRunning(context,BarometerService.class)){
