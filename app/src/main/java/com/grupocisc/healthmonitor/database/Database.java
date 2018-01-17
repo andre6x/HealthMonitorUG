@@ -2,6 +2,7 @@ package com.grupocisc.healthmonitor.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.grupocisc.healthmonitor.entities.EAlarmDetails;
@@ -33,6 +34,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import java.io.File;
 import java.sql.SQLException;
 
 public class Database extends OrmLiteSqliteOpenHelper {
@@ -76,6 +78,8 @@ public class Database extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, EAlarmDetails.class);
             TableUtils.createTable(connectionSource, EAlarmTakeMedicine.class);
             TableUtils.createTable(connectionSource, IAsthma.class);
+
+
         } catch (SQLException e) {
             Log.e(Database.class.getName(), "ERROR AL CREAR LA BASE DE DATOS", e);
             throw new RuntimeException(e);

@@ -16,6 +16,7 @@ import com.grupocisc.healthmonitor.Utils.NotificationHelper
 import com.grupocisc.healthmonitor.Utils.SensorChecker
 import com.grupocisc.healthmonitor.Utils.ServiceChecker
 import com.grupocisc.healthmonitor.Utils.Utils
+import okhttp3.internal.Util
 import kotlin.math.log
 
 /**
@@ -26,6 +27,7 @@ class BarometerService: Service(),SensorEventListener {
     private var sensorManager: SensorManager?=null
     private var sensor: Sensor? = null
     private var scheduler: AlarmManager? = null
+
 
     lateinit var ctx: Context
 
@@ -53,19 +55,24 @@ class BarometerService: Service(),SensorEventListener {
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
-        if (!ServiceChecker.isServiceRunning(applicationContext, BarometerService::class.java)) {
-            Log.i(tag, "Iniciando el servicio de lectura de presión")
-            val restartServiceIntent = Intent(applicationContext, this.javaClass)
-            //restartServiceIntent.`package` = packageName
-            startService(restartServiceIntent)
-        } else {
-            Log.i(tag, "El servicio de lectura de presión ya está en ejecución")
+        if(Utils.getEmailFromPreference(applicationContext)!=null){
+            if (!ServiceChecker.isServiceRunning(applicationContext, BarometerService::class.java)) {
+                Log.i(tag, "Iniciando el servicio de lectura de presión")
+                val restartServiceIntent = Intent(applicationContext, this.javaClass)
+                //restartServiceIntent.`package` = packageName
+                startService(restartServiceIntent)
+            } else {
+                Log.i(tag, "El servicio de lectura de presión ya está en ejecución")
+            }
         }
         super.onTaskRemoved(rootIntent)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         onTaskRemoved(intent)
+
+        instance = this
+
         if(Utils.getEmailFromPreference(applicationContext)!=null)
         {
             if(SensorChecker.isSupported(applicationContext,Sensor.TYPE_PRESSURE))
@@ -84,7 +91,8 @@ class BarometerService: Service(),SensorEventListener {
         return START_STICKY
     }
 
-    fun changeMilliToMicro(milli:Int):Int{
+
+    private fun changeMilliToMicro(milli:Int):Int{
         Log.i(tag,"$milli = ${milli * 1000} micro s")
         return  milli * 1000
     }
@@ -92,12 +100,12 @@ class BarometerService: Service(),SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         sensorManager?.unregisterListener(this)
-        if(SensorChecker.isSupported(applicationContext,Sensor.TYPE_PRESSURE)){
-            runService()
-        }
+//        if(SensorChecker.isSupported(applicationContext,Sensor.TYPE_PRESSURE)){
+//            runService()
+//        }
     }
 
-    fun runService() {
+    private fun runService() {
         try{
             if (Utils.getEmailFromPreference(applicationContext) != null) {
                 if (SensorChecker.Current.isSupported(applicationContext, Sensor.TYPE_PRESSURE)) {
@@ -114,6 +122,18 @@ class BarometerService: Service(),SensorEventListener {
         }
         catch (ex:Exception){
             Log.e(tag,ex.message)
+        }
+    }
+
+    companion object Current{
+        private var instance:BarometerService?=null
+
+        fun stopService(ctx: Context) {
+            if (ServiceChecker.isServiceRunning(ctx.applicationContext, AssistantService::class.java)) {
+                instance?.stopForeground(true)
+                instance?.stopSelf()
+                Log.i(instance?.tag, "AssistantService is stopped")
+            }
         }
     }
 }

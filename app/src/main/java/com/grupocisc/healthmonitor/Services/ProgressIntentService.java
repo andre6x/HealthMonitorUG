@@ -12,7 +12,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
+import com.grupocisc.healthmonitor.Home.activities.MainActivity;
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.EAlarmDetails;
 import com.grupocisc.healthmonitor.entities.EAlarmTakeMedicine;
@@ -140,10 +142,17 @@ public class ProgressIntentService extends IntentService {
 
             // Quitar de primer plano
             stopForeground(true);
+
+            //v3
+            MainActivity.InitAssistantService(this,TAG);
+            MainActivity.InitBarometerReaderService(this,TAG);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
+
 
     ///**********************************INNICIO GLUCOSA**************************//
     public void importDataGlucosa(){

@@ -85,7 +85,4 @@ public class ImportDataActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
-
 }
