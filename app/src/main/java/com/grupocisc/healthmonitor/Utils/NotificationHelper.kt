@@ -24,10 +24,12 @@ import com.grupocisc.healthmonitor.Asthma.activities.PickFlowRegistry
 import com.grupocisc.healthmonitor.Complementary.activities.ComplCholesterolRegistyActivity
 import com.grupocisc.healthmonitor.Complementary.activities.ComplHba1cRegistyActivity
 import com.grupocisc.healthmonitor.Disease.activities.DiseaseActivity
+import com.grupocisc.healthmonitor.Doctor.activities.DoctorActivity
 import com.grupocisc.healthmonitor.Doctor.activities.DoctorRegistre
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseRegistyActivity
 import com.grupocisc.healthmonitor.Insulin.activities.InsulinRegistry
 import com.grupocisc.healthmonitor.Medicines.activities.MedicineRegistry
+import com.grupocisc.healthmonitor.Medicines.activities.MedicinesActivity
 import com.grupocisc.healthmonitor.NotificationsMedical.activities.NotificationsMedicalActivity
 import com.grupocisc.healthmonitor.Pulse.activities.PulseActivity
 import com.grupocisc.healthmonitor.R
@@ -271,11 +273,11 @@ class NotificationHelper {
             val hba1cPendingIntent =PendingIntent.getActivity(ctx,0,hba1cIntent,PendingIntent.FLAG_UPDATE_CURRENT)
             remoteView.setOnClickPendingIntent(R.id.opHba1c,hba1cPendingIntent)
 
-            val medicineIntent = Intent(ctx,MedicineRegistry::class.java)
+            val medicineIntent = Intent(ctx,MedicinesActivity::class.java)
             val medicinePendingIntent =PendingIntent.getActivity(ctx,0,medicineIntent,PendingIntent.FLAG_UPDATE_CURRENT)
             remoteView.setOnClickPendingIntent(R.id.opMedicine,medicinePendingIntent)
 
-            val doctorIntent = Intent(ctx,DoctorRegistre::class.java)
+            val doctorIntent = Intent(ctx,DoctorActivity::class.java)
             val doctorPendingIntent =PendingIntent.getActivity(ctx,0,doctorIntent,PendingIntent.FLAG_UPDATE_CURRENT)
             remoteView.setOnClickPendingIntent(R.id.opDoctor,doctorPendingIntent)
 
