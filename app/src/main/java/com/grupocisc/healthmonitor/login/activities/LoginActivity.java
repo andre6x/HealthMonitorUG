@@ -18,6 +18,9 @@ import android.widget.TextView;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Services.AssistantService;
+import com.grupocisc.healthmonitor.Services.BarometerService;
+import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IUserLogin;
@@ -166,6 +169,9 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferencesManager.setValor(this, Utils.PREFERENCIA_USER, mLoginUser.getCellPhone()    , Utils.KEY_TELEFONO);
         SharedPreferencesManager.setValor(this, Utils.PREFERENCIA_USER, mLoginUser.getCountry() +""    , Utils.KEY_PAIS);
 
+        //v3
+        SharedPreferencesManager.setValor(this,Utils.PREFERENCIA_USER,mLoginUser.getAsma()+"", Utils.KEY_ASMA);
+
         //enviar a importar data
         Intent intent = new Intent(this, ImportDataActivity.class);  // enviar a IMPORTA DATA y luego al main
         startActivity(intent);
@@ -211,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     public void postExecutionLogin(){
         showLayoutDialog();
 
@@ -218,7 +225,6 @@ public class LoginActivity extends AppCompatActivity {
             if (mLoginUser.getIdCodResult()== 0 ) {
                 if(mLoginUser.getEmail() != null){
                     SavePreferencesCallMainActivity();
-                    MainActivity.InitControlPanel(getApplicationContext());
                 }else{
                     Utils.generarSweetAlertDialogError(LoginActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo_email) );
                 }

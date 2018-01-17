@@ -8,44 +8,26 @@
 
     <TextView
         android:textColor="@color/colorPrimary"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:textStyle="bold"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:layout_marginLeft="53dp"
         android:text="Panel de control Healthmonitor"
         android:textAlignment="center"/>
 
     <LinearLayout
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/opAnim"
-                android:padding="5dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/home_estado"/>
-
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ánimo"/>
-            </LinearLayout>
+        android:paddingTop="2dp"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/opWeight"
-                android:padding="5dp"
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
 
@@ -56,17 +38,17 @@
 
                 <TextView
                     android:textStyle="bold"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Peso"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/opGlucose"
-                android:padding="5dp"
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
 
@@ -77,17 +59,17 @@
 
                 <TextView
                     android:textStyle="bold"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Glucosa"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/opInsulin"
-                android:padding="5dp"
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
 
@@ -99,16 +81,16 @@
                 <TextView
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Insulina"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/opPulse"
-                android:padding="5dp"
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
 
@@ -120,22 +102,46 @@
                 <TextView
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Pulso"/>
             </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:paddingTop="5dp"
-        android:layout_gravity="center"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/opAsthma"
-            android:padding="5dp"
+            android:id="@+id/opAnim"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/home_estado"/>
+
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ánimo"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/opAsthma"
+            android:orientation="vertical"
+            android:layout_width="90dp"
             android:layout_height="match_parent"
             android:gravity="center">
 
@@ -147,16 +153,16 @@
         <TextView
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Asma"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/opCholesterol"
-            android:padding="5dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="match_parent"
             android:gravity="center">
 
@@ -168,16 +174,16 @@
             <TextView
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Colesterol"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/opHba1c"
-            android:padding="5dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="match_parent"
             android:gravity="center">
 
@@ -189,67 +195,68 @@
             <TextView
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="HBA1C"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/opMedicine"
-            android:padding="5dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-        <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@mipmap/icon_medicina"/>
-
-        <TextView
-        android:textStyle="bold"
-            android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medicinas"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/opDoctor"
-            android:padding="5dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-        <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@mipmap/icon_doctor"/>
-
-        <TextView
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Doctores"/>
-        </LinearLayout>
-
 
     </LinearLayout>
 
     <LinearLayout
         android:paddingTop="5dp"
-        android:layout_gravity="center"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/opDisease"
-            android:padding="5dp"
+            android:id="@+id/opMedicine"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/icon_medicina"/>
+
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medicinas"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/opDoctor"
+            android:orientation="vertical"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/icon_doctor"/>
+
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Doctores"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/opDisease"
+            android:orientation="vertical"
+            android:layout_width="90dp"
             android:layout_height="match_parent"
             android:gravity="center">
 
@@ -261,16 +268,16 @@
             <TextView
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Enfermedades"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/opRecommendations"
-            android:padding="5dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="match_parent"
             android:gravity="center">
 
@@ -282,8 +289,10 @@
             <TextView
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:text="Recomendaciones"/>
         </LinearLayout>
 

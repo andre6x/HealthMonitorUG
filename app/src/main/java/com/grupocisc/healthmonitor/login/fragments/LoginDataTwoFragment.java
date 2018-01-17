@@ -63,7 +63,8 @@ public class LoginDataTwoFragment extends Fragment implements DatePickerDialog.O
     String[] tipoDiabetes = new String[]{
             "Tipo 1",
             "Tipo 2",
-            "Gestacional"
+            "Gestacional",
+            "Sin diabetes"
     };
 
     private CheckBox seleccionAsma;
@@ -228,14 +229,26 @@ public class LoginDataTwoFragment extends Fragment implements DatePickerDialog.O
                 // TODO Auto-generated method stub
                 //Toast.makeText(getActivity(), spinnerColorChange.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 tdiabetes = spinnerDiabetes.getSelectedItem().toString();
+
                 if(tdiabetes.equals("Tipo 1")) {
-                    idTipoDiabetes = 11;  }
-                else{
-                    if(tdiabetes.equals("Tipo 2")){
-                        idTipoDiabetes = 12;
-                    }
-                    else{idTipoDiabetes = 13;}
+                    idTipoDiabetes = 11;
                 }
+                //v3
+                else if(tdiabetes.equals("Tipo 2")){
+                    idTipoDiabetes = 12;
+                }
+                else if(tdiabetes.equals("Gestacional")){
+                    idTipoDiabetes = 13;
+                }
+                else { //Sin diabetes
+                    idTipoDiabetes = 14;
+                }
+//                else if{
+//                    if(tdiabetes.equals("Tipo 2")){
+//                        idTipoDiabetes = 12;
+//                    }
+//                    else{idTipoDiabetes = 13;}
+//                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
