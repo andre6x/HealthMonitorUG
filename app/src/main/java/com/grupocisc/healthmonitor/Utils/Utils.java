@@ -732,7 +732,10 @@ public class Utils {
         return SharedPreferencesManager.getValorEsperado(ctx, PREFERENCIA_USER, KEY_ASMA);
     }
 
-
+    //V3
+    public static String getDiabetesType(Context ctx){
+        return SharedPreferencesManager.getValorEsperado(ctx,PREFERENCIA_USER, KEY_TIPO_DIABETES);
+    }
 
 //fin de preferencias
 

@@ -321,6 +321,18 @@ class NotificationHelper {
             else
                 remoteView.setViewVisibility(R.id.opAsthma, View.GONE)
 
+            if(Utils.getDiabetesType(ctx.applicationContext)!=null){
+                var diabetesType:String = Utils.getDiabetesType(ctx.applicationContext)
+                if(diabetesType!="14"){
+                    remoteView.setViewVisibility(R.id.opInsulin, View.VISIBLE)
+                }
+                else
+                    remoteView.setViewVisibility(R.id.opInsulin, View.GONE)
+            }
+            else
+                remoteView.setViewVisibility(R.id.opInsulin, View.GONE)
+
+
             setControlPanelClickListener(ctx,remoteView)
 
             val drawable = ctx.applicationInfo.loadIcon(ctx.packageManager)
