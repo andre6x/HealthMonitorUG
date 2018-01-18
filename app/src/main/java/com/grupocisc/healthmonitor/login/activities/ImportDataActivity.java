@@ -66,7 +66,6 @@ public class ImportDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gotoMain();
-
             }
         });
 
