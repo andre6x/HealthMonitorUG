@@ -822,8 +822,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                         sDialog.dismissWithAnimation();
                         //eliminar preferencias
                         DeletePreferencesCallMainActivity();
-                        NotificationHelper.Current.cancelAllNotifications(getApplicationContext());
                         AssistantService.stopService(getApplicationContext());
+                        NotificationHelper.Current.cancelAllNotifications(getApplicationContext());
                         BarometerService.Current.stopService(getApplicationContext());
                     }
                 })

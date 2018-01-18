@@ -46,7 +46,6 @@ class NotificationHelper {
         fun <T> showNotification(ctx:Context, activity:Class<T>, notificationId:Int, icon:Int, channelId:String, title:String, message:String){
 
             val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
                 val importance = NotificationManager.IMPORTANCE_HIGH
@@ -65,7 +64,6 @@ class NotificationHelper {
             options.putInt("notificationId",notificationId)
             notificationIntent.putExtras(options)
 
-            //notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             notificationIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
 
             val drawable = ctx.applicationInfo.loadIcon(ctx.packageManager)
@@ -116,7 +114,6 @@ class NotificationHelper {
             val options:Bundle = if(action1Intent.extras !=null) (action1Intent.extras) else Bundle()
             options.putInt("notificationId",notificationId)
             action1Intent.putExtras(options)
-            //notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             action1Intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
 
             val action1PendingIntent = PendingIntent.getActivity(ctx,0,action1Intent,PendingIntent.FLAG_UPDATE_CURRENT)
@@ -126,7 +123,6 @@ class NotificationHelper {
             val options2:Bundle = if(action2Intent.extras !=null) (action2Intent.extras) else Bundle()
             options2.putInt("notificationId",notificationId)
             action2Intent.putExtras(options2)
-            //notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             action2Intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
 
             val action2PendingIntent = PendingIntent.getActivity(ctx,0,action2Intent,PendingIntent.FLAG_UPDATE_CURRENT)
@@ -145,7 +141,6 @@ class NotificationHelper {
                     .setStyle(NotificationCompat.BigTextStyle().bigText(message))
                     .addAction(R.drawable.notification_template_icon_low_bg,action1,action1PendingIntent)
                     .addAction(R.drawable.notification_template_icon_low_bg,action2,action2PendingIntent)
-                    //.setContentIntent(resultPendingIntent)
                     .setAutoCancel(true)
 
             if (Build.VERSION.SDK_INT >= 23) {
@@ -204,41 +199,6 @@ class NotificationHelper {
             NotificationManagerCompat.from(ctx).cancelAll()
         }
 
-//        fun showAssistantPanel(ctx:Context, channelId:String):Unit{
-//            try {
-//                val notificationManager = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//
-//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//
-//                    val importance = NotificationManager.IMPORTANCE_HIGH
-//                    val mChannel = NotificationChannel(channelId, "Notificacion", importance)
-//                    //mChannel.description = message
-//                    mChannel.enableLights(true)
-//                    mChannel.lightColor = Color.RED
-//                    mChannel.enableVibration(true)
-//                    mChannel.vibrationPattern = longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
-//                    mChannel.setShowBadge(false)
-//                    notificationManager.createNotificationChannel(mChannel)
-//                }
-//
-//                val remoteView = RemoteViews(ctx.packageName,R.layout.control_panel)
-//
-//                setControlPanelClickListener(ctx,remoteView)
-//
-//                val notificationBuilder = NotificationCompat.Builder(ctx, channelId)
-//                        .setSmallIcon(R.mipmap.ic_launcher)
-//                        .setContentTitle("Panel de control Healthmonitor")
-//                        .setCustomBigContentView(remoteView)
-//                        .setStyle(NotificationCompat.BigTextStyle().bigText(""))
-//                        .setShowWhen(false)
-//                        .setOngoing(true)
-//
-//                notificationManager.notify(5800, notificationBuilder.build())
-//            }
-//            catch (ex:Exception){
-//                Log.e("NotificationHelper",ex.message)
-//            }
-//        }
 
         private fun setControlPanelClickListener(ctx:Context,remoteView:RemoteViews){
             val animStateIntent = Intent(ctx,StateRegistyActivity::class.java)
@@ -299,7 +259,6 @@ class NotificationHelper {
 
                 val importance = NotificationManager.IMPORTANCE_HIGH
                 val mChannel = NotificationChannel(channelId, "Notificacion", importance)
-                //mChannel.description = message
                 mChannel.enableLights(true)
                 mChannel.lightColor = Color.RED
                 mChannel.enableVibration(true)
@@ -320,6 +279,18 @@ class NotificationHelper {
             }
             else
                 remoteView.setViewVisibility(R.id.opAsthma, View.GONE)
+
+            if(Utils.getDiabetesType(ctx.applicationContext)!=null){
+                var diabetesType:String = Utils.getDiabetesType(ctx.applicationContext)
+                if(diabetesType!="14"){
+                    remoteView.setViewVisibility(R.id.opInsulin, View.VISIBLE)
+                }
+                else
+                    remoteView.setViewVisibility(R.id.opInsulin, View.GONE)
+            }
+            else
+                remoteView.setViewVisibility(R.id.opInsulin, View.GONE)
+
 
             setControlPanelClickListener(ctx,remoteView)
 

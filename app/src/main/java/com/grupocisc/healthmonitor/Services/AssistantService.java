@@ -43,6 +43,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.internal.Util;
+
 /**
  * Created by alex on 12/8/17.
  */
@@ -87,6 +89,7 @@ public class AssistantService extends Service {
 
         super.onTaskRemoved(rootIntent);
     }
+
     Integer period = 2000*60*60;
 
 
@@ -94,10 +97,6 @@ public class AssistantService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "AssistantService has been started");
         onTaskRemoved(intent);
-
-//        if(Utils.getEmailFromPreference(getApplicationContext())!=null){
-//            NotificationHelper.Current.showAssistantPanel(getApplicationContext(),"1115");
-//        }
 
         instance = this;
 
@@ -117,16 +116,8 @@ public class AssistantService extends Service {
         //_timer.scheduleAtFixedRate(_timerTask,0,2000*60); //se ejecuta cada 2 minutos
         WakeLocker.Current.release();
 
-//        Runnable task = new Runnable() {
-//            @Override
-//            public void run() {
-                startForeground(101, NotificationHelper.Current.createAssistanNotification(getApplicationContext(),"5800"));
-//            }
-//        };
-//
-//        if(Utils.getEmailFromPreference(getApplicationContext())!=null) {
-//            task.run();
-//        }
+        startForeground(101, NotificationHelper.Current.createAssistanNotification(getApplicationContext(),"5800"));
+
 
         return START_STICKY;
     }
@@ -299,29 +290,34 @@ public class AssistantService extends Service {
 
     void checkGlucose()
     {
-        try {
-            IGlucose data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getGlucoseDao(), Constantes.TABLA_GLUCOSA);
-            int GLUCOSE_NOTIFICATION_ID = 1003;
-            String GLUCOSE_NOTIFICATION_CHANNEL_ID = "003";
-            if(data!=null)
-            {
-                String dateString = data.getFecha()!=null ? data.getFecha():"";
-                int days = getDays(dateString);
+        if(Utils.getDiabetesType(getApplicationContext())!=null){
+            String diabetesType = Utils.getDiabetesType(getApplicationContext());
+            if(!diabetesType.equals("14")){
+                try {
+                    IGlucose data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getGlucoseDao(), Constantes.TABLA_GLUCOSA);
+                    int GLUCOSE_NOTIFICATION_ID = 1003;
+                    String GLUCOSE_NOTIFICATION_CHANNEL_ID = "003";
+                    if(data!=null)
+                    {
+                        String dateString = data.getFecha()!=null ? data.getFecha():"";
+                        int days = getDays(dateString);
 
-                if(days<=1){
-                    Log.i(TAG,Constantes.TABLA_GLUCOSA+" Last record on: "+dateString);
-                }
-                else {
-                    NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseRegistyActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"No ha ingresado su glucosa en "+days+" "+getCorrectWord(days));
+                        if(days<=1){
+                            Log.i(TAG,Constantes.TABLA_GLUCOSA+" Last record on: "+dateString);
+                        }
+                        else {
+                            NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseRegistyActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"No ha ingresado su glucosa en "+days+" "+getCorrectWord(days));
+                        }
+                    }
+                    else {
+                        NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseRegistyActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"Aún no ha ingresado su glucosa");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
-            else {
-                NotificationHelper.Current.showNotification(getApplicationContext(), GlucoseRegistyActivity.class, GLUCOSE_NOTIFICATION_ID,R.mipmap.icon_blood, GLUCOSE_NOTIFICATION_CHANNEL_ID,Constantes.GLUCOSE_NOTIFICATION_TITLE,"Aún no ha ingresado su glucosa");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
     }
 
@@ -444,29 +440,34 @@ public class AssistantService extends Service {
 
     void checkInsulinTable()
     {
-        try {
-            EInsulin data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getInsulinDao(), Constantes.TABLA_INSULIN);
-            int INSULIN_NOTIFICATION_ID = 1008;
-            String INSULIN_NOTIFICATION_CHANNEL_ID = "008";
-            if(data!=null)
-            {
-                String dateString = data.getFecha()!=null ? data.getFecha():"";
-                int days = getDays(dateString);
+        if(Utils.getDiabetesType(getApplicationContext())!=null){
+            String diabetesType = Utils.getDiabetesType(getApplicationContext());
+            if(!diabetesType.equals("14")){
+                try {
+                    EInsulin data = Utils.getLastRecordWithDate(HealthMonitorApplicattion.getApplication().getInsulinDao(), Constantes.TABLA_INSULIN);
+                    int INSULIN_NOTIFICATION_ID = 1008;
+                    String INSULIN_NOTIFICATION_CHANNEL_ID = "008";
+                    if(data!=null)
+                    {
+                        String dateString = data.getFecha()!=null ? data.getFecha():"";
+                        int days = getDays(dateString);
 
-                if(days<=1){
-                    Log.i(TAG,Constantes.TABLA_INSULIN+" Last record on: "+dateString);
-                }
-                else {
-                    NotificationHelper.Current.showNotification(getApplicationContext(), InsulinRegistry.class, INSULIN_NOTIFICATION_ID,R.mipmap.icon_insulina, INSULIN_NOTIFICATION_CHANNEL_ID,Constantes.INSULIN_NOTIFICATION_TITLE,"No ha ingresado su registro de insulina en "+days+" "+getCorrectWord(days));
+                        if(days<=1){
+                            Log.i(TAG,Constantes.TABLA_INSULIN+" Last record on: "+dateString);
+                        }
+                        else {
+                            NotificationHelper.Current.showNotification(getApplicationContext(), InsulinRegistry.class, INSULIN_NOTIFICATION_ID,R.mipmap.icon_insulina, INSULIN_NOTIFICATION_CHANNEL_ID,Constantes.INSULIN_NOTIFICATION_TITLE,"No ha ingresado su registro de insulina en "+days+" "+getCorrectWord(days));
+                        }
+                    }
+                    else {
+                        NotificationHelper.Current.showNotification(getApplicationContext(), InsulinRegistry.class, INSULIN_NOTIFICATION_ID,R.mipmap.icon_insulina, INSULIN_NOTIFICATION_CHANNEL_ID,Constantes.INSULIN_NOTIFICATION_TITLE,"Aún no ha ingresado su registro de insulina");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
-            else {
-                NotificationHelper.Current.showNotification(getApplicationContext(), InsulinRegistry.class, INSULIN_NOTIFICATION_ID,R.mipmap.icon_insulina, INSULIN_NOTIFICATION_CHANNEL_ID,Constantes.INSULIN_NOTIFICATION_TITLE,"Aún no ha ingresado su registro de insulina");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
     }
 
