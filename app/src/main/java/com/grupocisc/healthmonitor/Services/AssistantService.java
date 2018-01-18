@@ -89,6 +89,7 @@ public class AssistantService extends Service {
 
         super.onTaskRemoved(rootIntent);
     }
+
     Integer period = 2000*60*60;
 
 
@@ -96,10 +97,6 @@ public class AssistantService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "AssistantService has been started");
         onTaskRemoved(intent);
-
-//        if(Utils.getEmailFromPreference(getApplicationContext())!=null){
-//            NotificationHelper.Current.showAssistantPanel(getApplicationContext(),"1115");
-//        }
 
         instance = this;
 
@@ -119,16 +116,8 @@ public class AssistantService extends Service {
         //_timer.scheduleAtFixedRate(_timerTask,0,2000*60); //se ejecuta cada 2 minutos
         WakeLocker.Current.release();
 
-//        Runnable task = new Runnable() {
-//            @Override
-//            public void run() {
-                startForeground(101, NotificationHelper.Current.createAssistanNotification(getApplicationContext(),"5800"));
-//            }
-//        };
-//
-//        if(Utils.getEmailFromPreference(getApplicationContext())!=null) {
-//            task.run();
-//        }
+        startForeground(101, NotificationHelper.Current.createAssistanNotification(getApplicationContext(),"5800"));
+
 
         return START_STICKY;
     }
