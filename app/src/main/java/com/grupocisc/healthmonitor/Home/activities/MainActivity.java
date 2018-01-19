@@ -1,6 +1,7 @@
 package com.grupocisc.healthmonitor.Home.activities;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,8 +12,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -26,6 +29,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.github.mikephil.charting.utils.FileUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.grupocisc.healthmonitor.Advertising.PublicidadWebViewActivity;
@@ -51,6 +55,7 @@ import com.grupocisc.healthmonitor.Report.activities.ReportActivity;
 import com.grupocisc.healthmonitor.Routines.activities.RoutinesActivity;
 import com.grupocisc.healthmonitor.Services.AssistantService;
 import com.grupocisc.healthmonitor.Services.BarometerService;
+import com.grupocisc.healthmonitor.Services.ProgressIntentService;
 import com.grupocisc.healthmonitor.Services.SendDataMyService;
 import com.grupocisc.healthmonitor.Settings.activities.AboutActivity;
 import com.grupocisc.healthmonitor.Settings.activities.TutorialActivityV2;
@@ -68,9 +73,17 @@ import com.grupocisc.healthmonitor.gcmClasses.RegistrationIntentService;
 import com.grupocisc.healthmonitor.login.activities.LoginActivity;
 import com.grupocisc.healthmonitor.login.activities.LoginBackPassword;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 
@@ -78,6 +91,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 /**
@@ -160,23 +175,80 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         iv_est_4 = (ImageView) findViewById(R.id.img_est_4);
         iv_est_5 = (ImageView) findViewById(R.id.img_est_5);
 
-        InitControlPanel(getApplicationContext());
+
+//        File db =HealthMonitorApplicattion.getApplication().getDatabasePath("healthmonitorDB");
+//
+//        if (db.exists()) {
+//            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+//
+//            exportDB(db.getAbsolutePath());
+//        }
+
+
 
         Imagenes();
 
         iniciarServicio();
-        InitAssitantService();
-        InitBarometerReaderService();
+
+        //v3
+        if(!ServiceChecker.Current.isServiceRunning(this,ProgressIntentService.class)){
+
+            if(Utils.getEmailFromPreference(this)!=null){
+                InitAssistantService(this,TAG);
+                InitBarometerReaderService(this,TAG);
+            }
+        }
+        else {
+            Log.i(TAG,"ProgressIntent is still running ");
+        }
 
         showHashKey(this);
     }
 
-    public static void InitControlPanel(Context ctx){
-        if(Utils.getEmailFromPreference(ctx)!=null){
-            NotificationHelper.Current.showAssitantPanel(ctx,"1115");
+//    void exportDB(String dbPath) {
+//        try {
+//            File dbFile = new File(dbPath);
+//            FileInputStream fis = new FileInputStream(dbFile);
+//
+//            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+//
+//            String outFileName = dir.getAbsolutePath();
+//            OutputStream output = new FileOutputStream(outFileName+"/healthmonitorDb.db3");
+//            byte[] buffer = new byte[1024];
+//            int length;
+//            while ((length = fis.read(buffer)) > 0) {
+//                output.write(buffer, 0, length);
+//            }
+//            output.flush();
+//            output.close();
+//            fis.close();
+//        } catch (Exception e) {
+//            Log.e("MainAC",e.getMessage());
+//        }
+//    }
+
+    //v3
+    public static void InitAssistantService(Context ctx,String TAG){
+        if(!ServiceChecker.Current.isServiceRunning(ctx,AssistantService.class)){
+            Intent assistantService = new Intent(ctx, AssistantService.class); //serv de tipo Intent
+            ctx.startService(assistantService); //ctx de tipo Context
+            Log.i(TAG, "Assistant service started");
+        } else {
+            Log.i(TAG, "Assistant service is already running");
         }
     }
 
+    public static void InitBarometerReaderService(Context ctx,String TAG){
+        if(!ServiceChecker.Current.isServiceRunning(ctx,BarometerService.class)){
+            Intent barometerService = new Intent(ctx, BarometerService.class); //serv de tipo Intent
+            ctx.startService(barometerService); //ctx de tipo Context
+            Log.i(TAG, "Barometer service started");
+        } else {
+            Log.i(TAG, "Barometer service is already running");
+        }
+    }
+
+    //v3
     public void saveDataStateDB(String fecha, String hora, int IdStatus, String StatusName, String observacion) {
         try {
             if(Utils.getEmailFromPreference(getApplicationContext())!=null){
@@ -212,6 +284,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
+    //v3
     static final class CustomDate{
 
         private static String _stringDate;
@@ -251,6 +324,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
+    //v3
     public void Imagenes() {
         iv_est_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -367,6 +441,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
     }
 
+    //v3
     void unselectStates(){
         iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
         iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
@@ -387,26 +462,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             Log.e(TAG, "Send Data WS Service started");
         } else {
             Log.e(TAG, "Send Data WS Service already running");
-        }
-    }
-
-    public void InitAssitantService(){
-        if(!ServiceChecker.Current.isServiceRunning(this,AssistantService.class)){
-            Intent assistantService = new Intent(this, AssistantService.class); //serv de tipo Intent
-            this.startService(assistantService); //ctx de tipo Context
-            Log.i(TAG, "Assistant service started");
-        } else {
-            Log.i(TAG, "Assistant service is already running");
-        }
-    }
-
-    void InitBarometerReaderService(){
-        if(!ServiceChecker.Current.isServiceRunning(this,BarometerService.class)){
-            Intent barometerService = new Intent(this, BarometerService.class); //serv de tipo Intent
-            this.startService(barometerService); //ctx de tipo Context
-            Log.i(TAG, "Barometer service started");
-        } else {
-            Log.i(TAG, "Barometer service is already running");
         }
     }
 
@@ -680,14 +735,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
-//    void RegisterNetworkStateReceiver()
-//    {
-//        IntentFilter intent= new IntentFilter();
-//        intent.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-//        _networkStateReceiver = new OnBootReceiver();
-//        this.registerReceiver(_networkStateReceiver,intent);
-//    }
-
     /**
      * Método que valida si se tiene instalado y con la versión requerida el Google Play Service
      * ya que sin ello, la nueva forma de implementación del GCM no funcionaría
@@ -775,7 +822,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                         sDialog.dismissWithAnimation();
                         //eliminar preferencias
                         DeletePreferencesCallMainActivity();
+                        AssistantService.stopService(getApplicationContext());
                         NotificationHelper.Current.cancelAllNotifications(getApplicationContext());
+                        BarometerService.Current.stopService(getApplicationContext());
                     }
                 })
                 .setCancelText("Cancelar")

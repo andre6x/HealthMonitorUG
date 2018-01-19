@@ -28,8 +28,8 @@ android {
         applicationId "com.grupocisc.healthmonitor"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 20
-        versionName "3.07"
+        versionCode 21
+        versionName "3.08"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         // Stops the Gradle plugin’s automatic rasterization of vectors
@@ -44,7 +44,7 @@ android {
         debug {
             buildConfigField "String", "CONSUMER_KEY", "\"${props.getProperty("twitterConsumerKey")}\""
             buildConfigField "String", "CONSUMER_SECRET", "\"${props.getProperty("twitterConsumerSecret")}\""
-            //buildConfigField "String", "URL_SERVER", '"http://192.168.10.32:8080/"'
+            //buildConfigField "String", "URL_SERVER", '"http://192.168.10.103:8080/"'
             //buildConfigField "String", "URL_SERVER", '"http://209.182.204.74:8180/"'
             buildConfigField "String", "URL_SERVER", '"http://healthmonitorug.com:8180/"'
         }

@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import com.grupocisc.healthmonitor.State.fragments.StateGraphicFragment;
 import com.grupocisc.healthmonitor.State.fragments.StateListFragment;
-import com.grupocisc.healthmonitor.State.fragments.StateRecommendationsFragment;
+//import com.grupocisc.healthmonitor.State.fragments.StateRecommendationsFragment;
 
 public class SMainPagerAdapter extends FragmentStatePagerAdapter {
     CharSequence Titles[];
@@ -30,15 +30,15 @@ public class SMainPagerAdapter extends FragmentStatePagerAdapter {
             StateListFragment tab1 = new StateListFragment();
             return tab1;
         }
-        else if(position ==1)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             StateGraphicFragment tab2 = new StateGraphicFragment();
             return tab2;
         }
-        else {
-            StateRecommendationsFragment tab3 = new StateRecommendationsFragment();
-            return tab3;
-        }
+//        else {
+//            StateRecommendationsFragment tab3 = new StateRecommendationsFragment();
+//            return tab3;
+//        }
 
     }
 

@@ -741,7 +741,10 @@ public class Utils {
         return SharedPreferencesManager.getValorEsperado(ctx, PREFERENCIA_USER, KEY_ASMA);
     }
 
-
+    //V3
+    public static String getDiabetesType(Context ctx){
+        return SharedPreferencesManager.getValorEsperado(ctx,PREFERENCIA_USER, KEY_TIPO_DIABETES);
+    }
 
 //fin de preferencias
 
@@ -4980,15 +4983,16 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
         return eAlarmDetails;
     }
 
+    //v3
     public static <T> T getLastRecordWithDate(Dao<T,Integer> data, String tableName) throws java.sql.SQLException {
-        String query ="SELECT fecha FROM "+tableName+" ORDER By date(fecha) DESC LIMIT 1";
+        String query ="SELECT fecha FROM "+tableName+" ORDER By strftime(fecha) DESC LIMIT 1";
         GenericRawResults<T> rawResults = data.queryRaw(query, data.getRawRowMapper());
-
-        return rawResults.getFirstResult();
+        T result = rawResults.getFirstResult();
+        return result;
     }
 
     public static <T> T getLastRecord(Dao<T,Integer> data,String tableName) throws java.sql.SQLException {
-        String query = "SELECT * FROM "+tableName+" ORDER By date(fecha) DESC LIMIT 1";
+        String query = "SELECT * FROM "+tableName+" ORDER By strftime(fecha) DESC LIMIT 1";
         GenericRawResults<T> rawResults = data.queryRaw(query,data.getRawRowMapper());
         return rawResults.getFirstResult();
     }
