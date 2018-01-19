@@ -30,6 +30,8 @@ public class ProfileDataActivity extends AppCompatActivity {
     TextView txt_fecha;
     TextView txt_altura;
     TextView txt_peso;
+    TextView txt_tipo_diabetes;
+    TextView txt_tipo_asma;
     TextView txt_estcivil;
     TextView txt_telefono;
     TextView txt_pais;
@@ -39,6 +41,8 @@ public class ProfileDataActivity extends AppCompatActivity {
     public String Email = "";
     public String Anio = "";
     public String Peso = "";
+    public String TipoDiabetes = "";
+    public String TipoAsma = "";
     public String Altura = "";
     public String Sexo = "";
     public String EstCivil = "";
@@ -64,6 +68,8 @@ public class ProfileDataActivity extends AppCompatActivity {
         txt_fecha = (TextView) findViewById(R.id.txt_fecha);
         txt_altura = (TextView) findViewById(R.id.txt_altura);
         txt_peso = (TextView) findViewById(R.id.txt_peso);
+        txt_tipo_diabetes = (TextView) findViewById(R.id.txt_tipo_diabetes);
+        txt_tipo_asma = (TextView) findViewById(R.id.txt_tipo_asma);
         txt_estcivil = (TextView) findViewById(R.id.txt_estcivil);
         txt_telefono = (TextView) findViewById(R.id.txt_telefono);
         txt_pais = (TextView) findViewById(R.id.txt_pais);
@@ -81,6 +87,10 @@ public class ProfileDataActivity extends AppCompatActivity {
             Anio = Utils.getAnioFromPreference(this);
         if (Utils.getPesoFromPreference(this) != null)
             Peso = Utils.getPesoFromPreference(this);
+        if (Utils.getTipoDiabetesFromPreference(this) != null)
+            TipoDiabetes = Utils.getTipoDiabetesFromPreference(this);
+        if (Utils.getTipoAsmaFromPreference(this) != null)
+            TipoAsma = Utils.getTipoAsmaFromPreference(this);
         if (Utils.getAlturaFromPreference(this) != null)
             Altura = Utils.getAlturaFromPreference(this);
         if (Utils.getSexoFromPreference(this) != null)
@@ -118,6 +128,8 @@ public class ProfileDataActivity extends AppCompatActivity {
             txt_sexo.setText(Sexo);
             txt_altura.setText(Altura + "m");
             txt_peso.setText(Peso + "kg");
+            txt_tipo_diabetes.setText(TipoDiabetes);
+            txt_tipo_asma.setText(TipoAsma);
             txt_estcivil.setText(EstCivil);
             txt_telefono.setText(Telefono);
             txt_pais.setText(Pais);

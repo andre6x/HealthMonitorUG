@@ -267,6 +267,8 @@
     <string name="text_sexo">Sexo:</string>
     <string name="text_altura">Altura:</string>
     <string name="text_peso">Peso inicial:</string>
+    <string name="text_tipo_asma">Tipo Asma:</string>
+    <string name="text_tipo_diabetes">Tipo Diabetes:</string>
     <string name="text_estcivil">Estado Civil:</string> <!-- CAMBIO AJOB-->
     <string name="text_telefono">Número Celular:</string> <!-- CAMBIO AJOB-->
     <string name="text_pais">País:</string> <!-- CAMBIO AJOB-->
