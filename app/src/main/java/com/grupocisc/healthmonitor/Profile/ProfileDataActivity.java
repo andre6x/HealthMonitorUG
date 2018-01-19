@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
@@ -30,6 +33,8 @@ public class ProfileDataActivity extends AppCompatActivity {
     TextView txt_fecha;
     TextView txt_altura;
     TextView txt_peso;
+    //TextView txt_tipo_diabetes;
+    CheckBox chk_tipo_asma;
     TextView txt_estcivil;
     TextView txt_telefono;
     TextView txt_pais;
@@ -39,12 +44,23 @@ public class ProfileDataActivity extends AppCompatActivity {
     public String Email = "";
     public String Anio = "";
     public String Peso = "";
+    public String TipoDiabetesP = "";
+    public String TipoAsma = "";
     public String Altura = "";
     public String Sexo = "";
     public String EstCivil = "";
     public String Telefono = "";
     public String Pais = "";
     private ImageView user_avatar;
+    String  tdiabetes="";
+    int idTipoDiabetes=0;
+    Spinner spinnerDiabetes;
+    String[] tipoDiabetes = new String[]{
+            "Tipo 1",
+            "Tipo 2",
+            "Gestacional",
+            "Sin diabetes"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +80,8 @@ public class ProfileDataActivity extends AppCompatActivity {
         txt_fecha = (TextView) findViewById(R.id.txt_fecha);
         txt_altura = (TextView) findViewById(R.id.txt_altura);
         txt_peso = (TextView) findViewById(R.id.txt_peso);
+        //txt_tipo_diabetes = (TextView) findViewById(R.id.txt_tipo_diabetes);
+        chk_tipo_asma = (CheckBox) findViewById(R.id.chkAsma);
         txt_estcivil = (TextView) findViewById(R.id.txt_estcivil);
         txt_telefono = (TextView) findViewById(R.id.txt_telefono);
         txt_pais = (TextView) findViewById(R.id.txt_pais);
@@ -81,6 +99,10 @@ public class ProfileDataActivity extends AppCompatActivity {
             Anio = Utils.getAnioFromPreference(this);
         if (Utils.getPesoFromPreference(this) != null)
             Peso = Utils.getPesoFromPreference(this);
+        if (Utils.getTipoDiabetesFromPreference(this) != null)
+            TipoDiabetesP = Utils.getTipoDiabetesFromPreference(this);
+        if (Utils.getTipoAsmaFromPreference(this) != null)
+            TipoAsma = Utils.getTipoAsmaFromPreference(this);
         if (Utils.getAlturaFromPreference(this) != null)
             Altura = Utils.getAlturaFromPreference(this);
         if (Utils.getSexoFromPreference(this) != null)
@@ -118,10 +140,16 @@ public class ProfileDataActivity extends AppCompatActivity {
             txt_sexo.setText(Sexo);
             txt_altura.setText(Altura + "m");
             txt_peso.setText(Peso + "kg");
+            //txt_tipo_diabetes.setText(TipoDiabetesP);
+            chk_tipo_asma.setChecked(false);
+            if(TipoAsma.equals("true"))
+                chk_tipo_asma.setChecked(true);
             txt_estcivil.setText(EstCivil);
             txt_telefono.setText(Telefono);
             txt_pais.setText(Pais);
         }
+
+        setSpinner();
 
         card_change_pass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +172,49 @@ public class ProfileDataActivity extends AppCompatActivity {
     public void callChangePass() {
         Intent i = new Intent(ProfileDataActivity.this, LoginBackPassword.class);
         startActivity(i);
+    }
+
+    public void setSpinner(){
+
+
+        spinnerDiabetes = (Spinner) findViewById(R.id.spinnerDiabetes);
+        ArrayAdapter<String> spinnerArrayAdapterDiabetes = new ArrayAdapter<String>(this, R.layout.custom_textview_to_spinner,tipoDiabetes );
+        spinnerArrayAdapterDiabetes.setDropDownViewResource(R.layout.custom_textview_to_spinner);
+        spinnerDiabetes.setAdapter(spinnerArrayAdapterDiabetes);
+        spinnerDiabetes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,int position, long id) {
+                // TODO Auto-generated method stub
+                //Toast.makeText(getActivity(), spinnerColorChange.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                tdiabetes = spinnerDiabetes.getSelectedItem().toString();
+
+                if(tdiabetes.equals("Tipo 1")) {
+                    idTipoDiabetes = 11;
+                }
+                //v3
+                else if(tdiabetes.equals("Tipo 2")){
+                    idTipoDiabetes = 12;
+                }
+                else if(tdiabetes.equals("Gestacional")){
+                    idTipoDiabetes = 13;
+                }
+                else { //Sin diabetes
+                    idTipoDiabetes = 14;
+                }
+//                else if{
+//                    if(tdiabetes.equals("Tipo 2")){
+//                        idTipoDiabetes = 12;
+//                    }
+//                    else{idTipoDiabetes = 13;}
+//                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+
     }
 
 }
