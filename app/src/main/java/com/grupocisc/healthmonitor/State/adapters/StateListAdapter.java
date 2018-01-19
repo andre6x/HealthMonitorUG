@@ -67,7 +67,7 @@ public class StateListAdapter extends RecyclerView.Adapter<StateListAdapter.MyVi
             case 2:
                 myViewHolder.txt_imagen.setImageResource(R.drawable.estado_feliz_con);
                 myViewHolder.txt_estado.setTextColor(ContextCompat.getColor(context, R.color.status_green));
-                myViewHolder.txt_estado.setText( "Feliz");
+                myViewHolder.txt_estado.setText("Bien");
                 break;
             case 3:
                 myViewHolder.txt_imagen.setImageResource(R.drawable.estado_serio_con);

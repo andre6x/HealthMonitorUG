@@ -19,6 +19,7 @@ import com.grupocisc.healthmonitor.Asthma.activities.PickFlowActivity;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplActivity;
 import com.grupocisc.healthmonitor.Disease.activities.DiseaseActivity;
 import com.grupocisc.healthmonitor.Doctor.activities.DoctorActivity;
+import com.grupocisc.healthmonitor.FitData.activities.FitActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
 import com.grupocisc.healthmonitor.Home.ItemHome;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
@@ -78,6 +79,9 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
         pagerList.add(new ItemHome("Control de Enfermedad",      R.mipmap.pager_enfermedades, R.mipmap.home_enfermedades  ,8  , "#4fa6d1", "General"));
         pagerList.add(new ItemHome("Examenes Complementarios",   R.mipmap.pager_prueba       , R.mipmap.home_prueba        ,9  , "#107985", "General"));
         pagerList.add(new ItemHome("Mis Doctores",           R.mipmap.pager_doctor       , R.mipmap.home_doctor    ,10 , "#ebc33f", "General")); //CAMBIO f2b118
+
+        //V3
+        pagerList.add(new ItemHome("Google Fit",R.mipmap.fit,R.mipmap.fit,12,"#f2f2f2","Fitness"));
         //pagerList.add(new ItemHome("Peak Flow",                  R.mipmap.pager_presion      , R.mipmap.home_presion     ,?  , "#c0c23a", "Diabetes"));
         return pagerList;
     }
@@ -149,6 +153,10 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
                 break;
             case 11: // ASMA
                 intent = new Intent(getActivity(), PickFlowActivity.class);
+                break;
+
+            case 12: //GOOGLE FIT
+                intent = new Intent(getActivity(), FitActivity.class);
                 break;
 
         }
