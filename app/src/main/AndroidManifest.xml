@@ -23,7 +23,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.REAL_GET_TASKS" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -51,7 +50,7 @@
             android:name=".Home.activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|adjustResize"/>
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name=".login.activities.LoginActivity"
             android:screenOrientation="portrait" />
@@ -69,13 +68,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Glucose.activities.GlucoseActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Glucose.activities.GlucoseRegistyActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Pulse.activities.PulseActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Pulse.activities.PulseRegistyActivity"
             android:screenOrientation="portrait" />
@@ -88,19 +87,19 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Pressure.activities.PressureActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Pressure.activities.PressureRegistyActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Weight.activities.WeightActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Weight.activities.WeightRegistyActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Insulin.activities.InsulinActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Insulin.activities.InsulinRegistry"
             android:screenOrientation="portrait" />
@@ -121,7 +120,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Disease.activities.DiseaseActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Disease.activities.DiseaseRegistry"
             android:screenOrientation="portrait" />
@@ -207,54 +206,60 @@
             android:name=".FitData.activities.FitActivity"
             android:screenOrientation="portrait" />
 
-
         <!-- inicio FACEBOOK -->
         <activity
             android:name=".login.activities.LoginFacebookActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <!-- fin FACEBOOK -->
 
-        <!-- ALARMS_INI-->
+
+        <!-- ALARMS_INI -->
         <activity
             android:name=".Alarm.activities.AlarmActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Alarm.activities.AlarmRegistry"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Medicines.activities.MedicineTakeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Barometro.BarometroActivity"
             android:screenOrientation="portrait" />
 
         <service
             android:name=".Services.AlarmGetAllMedicineService"
             android:enabled="true"
             android:exported="true" />
+
         <receiver android:name=".Services.AlarmGetAllMedicineReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".Services.AlarmService"
             android:enabled="true"
             android:exported="true" />
+
         <receiver android:name=".Services.AlarmReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
+        <!-- ALARMS_END -->
 
-        <!-- ALARMS_END-->
 
         <!-- inicio servicio enviar data webservice cada x tiempo -->
         <service
@@ -270,8 +275,7 @@
 
         <service
             android:name=".Services.ProgressIntentService"
-            android:exported="false" >
-        </service>
+            android:exported="false" />
         <!-- fin servicio enviar data ws -->
         <!-- inicio notificaciones -->
         <meta-data
@@ -321,37 +325,38 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBHDxsVNQfxBeJFMn6zuMlsU-UhrTFDyI8"/>
-
+            android:value="AIzaSyBHDxsVNQfxBeJFMn6zuMlsU-UhrTFDyI8" />
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="b63409f7a1bc14eb43fb8cec4ce104d1b8793b61" />
 
-        <receiver android:name=".Services.OnBootReceiver"
+        <receiver
+            android:name=".Services.OnBootReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <category android:name="android.intent.category.DEFAULT"  />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
         <service
             android:name=".Services.AssistantService"
-            android:exported="true"
-            android:enabled="true">
-        </service>
+            android:enabled="true"
+            android:exported="true" />
 
-        <receiver android:name=".Services.RestartServiceReceiver"
+        <receiver
+            android:name=".Services.RestartServiceReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="RestartService"/>
+                <action android:name="RestartService" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".Services.BarometerService"
+        <service
+            android:name=".Services.BarometerService"
             android:enabled="true"
-            android:exported="true"/>
-
+            android:exported="true" />
     </application>
 
 </manifest>

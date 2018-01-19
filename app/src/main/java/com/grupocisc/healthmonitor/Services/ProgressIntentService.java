@@ -145,7 +145,7 @@ public class ProgressIntentService extends IntentService {
 
             //v3
             MainActivity.InitAssistantService(this,TAG);
-            MainActivity.InitBarometerReaderService(this,TAG);
+            //MainActivity.InitBarometerReaderService(this,TAG);
 
         } catch (InterruptedException e) {
             e.printStackTrace();

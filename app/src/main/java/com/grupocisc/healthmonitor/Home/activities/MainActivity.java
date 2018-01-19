@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
             if(Utils.getEmailFromPreference(this)!=null){
                 InitAssistantService(this,TAG);
-                InitBarometerReaderService(this,TAG);
+                //InitBarometerReaderService(this,TAG);
             }
         }
         else {
