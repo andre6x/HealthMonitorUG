@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 public interface IRecomenPressure {
 
 
-    @GET("RePresion")
+    @GET("ControlDP/diabetes/recomendaciones/RePresion")
     Call<Objeto> RecomenPressure(@Query("email") String email);
 
     public class Objeto {

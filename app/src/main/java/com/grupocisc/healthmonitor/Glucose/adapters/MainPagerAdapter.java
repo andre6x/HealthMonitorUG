@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.grupocisc.healthmonitor.Glucose.fragments.GlucoseGraphicFragment;
 import com.grupocisc.healthmonitor.Glucose.fragments.GlucoseListFragment;
+import com.grupocisc.healthmonitor.Glucose.fragments.GlucoseRecommendationsFragment;
 
 
 /**
@@ -36,10 +37,14 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
             GlucoseListFragment tab1 = new GlucoseListFragment();
             return tab1;
         }
-        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position ==1)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             GlucoseGraphicFragment tab2 = new GlucoseGraphicFragment();
             return tab2;
+        }
+        else {
+            GlucoseRecommendationsFragment tab3 = new GlucoseRecommendationsFragment();
+            return tab3;
         }
 
 

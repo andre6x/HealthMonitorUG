@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Insulin.TextValidator;
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IGlucose;
 import com.grupocisc.healthmonitor.entities.IRecomGlucose;
@@ -76,6 +77,12 @@ public class GlucoseRegistyActivity extends AppCompatActivity implements DatePic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getIntent()!=null)
+        {
+            NotificationHelper.Current.cancelNotificationFromActivity(this,getIntent().getExtras());
+        }
+
         // TRANSITIONS
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
             TransitionInflater inflater = TransitionInflater.from( this );
@@ -162,8 +169,8 @@ public class GlucoseRegistyActivity extends AppCompatActivity implements DatePic
                 {
                     if (!text.isEmpty()) {
                         if (Float.parseFloat(text) > 1000)
-                            txt_concentration.setError("El valor de su glucosa no puede ser mayor a 240 mg/dl. Por favor Verifique");
-                        if (Float.parseFloat(text) < 1)
+                            txt_concentration.setError("El valor de su glucosa no puede ser mayor a  1000 mg/dl. Por favor Verifique");
+                        if (Float.parseFloat(text) < 65)
                             txt_concentration.setError("El valor de su glucosa no puede ser menor a 65 mg/dl.  Por favor Verifique");
                     }
                 }

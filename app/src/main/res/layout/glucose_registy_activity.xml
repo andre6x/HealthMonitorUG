@@ -87,6 +87,7 @@
                      android:layout_height="wrap_content"
                      android:hint="Concentración"
                      android:textSize="16sp"
+                     android:maxLength="3"
                      android:inputType="numberDecimal"/>
              </android.support.design.widget.TextInputLayout>
 

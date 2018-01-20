@@ -1,7 +1,7 @@
 package com.grupocisc.healthmonitor.Home.activities;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,9 +12,13 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,7 +27,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 
+import com.github.mikephil.charting.utils.FileUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.grupocisc.healthmonitor.Advertising.PublicidadWebViewActivity;
@@ -31,7 +37,6 @@ import com.grupocisc.healthmonitor.Asthma.activities.PickFlowActivity;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplActivity;
 import com.grupocisc.healthmonitor.Disease.activities.DiseaseActivity;
 import com.grupocisc.healthmonitor.Doctor.activities.DoctorActivity;
-import com.grupocisc.healthmonitor.Doctor.activities.DoctorRegistre;
 import com.grupocisc.healthmonitor.Feeding.activities.FeedingActivity;
 import com.grupocisc.healthmonitor.FitData.activities.FitActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
@@ -48,12 +53,16 @@ import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Recommendations.activities.RecommendationsActivity;
 import com.grupocisc.healthmonitor.Report.activities.ReportActivity;
 import com.grupocisc.healthmonitor.Routines.activities.RoutinesActivity;
+import com.grupocisc.healthmonitor.Services.AssistantService;
+import com.grupocisc.healthmonitor.Services.BarometerService;
+import com.grupocisc.healthmonitor.Services.ProgressIntentService;
 import com.grupocisc.healthmonitor.Services.SendDataMyService;
 import com.grupocisc.healthmonitor.Settings.activities.AboutActivity;
-import com.grupocisc.healthmonitor.Settings.activities.TutorialActivity;
 import com.grupocisc.healthmonitor.Settings.activities.TutorialActivityV2;
 import com.grupocisc.healthmonitor.SocialNetworks.activities.SocialActivity;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
+import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Weight.activities.WeightActivity;
@@ -64,14 +73,26 @@ import com.grupocisc.healthmonitor.gcmClasses.RegistrationIntentService;
 import com.grupocisc.healthmonitor.login.activities.LoginActivity;
 import com.grupocisc.healthmonitor.login.activities.LoginBackPassword;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 /**
@@ -87,11 +108,28 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
+
+    //private BroadcastReceiver _networkStateReceiver; //V3
+
     private String token = "";
 
     private Call<IDoctorVinculado.DoctorVinculado> call_1; //CAMBIO
     private IDoctorVinculado.DoctorVinculado mLoginUser; //CAMBIO															   
     private IPushNotification.InsertNotification insertNotification;
+
+    private String StatusName = "";
+    private int IdStatus = 0;
+
+    private static final String enviadoServer = "false";
+    private static final String operacionI = "I";
+
+    private ImageView iv_est_1;
+    private ImageView iv_est_2;
+    private ImageView iv_est_3;
+    private ImageView iv_est_4;
+    private ImageView iv_est_5;
+
+
 
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
 
@@ -131,14 +169,294 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         String email = Utils.getEmailFromPreference(this) == null ? "" : Utils.getEmailFromPreference(this);
         notificaciones(email);
 
+        iv_est_1 = (ImageView) findViewById(R.id.img_est_1);
+        iv_est_2 = (ImageView) findViewById(R.id.img_est_2);
+        iv_est_3 = (ImageView) findViewById(R.id.img_est_3);
+        iv_est_4 = (ImageView) findViewById(R.id.img_est_4);
+        iv_est_5 = (ImageView) findViewById(R.id.img_est_5);
+
+
+//        File db =HealthMonitorApplicattion.getApplication().getDatabasePath("healthmonitorDB");
+//
+//        if (db.exists()) {
+//            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+//
+//            exportDB(db.getAbsolutePath());
+//        }
+
+
+
+        Imagenes();
+
         iniciarServicio();
+
+        //v3
+        if(!ServiceChecker.Current.isServiceRunning(this,ProgressIntentService.class)){
+
+            if(Utils.getEmailFromPreference(this)!=null){
+                InitAssistantService(this,TAG);
+                //InitBarometerReaderService(this,TAG);
+            }
+        }
+        else {
+            Log.i(TAG,"ProgressIntent is still running ");
+        }
 
         showHashKey(this);
     }
 
+//    void exportDB(String dbPath) {
+//        try {
+//            File dbFile = new File(dbPath);
+//            FileInputStream fis = new FileInputStream(dbFile);
+//
+//            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+//
+//            String outFileName = dir.getAbsolutePath();
+//            OutputStream output = new FileOutputStream(outFileName+"/healthmonitorDb.db3");
+//            byte[] buffer = new byte[1024];
+//            int length;
+//            while ((length = fis.read(buffer)) > 0) {
+//                output.write(buffer, 0, length);
+//            }
+//            output.flush();
+//            output.close();
+//            fis.close();
+//        } catch (Exception e) {
+//            Log.e("MainAC",e.getMessage());
+//        }
+//    }
+
+    //v3
+    public static void InitAssistantService(Context ctx,String TAG){
+        if(!ServiceChecker.Current.isServiceRunning(ctx,AssistantService.class)){
+            Intent assistantService = new Intent(ctx, AssistantService.class); //serv de tipo Intent
+            ctx.startService(assistantService); //ctx de tipo Context
+            Log.i(TAG, "Assistant service started");
+        } else {
+            Log.i(TAG, "Assistant service is already running");
+        }
+    }
+
+    public static void InitBarometerReaderService(Context ctx,String TAG){
+        if(!ServiceChecker.Current.isServiceRunning(ctx,BarometerService.class)){
+            Intent barometerService = new Intent(ctx, BarometerService.class); //serv de tipo Intent
+            ctx.startService(barometerService); //ctx de tipo Context
+            Log.i(TAG, "Barometer service started");
+        } else {
+            Log.i(TAG, "Barometer service is already running");
+        }
+    }
+
+    //v3
+    public void saveDataStateDB(String fecha, String hora, int IdStatus, String StatusName, String observacion) {
+        try {
+            if(Utils.getEmailFromPreference(getApplicationContext())!=null){
+                //setear datos al objeto y guardar y BD
+                Utils.DbsaveStateFromDatabase(-1,
+                        IdStatus,
+                        StatusName,
+                        fecha,
+                        hora,
+                        observacion,
+                        enviadoServer,
+                        operacionI,
+                        HealthMonitorApplicattion.getApplication().getStateDao());
+
+                Utils.generateToast(this, "Su estado de ánimo se ha guardado con éxito");
+
+            }
+            else {
+                generarAlertaNoRegistrado("No iniciado sesión");
+
+            }
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    unselectStates();
+                }
+            }, 500);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //v3
+    static final class CustomDate{
+
+        private static String _stringDate;
+
+        public static String getStringDate(){
+            return _stringDate;
+        }
+
+        private static String _stringHour;
+        public static String getStringHour(){
+            return _stringHour;
+        }
+
+        static void init(){
+            //obtener fechay hroa de Calendar
+            Calendar c = Calendar.getInstance();
+            Integer year = c.get(Calendar.YEAR);
+            Integer month = c.get(Calendar.MONTH)+1;
+            Integer day = c.get(Calendar.DAY_OF_MONTH);
+            Integer hour = c.get(Calendar.HOUR_OF_DAY);
+            Integer minute = c.get(Calendar.MINUTE);
+            Integer second = c.get(Calendar.SECOND);
+            //setear fecha
+
+            //String mes = (month + 1) < 10 ? "0" + (month + 1) : "" + (month);
+            String mes = month < 10 ? "0" + month : "" + month;
+            String dia = day < 10 ? "0" + day : "" + day;
+            //String date = ""+day+"/"+(++month)+"/"+year;
+            _stringDate = "" + dia + "/" + mes + "/" + year;
+
+            //setear hora
+            String hourString = hour < 10 ? "0" + hour : "" + hour;
+            String minuteString = minute < 10 ? "0" + minute : "" + minute;
+            //String secondString = second < 10 ? "0"+second : ""+second;
+            _stringHour = "" + hourString + ":" + minuteString;
+
+        }
+    }
+
+    //v3
+    public void Imagenes() {
+        iv_est_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_1();
+            }
+        });
+
+        iv_est_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_2();
+
+            }
+        });
+
+        iv_est_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_3();
+
+            }
+        });
+
+        iv_est_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_4();
+
+            }
+        });
+
+        iv_est_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage_estatus_5();
+
+            }
+        });
+    }
+
+    public void setImage_estatus_1() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_con));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName = getResources().getString(R.string.txt_sta_increible);
+        StatusName= String.format(String.valueOf(getResources().getColor(R.color.status_orange)));
+
+        IdStatus = 1;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+
+    }
+
+    public void setImage_estatus_2() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_con));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName = getResources().getString(R.string.txt_sta_bien);
+        IdStatus = 2;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+
+    }
+
+    public void setImage_estatus_3() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_con));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName = getResources().getString(R.string.txt_sta_normal);
+        IdStatus = 3;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+
+    }
+
+    public void setImage_estatus_4() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_con));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName = getResources().getString(R.string.txt_sta_mal);
+        IdStatus = 4;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+    }
+
+    public void setImage_estatus_5() {
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_con));
+        StatusName = getResources().getString(R.string.txt_sta_horrible);
+        IdStatus = 5;
+
+        CustomDate.init();
+
+        saveDataStateDB(CustomDate.getStringDate(),CustomDate.getStringHour(),IdStatus,StatusName,"");
+    }
+
+    //v3
+    void unselectStates(){
+        iv_est_1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_increible_sin));
+        iv_est_2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_feliz_sin));
+        iv_est_3.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_serio_sin));
+        iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
+        iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
+        StatusName="";
+        IdStatus =0;
+        //StatusName = getResources().getString(R.string.txt_sta_increible);
+        //StatusName= String.format(String.valueOf(getResources().getColor(R.color.status_orange)));
+    }
+
     //inico servicio enviar data webservice
     public void iniciarServicio() {
-        if (!isMyServiceRunning(SendDataMyService.class)) { //método que determina si el servicio ya está corriendo o no
+        if (!ServiceChecker.Current.isServiceRunning(this,SendDataMyService.class)) { //método que determina si el servicio ya está corriendo o no
             Intent serv = new Intent(this, SendDataMyService.class); //serv de tipo Intent
             this.startService(serv); //ctx de tipo Context
             Log.e(TAG, "Send Data WS Service started");
@@ -147,15 +465,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
+
     //fin servicio enviar data webservice
 
     @Override
@@ -340,7 +650,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     private void enviartoken(String userMail, String gcmToken) {
-        IPushNotification notifi = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IPushNotification.class);
+        IPushNotification notifi = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
         final Call<IPushNotification.InsertNotification> insertNotificationCall = notifi.INSERT_NOTIFICATION_CALL(userMail, gcmToken);
         insertNotificationCall.enqueue(new Callback<IPushNotification.InsertNotification>() {
             @Override
@@ -393,6 +703,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     protected void onDestroy() {
         super.onDestroy();
 
+//        if(_networkStateReceiver!=null)
+//            unregisterReceiver(_networkStateReceiver);
     }
 
 
@@ -464,6 +776,25 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 .show();
     }
 
+    public void generarAlertaNoRegistrado(String message) {
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("" + getString(R.string.txt_atencion))
+                .setContentText(message)
+                .setConfirmText("OK")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+
+                        notificaciones("");//CAMBIO
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);  // envia al login
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
+                })
+                .show();
+    }
+
     private void generateAlertDialog(String Title, String message) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("" + Title);
@@ -491,6 +822,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                         sDialog.dismissWithAnimation();
                         //eliminar preferencias
                         DeletePreferencesCallMainActivity();
+                        AssistantService.stopService(getApplicationContext());
+                        NotificationHelper.Current.cancelAllNotifications(getApplicationContext());
+                        BarometerService.Current.stopService(getApplicationContext());
                     }
                 })
                 .setCancelText("Cancelar")

@@ -224,7 +224,7 @@ public class MedicineUpdate extends AppCompatActivity implements DatePickerDialo
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    IRegCrtMedicamentos regCtrlMed = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterP().create(IRegCrtMedicamentos.class);
+                                    IRegCrtMedicamentos regCtrlMed = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegCrtMedicamentos.class);
                                     Call<IRegCrtMedicamentos.ActCtrlMedicamento> medicacionCall = regCtrlMed.ACTUALIZA_CTRL_MED_CALL(idMed, dosis,veces, fecha, obs);
                                     medicacionCall.enqueue(new Callback<IRegCrtMedicamentos.ActCtrlMedicamento>() {
                                         @Override

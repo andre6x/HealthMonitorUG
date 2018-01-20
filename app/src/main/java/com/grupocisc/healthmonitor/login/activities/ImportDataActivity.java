@@ -66,7 +66,6 @@ public class ImportDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gotoMain();
-
             }
         });
 
@@ -84,8 +83,5 @@ public class ImportDataActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP); //para borrar pila de actividades
         startActivity(intent);
     }
-
-
-
 
 }

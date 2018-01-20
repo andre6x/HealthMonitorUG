@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface IGetFeeding {
 
-    @GET("alimento_paciente/lista_alimento_paciente")
+    @GET("control/diabetes/alimento_paciente/lista_alimento_paciente")
     Call<ArrayList<RegistreFeeding>> getFeeding(@Query("email") String email);
 
     public class RegistreFeeding{

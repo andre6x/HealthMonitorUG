@@ -124,7 +124,7 @@ public class InsulinListFragment extends Fragment implements InsulinListAdapter.
         //obtener datos de la tabla
         try{
             //Pregunta si existen datos
-            ICunsulParamet CunsulParamet = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(ICunsulParamet.class);
+            ICunsulParamet CunsulParamet = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(ICunsulParamet.class);
             Call<List<ICunsulParamet.Objeto>> call_1 = CunsulParamet.CunsulParamet(email, parametro, fechaIni , fechaFin);
             call_1.enqueue(new Callback<List<ICunsulParamet.Objeto>>() {
                 @Override

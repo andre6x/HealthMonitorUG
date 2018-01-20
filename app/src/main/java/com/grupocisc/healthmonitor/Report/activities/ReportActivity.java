@@ -80,10 +80,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     private  Call<List<ICunsulParamet.Objeto>> call_5;
     private Call<List<IConsulPresion.Objeto>> call_2;
     private static List<ICunsulParamet.Objeto> rowsObjeto;
-   // private static List<ICunsulParamet.Objeto> rowsInsulin;
-    //private static List<ICunsulParamet.Objeto> rowsPulse;
-    //private static List<ICunsulParamet.Objeto> rowsWeight;
-    //private static List<ICunsulParamet.Objeto> rowsGlucose;
 
     private static List<IConsulPresion.Objeto> rowsIPressure;
     private static List<IRegCrtMedicamentos.ConsulCtrlMedicamentos> rowsIMedicines;
@@ -163,7 +159,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         rango = true; //por rango
         lytExportRango.setVisibility(View.VISIBLE);
 
-        //famReport.setOnClickListener(this);
         menu1.setOnClickListener(this);
         menu2.setOnClickListener(this);
         lytInicio.setOnClickListener(this);
@@ -353,10 +348,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
             }
             break;
             case R.id.subFloatingAbrir:{
-               /* if(!isOnline(this)) {
-                    Utils.generarAlerta(this, getString(R.string.txt_atencion), getString(R.string.sin_conexion));
-                    return;
-                }*/
 
                 enviar = false;
                 if(rdbGeneral.isChecked()
@@ -365,7 +356,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                         && !chkInsulina.isChecked()
                         && !chkPeso.isChecked()
                         && !chkPresionP.isChecked()) {
-                    //generarAlerta(this, "Error!", "Debe seleccionar al menos una opción.");
                     return;
                 }
                 if(rdbIndividual.isChecked()
@@ -526,7 +516,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         Toast.makeText(context, "Abriendo PDF.", Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        //intent.setDataAndType(Uri.fromFile(filePath),"application/pdf");
         intent.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", filePath),"application/pdf");
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -554,7 +543,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
         emailIntent.setType("application/pdf");
 
-        //context.startActivity(Intent.createChooser(emailIntent, "Send using:"));
         try {
             startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
             finish();
@@ -641,9 +629,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
     private void ConsultaGral(String s,final String fechaIni, final String fechaFin, final File myFile) throws FileNotFoundException {
-        //ICunsulParamet CunsulParamet = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(ICunsulParamet.class);
-        //IConsulPresion ConsulPresion = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterP().create(IConsulPresion.class);
-        //IRegCrtMedicamentos iRegCrtMedicamentos = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterP().create(IRegCrtMedicamentos.class);
 
         String suba = fechaIni.substring(0, 4);
         String subm  = fechaIni.substring(5, 7);
@@ -664,7 +649,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                     //validar si en la tabla ahi datos mayor a 0
                     if (Utils.GetInsulinFromDatabasePDF(HealthMonitorApplicattion.getApplication().getInsulinDao(), FechaI, FechaF).size() > 0) {
                         //asignamos datos de la tabla a la lista de objeto
-                        //Log.e(TAG,"ENTRA AL IF GLUCOSA DEL PDF");
                         Log.i(TAG, "fechas: " + fechaIni + fechaFin);
 
 
@@ -719,7 +703,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                     //validar si en la tabla ahi datos mayor a 0
                     if (Utils.GetPulseFromDatabasePDF(HealthMonitorApplicattion.getApplication().getPulseDao(), FeIniV, FeFinV).size() > 0) {
                         //asignamos datos de la tabla a la lista de objeto
-                        //      Log.e(TAG,"ENTRA AL IF Pulso-Presion DEL PDF");
                         rowsPulse = Utils.GetPulseFromDatabasePDF(HealthMonitorApplicattion.getApplication().getPulseDao(), FeIniV, FeFinV);
                         genTableDocGral("presion", myFile, fechaIni, fechaFin);
                         //obtenemos el tamaño de la listaDEobjetos , para recorrerlo
@@ -877,7 +860,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                 tableAsthma.addCell(rowsAsthma.get(cont).getObservacion());
                 cont++;
             } while (cont < ListSize);
-            //ConsultaGral("asma", fechaIni, fechaFin, myFile);
         }
 
         //Pulso presion
@@ -941,7 +923,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                                 //validar si en la tabla ahi datos mayor a 0
                 if (Utils.GetInsulinFromDatabasePDF(HealthMonitorApplicattion.getApplication().getInsulinDao(), FechaI, FechaF).size() > 0 ){
                     //asignamos datos de la tabla a la lista de objeto
-                    //Log.e(TAG,"ENTRA AL IF GLUCOSA DEL PDF");
                     rowsInsulin = Utils.GetInsulinFromDatabasePDF(HealthMonitorApplicattion.getApplication().getInsulinDao(), FechaI, FechaF);
                     genTableDocInd(parametro, fileName);
                     //obtenemos el tamaño de la listaDEobjetos , para recorrerlo

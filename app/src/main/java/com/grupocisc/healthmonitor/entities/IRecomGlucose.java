@@ -15,11 +15,11 @@ import retrofit2.http.Query;
  */
 public interface IRecomGlucose {
 
-    @POST("diabetes/patientUsers/registerGlucose")
+    @POST("controlServices/diabetes/patientUsers/registerGlucose")
     Call<RecomGlucose> setSendregisterGlucosaFrom(@Body rowGlucosa rGlucosa);
 
 
-    @POST("diabetes/patientUsers/updateGlucose")
+    @POST("controlServices/diabetes/patientUsers/updateGlucose")
     Call<RecomGlucose> setSendregisterGlucosaUpdateFrom(@Body rowGlucosaUpdate rGlucosa);
 
     public class RecomGlucose{

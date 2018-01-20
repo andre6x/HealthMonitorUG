@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 
 public interface IConsulMyDoctors {
 
-    @POST("diabetes/patientUsers/queryAssociatedDoctor")
+    @POST("controlServices/diabetes/patientUsers/queryAssociatedDoctor")
     Call<Obj> getConsultMyDoctors(@Body ObjUser objUser);
 
 

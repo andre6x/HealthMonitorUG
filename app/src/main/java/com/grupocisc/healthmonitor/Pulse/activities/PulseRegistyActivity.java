@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Insulin.TextValidator;
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Utils.NotificationHelper;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IPulse;
 import com.grupocisc.healthmonitor.entities.IRegCrtPacient;
@@ -78,6 +79,11 @@ public class PulseRegistyActivity extends AppCompatActivity implements DatePicke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getIntent()!=null)
+        {
+            NotificationHelper.Current.cancelNotificationFromActivity(this,getIntent().getExtras());
+        }
+
         // TRANSITIONS
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
             TransitionInflater inflater = TransitionInflater.from( this );
@@ -173,12 +179,14 @@ public class PulseRegistyActivity extends AppCompatActivity implements DatePicke
             //valida los rangos dw pulso
             public void validate(EditText editText, String text) {
                 if (!text.isEmpty() && Utils.isNumeric(text))
-
                 {
+                    //El 18 de enero del 2018 se pidio quitar esta validación
+                    /*
                     if (Float.parseFloat(text) > 195)
                         txt_concentration.setError("El valor de su pulso no puede ser mayor a 195 PPM. Por favor Verifique");
                     if (Float.parseFloat(text) < 39)
                         txt_concentration.setError("El valor de su pulso no puede ser menor a 39 PPM.  Por favor Verifique");
+                    */
                 }
             }
         });
@@ -187,12 +195,14 @@ public class PulseRegistyActivity extends AppCompatActivity implements DatePicke
             @Override
             public void validate(EditText editText, String text) {
                 if (!text.isEmpty() && Utils.isNumeric(text))
-
                 {
+                    //El 18 de enero del 2018 se pidio quitar esta validación
+                    /*
                     if (Float.parseFloat(text) > 230)
                         txt_maxpressure.setError("El valor de su presion sistólica no puede ser mayor a 230 Por favor Verifique");
                     if (Float.parseFloat(text) < 50)
                         txt_maxpressure.setError("El valor su presion sistólica no puede ser menor a 50.  Por favor Verifique");
+                    */
                 }
             }
         });
@@ -201,12 +211,14 @@ public class PulseRegistyActivity extends AppCompatActivity implements DatePicke
             @Override
             public void validate(EditText editText, String text) {
                 if (!text.isEmpty() && Utils.isNumeric(text))
-
                 {
+                    //El 18 de enero del 2018 se pidio quitar esta validación
+                    /*
                     if (Float.parseFloat(text) > 135)
                         txt_minpressure.setError("El valor de su presion diastólica no puede ser mayor a 135 Por favor Verifique");
                     if (Float.parseFloat(text) < 35)
                         txt_minpressure.setError("El valor su presion diastólica no puede ser menor a 35.  Por favor Verifique");
+                    */
                 }
             }
         });
@@ -606,6 +618,8 @@ public class PulseRegistyActivity extends AppCompatActivity implements DatePicke
     }
 
     private boolean validaRangos(float sistolica, float Diastolica ) {
+        //Comentado el 18 de enero del 2018. Pidieron quitar la validación.
+        /*
         if (sistolica>= 50 & sistolica <=90 )
         {
             if (Diastolica>= 35 & Diastolica <=60)
@@ -649,6 +663,9 @@ public class PulseRegistyActivity extends AppCompatActivity implements DatePicke
             }
         }
         return false;
+        */
+
+        return true;
     }
 
 }

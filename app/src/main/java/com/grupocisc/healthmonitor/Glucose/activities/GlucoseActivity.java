@@ -29,7 +29,7 @@ public class GlucoseActivity extends AppCompatActivity {
     public static FloatingActionButton fab;
 
     MainPagerAdapter adapter;
-    CharSequence Titles[]={"REGISTRO","ESTADISTICAS"};
+    CharSequence Titles[]={"REGISTRO","ESTADISTICAS","RECOMENDACIONES"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,19 +91,6 @@ public class GlucoseActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.mipmap.back); //buton back tollbar
         getSupportActionBar().setTitle("GLUCOSA"); //titulo tollbar
         toolbar.setTitleTextColor(getResources().getColor(R.color.white)); //color tollbar title
-
-        //centra el title del tolbar
-        /*try {
-            Field declaredField = toolbar.getClass().getDeclaredField("mTitleTextView");
-            declaredField.setAccessible(true);
-            TextView titleTextView = (TextView) declaredField.get(toolbar);
-            ViewGroup.LayoutParams layoutParams = titleTextView.getLayoutParams();
-            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            titleTextView.setLayoutParams(layoutParams);
-            titleTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-        } catch (Exception e) {
-            //"Error!"
-        }*/
     }
 
     //se ejecuta al seleccionar el icon back del toolbar
@@ -136,6 +123,7 @@ public class GlucoseActivity extends AppCompatActivity {
         adapter =  new MainPagerAdapter(this.getSupportFragmentManager(),Titles,Titles.length);
         pager.setAdapter(adapter);
         tabs.setupWithViewPager(pager);
+        //pager.setOffscreenPageLimit(3);
         setupTabIcons();
     }
 
@@ -143,6 +131,7 @@ public class GlucoseActivity extends AppCompatActivity {
     private void setupTabIcons() {
         tabs.getTabAt(0).setIcon(R.mipmap.registro);
         tabs.getTabAt(1).setIcon(R.mipmap.estadistica);
+        tabs.getTabAt(2).setIcon(R.mipmap.medical_history);
     }
 
 

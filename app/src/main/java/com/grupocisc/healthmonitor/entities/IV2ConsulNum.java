@@ -11,7 +11,7 @@ import retrofit2.http.POST;
  */
 public interface IV2ConsulNum {
 
-    @POST("diabetes/login/validateRegister")
+    @POST("controlServices/diabetes/login/validateRegister")
     Call<ConsulNum> ConsultaNumero(@Body ObjUserNum rPeso);
     class ConsulNum{
         @Getter

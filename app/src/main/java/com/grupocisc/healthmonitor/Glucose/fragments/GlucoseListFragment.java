@@ -90,21 +90,7 @@ public class GlucoseListFragment extends Fragment implements GlucoseListAdapter.
         }
     }
 
-    /*
-    //ocultar flotingaction button
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (this.isVisible()) {
-            if (isVisibleToUser) {
-                ComplActivity.fab.setVisibility(View.VISIBLE);
-            } else {
-                ComplActivity.fab.setVisibility(View.GONE);
-            }
-        }
-    }
 
-*/
     @Override
     public void onItemClicked(View view, int position) {
         int idMenu = rowsGlucose.get(position).getId() ;

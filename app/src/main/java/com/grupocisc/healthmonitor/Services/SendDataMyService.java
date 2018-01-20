@@ -14,6 +14,7 @@ import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.EAlarmDetails;
 import com.grupocisc.healthmonitor.entities.EAlarmTakeMedicine;
+import com.grupocisc.healthmonitor.entities.IState;
 import com.grupocisc.healthmonitor.entities.IV2Cholesterol;
 import com.grupocisc.healthmonitor.entities.IColesterol;
 import com.grupocisc.healthmonitor.entities.IConsulHba1c;
@@ -25,7 +26,6 @@ import com.grupocisc.healthmonitor.entities.EInsulin;
 import com.grupocisc.healthmonitor.entities.EMedicineUser;
 import com.grupocisc.healthmonitor.entities.IConsulMedicines;
 
-import com.grupocisc.healthmonitor.entities.IRegCrtMedicamentos;
 import com.grupocisc.healthmonitor.entities.IRegWeight;
 import com.grupocisc.healthmonitor.entities.ISendPulsePresion;
 import com.grupocisc.healthmonitor.entities.IV2Insulina;
@@ -35,7 +35,6 @@ import com.grupocisc.healthmonitor.entities.IV2RegisterMedication;
 import com.grupocisc.healthmonitor.entities.IWeight;
 import com.grupocisc.healthmonitor.entities.IRegisteredMedicines;
 import com.grupocisc.healthmonitor.entities.IV2RegistreState;
-import com.grupocisc.healthmonitor.entities.IState;
 import com.grupocisc.healthmonitor.entities.rowV2Cholesterol;
 import com.grupocisc.healthmonitor.entities.rowV2CholesterolUpdate;
 import com.grupocisc.healthmonitor.entities.rowGlucosa;
@@ -223,7 +222,7 @@ public class SendDataMyService extends Service {
 
         //INSERTAR
         if(pulse.getOperacion().equals(operacionI)) {
-            ISendPulsePresion Ipulse = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(ISendPulsePresion.class);
+            ISendPulsePresion Ipulse = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(ISendPulsePresion.class);
             call_3 = Ipulse.setSendPulsePresionFrom(new rowPulsePresion(Email, presionSistolica,presionDistolica,medido,pulso,fecha, observacion ));
             call_3.enqueue(new Callback<ISendPulsePresion.SendPulsePresion>() {
                 @Override
@@ -247,7 +246,7 @@ public class SendDataMyService extends Service {
             });
         }else if(pulse.getOperacion().equals(operacionU)) {
             //ACTUALIZAR
-            ISendPulsePresion Ipulse = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(ISendPulsePresion.class);
+            ISendPulsePresion Ipulse = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(ISendPulsePresion.class);
             call_3 = Ipulse.setSendPulsePresionUpdateFrom(new rowPulsePresionUpdate(pulse.getIdBdServer(),presionSistolica,presionDistolica,medido,pulso,fecha, observacion ));
             call_3.enqueue(new Callback<ISendPulsePresion.SendPulsePresion>() {
                 @Override
@@ -388,7 +387,7 @@ public class SendDataMyService extends Service {
             Log.e(TAG, idGlucosa+" "+  measureUnits  +"-"+ fecha +"-"+ observacion );
             //INSERTAR
             if(glucosa.getOperacion().equals(operacionI)) {
-                IRecomGlucose IGlucosa = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IRecomGlucose.class);
+                IRecomGlucose IGlucosa = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRecomGlucose.class);
                 glucose = IGlucosa.setSendregisterGlucosaFrom(new rowGlucosa(Email, measureUnits,fecha, observacion ));
                 glucose.enqueue(new Callback<IRecomGlucose.RecomGlucose>() {
                     @Override
@@ -413,7 +412,7 @@ public class SendDataMyService extends Service {
                 });
             }else if(glucosa.getOperacion().equals(operacionU)) {
                 //ACTUALIZAR
-                IRecomGlucose IGlucosa = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IRecomGlucose.class);
+                IRecomGlucose IGlucosa = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRecomGlucose.class);
                 glucose = IGlucosa.setSendregisterGlucosaUpdateFrom(new rowGlucosaUpdate(glucosa.getIdBdServer(), measureUnits,fecha, observacion ));
                 glucose.enqueue(new Callback<IRecomGlucose.RecomGlucose>() {
                     @Override
@@ -564,7 +563,7 @@ public class SendDataMyService extends Service {
             Log.e(TAG,"PESO"+ Email +"-"+ peso +"-"+ tmb +"-"+ porcentajeAgua +"-"+ porcentajeGrasa+"-"+ dmo+"-"+ masaMuscular +"-"+ fecha +"-"+ observacion );
 
             if (weight.getOperacion().equals(operacionI)) {
-                IRegWeight IWeight = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IRegWeight.class);
+                IRegWeight IWeight = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegWeight.class);
                 call_4 = IWeight.setSendregisterWeightFrom(new rowPeso(Email, peso, imc, tmb, porcentajeAgua, porcentajeGrasa, dmo, masaMuscular, fecha, observacion));
                 call_4.enqueue(new Callback<IRegWeight.RegWeight>() {
                     @Override
@@ -589,7 +588,7 @@ public class SendDataMyService extends Service {
                 });
             } else if (weight.getOperacion().equals(operacionU)) {
                 //ACTUALIZAR
-                IRegWeight IWeight =  HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IRegWeight.class);
+                IRegWeight IWeight =  HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegWeight.class);
                 call_4 = IWeight.setSendWeightUpdateFrom(new rowPesoUpdate(weight.getIdBdServer() , peso, imc, tmb, porcentajeAgua, porcentajeGrasa, dmo, masaMuscular, fecha, observacion));
                 call_4.enqueue(new Callback<IRegWeight.RegWeight>() {
                     @Override
@@ -726,7 +725,7 @@ public class SendDataMyService extends Service {
         try
         {
             if(eInsulin.getOperationDb().equals(operacionI)) {
-                IV2Insulina CrtPacient = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2Insulina.class);
+                IV2Insulina CrtPacient = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2Insulina.class);
                 call_7 = CrtPacient.setSendInsulinFrom(new rowInsulin(Email, idInsulin, fechaHora, observacion ));
                 call_7.enqueue(new Callback<IV2Insulina.Insulina>() {
                     @Override
@@ -753,7 +752,7 @@ public class SendDataMyService extends Service {
                 });
             }else if(eInsulin.getOperationDb().equals(operacionU)){
                 //ACTUALIZAR
-                IV2Insulina CrtPacient = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2Insulina.class);
+                IV2Insulina CrtPacient = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2Insulina.class);
                 call_7 = CrtPacient.setSendInsulinUpdateFrom(new rowInsulinUpdate(eInsulin.getIdBdServer(), insulina, fechaHora, observacion));
                 call_7.enqueue(new Callback<IV2Insulina.Insulina>() {
                     @Override
@@ -894,7 +893,7 @@ public class SendDataMyService extends Service {
         Log.e(TAG, "EstadoAnimo:"+id_estado_animo +"*fecha:"+ fecha +"*observacion:"+ observacion);
 
         if(state.getOperationDb().equals(operacionI)) {
-            IV2RegistreState ConsulState = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2RegistreState.class);
+            IV2RegistreState ConsulState = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2RegistreState.class);
             call_2 = ConsulState.setSendStateFrom(new rowV2State(Email, id_estado_animo, fecha, observacion));
             call_2.enqueue(new Callback<IV2RegistreState.RegistroState>() {
                 @Override
@@ -920,7 +919,7 @@ public class SendDataMyService extends Service {
                 }
             });
         }else if(state.getOperationDb().equals(operacionU)) {
-            IV2RegistreState ConsulState = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2RegistreState.class);
+            IV2RegistreState ConsulState = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2RegistreState.class);
             call_2 = ConsulState.setSendStateUpdateFrom(new rowV2StateUpdate(state.getIdBdServer(), id_estado_animo, fecha, observacion));
             call_2.enqueue(new Callback<IV2RegistreState.RegistroState>() {
                 @Override
@@ -1055,7 +1054,7 @@ public class SendDataMyService extends Service {
         try{
             if(cholesterol.getOperacion().equals(operacionI)) {
 
-                IV2Cholesterol CrtPacientCholesterol = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2Cholesterol.class);
+                IV2Cholesterol CrtPacientCholesterol = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2Cholesterol.class);
                 call_5 = CrtPacientCholesterol.setSendCholesterolFrom(new rowV2Cholesterol(Email,  colesterol,  trigliceridos, hdl, ldl,  fecha, observacion ));
                 call_5.enqueue(new Callback<IV2Cholesterol.Cholesterol>() {
                     @Override
@@ -1080,7 +1079,7 @@ public class SendDataMyService extends Service {
                 //ACTUALIZAR
 
 
-                IV2Cholesterol CrtPacientCholesterol = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2Cholesterol.class);
+                IV2Cholesterol CrtPacientCholesterol = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2Cholesterol.class);
                 call_5=CrtPacientCholesterol.setSendCholesterolupdateFrom(new rowV2CholesterolUpdate(cholesterol.getIdBdServer(),  colesterol, trigliceridos, hdl, ldl,  fecha, observacion));
                 call_5.enqueue(new Callback<IV2Cholesterol.Cholesterol>() {
                     @Override
@@ -1228,7 +1227,7 @@ public class SendDataMyService extends Service {
 
         try {
             if (hba1.getOperacion().equals(operacionI)) {
-                IConsulHba1c CrtPacientHba1c = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IConsulHba1c.class);
+                IConsulHba1c CrtPacientHba1c = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulHba1c.class);
                 call_6 = CrtPacientHba1c.setSendregisterHba1cFrom(new rowV2Hba1(Email, hba1c, cetona, fecha, observacion));
                 call_6.enqueue(new Callback<IConsulHba1c.Hba>() {
                     @Override
@@ -1252,7 +1251,7 @@ public class SendDataMyService extends Service {
                     }
                 });
             }else if(hba1.getOperacion().equals(operacionU)){
-                IConsulHba1c CrtPacientHba1c = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IConsulHba1c.class);
+                IConsulHba1c CrtPacientHba1c = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulHba1c.class);
                 call_6 = CrtPacientHba1c.setSendregisterHba1cUpdateFrom(new rowV2Hba1Update(hba1.getIdBdServer(), hba1c, cetona, fecha, observacion));
                 call_6.enqueue(new Callback<IConsulHba1c.Hba>() {
                     @Override
@@ -1393,7 +1392,7 @@ public class SendDataMyService extends Service {
         Log.i(TAG, Method + "Init...");
         String userMail = eMedicineUser.getEmail(); // Utils.getEmailFromPreference(this);
 
-        IConsulMedicines regMed = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterP().create(IConsulMedicines.class);
+        IConsulMedicines regMed = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulMedicines.class);
         medicacionCall = regMed.RegMedicacion(userMail, eMedicineUser.getIdMedicacion(), eMedicineUser.getFechaRegistro());
         medicacionCall.enqueue(new Callback<IConsulMedicines.RegMedicacion>() {
             @Override
@@ -1508,18 +1507,8 @@ public class SendDataMyService extends Service {
         String Method = "[restartLoadingSendDataWsMedicineUserControl]";
         Log.i(TAG, Method + "Init...");
 
-        IV2RegisterMedication regCtrlMed = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2RegisterMedication.class);
+        IV2RegisterMedication regCtrlMed = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2RegisterMedication.class);
         if (iRegisteredMedicines.getOperationDb().equals(operacionI)){
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:identifier " + iRegisteredMedicines.getEmail()            );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:medicationID " + iRegisteredMedicines.getIdServerDb()       );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:medicineID " + iRegisteredMedicines.getId_medicacion()    );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:doseMedicine " + iRegisteredMedicines.getDosis()            );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:frequencyType " + iRegisteredMedicines.getReminderTypeCode() );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:times " + iRegisteredMedicines.getReminderTimeCode()   );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:frequencyDescription " + iRegisteredMedicines.getDiasMedicacion() );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:startDate " + iRegisteredMedicines.getFechaInicio()      );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:endDate " + iRegisteredMedicines.getFechaFin()         );
-//            Log.i(TAG, "restartLoadingSendDataWsMedicineUserControl:observations " + iRegisteredMedicines.getConsumo_medicina() );
 
             medUserCtrlCall = regCtrlMed.RegisterMedication (new IV2RegisterMedication.ObjRegisterMedication(
                             iRegisteredMedicines.getEmail(),
@@ -1533,6 +1522,7 @@ public class SendDataMyService extends Service {
                             iRegisteredMedicines.getConsumo_medicina()
                     )
             );
+
             medUserCtrlCall.enqueue(new Callback<IV2RegisterMedication.MedicationRegister>() {
                 @Override
                 public void onResponse(Call<IV2RegisterMedication.MedicationRegister> call, Response<IV2RegisterMedication.MedicationRegister> response) {
@@ -1716,7 +1706,7 @@ public class SendDataMyService extends Service {
         String Method = "[restartLoadingSendDataWsMedicineAlarm]";
         Log.i(TAG, Method + "Init...");
         // getRestCISCAdapterV2
-        IV2RegisterAlarmMedication regCtrlMed = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2RegisterAlarmMedication.class);
+        IV2RegisterAlarmMedication regCtrlMed = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2RegisterAlarmMedication.class);
         Log.i(TAG, Method + "H=" + alarmDetails.getAlarmDetailHour().substring(0,5) );
         Log.i(TAG, Method + "F=" + alarmDetails.getAlarmDetailCreateDate()  .substring(0,10) );
         medAlarmCall = regCtrlMed.registerAlarmMedication (new IV2RegisterAlarmMedication.ObjRegisterAlarmMedication (
@@ -1841,7 +1831,7 @@ public class SendDataMyService extends Service {
     private void restartLoadingSendDataWsAlarmTakeMedicine(final EAlarmTakeMedicine alarmTakeMedicine) {
         String Method = "[restartLoadingSendDataWsAlarmTakeMedicine]";
         Log.i(TAG, Method + "Init...");
-        IV2RegisterAlarmTakeMedicine regAlarmTakeMedicine = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IV2RegisterAlarmTakeMedicine.class);
+        IV2RegisterAlarmTakeMedicine regAlarmTakeMedicine = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IV2RegisterAlarmTakeMedicine.class);
 
         medAlarmTakeCall = regAlarmTakeMedicine.registerAlarmTakeMedicine (new IV2RegisterAlarmTakeMedicine.ObjRegisterAlarmTakeMedicine(
                 alarmTakeMedicine.getAlarmDetailId()

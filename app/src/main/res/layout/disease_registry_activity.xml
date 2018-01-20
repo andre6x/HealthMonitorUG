@@ -68,6 +68,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimary"
                             android:hint="Buscar patología:"
+                            android:maxLength="30"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                     </android.support.design.widget.TextInputLayout>
@@ -135,6 +136,7 @@
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
                         android:hint="Observaciones"
+                        android:maxLength="150"
                         android:inputType="textEmailAddress"
                         android:textSize="14sp" />
                 </android.support.design.widget.TextInputLayout>

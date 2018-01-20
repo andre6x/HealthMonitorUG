@@ -122,7 +122,7 @@ public class NotificationsTipsAsma extends Fragment {
         try{
             int id_enfermedad = 2; // asma
             //Pregunta si existen datos
-            IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2IP().create(IPushNotification.class);
+            IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
             call_1 = notifiMensajes.getTips(id_enfermedad);
             call_1.enqueue(new Callback<List<IPushNotification.TipsMensajes>>() {
                 @Override

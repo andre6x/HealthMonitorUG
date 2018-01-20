@@ -17,7 +17,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,7 +33,6 @@ import android.widget.Toast;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
 import com.grupocisc.healthmonitor.R;
-import com.grupocisc.healthmonitor.Services.AlarmGetAllMedicineReceiver;
 import com.grupocisc.healthmonitor.Services.AlarmGetAllMedicineService;
 import com.grupocisc.healthmonitor.entities.EAlarmDetails;
 import com.grupocisc.healthmonitor.entities.EAlarmReminderTime;
@@ -734,7 +732,10 @@ public class Utils {
         return SharedPreferencesManager.getValorEsperado(ctx, PREFERENCIA_USER, KEY_ASMA);
     }
 
-
+    //V3
+    public static String getDiabetesType(Context ctx){
+        return SharedPreferencesManager.getValorEsperado(ctx,PREFERENCIA_USER, KEY_TIPO_DIABETES);
+    }
 
 //fin de preferencias
 
@@ -945,6 +946,17 @@ public class Utils {
         GenericRawResults<IPulse> rawResults = PulseDao.queryRaw(query, PulseDao.getRawRowMapper());
         pulse = rawResults.getResults();
         return pulse;
+    }
+
+    //Obtiene los registros para verificar si no se han ingreado datos recientemente V3
+    public static List<IPulse> GetPulseFromDataBase(Dao<IPulse,Integer> _pulseDao) throws SQLException, java.sql.SQLException
+    {
+        List<IPulse> _pulseCollection = null;
+        String query="SELECT fecha FROM PulseTable";
+
+        GenericRawResults<IPulse> result = _pulseDao.queryRaw(query,_pulseDao.getRawRowMapper());
+        _pulseCollection = result.getResults();
+        return  _pulseCollection;
     }
 
     /*OBTEBER REGISTROS DE LA TABLA BD*/
@@ -3163,7 +3175,7 @@ public  static  void UpdateStateFromDatabase(int idstate,
     public static List<IPulse> GetPulseFromDatabaseInf(Dao<IPulse, Integer> PulseDao) throws SQLException, java.sql.SQLException {
         String query = "SELECT  id , idBdServer , concentracion , maxPressure , minPressure " +
                 ", " + getDateStr("fecha","") +
-                ", hora , medido , observacion , enviadoServer , operacion " +
+                ", hora , medido , observacion , enviadoServ        er , operacion " +
                 " FROM PulseTable order by id DESC"; //LIMIT
         GenericRawResults<IPulse> rawResults = PulseDao.queryRaw(query, PulseDao.getRawRowMapper());
         return rawResults.getResults();
@@ -4962,5 +4974,17 @@ public static int DeleteByIdInsulin(Dao<EInsulin, Integer> InsulinDao, int id) t
         return eAlarmDetails;
     }
 
+    //v3
+    public static <T> T getLastRecordWithDate(Dao<T,Integer> data, String tableName) throws java.sql.SQLException {
+        String query ="SELECT fecha FROM "+tableName+" ORDER By strftime(fecha) DESC LIMIT 1";
+        GenericRawResults<T> rawResults = data.queryRaw(query, data.getRawRowMapper());
+        T result = rawResults.getFirstResult();
+        return result;
+    }
 
+    public static <T> T getLastRecord(Dao<T,Integer> data,String tableName) throws java.sql.SQLException {
+        String query = "SELECT * FROM "+tableName+" ORDER By strftime(fecha) DESC LIMIT 1";
+        GenericRawResults<T> rawResults = data.queryRaw(query,data.getRawRowMapper());
+        return rawResults.getFirstResult();
+    }
 }

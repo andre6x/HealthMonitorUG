@@ -14,8 +14,8 @@ import retrofit2.http.Query;
 public interface IUserLogin {
 
 
-    @POST("diabetes/patientUsers/validateAccount")
-    Call<UserLogin> LoginUser(@Body ObjLogin rPeso);
+    @POST("controlServices/diabetes/patientUsers/validateAccount")
+    Call<UserLogin> LoginUser(@Body ObjLogin rLogin);
     /*
     @GET("control/diabetes/personas/verifica_paciente")
     Call<UserLogin> LoginUser(@Query("email") String email,

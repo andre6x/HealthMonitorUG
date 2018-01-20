@@ -113,7 +113,7 @@ public class NotificationsMedical extends Fragment {
     public void selectDataNotifiDB(String token){
         try {
             showLoading();
-            IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2IP().create(IPushNotification.class);
+            IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
             call_1 = notifiMensajes.getPushNotification_3(token, email);
             call_1.enqueue(new Callback<List<IPushNotification.NotifiMensajes>>() {
                 @Override

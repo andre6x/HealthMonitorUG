@@ -1,12 +1,16 @@
 package com.grupocisc.healthmonitor.entities;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
+import com.grupocisc.healthmonitor.Utils.Utils;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-@DatabaseTable(tableName = "GlucoseTable")
+//@DatabaseTable(tableName = "GlucoseTable")
+@DatabaseTable(tableName = Constantes.TABLA_GLUCOSA)
+
 public class IGlucose implements Serializable{
 	
 	@DatabaseField(generatedId=true)

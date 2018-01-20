@@ -99,6 +99,7 @@
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/colorPrimary"
                                 android:hint="Buscar medicamento"
+                                android:maxLength="50"
                                 android:inputType="textEmailAddress"
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
@@ -128,6 +129,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="Nombre"
+                        android:maxLength="60"
                         android:textSize="8pt"
                         android:textStyle="bold" />
 
@@ -142,6 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="Descripción:"
+                        android:maxLength="100"
                         android:textSize="7pt" />
 
                     <TextView
@@ -157,6 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="Presentación:"
+                        android:maxLength="100"
                         android:textSize="7pt" />
 
                     <TextView

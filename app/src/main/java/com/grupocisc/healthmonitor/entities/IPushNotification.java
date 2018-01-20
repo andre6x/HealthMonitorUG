@@ -2,6 +2,7 @@ package com.grupocisc.healthmonitor.entities;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Getter;
@@ -18,7 +19,7 @@ import retrofit2.http.Query;
 public interface IPushNotification {
 
 
-    @PUT("notificaciones/inserta_actualiza_token")
+    @PUT("control/diabetes/notificaciones/inserta_actualiza_token")
     Call<InsertNotification> INSERT_NOTIFICATION_CALL( @Query("email") String email,
                                                        @Query("push") String push);
 
@@ -61,4 +62,17 @@ public interface IPushNotification {
 
     }
 
+
+
+    @GET("")
+    Call<List<Recommendation>> getRecommendations(@Query("id_patient") String id_patient, @Query("id_section")int id_section);
+    class Recommendation implements Serializable{
+        @Getter
+        @Setter
+        String content;
+
+        @Getter
+        @Setter
+        int id;
+    }
 }

@@ -28,7 +28,7 @@
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/header_exams"
+                android:src="@mipmap/header_exams2"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitXY"
                 app:layout_collapseMode="parallax" />

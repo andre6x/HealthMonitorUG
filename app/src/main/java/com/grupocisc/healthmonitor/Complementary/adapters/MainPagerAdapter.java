@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.grupocisc.healthmonitor.Complementary.fragments.ComplCholesterolListFragment;
 import com.grupocisc.healthmonitor.Complementary.fragments.ComplHba1cListFragment;
+import com.grupocisc.healthmonitor.Complementary.fragments.CholesterolRecomendationsFragment;
+import com.grupocisc.healthmonitor.Complementary.fragments.Hba1cRecomendationsFragment;
 //import com.grupocisc.healthmonitor.Complementary.fragments.ComplKetoneListFragment;
 
 
@@ -37,11 +39,21 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
             ComplCholesterolListFragment tab1 = new ComplCholesterolListFragment();
             return tab1;
         }
-        else           // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else if(position ==1)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        {
+            CholesterolRecomendationsFragment tab3 = new CholesterolRecomendationsFragment();
+            return tab3;
+        }
+        else if(position ==2)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             ComplHba1cListFragment tab2 = new ComplHba1cListFragment();
             return tab2;
         }
+        else {
+            Hba1cRecomendationsFragment tab3 = new Hba1cRecomendationsFragment();
+            return tab3;
+        }
+
 
     }
 

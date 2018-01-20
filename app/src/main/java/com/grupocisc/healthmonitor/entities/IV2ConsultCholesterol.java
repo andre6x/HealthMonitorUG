@@ -16,7 +16,7 @@ import retrofit2.http.POST;
 
 public interface IV2ConsultCholesterol {
 
-    @POST("diabetes/patientUsers/queryCholesterolLog")
+    @POST("controlServices/diabetes/patientUsers/queryCholesterolLog")
     Call<Obj> getConsultCholesterol(@Body ObjUserdate objUser);
 
 

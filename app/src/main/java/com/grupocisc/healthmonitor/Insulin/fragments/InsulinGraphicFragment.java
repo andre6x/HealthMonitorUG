@@ -238,7 +238,7 @@ public class InsulinGraphicFragment extends Fragment {
 
         try {
 
-            ICunsulParamet CunsulParamet = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(ICunsulParamet.class);
+            ICunsulParamet CunsulParamet = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(ICunsulParamet.class);
             Call<List<ICunsulParamet.Objeto>> call_1 = CunsulParamet.HistorialDatos(email, "insulina", fechaDesde, fechaHasta);
             call_1.enqueue(new Callback<List<ICunsulParamet.Objeto>>() {
                 @Override

@@ -11,14 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.grupocisc.healthmonitor.Home.adapters.HomeAdapter;
-import com.grupocisc.healthmonitor.Pressure.adapters.PressureListAdapter;
-import com.grupocisc.healthmonitor.State.fragments.StateListFragment;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Utils.RecyclerViewAnimator;
-import com.grupocisc.healthmonitor.entities.IConsulState;
 import com.grupocisc.healthmonitor.entities.IState;
-import com.j256.ormlite.table.TableUtils;
 
 import java.util.List;
 
@@ -72,7 +67,7 @@ public class StateListAdapter extends RecyclerView.Adapter<StateListAdapter.MyVi
             case 2:
                 myViewHolder.txt_imagen.setImageResource(R.drawable.estado_feliz_con);
                 myViewHolder.txt_estado.setTextColor(ContextCompat.getColor(context, R.color.status_green));
-                myViewHolder.txt_estado.setText( "Feliz");
+                myViewHolder.txt_estado.setText("Bien");
                 break;
             case 3:
                 myViewHolder.txt_imagen.setImageResource(R.drawable.estado_serio_con);

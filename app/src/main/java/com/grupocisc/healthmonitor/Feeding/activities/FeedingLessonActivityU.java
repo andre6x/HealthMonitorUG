@@ -100,7 +100,7 @@ public class FeedingLessonActivityU extends AppCompatActivity {
 
     private void insertDiet() {
         String email = Utils.getEmailFromPreference(this);
-        IRegistreDiet iRegistreDiet = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IRegistreDiet.class);
+        IRegistreDiet iRegistreDiet = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegistreDiet.class);
         dietCall = iRegistreDiet.putDiet(email, idDieta, Math.round(ratingBar.getRating()));
         dietCall.enqueue(new Callback<IRegistreDiet.RegistreDiet>() {
             @Override

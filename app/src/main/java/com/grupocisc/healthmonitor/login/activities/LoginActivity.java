@@ -18,6 +18,9 @@ import android.widget.TextView;
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
 import com.grupocisc.healthmonitor.R;
+import com.grupocisc.healthmonitor.Services.AssistantService;
+import com.grupocisc.healthmonitor.Services.BarometerService;
+import com.grupocisc.healthmonitor.Utils.ServiceChecker;
 import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.entities.IUserLogin;
@@ -166,6 +169,9 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferencesManager.setValor(this, Utils.PREFERENCIA_USER, mLoginUser.getCellPhone()    , Utils.KEY_TELEFONO);
         SharedPreferencesManager.setValor(this, Utils.PREFERENCIA_USER, mLoginUser.getCountry() +""    , Utils.KEY_PAIS);
 
+        //v3
+        SharedPreferencesManager.setValor(this,Utils.PREFERENCIA_USER,mLoginUser.getAsma()+"", Utils.KEY_ASMA);
+
         //enviar a importar data
         Intent intent = new Intent(this, ImportDataActivity.class);  // enviar a IMPORTA DATA y luego al main
         startActivity(intent);
@@ -183,7 +189,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //enviar webservice
         //APUNTANDO AA METODO CISC
-        IUserLogin login = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IUserLogin.class);
+        IUserLogin login = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IUserLogin.class);
         Log.i(TAG, "restartLoadingEnviarData: " + user_email +" - "+ user_pass  );
         call_1 = login.LoginUser( new ObjLogin(user_email,user_pass)  );
         call_1.enqueue(new Callback<IUserLogin.UserLogin>() {
@@ -211,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     public void postExecutionLogin(){
         showLayoutDialog();
 

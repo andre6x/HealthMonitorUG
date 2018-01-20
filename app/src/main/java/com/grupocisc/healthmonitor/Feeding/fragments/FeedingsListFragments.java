@@ -113,7 +113,7 @@ public class FeedingsListFragments extends Fragment {
     public void getFeedings() {
         showLoading();
         String email = Utils.getEmailFromPreference(getActivity());
-        IGetFeeding iGetFeeding = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IGetFeeding.class);
+        IGetFeeding iGetFeeding = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IGetFeeding.class);
         listCall = iGetFeeding.getFeeding(email);
         listCall.enqueue(new Callback<ArrayList<IGetFeeding.RegistreFeeding>>() {
             @Override

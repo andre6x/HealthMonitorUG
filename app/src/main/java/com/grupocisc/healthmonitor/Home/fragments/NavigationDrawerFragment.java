@@ -39,7 +39,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//AGREGA LOS ITEMS DEL MENU Y SUS RESPECTIVOS ICONOS
 public class NavigationDrawerFragment extends Fragment {
 
     private static final String STATE_SELECTED_POSITION = "0";
@@ -364,7 +364,6 @@ public class NavigationDrawerFragment extends Fragment {
         List<ItemMenu> menuList = new ArrayList<>();
 
         menuList.add(new ItemMenu("PULSO Y PRESIÓN",    R.mipmap.menu_pulso          , 2 , 1));//submenu
-        //menuList.add(new ItemMenu("PRESIÓN",            R.mipmap.menu_presion        , 3 , 1));
         menuList.add(new ItemMenu("PESO",               R.mipmap.menu_peso           , 4 , 1));//submenu
         menuList.add(new ItemMenu("ESTADO DE ÁNIMO",    R.mipmap.menu_estados        , 6 , 1));//submenu
         menuList.add(new ItemMenu("ENFERMEDAD",         R.mipmap.menu_enfermedad     ,7  , 1));//submenu

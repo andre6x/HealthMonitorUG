@@ -604,7 +604,7 @@ public class MedicinesRegisteredActivity extends AppCompatActivity implements On
         String Method = "[callAdapter]";
         Log.i(TAG, Method + "Init...");
         float fRows = 0;
-        IConsulMedicines iConsulMedicines = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IConsulMedicines.class);
+        IConsulMedicines iConsulMedicines = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulMedicines.class);
         try {
             fRows = Utils.GetTotalMedicineDBLocal(HealthMonitorApplicattion.getApplication().getMedicineDao());
         } catch (Exception e) {
@@ -905,7 +905,7 @@ public class MedicinesRegisteredActivity extends AppCompatActivity implements On
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    IConsulMedicines regMed = HealthMonitorApplicattion.getApplication().getmRestCISCAdapterP().create(IConsulMedicines.class);
+                                    IConsulMedicines regMed = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulMedicines.class);
                                     medicacionCall = regMed.RegMedicacion(userMail, id, fechaRegistro);
                                     medicacionCall.enqueue(new Callback<IConsulMedicines.RegMedicacion>() {
                                         @Override
@@ -1317,7 +1317,7 @@ public class MedicinesRegisteredActivity extends AppCompatActivity implements On
     private boolean fnExistsMediceRegistred(int idMedicine) {
 
         float fRows = 0;
-        IConsulMedicines iConsulMedicines = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IConsulMedicines.class);
+        IConsulMedicines iConsulMedicines = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulMedicines.class);
         try {
             fRows = Utils.GetTotalMedicineUserRegisteredByIdFromDBLocal(idMedicine, HealthMonitorApplicattion.getApplication().getMedicineUserDao());
         } catch (Exception e) {

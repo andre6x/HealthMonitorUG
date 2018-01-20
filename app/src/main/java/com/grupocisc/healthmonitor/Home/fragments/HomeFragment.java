@@ -1,24 +1,33 @@
 package com.grupocisc.healthmonitor.Home.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.grupocisc.healthmonitor.Asthma.activities.PickFlowActivity;
+import com.grupocisc.healthmonitor.Barometro.BarometroActivity;
 import com.grupocisc.healthmonitor.Complementary.activities.ComplActivity;
 import com.grupocisc.healthmonitor.Disease.activities.DiseaseActivity;
 import com.grupocisc.healthmonitor.Doctor.activities.DoctorActivity;
+import com.grupocisc.healthmonitor.FitData.activities.FitActivity;
 import com.grupocisc.healthmonitor.Glucose.activities.GlucoseActivity;
 import com.grupocisc.healthmonitor.Home.ItemHome;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
@@ -29,11 +38,15 @@ import com.grupocisc.healthmonitor.Pressure.activities.PressureActivity;
 import com.grupocisc.healthmonitor.Pulse.activities.PulseActivity;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.State.activities.StateActivity;
+import com.grupocisc.healthmonitor.Utils.SensorChecker;
 import com.grupocisc.healthmonitor.Utils.Utils;
 import com.grupocisc.healthmonitor.Weight.activities.WeightActivity;
+import com.rey.material.widget.SnackBar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.grupocisc.healthmonitor.Utils.Utils.generarAlerta;
 
 
 /**
@@ -43,7 +56,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
 
     private String TAG = "HomeFragment";
     //INCLUDE
-    private LinearLayout linear_loading;
+    private LinearLayout linearLayout;
     private ProgressBar progress;
     private Button retry;
     View view;
@@ -55,6 +68,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_layout, container, false);
+        linearLayout = (LinearLayout)view.findViewById(R.id.linearLayout);
         callsetAdapter();
         return view;
     }
@@ -67,7 +81,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
 
     private List<ItemHome> getDataItemHome() {
         List<ItemHome> pagerList = new ArrayList<>();
-        //pagerList.add(new ItemHome("UNIVERSIDAD DE GUAYAQUIL\n FACULTAD MATEMÁTICAS Y FÍSICAS\n CINT", R.mipmap.flayerto, 0));
+
         pagerList.add(new ItemHome("Control de Glucosa",         R.mipmap.pager_gluco       , R.mipmap.home_gluco         ,1  , "#57c7d9", "Diabetes" ));
         pagerList.add(new ItemHome("Flujo Máximo",               R.mipmap.pager_inhaler     , R.mipmap.home_inhaler      ,11 , "#f2b118", "Asma")); //CAMBIO f2b118
         pagerList.add(new ItemHome("Control de Insulina",        R.mipmap.pager_insulina    , R.mipmap.home_insulina      ,5  , "#775ba6", "Diabetes"));
@@ -78,6 +92,10 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
         pagerList.add(new ItemHome("Control de Enfermedad",      R.mipmap.pager_enfermedades, R.mipmap.home_enfermedades  ,8  , "#4fa6d1", "General"));
         pagerList.add(new ItemHome("Examenes Complementarios",   R.mipmap.pager_prueba       , R.mipmap.home_prueba        ,9  , "#107985", "General"));
         pagerList.add(new ItemHome("Mis Doctores",           R.mipmap.pager_doctor       , R.mipmap.home_doctor    ,10 , "#ebc33f", "General")); //CAMBIO f2b118
+
+        //v3
+        pagerList.add(new ItemHome("Google Fit",R.mipmap.fit,R.mipmap.fit,12,"#f2f2f2","Fitness"));
+        pagerList.add(new ItemHome("Control de presión atmosférica",           R.mipmap.image_barometro       , R.mipmap.image_barometro    ,13 , "#f2b118", "Barómetro"));
         //pagerList.add(new ItemHome("Peak Flow",                  R.mipmap.pager_presion      , R.mipmap.home_presion     ,?  , "#c0c23a", "Diabetes"));
         return pagerList;
     }
@@ -113,6 +131,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void callTransitionActivity(View view, int position){
         int idMenu = listDataHome.get(position).getId() ;
         Intent intent = null;
@@ -150,6 +169,24 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
             case 11: // ASMA
                 intent = new Intent(getActivity(), PickFlowActivity.class);
                 break;
+            case 12: // GOOGLE FIT
+                intent = new Intent(getActivity(), FitActivity.class);
+                break;
+            case 13: // BAROMETRO
+                if(Utils.getEmailFromPreference(getContext())!=null)
+                {
+                    if(SensorChecker.Current.isSupported(getContext(), Sensor.TYPE_PRESSURE))
+                    {
+                        intent = new Intent(getActivity(), BarometroActivity.class);
+                    }else{
+                        Log.e(TAG,"no tiene sensor");
+                        generarAlerta(getContext(), "Error!", "El dispositivo no soporta el sensor de barómetro.");
+                    }
+                }
+                else{
+                    Log.i(TAG, "User didn't log in");
+                }
+                break;
 
         }
 
@@ -164,9 +201,11 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
                     Pair.create(txt_title, "element1"),
                     Pair.create(card, "element2"));
 
-            getActivity().startActivity(intent, options.toBundle());
+            if(intent!=null)
+                getActivity().startActivity(intent, options.toBundle());
         } else {
-            getActivity().startActivity(intent);
+            if(intent!=null)
+                getActivity().startActivity(intent);
         }
     }
     //fin metodos ejecutados del adapter click

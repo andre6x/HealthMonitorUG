@@ -26,6 +26,7 @@ public class StateActivity extends AppCompatActivity {
    // FloatingActionButton fab;
     public static FloatingActionButton fab;
     SMainPagerAdapter adapter;
+    //CharSequence Titles[]={"REGISTRO","ESTADISTICAS","RECOMENDACIONES"};
     CharSequence Titles[]={"REGISTRO","ESTADISTICAS"};
 
 
@@ -139,6 +140,7 @@ public class StateActivity extends AppCompatActivity {
     private void setupTabIcons() {
         tabs.getTabAt(0).setIcon(R.mipmap.registro);
         tabs.getTabAt(1).setIcon(R.mipmap.estadistica);
+        //tabs.getTabAt(2).setIcon(R.mipmap.medical_history);
     }
 
     public void callActivityRegister(){

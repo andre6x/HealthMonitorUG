@@ -46,14 +46,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.twitter.sdk.android.core.GuestSession;
 import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
-import com.twitter.sdk.android.core.TwitterSession;
 
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 import io.fabric.sdk.android.Fabric;
+import okhttp3.OkHttpClient;
 import retrofit2.converter.gson.GsonConverterFactory;
 //import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
@@ -63,15 +63,18 @@ public class HealthMonitorApplicattion extends Application {
 
     private static HealthMonitorApplicattion instance;
     private Retrofit mRestAdapter;
-    private Retrofit mRestCISCAdapter;
-	private Retrofit mRestCISCAdapterp;								   
-    private Retrofit mRestPushAdapter;
-    private Retrofit mRestCISCAdapterP;
-    private Retrofit getmRestCISCReconAdapter;
-    private Retrofit mRestCISCAdapterAnimo;
-	private Retrofit mRestPushAdapterRecpre;
-    private Retrofit mRestCISCAdapterV2;
-    private Retrofit mRestCISCAdapterV2IP;
+    //private Retrofit mRestCISCAdapter;
+	//private Retrofit mRestCISCAdapterp;
+    //private Retrofit mRestPushAdapter;
+    //private Retrofit mRestCISCAdapterP;
+    //private Retrofit getmRestCISCReconAdapter;
+    //private Retrofit mRestCISCAdapterAnimo;
+	//private Retrofit mRestPushAdapterRecpre;
+    //private Retrofit mRestCISCAdapterV2;
+    //private Retrofit mRestCISCAdapterV2IP;
+    private Retrofit mRetrofitAdapter;
+    private OkHttpClient client;
+
 	
     private Database databaseHelper = null;
     //Notifications DATABASE
@@ -125,52 +128,65 @@ public class HealthMonitorApplicattion extends Application {
         TwitterConfig configg = new TwitterConfig.Builder(this).twitterAuthConfig(authConfig).build();
         Twitter.initialize(configg);
 
-
-
-
-
         databaseHelper = new Database(this);
+
+        //String path = databaseHelper.getReadableDatabase().getPath();
+        //Log.i("HELPER",path);
 
         mRestAdapter = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        mRestCISCAdapter = new Retrofit.Builder()
+        /*mRestCISCAdapter = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path_cisc))
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .build();*/
 
 
-        mRestCISCAdapterP = new Retrofit.Builder()
+        /*mRestCISCAdapterP = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path_procesos))
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .build();*/
 
-        getmRestCISCReconAdapter = new Retrofit.Builder()
+        /*getmRestCISCReconAdapter = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path_recomendacion))
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .build();*/
 
-        mRestCISCAdapterAnimo = new Retrofit.Builder()
+        /*mRestCISCAdapterAnimo = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path_cisc_animo))
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        mRestPushAdapterRecpre = new Retrofit.Builder()
+                .build();*/
+
+        /*mRestPushAdapterRecpre = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path_ciscrepp))
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .build();*/
         //inicio nuevos metodos v2
-        mRestCISCAdapterV2 = new Retrofit.Builder()
+        /*mRestCISCAdapterV2 = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path_v2))
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .build();*/
 
-        mRestCISCAdapterV2IP  = new Retrofit.Builder()
+        /*mRestCISCAdapterV2IP  = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path_v2_ip))
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .build();*/
         //fin nuevos metodos v2
+
+        //-------------METODOS VERSION 3--------------------------
+        client = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30,TimeUnit.SECONDS).build();
+
+
+        mRetrofitAdapter = new Retrofit.Builder()
+                .baseUrl(BuildConfig.URL_SERVER)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        //--------------------------------------------------------
 
 
 
@@ -178,6 +194,7 @@ public class HealthMonitorApplicattion extends Application {
                 .cacheInMemory(true)
                 .cacheOnDisc(true)
                 .build();
+
         ImageLoaderConfiguration config = new ImageLoaderConfiguration
                 .Builder(getApplicationContext())
                 .defaultDisplayImageOptions(options)
@@ -200,42 +217,45 @@ public class HealthMonitorApplicattion extends Application {
      * @return
      */
 
+    public Retrofit getRetrofitAdapter(){
+        return mRetrofitAdapter;
+    }
 
-    public Retrofit getRestCISCAdapterV2() {
+    /*public Retrofit getRestCISCAdapterV2() {
         return this.mRestCISCAdapterV2;
-    }
+    }*/
 
-    public Retrofit getRestCISCAdapterV2IP() {
+    /*public Retrofit getRestCISCAdapterV2IP() {
         return this.mRestCISCAdapterV2IP;
-    }
+    }*/
 
 
     public Retrofit getRestAdapter() {
         return this.mRestAdapter;
     }
 
-    public Retrofit getmRestCISCAdapter() {
+    /*public Retrofit getmRestCISCAdapter() {
         return this.mRestCISCAdapter;
-    }
+    }*/
 
-    public Retrofit getmRestCISCAdapterP() {
+    /*public Retrofit getmRestCISCAdapterP() {
         return this.mRestCISCAdapterP;
-    }
+    }*/
 
 
-    public Retrofit getmRestCISCReconAdapter() {
+    /*public Retrofit getmRestCISCReconAdapter() {
         return this.getmRestCISCReconAdapter;
-    }
+    }*/
 
-    public Retrofit getmRestPushAdapter() {
+    /*public Retrofit getmRestPushAdapter() {
         return this.mRestPushAdapter;
-    }
-    public Retrofit getmRestCISCAdapterAnimo() {
+    }*/
+    /*public Retrofit getmRestCISCAdapterAnimo() {
         return this.mRestCISCAdapterAnimo;
-	 } //CAMBIO
-	public Retrofit getmRestPushAdapterRecpre() {
+	 } //CAMBIO*/
+	/*public Retrofit getmRestPushAdapterRecpre() {
         return this.mRestPushAdapterRecpre;
-    }
+    }*/
     //INIICO GLUCOSA
     public Dao<IGlucose, Integer> getGlucoseDao() throws SQLException {
         if (Glucose == null) {

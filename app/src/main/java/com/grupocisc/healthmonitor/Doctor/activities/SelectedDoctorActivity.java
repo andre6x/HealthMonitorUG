@@ -199,7 +199,7 @@ public class SelectedDoctorActivity extends AppCompatActivity {
 
     private void restartLoadingconsultaEspeciality() {
         Log.e(TAG, "METODO consultadoc ");
-        IConsulDoctorEspeciality CunsulParamet = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IConsulDoctorEspeciality.class);
+        IConsulDoctorEspeciality CunsulParamet = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulDoctorEspeciality.class);
         call_3 = CunsulParamet.CunsulParametEspeciality();
         call_3.enqueue(new Callback<IConsulDoctorEspeciality.Obj>() {
             @Override
@@ -281,7 +281,7 @@ public class SelectedDoctorActivity extends AppCompatActivity {
 
     private void restartLoadingconsultadoc() {
         Log.e(TAG, "METODO consultadoc ");
-        IConsulDoctor CunsulParamet = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IConsulDoctor.class);
+        IConsulDoctor CunsulParamet = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IConsulDoctor.class);
         call_2 = CunsulParamet.CunsulParamet(new ObjSpeciality(SpecialtyId));
         call_2.enqueue(new Callback<IConsulDoctor.Obj>() {
             @Override
@@ -375,7 +375,7 @@ public class SelectedDoctorActivity extends AppCompatActivity {
 
         Log.e(TAG, "email paciente: " + email);
         Log.e(TAG, "id dr: " + idDoctor);
-        IRegistreDoctor RegistreDoctor = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IRegistreDoctor.class);
+        IRegistreDoctor RegistreDoctor = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegistreDoctor.class);
         call_1 = RegistreDoctor.RegDoctor(new ObjDoctorSelect(email, idDoctor));
         call_1.enqueue(new Callback<IRegistreDoctor.RegistroDoctor>() {
             @Override

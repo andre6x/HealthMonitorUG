@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface IRegistreRoutine {
 
-    @PUT("rutina/vincula_rutina_ejercicio")
+    @PUT("control/diabetes/rutina/vincula_rutina_ejercicio")
     Call<RegistroRoutine> putRoutine(@Query("email") String email,
                                      @Query("id_rutina") int id_rutina,
                                      @Query("calificacion") int calificacion);

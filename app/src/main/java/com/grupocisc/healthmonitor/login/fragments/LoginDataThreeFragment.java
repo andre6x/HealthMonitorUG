@@ -164,7 +164,7 @@ public class LoginDataThreeFragment extends Fragment {
 
     private void restartLoadingPaises() {
         Log.e(TAG, "METODO consultadoc ");
-        IPaises Cunsul = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IPaises.class);
+        IPaises Cunsul = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPaises.class);
         call_2 = Cunsul.getFromPaises();
         call_2.enqueue(new Callback<IPaises.Paises>() {
             @Override
@@ -383,7 +383,7 @@ public class LoginDataThreeFragment extends Fragment {
         }
 
         //APUNTANDO AA METODO CISC
-        IRegistrePerson suscripcion = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2().create(IRegistrePerson.class);
+        IRegistrePerson suscripcion = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegistrePerson.class);
         call_1 = suscripcion.RegistroPersona1(new IRegistrePerson.ObjDataUserLogin(name,lastName,email,password,birthDate,identifier,weight,height,gender,relationshipStatus,cellPhone,countryId,diabetesType,asma,url));
         call_1.enqueue(new Callback<IRegistrePerson.RegistroPersona>() {
             @Override

@@ -11,10 +11,10 @@ import retrofit2.http.POST;
  */
 
 public interface IV2Cholesterol {
-    @POST("diabetes/patientUsers/registerCholesterol")
+    @POST("controlServices/diabetes/patientUsers/registerCholesterol")
     Call<Cholesterol> setSendCholesterolFrom(@Body rowV2Cholesterol rCholesterol);
 
-    @POST("diabetes/patientUsers/updateCholesterol")
+    @POST("controlServices/diabetes/patientUsers/updateCholesterol")
     Call<Cholesterol> setSendCholesterolupdateFrom(@Body rowV2CholesterolUpdate rCholesterolupdate);
 
 

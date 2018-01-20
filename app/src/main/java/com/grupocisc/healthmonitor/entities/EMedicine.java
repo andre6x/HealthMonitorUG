@@ -2,6 +2,7 @@ package com.grupocisc.healthmonitor.entities;
 
 import android.support.annotation.NonNull;
 
+import com.grupocisc.healthmonitor.Utils.Constantes;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -33,7 +34,9 @@ import com.j256.ormlite.table.DatabaseTable;
 /*                                                                          */
 /****************************************************************************/
 
-@DatabaseTable(tableName = "MedicineTable")
+//@DatabaseTable(tableName = "MedicineTable")
+@DatabaseTable(tableName = Constantes.TABLA_MEDICINE)
+
 public class EMedicine implements Comparable<EMedicine>  {
 
     @DatabaseField(generatedId=true)

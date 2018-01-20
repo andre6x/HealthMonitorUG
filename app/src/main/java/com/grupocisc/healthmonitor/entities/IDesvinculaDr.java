@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface IDesvinculaDr {
 
-    @POST("diabetes/patientUsers/disassociateDoctorPatient")
+    @POST("controlServices/diabetes/patientUsers/disassociateDoctorPatient")
     Call<DesvinculaDoctor> DesvDoctor(@Body ObjDoctorSelect objDoctorSelect);
 
     public class DesvinculaDoctor {

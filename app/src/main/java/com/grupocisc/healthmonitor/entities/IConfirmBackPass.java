@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface IConfirmBackPass {
 
-    @POST("diabetes/patientUsers/updateCredential")
+    @POST("controlServices/diabetes/patientUsers/updateCredential")
     Call<RegistroNuevaPass> RegPass(@Body ObjNewPass objNewPass);
 
     public class RegistroNuevaPass {

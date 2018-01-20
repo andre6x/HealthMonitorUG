@@ -133,7 +133,7 @@ public class DiseaseListFragment extends Fragment {
 
     private void restartLoadingEnviarData( ) {
         //enviar webservice
-        IDiseasePac DiseasePac = HealthMonitorApplicattion.getApplication().getRestCISCAdapterV2IP().create(IDiseasePac.class);
+        IDiseasePac DiseasePac = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IDiseasePac.class);
         call_1 = DiseasePac.DiseasePac(user_email);
         call_1.enqueue(new Callback<List<IDiseasePac.Disease>>() {
             @Override

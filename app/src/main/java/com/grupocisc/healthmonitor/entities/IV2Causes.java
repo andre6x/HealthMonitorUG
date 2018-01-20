@@ -16,7 +16,7 @@ import retrofit2.http.Query;
 
 public interface IV2Causes {
 
-    @POST("diabetes/patientUsers/queryAsthmaDesencadenantes")
+    @POST("controlServices/diabetes/patientUsers/queryAsthmaDesencadenantes")
     Call<Obj> getCategoryFrom(@Body ObjPickFlow objPickFlow) ;
 
     public class Obj {

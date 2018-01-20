@@ -13,7 +13,7 @@ import retrofit2.http.POST;
  */
 public interface IV2ConsulMedicationAlarm {
     
-    @POST("diabetes/patientUsers/queryMedicationAlarmLog")
+    @POST("controlServices/diabetes/patientUsers/queryMedicationAlarmLog")
     Call<Obj> queryMedicationAlarmLog(@Body ObjQueryMedicationAlarmLog obj);
     class Obj {
         @Getter

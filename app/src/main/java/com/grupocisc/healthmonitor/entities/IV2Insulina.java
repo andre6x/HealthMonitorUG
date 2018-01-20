@@ -13,10 +13,10 @@ import retrofit2.http.Query;
  */
 public interface IV2Insulina {
 
-    @POST("diabetes/patientUsers/registerInsulin")
+    @POST("controlServices/diabetes/patientUsers/registerInsulin")
     Call<Insulina> setSendInsulinFrom(@Body rowInsulin rInsulin);
 
-    @POST("diabetes/patientUsers/updateInsulin")
+    @POST("controlServices/diabetes/patientUsers/updateInsulin")
     Call<Insulina> setSendInsulinUpdateFrom(@Body rowInsulinUpdate rInsulin);
 
     public class  Insulina{

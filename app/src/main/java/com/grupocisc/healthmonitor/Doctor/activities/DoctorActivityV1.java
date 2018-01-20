@@ -38,6 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/*
 public class DoctorActivityV1 extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -96,7 +97,9 @@ public class DoctorActivityV1 extends AppCompatActivity {
         restartLoading(2);
 
         inputSearch = (EditText) findViewById(R.id.edt_buscar);
-        /* Activando el filtro de busqueda */
+        */
+/* Activando el filtro de busqueda *//*
+
         inputSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -209,7 +212,7 @@ public class DoctorActivityV1 extends AppCompatActivity {
 
     private void restartLoadingconsultadoc() {
         Log.e(TAG, "METODO consultadoc ");
-        IConsulDoctor CunsulParamet = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IConsulDoctor.class);
+        IConsulDoctor CunsulParamet = HealthMonitorApplicattion.getApplication().getRetrofitAdapter() .create(IConsulDoctor.class);
         //call_2 = CunsulParamet.CunsulParamet();
         call_2.enqueue(new Callback<List<IConsulDoctor.doctor>>() {
             @Override
@@ -292,7 +295,7 @@ public class DoctorActivityV1 extends AppCompatActivity {
         Log.e(TAG, "id dr: " + idDoctor);
         //enviar webservice
         //APUNTANDO AA METODO CISC
-        IRegistreDoctor RegistreDoctor = HealthMonitorApplicattion.getApplication().getmRestCISCAdapter().create(IRegistreDoctor.class);
+        IRegistreDoctor RegistreDoctor = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IRegistreDoctor.class);
 
         //call_1 = RegistreDoctor.RegDoctor(email, idDoctor);
         call_1.enqueue(new Callback<IRegistreDoctor.RegistroDoctor>() {
@@ -325,7 +328,8 @@ public class DoctorActivityV1 extends AppCompatActivity {
     }
 
     //GUARDOS DATOS EN LA TABLA BD
-  /*  public void saveDataDoctorDB() {
+  */
+/*  public void saveDataDoctorDB() {
         String nombres = nombreDoc;
         String apellidos = apellidoDoc;
         String email = emailDoc;
@@ -340,7 +344,8 @@ public class DoctorActivityV1 extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }*/
+    }*//*
+
 
     //datos de usuario obtenedis del webservice y guardar en preferencias
     private void SavePreferencesUserDoctor() {
@@ -379,3 +384,4 @@ public class DoctorActivityV1 extends AppCompatActivity {
 
 
 
+*/
