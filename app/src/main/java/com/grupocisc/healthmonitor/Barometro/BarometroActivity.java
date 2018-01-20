@@ -6,6 +6,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,7 +42,7 @@ public class BarometroActivity extends AppCompatActivity implements SensorEventL
         getSupportActionBar().setTitle("Barómetro"); //titulo tollbar
         toolbar.setTitleTextColor(getResources().getColor(R.color.white)); //color tollbar title
 
-        txtPresion = (TextView) findViewById(R.id.txtPresion);
+        txtPresion = (TextView) findViewById(R.id.tvPressure);
     }
 
     public void presion(View view){
