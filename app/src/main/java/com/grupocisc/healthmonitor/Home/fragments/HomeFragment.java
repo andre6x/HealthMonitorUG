@@ -173,19 +173,16 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
                 intent = new Intent(getActivity(), FitActivity.class);
                 break;
             case 13: // BAROMETRO
-                if(Utils.getEmailFromPreference(getContext())!=null)
-                {
-                    if(SensorChecker.Current.isSupported(getContext(), Sensor.TYPE_PRESSURE))
-                    {
+
+                    //if(SensorChecker.Current.isSupported(getContext(), Sensor.TYPE_PRESSURE))
+                    //{
                         intent = new Intent(getActivity(), BarometroActivity.class);
-                    }else{
-                        Log.e(TAG,"no tiene sensor");
-                        generarAlerta(getContext(), "Error!", "El dispositivo no soporta el sensor de barómetro.");
-                    }
-                }
-                else{
-                    Log.i(TAG, "User didn't log in");
-                }
+                    //}else{
+                    //    Log.e(TAG,"no tiene sensor");
+                    //    Toast.makeText(getContext(),"El dispositivo no soporta el sensor de barómetro",Toast.LENGTH_SHORT).show();
+                        //generarAlerta(getContext(), "Error!", "El dispositivo no soporta el sensor de barómetro.");
+                    //}
+
                 break;
 
         }
