@@ -698,6 +698,15 @@ public class Utils {
         return SharedPreferencesManager.getValorEsperado(ctx, PREFERENCIA_USER, KEY_PESO);
     }
 
+    public static String getTipoDiabetesFromPreference(Context ctx){
+        return SharedPreferencesManager.getValorEsperado(ctx, PREFERENCIA_USER, KEY_TIPO_DIABETES);
+    }
+
+    public static String getTipoAsmaFromPreference(Context ctx){
+        return SharedPreferencesManager.getValorEsperado(ctx, PREFERENCIA_USER, KEY_ASMA);
+    }
+
+
     /*return ALTURA que se tiene en la preferencia*/
     public static String getAlturaFromPreference(Context ctx){
         return SharedPreferencesManager.getValorEsperado(ctx, PREFERENCIA_USER, KEY_ALTURA);

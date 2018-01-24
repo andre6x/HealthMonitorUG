@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
 
         //v3
         pagerList.add(new ItemHome("Google Fit",R.mipmap.fit,R.mipmap.fit,12,"#f2f2f2","Fitness"));
-        pagerList.add(new ItemHome("Control de presión atmosférica",           R.mipmap.image_barometro       , R.mipmap.image_barometro    ,13 , "#f2b118", "Barómetro"));
+        pagerList.add(new ItemHome("Control de presión atmosférica",           R.mipmap.image_barometro1       , R.mipmap.image_barometro1    ,13 , "#0462a0", "Barómetro"));
         //pagerList.add(new ItemHome("Peak Flow",                  R.mipmap.pager_presion      , R.mipmap.home_presion     ,?  , "#c0c23a", "Diabetes"));
         return pagerList;
     }
@@ -173,19 +173,16 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
                 intent = new Intent(getActivity(), FitActivity.class);
                 break;
             case 13: // BAROMETRO
-                if(Utils.getEmailFromPreference(getContext())!=null)
-                {
-                    if(SensorChecker.Current.isSupported(getContext(), Sensor.TYPE_PRESSURE))
-                    {
+
+                    //if(SensorChecker.Current.isSupported(getContext(), Sensor.TYPE_PRESSURE))
+                    //{
                         intent = new Intent(getActivity(), BarometroActivity.class);
-                    }else{
-                        Log.e(TAG,"no tiene sensor");
-                        generarAlerta(getContext(), "Error!", "El dispositivo no soporta el sensor de barómetro.");
-                    }
-                }
-                else{
-                    Log.i(TAG, "User didn't log in");
-                }
+                    //}else{
+                    //    Log.e(TAG,"no tiene sensor");
+                    //    Toast.makeText(getContext(),"El dispositivo no soporta el sensor de barómetro",Toast.LENGTH_SHORT).show();
+                        //generarAlerta(getContext(), "Error!", "El dispositivo no soporta el sensor de barómetro.");
+                    //}
+
                 break;
 
         }
