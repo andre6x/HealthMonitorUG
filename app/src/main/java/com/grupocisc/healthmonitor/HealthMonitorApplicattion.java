@@ -63,6 +63,8 @@ public class HealthMonitorApplicattion extends Application {
 
     private static HealthMonitorApplicattion instance;
     private Retrofit mRestAdapter;
+    private Retrofit _measurePressureAdapter;
+
     //private Retrofit mRestCISCAdapter;
 	//private Retrofit mRestCISCAdapterp;
     //private Retrofit mRestPushAdapter;
@@ -72,6 +74,7 @@ public class HealthMonitorApplicattion extends Application {
 	//private Retrofit mRestPushAdapterRecpre;
     //private Retrofit mRestCISCAdapterV2;
     //private Retrofit mRestCISCAdapterV2IP;
+
     private Retrofit mRetrofitAdapter;
     private OkHttpClient client;
 
@@ -135,6 +138,11 @@ public class HealthMonitorApplicattion extends Application {
 
         mRestAdapter = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_path))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        _measurePressureAdapter = new Retrofit.Builder()
+                .baseUrl("http://api.openweathermap.org/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -232,6 +240,11 @@ public class HealthMonitorApplicattion extends Application {
 
     public Retrofit getRestAdapter() {
         return this.mRestAdapter;
+    }
+
+
+    public Retrofit getMeasurePressureAdapter(){
+        return  this._measurePressureAdapter;
     }
 
     /*public Retrofit getmRestCISCAdapter() {
