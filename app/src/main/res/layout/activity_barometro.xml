@@ -71,8 +71,8 @@
                 <ImageView
                     android:id="@+id/img_icon"
                     android:layout_marginTop="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:visibility="gone"
                     android:src="@drawable/ic_white_balance_sunny_white_48dp"
                     android:layout_gravity="center"/>

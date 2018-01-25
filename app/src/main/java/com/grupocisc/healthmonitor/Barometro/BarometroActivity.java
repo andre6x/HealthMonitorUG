@@ -397,6 +397,8 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
         locationManager.removeUpdates(this);
         if(pressureTask!=null)
             pressureTask.cancel(true);
+
+        UpdateWidget(progress,false);
     }
 
     @Override
@@ -406,6 +408,8 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
 
         if(pressureTask!=null)
             pressureTask.cancel(true);
+
+        UpdateWidget(progress,false);
     }
 
     @Override
@@ -420,6 +424,8 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
 
         if(pressureTask!=null)
             pressureTask.cancel(true);
+
+        UpdateWidget(progress,false);
     }
 
 
