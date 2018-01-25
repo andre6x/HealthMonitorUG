@@ -66,8 +66,6 @@ public interface IOpenWeatherMap {
         @Getter
         @Setter
         int cod;
-
-
     }
 
     class Coordinates{
@@ -93,7 +91,6 @@ public interface IOpenWeatherMap {
         @Getter
         @Setter
         String icon;
-
     }
 
     class Main{
@@ -103,7 +100,7 @@ public interface IOpenWeatherMap {
 
         @Getter
         @Setter
-        int pressure;
+        double pressure;
 
         @Getter
         @Setter
@@ -125,7 +122,7 @@ public interface IOpenWeatherMap {
 
         @Getter
         @Setter
-        int deg;
+        double deg;
     }
 
     class Cloud{
@@ -159,6 +156,4 @@ public interface IOpenWeatherMap {
         @Setter
         int sunset;
     }
-
-
 }

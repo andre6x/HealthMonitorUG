@@ -115,33 +115,31 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
     void getLocation() {
 
         UpdateWidget(progress,true);
-        com.transitionseverywhere.TransitionManager.beginDelayedTransition(transitionsContainer, new Rotate());
 
         if(isOnline()){
-            LocationProvider low =locationManager.getProvider(locationManager.getBestProvider(createCoarseCriteria(),true));
-            LocationProvider high = locationManager.getProvider(locationManager.getBestProvider(createFineCriteria(),true));
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     Log.d(TAG,"Faltan permisos");
                     ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+                    UpdateWidget(progress,false);
                     return;
                 }
                 else {
+                    LocationProvider low =locationManager.getProvider(locationManager.getBestProvider(createCoarseCriteria(),false));
+                    LocationProvider high = locationManager.getProvider(locationManager.getBestProvider(createFineCriteria(),true));
+
                     if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
                         buildAlertMessage();
                     }
                     else {
                         locationManager.requestLocationUpdates(low.getName(), 200, 0, this);
                         locationManager.requestLocationUpdates(high.getName(), 200, 0, this);
-                        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, this);
                     }
                 }
             } else {
 
-                locationManager.requestLocationUpdates(low.getName(), 500, 0, this);
-                locationManager.requestLocationUpdates(high.getName(), 500, 0, this);
-                //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, this);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 200, 0, this);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 0, this);
             }
         }
         else {
@@ -178,6 +176,7 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
     }
 
     void buildAlertMessage(){
+        UpdateWidget(progress,false);
         final AlertDialog.Builder builder= new AlertDialog.Builder(this);
 
         builder.setMessage("Tu GPS se encuentra desactivado, deseas activarlo?")
@@ -237,14 +236,25 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
             TextChange(tvCityName,data.getName().toUpperCase());
             TextChange(tvLastForecastDate," "+convertMillisToStringDate(System.currentTimeMillis()));
             UpdateWidget(imgIcon,true);
-            TextChange(tvForecast,data.getWeather().get(0).getMain().toUpperCase());
-            TextChange(tvPressure," "+data.getMain().getPressure()+" hpa");
+
+            String foreCast = data.getWeather().get(0).getMain().toUpperCase();
+
+            if(foreCast.equals("CLEAR")){
+                TextChange(tvForecast,"DESPEJADO");
+                changeIcon(R.drawable.ic_white_balance_sunny_white_48dp);
+            }
+            else if(foreCast.equals("RAIN")){
+                TextChange(tvForecast,"LLUVIOSO");
+                changeIcon(R.drawable.ic_weather_rainy_white_48dp);
+            }
+            else if (foreCast.equals("CLOUDS")){
+                TextChange(tvForecast,"NUBLADO");
+                changeIcon(R.drawable.ic_weather_cloudy_white_48dp);
+            }
+
+            TextChange(tvPressure,String.format(" %.0f hpa",data.getMain().getPressure()));
             TextChange(tvHumidity," "+data.getMain().getHumidity()+"%");
-            TextChange(tvTemperature,getKelvinToCelsius(data.getMain().getTemp())+" °C");
-
-
-            isRotated = true;
-            imgIcon.setRotation(isRotated ? 135 : 0);
+            TextChange(tvTemperature,String.format( " %.0f °C", getKelvinToCelsius(data.getMain().getTemp()) ));
         }
         else {
             UpdateWidget(tvCityName,false);
@@ -253,15 +263,16 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
             TextChange(tvForecast,"");
             TextChange(tvPressure," 0 hpa");
             TextChange(tvHumidity," 0%");
-            TextChange(tvTemperature,"0.0 °C");
+            TextChange(tvTemperature,"0 °C");
         }
     }
 
-
+    void changeIcon(int drawable){
+        imgIcon.setImageResource(drawable);
+    }
 
     void TextChange(TextView _textView,String text){
         com.transitionseverywhere.TransitionManager.beginDelayedTransition(transitionsContainer,  new ChangeText().setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_OUT_IN));
-
         _textView.setText(text!=null ? text : "");
     }
 
@@ -414,15 +425,6 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
 
     class PressureAsyncTask extends AsyncTask<Double,Void,IOpenWeatherMap.OpenWeatherMap>{
         private SweetAlertDialog dialog;
-
-        PressureAsyncTask(){
-//            dialog = new SweetAlertDialog(BarometroActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-//            dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-//            dialog.setTitleText("Obteniendo datos por favor espere...");
-//            dialog.setCancelable(false);
-//            dialog.show();
-        }
-
 
         @Override
         protected IOpenWeatherMap.OpenWeatherMap doInBackground(Double... doubles) {
