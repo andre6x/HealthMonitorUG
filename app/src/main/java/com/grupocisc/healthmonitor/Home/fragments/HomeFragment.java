@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.MyViewHolder.C
 
         //v3
         pagerList.add(new ItemHome("Google Fit",R.mipmap.fit,R.mipmap.fit,12,"#f2f2f2","Fitness"));
-        pagerList.add(new ItemHome("Control de presión atmosférica",           R.mipmap.image_barometro1       , R.mipmap.image_barometro1    ,13 , "#0462a0", "Barómetro"));
+        pagerList.add(new ItemHome("Control de presión atmosférica",           R.drawable.draw_cloudy       , R.drawable.draw_cloudy    ,13 , "#0462a0", "Barómetro"));
         //pagerList.add(new ItemHome("Peak Flow",                  R.mipmap.pager_presion      , R.mipmap.home_presion     ,?  , "#c0c23a", "Diabetes"));
         return pagerList;
     }
