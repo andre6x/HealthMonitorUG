@@ -125,15 +125,18 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
                     return;
                 }
                 else {
-                    LocationProvider low =locationManager.getProvider(locationManager.getBestProvider(createCoarseCriteria(),false));
-                    LocationProvider high = locationManager.getProvider(locationManager.getBestProvider(createFineCriteria(),true));
+                    //LocationProvider low =locationManager.getProvider(locationManager.getBestProvider(createCoarseCriteria(),false));
+                    //LocationProvider high = locationManager.getProvider(locationManager.getBestProvider(createFineCriteria(),true));
 
                     if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
                         buildAlertMessage();
                     }
                     else {
-                        locationManager.requestLocationUpdates(low.getName(), 200, 0, this);
-                        locationManager.requestLocationUpdates(high.getName(), 200, 0, this);
+                        /*locationManager.requestLocationUpdates(low.getName(), 200, 0, this);
+                        locationManager.requestLocationUpdates(high.getName(), 200, 0, this);*/
+
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 200, 0, this);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 0, this);
                     }
                 }
             } else {
@@ -203,31 +206,6 @@ public class BarometroActivity extends AppCompatActivity implements LocationList
                 break;
         }
     }
-
-//    void PressureMeasurement(double lat, double lon){
-//        IOpenWeatherMap openWeatherMap = HealthMonitorApplicattion.getApplication().getMeasurePressureAdapter().create(IOpenWeatherMap.class);
-//        Call<IOpenWeatherMap.OpenWeatherMap> invokeMethod = openWeatherMap.getData(lat,lon,"29a0fabd112d649e3c512dd4856e7870");
-//        invokeMethod.enqueue(new Callback<IOpenWeatherMap.OpenWeatherMap>() {
-//            @Override
-//            public void onResponse(Call<IOpenWeatherMap.OpenWeatherMap> call, Response<IOpenWeatherMap.OpenWeatherMap> response) {
-//                if(response.isSuccessful()){
-//                    data = response.body();
-//                    setData(data);
-//                }
-//                else {
-//                    Log.e(TAG,"No se pudo obtener la información");
-//                    data = null;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<IOpenWeatherMap.OpenWeatherMap> call, Throwable t) {
-//                Log.e(TAG,"No se pudo obtener la información se invocó desde onFailure");
-//                t.printStackTrace();
-//                data = null;
-//            }
-//        });
-//    }
 
     void  setData(IOpenWeatherMap.OpenWeatherMap data){
         if(data!=null){
