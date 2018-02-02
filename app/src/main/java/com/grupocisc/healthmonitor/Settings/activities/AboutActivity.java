@@ -20,26 +20,44 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AboutActivity extends AppCompatActivity  implements OnMapReadyCallback{
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private TextView txt_version_name;
-    private GoogleMap mMap;
+public class AboutActivity extends AppCompatActivity { // implements OnMapReadyCallback
+
+    @BindView(R.id.txt_version_name)
+    TextView txt_version_name;
+
+    @BindView(R.id.tvAdvertisement)
+    TextView tvAdvertisement;
+    //private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        ButterKnife.bind(this);
+
         Utils.SetStyleToolbarLogo(this);
 
         String versionName = BuildConfig.VERSION_NAME;
-        txt_version_name = (TextView) findViewById(R.id.txt_version_name);
+        //txt_version_name = (TextView) findViewById(R.id.txt_version_name);
         txt_version_name.setText("Health Monitor V "+ versionName );
 
+        tvAdvertisement.setText("El fin de esta aplicación es " +
+                "únicamente con propósitos de mejoramiento " +
+                "y acondicionamiento de la salud, su uso no " +
+                "está indicado para diagnosticar enfermedades " +
+                "o para ser una cura.");
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        //SupportMapFragment advertisementFragment = (SupportMapFragment) getSupportFragmentManager()
+        //        .findFragmentById(R.id.advertisement);
+
+        //TextView tv_advertisement =(TextView) advertisementFragment.getView();
+        //tv_advertisement.setText("");
+        //mapFragment.getMapAsync(this);
 
 
     }
@@ -52,22 +70,22 @@ public class AboutActivity extends AppCompatActivity  implements OnMapReadyCallb
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-2.1826184030722544, -79.8977279663086);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Universidad de Guayaquil"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-        // Zoom in, animating the camera.
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
-
-        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
-
-
-    }
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-2.1826184030722544, -79.8977279663086);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Universidad de Guayaquil"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//
+//        // Zoom in, animating the camera.
+//        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+//
+//        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+//
+//
+//    }
 
 }
