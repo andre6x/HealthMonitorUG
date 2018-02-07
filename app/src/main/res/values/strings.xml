@@ -233,6 +233,7 @@
     <string name="txt_iniciar">Iniciar sesión</string>
     <string name="txt_cerrar">Cerrar sesión</string>
     <string name="txt_change_pass">Cambiar la contraseña</string>
+    <string name="actualiza_datos">Actualizar datos</string>
     <string name="text_recuperarCon">Solo necesitamos su identificación de correo electrónico registrada para restablecer su contraseña</string>
     <string name="text_btn_recuperar">RESTABLECER CONTRASEÑA</string>
     <string name="txt_iniciarM">INICIAR SESIÓN</string>
@@ -535,4 +536,16 @@
         <item>ENFERMEDADES</item>
     </string-array>
 
+    <string-array name="sexo">
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+
+    <string-array name="estado_civil">
+        <item>Soltero</item>
+        <item>Casado</item>
+        <item>Viudo</item>
+        <item>Divorciado</item>
+        <item>En Unión de Hechos</item>
+    </string-array>
 </resources>

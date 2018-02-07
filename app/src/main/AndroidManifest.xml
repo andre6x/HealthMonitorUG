@@ -161,7 +161,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Profile.ProfileDataActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Advertising.PublicidadWebViewActivity"
             android:screenOrientation="portrait" />
