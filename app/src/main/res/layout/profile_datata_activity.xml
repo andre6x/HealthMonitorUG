@@ -100,17 +100,16 @@
                                 android:textStyle="normal|bold" />
 
                             <ImageView
+                                android:id="@+id/editionBtn"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@mipmap/perfil_lapiz"
-                                android:onClick="habilitaCampos"/>
+                                android:src="@mipmap/perfil_lapiz"/>
                         </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:background="@color/silver_fondo" />
-
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -173,7 +172,6 @@
                             android:layout_marginRight="15dp"
                             android:background="@color/silver_fondo" />
 
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -187,16 +185,6 @@
                                 android:textColor="@color/btn_login"
                                 android:textSize="14sp" />
 
-                            <!--
-                            <TextView
-                                android:id="@+id/txt_email"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text=""
-                                android:textColor="@color/text_silver"
-                                android:textSize="14sp" />
-                                -->
                             <EditText
                                 android:id="@+id/txt_email"
                                 android:layout_width="match_parent"
@@ -231,16 +219,6 @@
                                 android:textColor="@color/btn_login"
                                 android:textSize="14sp" />
 
-                            <!--
-                            <TextView
-                                android:id="@+id/txt_sexo"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text=""
-                                android:textColor="@color/text_silver"
-                                android:textSize="14sp" />
-                                -->
                             <Spinner
                                 android:id="@+id/txt_sexo"
                                 android:layout_width="match_parent"
@@ -304,16 +282,6 @@
                                 android:textSize="14sp"
                                 android:layout_alignParentLeft="true"/>
 
-                            <!--
-                            <TextView
-                                android:id="@+id/txt_altura"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text=""
-                                android:textColor="@color/text_silver"
-                                android:textSize="14sp" />
-                                -->
                             <EditText
                                 android:id="@+id/txt_altura"
                                 android:layout_width="match_parent"
@@ -401,12 +369,11 @@
                                 android:textColor="@color/btn_login"
                                 android:textSize="14sp" />
 
-
-
                             <Spinner
                                 android:id="@+id/spinnerDiabetes"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"/>
                         </LinearLayout>
@@ -432,11 +399,10 @@
                                 android:textColor="@color/btn_login"
                                 android:textSize="14sp" />
 
-
-
                             <CheckBox
                                 android:id="@+id/chkAsma"
                                 android:gravity="center"
+                                android:enabled="false"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
@@ -449,8 +415,6 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:background="@color/silver_fondo" />
-
-
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -465,16 +429,6 @@
                                 android:textColor="@color/btn_login"
                                 android:textSize="14sp" />
 
-                            <!--
-                            <TextView
-                                android:id="@+id/txt_estcivil"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text=""
-                                android:textColor="@color/text_silver"
-                                android:textSize="14sp" />
-                                -->
                             <Spinner
                                 android:id="@+id/txt_estcivil"
                                 android:layout_width="match_parent"
@@ -486,16 +440,6 @@
                                 android:clickable="false"
                                 android:entries="@array/estado_civil"/>
 
-
-                            <!--
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="50dp"
-                                android:text=""
-                                android:textColor="@color/text_silver"
-                                android:textSize="14sp" />
-                                -->
                         </LinearLayout>
 
                         <View
@@ -518,16 +462,6 @@
                                 android:textColor="@color/btn_login"
                                 android:textSize="14sp" />
 
-                            <!--
-                            <TextView
-                                android:id="@+id/txt_telefono"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text=""
-                                android:textColor="@color/text_silver"
-                                android:textSize="14sp" />
-                                -->
                             <EditText
                                 android:id="@+id/txt_telefono"
                                 android:layout_width="match_parent"

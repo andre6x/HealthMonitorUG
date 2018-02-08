@@ -28,22 +28,30 @@ import com.grupocisc.healthmonitor.login.activities.LoginAccountActivity;
 import com.grupocisc.healthmonitor.login.activities.LoginBackPassword;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class ProfileDataActivity extends AppCompatActivity {
-    TextView txt_name;
-    TextView txt_last_name;
-    EditText txt_email;
-    Spinner txt_sexo;
-    TextView txt_fecha;
-    EditText txt_altura;
-    TextView txt_peso;
-    //TextView txt_tipo_diabetes;
-    CheckBox chk_tipo_asma;
-    Spinner txt_estcivil;
-    EditText txt_telefono;
-    TextView txt_pais;
-    private CardView card_change_pass;
-    private CardView card_update_data;
+
+    @BindView(R.id.txt_name) TextView txt_name;
+    @BindView(R.id.txt_last_name) TextView txt_last_name;
+    @BindView(R.id.txt_email) EditText txt_email;
+    @BindView(R.id.txt_sexo) Spinner txt_sexo;
+    @BindView(R.id.spinnerDiabetes) Spinner spinnerDiabetes;
+    @BindView(R.id.txt_fecha) TextView txt_fecha;
+    @BindView(R.id.txt_altura) EditText txt_altura;
+    @BindView(R.id.txt_peso) TextView txt_peso;
+    @BindView(R.id.chkAsma) CheckBox chk_tipo_asma;
+    @BindView(R.id.txt_estcivil) Spinner txt_estcivil;
+    @BindView(R.id.txt_telefono) EditText txt_telefono;
+    @BindView(R.id.txt_pais) TextView txt_pais;
+    @BindView(R.id.editionBtn) ImageView editionButton;
+    @BindView(R.id.card_change_pass) CardView card_change_pass;
+    @BindView(R.id.card_update_data) CardView card_update_data;
+
+    boolean _isEnabled=false;
     public String Nombre = "";
     public String Apellido = "";
     public String Email = "";
@@ -61,7 +69,7 @@ public class ProfileDataActivity extends AppCompatActivity {
     String  tdiabetes="";
     int idTipoDiabetes=0;
     int tieneAsma=0;
-    Spinner spinnerDiabetes;
+    //Spinner spinnerDiabetes;
     String[] tipoDiabetes = new String[]{
             "Tipo 1",
             "Tipo 2",
@@ -74,27 +82,16 @@ public class ProfileDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_datata_activity);
 
+        ButterKnife.bind(this);
+
         Utils.SetStyleToolbarLogo(this);
         //setea el color de la imagen
         ImageView perfil_user = (ImageView) findViewById(R.id.img_icon);
         perfil_user.setColorFilter(perfil_user.getContext().getResources().getColor(R.color.btn_login), PorterDuff.Mode.SRC_ATOP);
 
-        card_change_pass = (CardView) findViewById(R.id.card_change_pass);
-        card_update_data = (CardView) findViewById(R.id.card_update_data);
-
-        txt_name = (TextView) findViewById(R.id.txt_name);
-        txt_last_name = (TextView) findViewById(R.id.txt_last_name);
-        txt_email = (EditText) findViewById(R.id.txt_email);
-        txt_sexo = (Spinner) findViewById(R.id.txt_sexo);
-        txt_fecha = (TextView) findViewById(R.id.txt_fecha);
-        txt_altura = (EditText) findViewById(R.id.txt_altura);
-        txt_peso = (TextView) findViewById(R.id.txt_peso);
-        //txt_tipo_diabetes = (TextView) findViewById(R.id.txt_tipo_diabetes);
-        chk_tipo_asma = (CheckBox) findViewById(R.id.chkAsma);
-        txt_estcivil = (Spinner) findViewById(R.id.txt_estcivil);
-        txt_telefono = (EditText) findViewById(R.id.txt_telefono);
-        txt_pais = (TextView) findViewById(R.id.txt_pais);
-        user_avatar = (ImageView) findViewById(R.id.user_avatar);
+        txt_sexo.setEnabled(_isEnabled);
+        txt_estcivil.setEnabled(_isEnabled);
+        spinnerDiabetes.setEnabled(_isEnabled);
 
 
         //OBTENER DATA DE PREFERENCIA
@@ -175,20 +172,6 @@ public class ProfileDataActivity extends AppCompatActivity {
 
         setSpinner();
 
-        card_change_pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callChangePass();
-            }
-        });
-
-        card_update_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actualizaDatos();
-            }
-        });
-
         if(TipoDiabetesP.equals("11")){
             spinnerDiabetes.setSelection(0);
         }else if(TipoDiabetesP.equals("12")){
@@ -198,12 +181,6 @@ public class ProfileDataActivity extends AppCompatActivity {
         }else if(TipoDiabetesP.equals("14")){
             spinnerDiabetes.setSelection(3);
         }
-
-
-        this.txt_sexo.setEnabled(false);
-        this.txt_estcivil.setEnabled(false);
-        this.spinnerDiabetes.setEnabled(false);
-        this.chk_tipo_asma.setEnabled(false);
     }
 
     //se ejecuta al seleccionar el icon back del toolbar
@@ -214,18 +191,19 @@ public class ProfileDataActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @OnClick(R.id.card_change_pass)
     public void callChangePass() {
         Intent i = new Intent(ProfileDataActivity.this, LoginBackPassword.class);
         startActivity(i);
     }
 
     public void setSpinner(){
-        spinnerDiabetes = (Spinner) findViewById(R.id.spinnerDiabetes);
         ArrayAdapter<String> spinnerArrayAdapterDiabetes = new ArrayAdapter<String>(this, R.layout.custom_textview_to_spinner,tipoDiabetes );
         spinnerArrayAdapterDiabetes.setDropDownViewResource(R.layout.custom_textview_to_spinner);
         spinnerDiabetes.setAdapter(spinnerArrayAdapterDiabetes);
     }
 
+    @OnClick(R.id.card_update_data)
     public void actualizaDatos(){
         String msg = "";
         if(this.txt_email.getText().toString().trim().isEmpty()){
@@ -252,7 +230,7 @@ public class ProfileDataActivity extends AppCompatActivity {
             Estado civil --> txt_estcivil.getSelectedItem().toString().trim()
             Telefono --> txt_telefono.getText().toString().trim()
             */
-            Utils.generarSweetAlertDialogError(ProfileDataActivity.this, "HealthMonitorUG", "Datos actualizados");
+            Utils.generarAlerta(ProfileDataActivity.this, "HealthMonitorUG", "Datos actualizados");
         }
     }
 
@@ -286,18 +264,28 @@ public class ProfileDataActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("ResourceAsColor")
-    public void habilitaCampos(View view){
-        this.txt_email.setEnabled(true);
-        this.txt_altura.setEnabled(true);
-        this.txt_telefono.setEnabled(true);
-        this.txt_sexo.setEnabled(true);
-        this.txt_estcivil.setEnabled(true);
-        this.spinnerDiabetes.setEnabled(true);
-        this.chk_tipo_asma.setEnabled(true);
+    //@SuppressLint("ResourceAsColor")
 
-        this.txt_email.setBackgroundResource(R.color.silver_fondo);
-        this.txt_altura.setBackgroundResource(R.color.silver_fondo);
-        this.txt_telefono.setBackgroundResource(R.color.silver_fondo);
+    @OnClick(R.id.editionBtn)
+    public void habilitaCampos(){
+        _isEnabled = !_isEnabled;
+        //txt_email.setEnabled(_isEnabled);
+        txt_altura.setEnabled(_isEnabled);
+        txt_telefono.setEnabled(_isEnabled);
+        txt_sexo.setEnabled(_isEnabled);
+        txt_estcivil.setEnabled(_isEnabled);
+        spinnerDiabetes.setEnabled(_isEnabled);
+        chk_tipo_asma.setEnabled(_isEnabled);
+
+        if(_isEnabled){
+            //txt_email.setBackgroundResource(R.color.silver_fondo);
+            txt_altura.setBackgroundResource(R.color.silver_fondo);
+            txt_telefono.setBackgroundResource(R.color.silver_fondo);
+        }
+        else {
+            //txt_email.setBackgroundResource(R.color.transparent);
+            txt_altura.setBackgroundResource(R.color.transparent);
+            txt_telefono.setBackgroundResource(R.color.transparent);
+        }
     }
 }

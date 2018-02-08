@@ -127,12 +127,12 @@ public class LoginBackPassword extends AppCompatActivity {
     }
 
     //se ejecuta al seleccionar el icon back del toolbar
-   /* @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==android.R.id.home)
             this.finish();
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     private void showLoadingDialog() {
         pDialog.getProgressHelper().setBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
