@@ -1,30 +1,20 @@
 package com.grupocisc.healthmonitor.Profile;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Spinner;
-import android.widget.ArrayAdapter;
-import android.widget.AdapterView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.grupocisc.healthmonitor.Home.activities.MainActivity;
 import com.grupocisc.healthmonitor.R;
-import com.grupocisc.healthmonitor.Utils.SharedPreferencesManager;
 import com.grupocisc.healthmonitor.Utils.Utils;
-import com.grupocisc.healthmonitor.login.activities.LoginAccountActivity;
 import com.grupocisc.healthmonitor.login.activities.LoginBackPassword;
 import com.squareup.picasso.Picasso;
 
@@ -52,10 +42,10 @@ public class ProfileDataActivity extends AppCompatActivity {
     @BindView(R.id.card_update_data) CardView card_update_data;
 
     boolean _isEnabled=false;
-    public String Nombre = "";
-    public String Apellido = "";
+    public String name = "";
+    public String _lastName = "";
     public String Email = "";
-    public String Anio = "";
+    public String year = "";
     public String Peso = "";
     public String TipoDiabetesP = "";
     public String TipoAsma = "";
@@ -66,11 +56,11 @@ public class ProfileDataActivity extends AppCompatActivity {
     public String Pais = "";
     private String enviaSexo = "";
     private ImageView user_avatar;
-    String  tdiabetes="";
+    //String  tdiabetes="";
     int idTipoDiabetes=0;
     int tieneAsma=0;
     //Spinner spinnerDiabetes;
-    String[] tipoDiabetes = new String[]{
+    String[] diabetesType = new String[]{
             "Tipo 1",
             "Tipo 2",
             "Gestacional",
@@ -98,11 +88,11 @@ public class ProfileDataActivity extends AppCompatActivity {
         if (Utils.getEmailFromPreference(this) != null)
             Email = Utils.getEmailFromPreference(this);
         if (Utils.getNombreFromPreference(this) != null)
-            Nombre = Utils.getNombreFromPreference(this);
+            name = Utils.getNombreFromPreference(this);
         if (Utils.getApellidoFromPreference(this) != null)
-            Apellido = Utils.getApellidoFromPreference(this);
+            _lastName = Utils.getApellidoFromPreference(this);
         if (Utils.getAnioFromPreference(this) != null)
-            Anio = Utils.getAnioFromPreference(this);
+            year = Utils.getAnioFromPreference(this);
         if (Utils.getPesoFromPreference(this) != null)
             Peso = Utils.getPesoFromPreference(this);
         if (Utils.getTipoDiabetesFromPreference(this) != null)
@@ -126,12 +116,12 @@ public class ProfileDataActivity extends AppCompatActivity {
 
         if (Utils.getEmailFromPreference(this) != null) {
             //setear texto del layout
-            String valores = Anio.toString().substring(2, 3);
-            if (valores.equals("/")) {
-                txt_fecha.setText(Anio);
+            String dateValues = year.substring(2, 3);
+            if (dateValues.equals("/")) {
+                txt_fecha.setText(year);
             } else {
-                String fecha = Anio.toString().substring(8, 10) + "/" + Anio.toString().substring(5, 7) + "/" + Anio.toString().substring(0, 4);
-                txt_fecha.setText(fecha);
+                String date = year.substring(8, 10) + "/" + year.substring(5, 7) + "/" + year.substring(0, 4);
+                txt_fecha.setText(date);
             }
 
             String sex = Sexo;
@@ -142,19 +132,15 @@ public class ProfileDataActivity extends AppCompatActivity {
                 Sexo = "FEMENINO";
                 txt_sexo.setSelection(1);
             }
-            txt_name.setText(Nombre);
-            txt_last_name.setText(Apellido);
+            txt_name.setText(name);
+            txt_last_name.setText(_lastName);
             txt_email.setText(Email);
-            //txt_sexo.setText(Sexo);
             txt_altura.setText(Altura);
             txt_peso.setText(Peso + " kg");
-            //txt_tipo_diabetes.setText(TipoDiabetesP);
             chk_tipo_asma.setChecked(false);
             if(TipoAsma.equals("true"))
                 chk_tipo_asma.setChecked(true);
 
-
-            //txt_estcivil.setText(EstCivil);
             if(EstCivil.equals("Soltero")){
                 txt_estcivil.setSelection(0);
             }else if(EstCivil.equals("Casado")){
@@ -198,7 +184,7 @@ public class ProfileDataActivity extends AppCompatActivity {
     }
 
     public void setSpinner(){
-        ArrayAdapter<String> spinnerArrayAdapterDiabetes = new ArrayAdapter<String>(this, R.layout.custom_textview_to_spinner,tipoDiabetes );
+        ArrayAdapter<String> spinnerArrayAdapterDiabetes = new ArrayAdapter<String>(this, R.layout.custom_textview_to_spinner, diabetesType);
         spinnerArrayAdapterDiabetes.setDropDownViewResource(R.layout.custom_textview_to_spinner);
         spinnerDiabetes.setAdapter(spinnerArrayAdapterDiabetes);
     }
