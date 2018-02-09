@@ -90,11 +90,9 @@ public interface IPushNotification {
     class rows implements Serializable{
         @Getter
         @Setter
-        String recommendations;
+        public String recommendations;
 
-        @Getter
-        @Setter
-        int recommendationsId;
+
 
 
     }

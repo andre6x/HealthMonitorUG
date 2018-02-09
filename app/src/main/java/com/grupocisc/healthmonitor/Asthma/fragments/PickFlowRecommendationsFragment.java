@@ -70,7 +70,6 @@ public class PickFlowRecommendationsFragment extends Fragment implements PickFlo
 
     @Override
     public void onItemClicked(View view, int position) {
-        int idMenu = rowsRecommendations.get(position).getId() ;
         Intent intent = new Intent(getActivity(), AsthmaRegistry.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("car", rowsRecommendations.get(position) ) ;
@@ -97,11 +96,11 @@ public class PickFlowRecommendationsFragment extends Fragment implements PickFlo
             //validar si en la tabla ahi datos mayor a 0
 
 
-            IPushNotification.Recommendation rowPrueba = new IPushNotification.Recommendation();
-            rowPrueba.content = "Recomendacion de prueba";
-            rowPrueba.id = 1;
 
-            rowsRecommendations.add(rowPrueba);
+            //rowPrueba.content = "Recomendacion de prueba";
+            //rowPrueba.id = 1;
+
+            //rowsRecommendations.add(rowPrueba);
 
 
             IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
@@ -114,9 +113,24 @@ public class PickFlowRecommendationsFragment extends Fragment implements PickFlo
                         Log.e(TAG, "Tips Respuesta exitosa");
                         recomendacionRequest = response.body();
                         if (recomendacionRequest != null && recomendacionRequest.rows.size() > 0 ) {
+                            int idx=0;
+                            for (IPushNotification.rows registro : recomendacionRequest.rows) {
+                                idx++;
+                                IPushNotification.Recommendation rowIngresa  = new IPushNotification.Recommendation();
+                                rowIngresa.id = idx;
+                                rowIngresa.content = registro.recommendations;
+                                rowsRecommendations.add(rowIngresa);
+                            }
                             //showLayout();
                             //setear el adaptador con los datos
-                            //callsetAdapter();
+                            int tamaño = rowsRecommendations.size();
+                            for(int i = 0 ; i < tamaño ; i++){
+                                Log.e(TAG,"id:" + rowsRecommendations.get(i).getId() +"-" + rowsRecommendations.get(i).getContent());
+                            }
+                            if(tamaño > 0) {
+                                //setear el adaptador con los datos
+                                callsetAdapter();
+                            }
                         }else{
                             //showRetry();
                         }
@@ -136,14 +150,7 @@ public class PickFlowRecommendationsFragment extends Fragment implements PickFlo
 
 
 
-            int tamaño = rowsRecommendations.size();
-            for(int i = 0 ; i < tamaño ; i++){
-                Log.e(TAG,"id:" + rowsRecommendations.get(i).getId() +"-" + rowsRecommendations.get(i).getContent());
-            }
-            if(tamaño > 0) {
-                //setear el adaptador con los datos
-                callsetAdapter();
-            }
+
 
 
 
