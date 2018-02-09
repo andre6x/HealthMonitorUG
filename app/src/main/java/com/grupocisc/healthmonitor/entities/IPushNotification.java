@@ -8,7 +8,9 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -64,15 +66,65 @@ public interface IPushNotification {
 
 
 
-    @GET("")
-    Call<List<Recommendation>> getRecommendations(@Query("id_patient") String id_patient, @Query("id_section")int id_section);
-    class Recommendation implements Serializable{
+
+    @POST("controlServices/diabetes/patientUsers/recommendations")
+    Call<RecommendationRequest> getRecommendations(@Body() ParamRequest parametros);
+    class RecommendationRequest implements Serializable{
         @Getter
         @Setter
-        String content;
+        String resultDescription;
 
         @Getter
         @Setter
-        int id;
+        int idCodResult;
+
+        @Getter
+        @Setter
+        public List<rows> rows;
+
+
+
+
     }
+
+    class rows implements Serializable{
+        @Getter
+        @Setter
+        public String recommendations;
+
+
+
+
+    }
+
+
+    class Recommendation implements Serializable{
+        @Getter
+        @Setter
+        public String content;
+
+        @Getter
+        @Setter
+        public int id;
+    }
+
+    class ParamRequest implements Serializable{
+
+        public ParamRequest(String identifier, int idSection)
+        {
+
+            this.identifier = identifier;
+            this.idSection = idSection;
+        }
+        @Getter
+        @Setter
+        public String identifier;
+
+        @Getter
+        @Setter
+        public int idSection;
+    }
+
+
+
 }

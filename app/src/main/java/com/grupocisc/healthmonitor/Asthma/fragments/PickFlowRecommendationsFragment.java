@@ -13,14 +13,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Asthma.activities.PickFlowActivity;
 import com.grupocisc.healthmonitor.Asthma.activities.AsthmaRegistry;
 import com.grupocisc.healthmonitor.Asthma.adapters.PickFlowRecommendationsAdapter;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.entities.IPushNotification;
 
+
+
+import java.util.ArrayList;
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 
 public class PickFlowRecommendationsFragment extends Fragment implements PickFlowRecommendationsAdapter.MyViewHolder.ClickListener {
@@ -28,8 +35,10 @@ public class PickFlowRecommendationsFragment extends Fragment implements PickFlo
     private String TAG = "PickFlowRecoFragment";
     private RecyclerView recyclerView;
     private PickFlowRecommendationsAdapter adapter;
-    private static List<IPushNotification.Recommendation> rowsRecommendations;
 
+    private static List<IPushNotification.Recommendation> rowsRecommendations;
+    private IPushNotification.RecommendationRequest recomendacionRequest;
+    Call<IPushNotification.RecommendationRequest> call_1;
     //private OnFragmentInteractionListener mListener;
 
     public PickFlowRecommendationsFragment() {
@@ -47,7 +56,8 @@ public class PickFlowRecommendationsFragment extends Fragment implements PickFlo
 
         View contentView = inflater.inflate(R.layout.fragment_recomendations, container, false);
         recyclerView = (RecyclerView) contentView.findViewById(R.id.recycler_view);
-
+        rowsRecommendations = new ArrayList<IPushNotification.Recommendation>();
+        selectRecomendationsDB();
         return contentView;
     }
 
@@ -60,7 +70,6 @@ public class PickFlowRecommendationsFragment extends Fragment implements PickFlo
 
     @Override
     public void onItemClicked(View view, int position) {
-        int idMenu = rowsRecommendations.get(position).getId() ;
         Intent intent = new Intent(getActivity(), AsthmaRegistry.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("car", rowsRecommendations.get(position) ) ;
@@ -79,6 +88,79 @@ public class PickFlowRecommendationsFragment extends Fragment implements PickFlo
             getActivity().startActivity(intent);
         }
 
+    }
+
+    public  void selectRecomendationsDB(){
+
+        try {
+            //validar si en la tabla ahi datos mayor a 0
+
+
+
+            //rowPrueba.content = "Recomendacion de prueba";
+            //rowPrueba.id = 1;
+
+            //rowsRecommendations.add(rowPrueba);
+
+
+            IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
+
+            call_1 = notifiMensajes.getRecommendations(new IPushNotification.ParamRequest("DIANA_SILVAM@HOTMAIL.COM",3));
+            call_1.enqueue(new Callback<IPushNotification.RecommendationRequest>() {
+                @Override
+                public void onResponse(Call<IPushNotification.RecommendationRequest> call, Response<IPushNotification.RecommendationRequest> response) {
+                    if(response.isSuccessful()) {
+                        Log.e(TAG, "Tips Respuesta exitosa");
+                        recomendacionRequest = response.body();
+                        if (recomendacionRequest != null && recomendacionRequest.rows.size() > 0 ) {
+                            int idx=0;
+                            for (IPushNotification.rows registro : recomendacionRequest.rows) {
+                                idx++;
+                                IPushNotification.Recommendation rowIngresa  = new IPushNotification.Recommendation();
+                                rowIngresa.id = idx;
+                                rowIngresa.content = registro.recommendations;
+                                rowsRecommendations.add(rowIngresa);
+                            }
+                            //showLayout();
+                            //setear el adaptador con los datos
+                            int tamaño = rowsRecommendations.size();
+                            for(int i = 0 ; i < tamaño ; i++){
+                                Log.e(TAG,"id:" + rowsRecommendations.get(i).getId() +"-" + rowsRecommendations.get(i).getContent());
+                            }
+                            if(tamaño > 0) {
+                                //setear el adaptador con los datos
+                                callsetAdapter();
+                            }
+                        }else{
+                            //showRetry();
+                        }
+                    }
+                    else
+                    {    //showRetry();
+                        Log.e(TAG, "Tips Error en la petición");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<IPushNotification.RecommendationRequest> call, Throwable t) {
+                    //showRetry();
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+       } catch (Exception e) {
+            Log.e(TAG, "Error" + e.toString());
+        }
     }
 
 
