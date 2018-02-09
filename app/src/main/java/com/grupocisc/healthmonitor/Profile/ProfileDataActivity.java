@@ -1,10 +1,12 @@
 package com.grupocisc.healthmonitor.Profile;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -13,17 +15,26 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.R;
 import com.grupocisc.healthmonitor.Utils.Utils;
+import com.grupocisc.healthmonitor.entities.IProfileData;
+import com.grupocisc.healthmonitor.entities.ProfileData;
 import com.grupocisc.healthmonitor.login.activities.LoginBackPassword;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ProfileDataActivity extends AppCompatActivity {
+
+    static final String TAG = "ProfileDataActivity";
+    public ProgressDialog Dialog;
 
     @BindView(R.id.txt_name) TextView txt_name;
     @BindView(R.id.txt_last_name) TextView txt_last_name;
@@ -56,9 +67,13 @@ public class ProfileDataActivity extends AppCompatActivity {
     public String Pais = "";
     private String enviaSexo = "";
     private ImageView user_avatar;
+
+    Call<ProfileData> _updateRequest;
+    ProfileData _profileData;
+
     //String  tdiabetes="";
     int idTipoDiabetes=0;
-    int tieneAsma=0;
+    Boolean hasAsthma;
     //Spinner spinnerDiabetes;
     String[] diabetesType = new String[]{
             "Tipo 1",
@@ -73,6 +88,8 @@ public class ProfileDataActivity extends AppCompatActivity {
         setContentView(R.layout.profile_datata_activity);
 
         ButterKnife.bind(this);
+
+        Dialog = new ProgressDialog(this);
 
         Utils.SetStyleToolbarLogo(this);
         //setea el color de la imagen
@@ -204,7 +221,32 @@ public class ProfileDataActivity extends AppCompatActivity {
         }else{
             getIdSexo();
             getIdTipoDiabetes();
-            getTieneAsma();
+            getHasAsthma();
+
+            IProfileData _data = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IProfileData.class);
+            _updateRequest = _data.updateProfileData(new ProfileData(Email,enviaSexo,Float.parseFloat(Altura), idTipoDiabetes, hasAsthma,EstCivil,Telefono));
+            _updateRequest.enqueue(new Callback<ProfileData>() {
+                @Override
+                public void onResponse(Call<ProfileData> call, Response<ProfileData> response) {
+                    if(response.isSuccessful()){
+                        _profileData =null;
+                        _profileData = response.body();
+                        postEnviaData();
+                    }else {
+                        showLayoutDialog();
+                        Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo));
+                        Log.e(TAG, "Error en la petición call_3");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ProfileData> call, Throwable t) {
+                    showLayoutDialog();
+                    Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo) + " o revise su conexión a internet");
+                    t.printStackTrace();
+                    Log.e(TAG, "Error en la petición onFailure");
+                }
+            });
 
             //Variables para enviarla al sevidor
             /*
@@ -216,8 +258,13 @@ public class ProfileDataActivity extends AppCompatActivity {
             Estado civil --> txt_estcivil.getSelectedItem().toString().trim()
             Telefono --> txt_telefono.getText().toString().trim()
             */
-            Utils.generarAlerta(ProfileDataActivity.this, "HealthMonitorUG", "Datos actualizados");
+            //Utils.generarAlerta(ProfileDataActivity.this, "HealthMonitorUG", "Datos actualizados");
         }
+    }
+
+    private void showLayoutDialog() {
+        if (Dialog != null)
+            Dialog.dismiss();
     }
 
     private void getIdTipoDiabetes(){
@@ -242,18 +289,18 @@ public class ProfileDataActivity extends AppCompatActivity {
         }
     }
 
-    private void getTieneAsma(){
+    private void getHasAsthma(){
         if(this.chk_tipo_asma.isChecked()){
-            tieneAsma = 1;
+            hasAsthma = true;
         }else{
-            tieneAsma = 0;
+            hasAsthma = false;
         }
     }
 
     //@SuppressLint("ResourceAsColor")
 
     @OnClick(R.id.editionBtn)
-    public void habilitaCampos(){
+    public void enableFields(){
         _isEnabled = !_isEnabled;
         //txt_email.setEnabled(_isEnabled);
         txt_altura.setEnabled(_isEnabled);
@@ -272,6 +319,19 @@ public class ProfileDataActivity extends AppCompatActivity {
             //txt_email.setBackgroundResource(R.color.transparent);
             txt_altura.setBackgroundResource(R.color.transparent);
             txt_telefono.setBackgroundResource(R.color.transparent);
+        }
+    }
+
+    public void postEnviaData() {
+        showLayoutDialog();
+        if (_profileData != null) {
+            /*if (mDesvDoctor.getIdCodResult() == 0) {
+                //DeletePreferencesCallMainActivity();
+            } else {
+                Utils.generarAlerta(DoctorRegistre.this, getString(R.string.txt_atencion), mDesvDoctor.getResultDescription());
+            }*/
+        } else {
+            Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo));
         }
     }
 }
