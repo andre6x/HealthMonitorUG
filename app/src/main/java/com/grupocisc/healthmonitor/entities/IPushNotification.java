@@ -106,6 +106,10 @@ public interface IPushNotification {
         @Getter
         @Setter
         public int id;
+
+//        @Getter
+//        @Setter
+//        public  String title;
     }
 
     class ParamRequest implements Serializable{
