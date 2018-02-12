@@ -103,16 +103,16 @@ public class PickFlowRecommendationsFragment extends Fragment {
 
 
 
-            //rowPrueba.content = "Recomendacion de prueba";
-            //rowPrueba.id = 1;
-
-            //rowsRecommendations.add(rowPrueba);
+            String usuario = "";
+            if(Utils.getAsmaFromPreference(getActivity())!=null) {
+                usuario = Utils.getEmailFromPreference(getActivity());
+            }
 
 
             if(hasAsthma){
                 IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
 
-                call_1 = notifiMensajes.getRecommendations(new IPushNotification.ParamRequest("DIANA_SILVAM@HOTMAIL.COM",4));
+                call_1 = notifiMensajes.getRecommendations(new IPushNotification.ParamRequest(usuario,4));
                 call_1.enqueue(new Callback<IPushNotification.RecommendationRequest>() {
                     @Override
                     public void onResponse(Call<IPushNotification.RecommendationRequest> call, Response<IPushNotification.RecommendationRequest> response) {
@@ -165,34 +165,12 @@ public class PickFlowRecommendationsFragment extends Fragment {
             }
 
 
-       } catch (Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "Error" + e.toString());
         }
     }
 
 
-//    public  void selectRecomendationsDB(){
-//        Log.e(TAG,"selectRecoGluDB");
-//        try {
-//            //validar si en la tabla ahi datos mayor a 0
-//            if (Utils.GetPickFlowFromDatabase(HealthMonitorApplicattion.getApplication().getPickFlowDao() ).size() > 0 ){
-//                //asignamos datos de la tabla a la lista de objeto
-//                rowsRecommendations = Utils.GetPickFlowFromDatabase(HealthMonitorApplicattion.getApplication().getPickFlowDao() );
-//                //obtenemos el tamaño de la listaDEobjetos , para recorrerlo
-//                //y presenta los datos de la tabla bd en el LOG
-//                int tamaño = rowsRecommendations.size();
-//                for(int i = 0 ; i < tamaño ; i++){
-//                    Log.e(TAG,"id:" + rowsRecommendations.get(i).getId() +"-" + rowsRecommendations.get(i).getContent());
-//                }
-//                if(tamaño > 0) {
-//                    //setear el adaptador con los datos
-//                    callsetAdapter();
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void callsetAdapter(){
         //validacion si se a iniciado el adapter

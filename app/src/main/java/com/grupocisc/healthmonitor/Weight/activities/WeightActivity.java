@@ -130,11 +130,14 @@ public class WeightActivity extends AppCompatActivity {
     }
 
 
+
+
+
     //setear adaptador viewpager
     void setUpTabs(){
         adapter =  new WMainPagerAdapter(this.getSupportFragmentManager(),Titles,Titles.length);
         pager.setAdapter(adapter);
-        pager.setOffscreenPageLimit(4);
+        //pager.setOffscreenPageLimit(4);
         tabs.setupWithViewPager(pager);
         setupTabIcons();
     }
