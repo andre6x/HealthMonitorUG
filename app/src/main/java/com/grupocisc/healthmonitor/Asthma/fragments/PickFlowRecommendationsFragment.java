@@ -72,13 +72,9 @@ public class PickFlowRecommendationsFragment extends Fragment {
         if(hasAsthma){
             IPushNotification.Recommendation r1 = new IPushNotification.Recommendation();
             r1.content = "Su flujo máximo está dentro de los parámetros establecidos";
-            //r1.title = "Filtrado de contenido";
 
             IPushNotification.Recommendation r2 = new IPushNotification.Recommendation();
             r2.content = "Debe evitar caminar por campos de flores";
-            //r2.title = "Filtrado de contenido";
-
-
             rowsRecommendations.add(r1);
             rowsRecommendations.add(r2);
         }
@@ -86,15 +82,6 @@ public class PickFlowRecommendationsFragment extends Fragment {
         selectRecomendationsDB();
         return contentView;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-
-
 
     public  void selectRecomendationsDB(){
 

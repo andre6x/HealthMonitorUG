@@ -155,8 +155,11 @@ public class ProfileDataActivity extends AppCompatActivity {
             txt_altura.setText(Altura);
             txt_peso.setText(Peso + " kg");
             chk_tipo_asma.setChecked(false);
-            if(TipoAsma.equals("true"))
+
+            if(TipoAsma.equals("1") || TipoAsma.equals("2"))
                 chk_tipo_asma.setChecked(true);
+            else
+                chk_tipo_asma.setChecked(false);
 
             if(EstCivil.equals("Soltero")){
                 txt_estcivil.setSelection(0);
