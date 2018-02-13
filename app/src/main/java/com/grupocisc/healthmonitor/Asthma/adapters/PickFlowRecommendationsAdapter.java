@@ -32,7 +32,7 @@ public class PickFlowRecommendationsAdapter extends RecyclerView.Adapter<PickFlo
     //private LayoutInflater mLayoutInflater;
 
 
-    public PickFlowRecommendationsAdapter(PickFlowRecommendationsFragment ctx, List<IPushNotification.Recommendation> rawRecomendations)
+    public PickFlowRecommendationsAdapter( PickFlowRecommendationsFragment ctx, List<IPushNotification.Recommendation> rawRecomendations)
     {
         this.context = ctx;
         this.rows = rawRecomendations;
