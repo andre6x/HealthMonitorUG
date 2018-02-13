@@ -75,12 +75,12 @@ public class ProfileDataActivity extends AppCompatActivity {
     int idTipoDiabetes=0;
     Boolean hasAsthma;
     //Spinner spinnerDiabetes;
-    String[] diabetesType = new String[]{
+    /*String[] diabetesType = new String[]{
             "Tipo 1",
             "Tipo 2",
             "Gestacional",
             "Sin diabetes"
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +173,7 @@ public class ProfileDataActivity extends AppCompatActivity {
             txt_pais.setText(Pais);
         }
 
-        setSpinner();
+        //setSpinner();
 
         if(TipoDiabetesP.equals("11")){
             spinnerDiabetes.setSelection(0);
@@ -200,11 +200,11 @@ public class ProfileDataActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void setSpinner(){
+    /*public void setSpinner(){
         ArrayAdapter<String> spinnerArrayAdapterDiabetes = new ArrayAdapter<String>(this, R.layout.custom_textview_to_spinner, diabetesType);
         spinnerArrayAdapterDiabetes.setDropDownViewResource(R.layout.custom_textview_to_spinner);
         spinnerDiabetes.setAdapter(spinnerArrayAdapterDiabetes);
-    }
+    }*/
 
     @OnClick(R.id.card_update_data)
     public void actualizaDatos(){
@@ -305,7 +305,7 @@ public class ProfileDataActivity extends AppCompatActivity {
         //txt_email.setEnabled(_isEnabled);
         txt_altura.setEnabled(_isEnabled);
         txt_telefono.setEnabled(_isEnabled);
-        txt_sexo.setEnabled(_isEnabled);
+        //txt_sexo.setEnabled(_isEnabled);
         txt_estcivil.setEnabled(_isEnabled);
         spinnerDiabetes.setEnabled(_isEnabled);
         chk_tipo_asma.setEnabled(_isEnabled);

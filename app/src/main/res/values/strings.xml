@@ -541,6 +541,13 @@
         <item>Femenino</item>
     </string-array>
 
+    <string-array name="diabetesTypes">
+        <item>Tipo 1</item>
+        <item>Tipo 2</item>
+        <item>Gestacional</item>
+        <item>Sin diabetes</item>
+    </string-array>
+
     <string-array name="estado_civil">
         <item>Soltero</item>
         <item>Casado</item>
