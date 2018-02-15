@@ -375,7 +375,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         StatusName = getResources().getString(R.string.txt_sta_increible);
         StatusName= String.format(String.valueOf(getResources().getColor(R.color.status_orange)));
 
-        IdStatus = 1;
+        IdStatus = 5;
 
         CustomDate.init();
 
@@ -390,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
         iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
         StatusName = getResources().getString(R.string.txt_sta_bien);
-        IdStatus = 2;
+        IdStatus = 4;
 
         CustomDate.init();
 
@@ -420,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_con));
         iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_sin));
         StatusName = getResources().getString(R.string.txt_sta_mal);
-        IdStatus = 4;
+        IdStatus = 2;
 
         CustomDate.init();
 
@@ -434,7 +434,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         iv_est_4.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_triste_sin));
         iv_est_5.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.estado_horrible_con));
         StatusName = getResources().getString(R.string.txt_sta_horrible);
-        IdStatus = 5;
+        IdStatus = 1;
 
         CustomDate.init();
 
