@@ -59,12 +59,12 @@ public class StateListAdapter extends RecyclerView.Adapter<StateListAdapter.MyVi
 //CAMBIO
         switch (rows.get(position).getIdStatus()) {
 
-            case 1:
+            case 5:
                 myViewHolder.txt_imagen.setImageResource(R.drawable.estado_increible_con);
                 myViewHolder.txt_estado.setTextColor(ContextCompat.getColor(context,R.color.status_orange));
                 myViewHolder.txt_estado.setText( "Increíble");
                 break;
-            case 2:
+            case 4:
                 myViewHolder.txt_imagen.setImageResource(R.drawable.estado_feliz_con);
                 myViewHolder.txt_estado.setTextColor(ContextCompat.getColor(context, R.color.status_green));
                 myViewHolder.txt_estado.setText("Bien");
@@ -74,12 +74,12 @@ public class StateListAdapter extends RecyclerView.Adapter<StateListAdapter.MyVi
                 myViewHolder.txt_estado.setTextColor(ContextCompat.getColor(context, R.color.status_purple));
                 myViewHolder.txt_estado.setText( "Normal");
                 break;
-            case 4:
+            case 2:
                 myViewHolder.txt_imagen.setImageResource(R.drawable.estado_triste_con);
                 myViewHolder.txt_estado.setTextColor(ContextCompat.getColor(context, R.color.status_blue));
                 myViewHolder.txt_estado.setText( "Mal");
                 break;
-            case 5:
+            case 1:
                 myViewHolder.txt_imagen.setImageResource(R.drawable.estado_horrible_con);
                 myViewHolder.txt_estado.setTextColor(ContextCompat.getColor(context, R.color.status_silver));
                 myViewHolder.txt_estado.setText( "Horrible");
