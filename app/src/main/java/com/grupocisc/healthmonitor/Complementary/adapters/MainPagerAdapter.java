@@ -44,15 +44,15 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
             CholesterolRecomendationsFragment tab3 = new CholesterolRecomendationsFragment();
             return tab3;
         }
-        else if(position ==2)             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             ComplHba1cListFragment tab2 = new ComplHba1cListFragment();
             return tab2;
         }
-        else {
+        /*else {
             Hba1cRecomendationsFragment tab3 = new Hba1cRecomendationsFragment();
             return tab3;
-        }
+        }*/
 
 
     }

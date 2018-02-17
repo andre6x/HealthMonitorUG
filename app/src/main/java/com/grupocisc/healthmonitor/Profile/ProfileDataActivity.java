@@ -36,8 +36,8 @@ public class ProfileDataActivity extends AppCompatActivity {
     static final String TAG = "ProfileDataActivity";
     public ProgressDialog Dialog;
 
-    @BindView(R.id.txt_name) TextView txt_name;
-    @BindView(R.id.txt_last_name) TextView txt_last_name;
+    @BindView(R.id.et_name) EditText txt_name;
+    @BindView(R.id.et_last_name) EditText txt_last_name;
     @BindView(R.id.txt_email) EditText txt_email;
     @BindView(R.id.txt_sexo) Spinner txt_sexo;
     @BindView(R.id.spinnerDiabetes) Spinner spinnerDiabetes;
@@ -305,21 +305,26 @@ public class ProfileDataActivity extends AppCompatActivity {
     @OnClick(R.id.editionBtn)
     public void enableFields(){
         _isEnabled = !_isEnabled;
+        txt_name.setEnabled(_isEnabled);
+        txt_last_name.setEnabled(_isEnabled);
         //txt_email.setEnabled(_isEnabled);
         txt_altura.setEnabled(_isEnabled);
         txt_telefono.setEnabled(_isEnabled);
-        //txt_sexo.setEnabled(_isEnabled);
         txt_estcivil.setEnabled(_isEnabled);
         spinnerDiabetes.setEnabled(_isEnabled);
         chk_tipo_asma.setEnabled(_isEnabled);
 
         if(_isEnabled){
             //txt_email.setBackgroundResource(R.color.silver_fondo);
+            txt_name.setBackgroundResource(R.color.silver_fondo);
+            txt_last_name.setBackgroundResource(R.color.silver_fondo);
             txt_altura.setBackgroundResource(R.color.silver_fondo);
             txt_telefono.setBackgroundResource(R.color.silver_fondo);
         }
         else {
             //txt_email.setBackgroundResource(R.color.transparent);
+            txt_name.setBackgroundResource(R.color.transparent);
+            txt_last_name.setBackgroundResource(R.color.transparent);
             txt_altura.setBackgroundResource(R.color.transparent);
             txt_telefono.setBackgroundResource(R.color.transparent);
         }

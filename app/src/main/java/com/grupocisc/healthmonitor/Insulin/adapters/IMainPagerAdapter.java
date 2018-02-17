@@ -39,12 +39,12 @@ public class IMainPagerAdapter extends FragmentStatePagerAdapter {
                 InsulinGraphicFragment tab3 = new InsulinGraphicFragment();
                 return tab3;
             }
-            case 2:{
+            /*case 2:{
                 InsulinRecommendationsFragment tab4 = new InsulinRecommendationsFragment();
                 return tab4;
 
 
-            }default:
+            }*/default:
                 return null;
         }
     }
