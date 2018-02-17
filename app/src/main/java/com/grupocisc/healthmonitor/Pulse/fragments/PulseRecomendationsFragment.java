@@ -38,6 +38,9 @@ public class PulseRecomendationsFragment extends Fragment {
     private IPushNotification.RecommendationRequest recomendacionRequest;
     Call<IPushNotification.RecommendationRequest> call_1;
     Call<IPushNotification.RecommendationRequest> call_2;
+    Call<IPushNotification.RecommendationRequest> call_3;
+    Call<IPushNotification.RecommendationRequest> call_4;
+
 
     //private OnFragmentInteractionListener mListener;
 
@@ -87,6 +90,156 @@ public class PulseRecomendationsFragment extends Fragment {
 
             call_1 = notifiMensajes.getRecommendations(new IPushNotification.ParamRequest(usuario, 1));
             call_1.enqueue(new Callback<IPushNotification.RecommendationRequest>() {
+                @Override
+                public void onResponse(Call<IPushNotification.RecommendationRequest> call, Response<IPushNotification.RecommendationRequest> response) {
+                    if (response.isSuccessful()) {
+                        Log.e(TAG, "Tips Respuesta exitosa");
+                        recomendacionRequest = response.body();
+                        if (recomendacionRequest != null) {
+                            if (recomendacionRequest.rows != null) {
+                                if (recomendacionRequest.rows.size() > 0) {
+                                    //si retorna informacion WS borrar los datos seteados
+
+                                    int idx = 0;
+                                    for (IPushNotification.rows registro : recomendacionRequest.rows) {
+                                        idx++;
+                                        IPushNotification.Recommendation rowIngresa = new IPushNotification.Recommendation();
+                                        rowIngresa.id = idx;
+                                        rowIngresa.content = registro.recommendations;
+                                        rowsRecommendations.add(rowIngresa);
+                                    }
+                                    //showLayout();
+                                    //setear el adaptador con los datos
+                                    int size = rowsRecommendations.size();
+                                    for (int i = 0; i < size; i++) {
+                                        Log.e(TAG, "id:" + rowsRecommendations.get(i).id + "-" + rowsRecommendations.get(i).content);
+                                    }
+                                    if (size > 0) {
+                                        //setear el adaptador con los datos
+                                        //callsetAdapter();
+                                    }
+                                }
+                            }
+
+                        } else {
+                            //showRetry();
+                        }
+
+
+                    } else {    //showRetry();
+                        Log.e(TAG, "Tips Error en la petición");
+                    }
+
+                    //Invocar servicio contentFiltering
+                    selectEstadisticas();
+
+                }
+
+                @Override
+                public void onFailure(Call<IPushNotification.RecommendationRequest> call, Throwable t) {
+                    //showRetry();
+                }
+
+
+            });
+
+
+        } catch (Exception e) {
+            Log.e(TAG, "Error" + e.toString());
+        }
+    }
+
+    public void selectEstadisticas() {
+
+        try {
+
+
+            String usuario = "";
+            if (Utils.getAsmaFromPreference(getActivity()) != null) {
+                usuario = Utils.getEmailFromPreference(getActivity());
+            }
+
+
+            IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
+
+
+            call_3 = notifiMensajes.getEstadisticas(new IPushNotification.ParamRequest(usuario, 1));
+            call_3.enqueue(new Callback<IPushNotification.RecommendationRequest>() {
+                @Override
+                public void onResponse(Call<IPushNotification.RecommendationRequest> call, Response<IPushNotification.RecommendationRequest> response) {
+                    if (response.isSuccessful()) {
+                        Log.e(TAG, "Tips Respuesta exitosa");
+                        recomendacionRequest = response.body();
+                        if (recomendacionRequest != null) {
+                            if (recomendacionRequest.rows != null) {
+                                if (recomendacionRequest.rows.size() > 0) {
+                                    //si retorna informacion WS borrar los datos seteados
+
+                                    int idx = 0;
+                                    for (IPushNotification.rows registro : recomendacionRequest.rows) {
+                                        idx++;
+                                        IPushNotification.Recommendation rowIngresa = new IPushNotification.Recommendation();
+                                        rowIngresa.id = idx;
+                                        rowIngresa.content = registro.recommendations;
+                                        rowsRecommendations.add(rowIngresa);
+                                    }
+                                    //showLayout();
+                                    //setear el adaptador con los datos
+                                    int size = rowsRecommendations.size();
+                                    for (int i = 0; i < size; i++) {
+                                        Log.e(TAG, "id:" + rowsRecommendations.get(i).id + "-" + rowsRecommendations.get(i).content);
+                                    }
+                                    if (size > 0) {
+                                        //setear el adaptador con los datos
+                                        //callsetAdapter();
+                                    }
+                                }
+                            }
+
+                        } else {
+                            //showRetry();
+                        }
+
+
+                    } else {    //showRetry();
+                        Log.e(TAG, "Tips Error en la petición");
+                    }
+
+                    //Invocar servicio contentFiltering
+                    selectDatamining();
+
+                }
+
+                @Override
+                public void onFailure(Call<IPushNotification.RecommendationRequest> call, Throwable t) {
+                    //showRetry();
+                }
+
+
+            });
+
+
+        } catch (Exception e) {
+            Log.e(TAG, "Error" + e.toString());
+        }
+    }
+
+    public void selectDatamining() {
+
+        try {
+
+
+            String usuario = "";
+            if (Utils.getAsmaFromPreference(getActivity()) != null) {
+                usuario = Utils.getEmailFromPreference(getActivity());
+            }
+
+
+            IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
+
+
+            call_4 = notifiMensajes.getDatamining(new IPushNotification.ParamRequest(usuario, 1));
+            call_4.enqueue(new Callback<IPushNotification.RecommendationRequest>() {
                 @Override
                 public void onResponse(Call<IPushNotification.RecommendationRequest> call, Response<IPushNotification.RecommendationRequest> response) {
                     if (response.isSuccessful()) {
