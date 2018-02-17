@@ -1,6 +1,9 @@
 package com.grupocisc.healthmonitor.Profile;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -9,6 +12,7 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -59,6 +63,12 @@ public class ProfileDataActivity extends AppCompatActivity {
     @BindView(R.id.editionBtn) ImageView editionButton;
     @BindView(R.id.card_change_pass) CardView card_change_pass;
     @BindView(R.id.card_update_data) CardView card_update_data;
+
+    private static final int DATE_DIALOG_ID = 1;
+    private int _year;
+    private int month;
+    private int day;
+    private String currentDate;
 
     boolean _isEnabled=false;
     public String name = "";
@@ -147,6 +157,9 @@ public class ProfileDataActivity extends AppCompatActivity {
             } else {
                 //String date = year.substring(8, 10) + "/" + year.substring(5, 7) + "/" + year.substring(0, 4);
                 String date = year;
+                _year = Integer.parseInt(year.substring(0, 4));
+                month = Integer.parseInt(year.substring(5, 7));
+                day = Integer.parseInt(year.substring(8, 10));
                 txt_fecha.setText(date);
             }
 
@@ -196,6 +209,12 @@ public class ProfileDataActivity extends AppCompatActivity {
         }else if(TipoDiabetesP.equals("14")){
             spinnerDiabetes.setSelection(3);
         }
+
+        txt_fecha.setOnClickListener(view -> {
+            if(_isEnabled){
+                showDialog(DATE_DIALOG_ID);
+            }
+        });
     }
 
     //se ejecuta al seleccionar el icon back del toolbar
@@ -243,7 +262,7 @@ public class ProfileDataActivity extends AppCompatActivity {
                     }else {
                         showLayoutDialog();
                         Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo));
-                        Log.e(TAG, "Error en la petición call_3");
+                        Log.e(TAG, "Error en la petición actualizacion de datos");
                     }
                 }
 
@@ -353,15 +372,57 @@ public class ProfileDataActivity extends AppCompatActivity {
         }
     }
 
+//    void ShowDatePickerDialog(){
+//        new DatePickerDialog(this).show();
+//    }
+
+    @Override
+    protected android.app.Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                return new DatePickerDialog(this, myDateSetListener, _year, month, day);
+        }
+        return null;
+    }
+
+    private void updateDisplay() {
+
+        //currentDate = year.substring(0, 4)+ "-" + year.substring(5, 7)+ "-" +year.substring(8, 10);
+        currentDate = new StringBuilder().append(_year).append("-")
+                .append(month + 1).append("-").append(day).toString();
+
+        Log.i("DATE", currentDate);
+    }
+
+    DatePickerDialog.OnDateSetListener myDateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker datePicker, int i, int j, int k) {
+
+            _year = i;
+            month = j;
+            day = k;
+            updateDisplay();
+            txt_fecha.setText(currentDate);
+        }
+    };
+
     public void postEnviaData() {
         showLayoutDialog();
         if (updateProfileResult != null) {
-            new SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE)
-            .setContentText("Los datos se han actualizado correctamente, debe volver a iniciar sesión")
-            .setConfirmText("OK")
-            .show();
-            //Toast.makeText(this,"",Toast.LENGTH_SHORT).show();
-            generateCerrar();
+            if(updateProfileResult.getRespuesta()){
+
+                new SweetAlertDialog(MainActivity.getInstance().getApplicationContext(),SweetAlertDialog.SUCCESS_TYPE)
+                        .setContentText("Los datos se han actualizado correctamente, debe volver a iniciar sesión")
+                        .setConfirmText("OK")
+                        .show();
+                //Toast.makeText(this,"",Toast.LENGTH_SHORT).show();
+                generateCerrar();
+
+            }
+            else {
+                Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo));
+            }
         } else {
             Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo));
         }

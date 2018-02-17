@@ -133,6 +133,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
 
+    static MainActivity _instance;
+    public static MainActivity getInstance(){
+        return  _instance;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -174,6 +179,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         iv_est_3 = (ImageView) findViewById(R.id.img_est_3);
         iv_est_4 = (ImageView) findViewById(R.id.img_est_4);
         iv_est_5 = (ImageView) findViewById(R.id.img_est_5);
+
+        _instance = this;
 
 
 //        File db =HealthMonitorApplicattion.getApplication().getDatabasePath("healthmonitorDB");
