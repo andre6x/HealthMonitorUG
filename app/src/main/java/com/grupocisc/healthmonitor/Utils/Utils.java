@@ -506,6 +506,19 @@ public class Utils {
         }
     }
 
+    public static void generarSweetAlertDialogSuccess(Activity act, String msm) {
+        if (!((Activity) act).isFinishing()) {
+            try {
+                new SweetAlertDialog(act, SweetAlertDialog.SUCCESS_TYPE)
+                        .setContentText(msm)
+                        .setConfirmText("Ok")
+                        .show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void generarSweetAlertDialogWarning(Activity act, String Title, String msm) {
         if (!((Activity) act).isFinishing()) {
             try {

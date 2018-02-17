@@ -264,6 +264,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:text=""
+                                android:padding="10dp"
                                 android:layout_gravity="center"
                                 android:textColor="@color/text_silver"
                                 android:textSize="14sp" />

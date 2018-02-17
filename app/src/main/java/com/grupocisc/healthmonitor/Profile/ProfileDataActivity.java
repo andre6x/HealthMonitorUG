@@ -1,11 +1,10 @@
 package com.grupocisc.healthmonitor.Profile;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -17,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.grupocisc.healthmonitor.HealthMonitorApplicattion;
 import com.grupocisc.healthmonitor.Home.activities.MainActivity;
@@ -37,7 +37,6 @@ import java.sql.SQLException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -158,7 +157,7 @@ public class ProfileDataActivity extends AppCompatActivity {
                 //String date = year.substring(8, 10) + "/" + year.substring(5, 7) + "/" + year.substring(0, 4);
                 String date = year;
                 _year = Integer.parseInt(year.substring(0, 4));
-                month = Integer.parseInt(year.substring(5, 7));
+                month = Integer.parseInt(year.substring(5, 7))-1;
                 day = Integer.parseInt(year.substring(8, 10));
                 txt_fecha.setText(date);
             }
@@ -250,7 +249,7 @@ public class ProfileDataActivity extends AppCompatActivity {
             getCivilState();
 
             IProfileData _data = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IProfileData.class);
-            ProfileData profileData = new ProfileData(txt_email.getText().toString(),txt_name.getText().toString(),txt_last_name.getText().toString(),txt_fecha.getText().toString().replace('/','-'),enviaSexo,EstCivil,txt_telefono.getText().toString(),25,1,Float.parseFloat(txt_altura.getText().toString()), idTipoDiabetes, hasAsthma);
+            ProfileData profileData = new ProfileData(txt_email.getText().toString(),txt_name.getText().toString(),txt_last_name.getText().toString(),txt_fecha.getText().toString().replace('/','-'),enviaSexo,EstCivil,txt_telefono.getText().toString(),getAge(),1,Float.parseFloat(txt_altura.getText().toString()), idTipoDiabetes, hasAsthma);
             _updateRequest = _data.updateProfileData(profileData);
             _updateRequest.enqueue(new Callback<UpdateProfileResult>() {
                 @Override
@@ -274,19 +273,40 @@ public class ProfileDataActivity extends AppCompatActivity {
                     Log.e(TAG, "Error en la petición onFailure");
                 }
             });
-
-            //Variables para enviarla al sevidor
-            /*
-            Email --> txt_email.getText().toString().trim()
-            Sexo --> enviaSexo
-            Altura --> txt_altura.getText().toString().trim()
-            Tipo de diabetes --> idTipoDiabetes
-            Asma --> tieneAsma
-            Estado civil --> txt_estcivil.getSelectedItem().toString().trim()
-            Telefono --> txt_telefono.getText().toString().trim()
-            */
-            //Utils.generarAlerta(ProfileDataActivity.this, "HealthMonitorUG", "Datos actualizados");
         }
+    }
+
+    int getAge() {
+        java.util.Calendar birthday = java.util.Calendar.getInstance();
+        birthday.set(_year, month, day);
+        //Date currentDate = new Date();
+
+        java.util.Calendar today = java.util.Calendar.getInstance();
+        java.util.Calendar birthDate = java.util.Calendar.getInstance();
+        birthDate.setTime(birthday.getTime());
+
+        if (birthDate.after(today)) {
+            throw new IllegalArgumentException("You don't exist yet");
+        }
+        int todayYear = today.get(java.util.Calendar.YEAR);
+        int birthDateYear = birthDate.get(java.util.Calendar.YEAR);
+        int todayDayOfYear = today.get(java.util.Calendar.DAY_OF_YEAR);
+        int birthDateDayOfYear = birthDate.get(java.util.Calendar.DAY_OF_YEAR);
+        int todayMonth = today.get(java.util.Calendar.MONTH);
+        int birthDateMonth = birthDate.get(java.util.Calendar.MONTH);
+        int todayDayOfMonth = today.get(java.util.Calendar.DAY_OF_MONTH);
+        int birthDateDayOfMonth = birthDate.get(java.util.Calendar.DAY_OF_MONTH);
+        int age = todayYear - birthDateYear;
+
+        // If birth date is greater than todays date (after 2 days adjustment of leap year) then decrement age one year
+        if ((birthDateDayOfYear - todayDayOfYear > 3) || (birthDateMonth > todayMonth)){
+            age--;
+
+            // If birth date and todays date are of same month and birth day of month is greater than todays day of month then decrement age
+        } else if ((birthDateMonth == todayMonth) && (birthDateDayOfMonth > todayDayOfMonth)){
+            age--;
+        }
+        return age;
     }
 
     private void showLayoutDialog() {
@@ -308,18 +328,19 @@ public class ProfileDataActivity extends AppCompatActivity {
         }
     }
 
+
     void getCivilState(){
         if(txt_estcivil.getSelectedItemPosition()==0){
-            EstCivil = "SOLTERO";
+            EstCivil = "Soltero";
         }
         else if(txt_estcivil.getSelectedItemPosition()==1){
-            EstCivil = "CASADO";
+            EstCivil = "Casado";
         }
         else if(txt_estcivil.getSelectedItemPosition()==2){
-            EstCivil = "VIUDO";
+            EstCivil = "Viudo";
         }
         else if(txt_estcivil.getSelectedItemPosition()==3){
-            EstCivil = "DIVORCIADO";
+            EstCivil = "Divorciado";
         }
         else {
             EstCivil = "En Unión de Hechos";
@@ -360,6 +381,7 @@ public class ProfileDataActivity extends AppCompatActivity {
             //txt_email.setBackgroundResource(R.color.silver_fondo);
             txt_name.setBackgroundResource(R.color.silver_fondo);
             txt_last_name.setBackgroundResource(R.color.silver_fondo);
+            txt_fecha.setBackgroundResource(R.color.silver_fondo);
             txt_altura.setBackgroundResource(R.color.silver_fondo);
             txt_telefono.setBackgroundResource(R.color.silver_fondo);
         }
@@ -367,6 +389,7 @@ public class ProfileDataActivity extends AppCompatActivity {
             //txt_email.setBackgroundResource(R.color.transparent);
             txt_name.setBackgroundResource(R.color.transparent);
             txt_last_name.setBackgroundResource(R.color.transparent);
+            txt_fecha.setBackgroundResource(R.color.transparent);
             txt_altura.setBackgroundResource(R.color.transparent);
             txt_telefono.setBackgroundResource(R.color.transparent);
         }
@@ -389,7 +412,7 @@ public class ProfileDataActivity extends AppCompatActivity {
 
         //currentDate = year.substring(0, 4)+ "-" + year.substring(5, 7)+ "-" +year.substring(8, 10);
         currentDate = new StringBuilder().append(_year).append("-")
-                .append(month + 1).append("-").append(day).toString();
+                .append(String.format("%02d", month + 1)).append("-").append(String.format("%02d",day)).toString();
 
         Log.i("DATE", currentDate);
     }
@@ -412,12 +435,9 @@ public class ProfileDataActivity extends AppCompatActivity {
         if (updateProfileResult != null) {
             if(updateProfileResult.getRespuesta()){
 
-                new SweetAlertDialog(MainActivity.getInstance().getApplicationContext(),SweetAlertDialog.SUCCESS_TYPE)
-                        .setContentText("Los datos se han actualizado correctamente, debe volver a iniciar sesión")
-                        .setConfirmText("OK")
-                        .show();
-                //Toast.makeText(this,"",Toast.LENGTH_SHORT).show();
                 generateCerrar();
+                //Utils.generarSweetAlertDialogSuccess(MainActivity.getInstance(),"Los datos se han actualizado correctamente, debe volver a iniciar sesión");
+                Toast.makeText(MainActivity.getInstance(),"Los datos se han actualizado correctamente, debe volver a iniciar sesión", Toast.LENGTH_LONG).show();
 
             }
             else {
