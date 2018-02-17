@@ -589,6 +589,7 @@
                     android:background="@drawable/bar_selector_white"
                     android:gravity="center"
                     android:text="@string/actualiza_datos"
+                    android:enabled="false"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
             </android.support.v7.widget.CardView>

@@ -116,6 +116,7 @@ public class ProfileDataActivity extends AppCompatActivity {
         txt_sexo.setEnabled(_isEnabled);
         txt_estcivil.setEnabled(_isEnabled);
         spinnerDiabetes.setEnabled(_isEnabled);
+        card_change_pass.setEnabled(_isEnabled);
 
 
         //OBTENER DATA DE PREFERENCIA
@@ -248,31 +249,36 @@ public class ProfileDataActivity extends AppCompatActivity {
             getHasAsthma();
             getCivilState();
 
-            IProfileData _data = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IProfileData.class);
-            ProfileData profileData = new ProfileData(txt_email.getText().toString(),txt_name.getText().toString(),txt_last_name.getText().toString(),txt_fecha.getText().toString().replace('/','-'),enviaSexo,EstCivil,txt_telefono.getText().toString(),getAge(),1,Float.parseFloat(txt_altura.getText().toString()), idTipoDiabetes, hasAsthma);
-            _updateRequest = _data.updateProfileData(profileData);
-            _updateRequest.enqueue(new Callback<UpdateProfileResult>() {
-                @Override
-                public void onResponse(Call<UpdateProfileResult> call, Response<UpdateProfileResult> response) {
-                    if(response.isSuccessful()){
-                        updateProfileResult =null;
-                        updateProfileResult = response.body();
-                        postEnviaData();
-                    }else {
-                        showLayoutDialog();
-                        Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo));
-                        Log.e(TAG, "Error en la petición actualizacion de datos");
+            if(_isEnabled){
+                IProfileData _data = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IProfileData.class);
+                ProfileData profileData = new ProfileData(txt_email.getText().toString(),txt_name.getText().toString(),txt_last_name.getText().toString(),txt_fecha.getText().toString().replace('/','-'),enviaSexo,EstCivil,txt_telefono.getText().toString(),getAge(),1,Float.parseFloat(txt_altura.getText().toString()), idTipoDiabetes, hasAsthma);
+                _updateRequest = _data.updateProfileData(profileData);
+                _updateRequest.enqueue(new Callback<UpdateProfileResult>() {
+                    @Override
+                    public void onResponse(Call<UpdateProfileResult> call, Response<UpdateProfileResult> response) {
+                        if(response.isSuccessful()){
+                            updateProfileResult =null;
+                            updateProfileResult = response.body();
+                            postEnviaData();
+                        }else {
+                            showLayoutDialog();
+                            Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo));
+                            Log.e(TAG, "Error en la petición actualizacion de datos");
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<UpdateProfileResult> call, Throwable t) {
-                    showLayoutDialog();
-                    Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo) + " o revise su conexión a internet");
-                    t.printStackTrace();
-                    Log.e(TAG, "Error en la petición onFailure");
-                }
-            });
+                    @Override
+                    public void onFailure(Call<UpdateProfileResult> call, Throwable t) {
+                        showLayoutDialog();
+                        Utils.generarAlerta(ProfileDataActivity.this, getString(R.string.txt_atencion), getString(R.string.text_error_metodo) + " o revise su conexión a internet");
+                        t.printStackTrace();
+                        Log.e(TAG, "Error en la petición onFailure");
+                    }
+                });
+            }
+            else {
+                Utils.generarAlerta(this,"No hay campos que han sido editados","");
+            }
         }
     }
 
@@ -368,6 +374,7 @@ public class ProfileDataActivity extends AppCompatActivity {
     @OnClick(R.id.editionBtn)
     public void enableFields(){
         _isEnabled = !_isEnabled;
+        card_change_pass.setEnabled(_isEnabled);
         txt_name.setEnabled(_isEnabled);
         txt_last_name.setEnabled(_isEnabled);
         //txt_email.setEnabled(_isEnabled);
@@ -436,7 +443,6 @@ public class ProfileDataActivity extends AppCompatActivity {
             if(updateProfileResult.getRespuesta()){
 
                 generateCerrar();
-                //Utils.generarSweetAlertDialogSuccess(MainActivity.getInstance(),"Los datos se han actualizado correctamente, debe volver a iniciar sesión");
                 Toast.makeText(MainActivity.getInstance(),"Los datos se han actualizado correctamente, debe volver a iniciar sesión", Toast.LENGTH_LONG).show();
 
             }
