@@ -267,7 +267,7 @@
     <string name="text_fecha">Fecha de Nacimiento:</string>
     <string name="text_sexo">Sexo:</string>
     <string name="text_altura">Altura:</string>
-    <string name="text_peso">Peso inicial:</string>
+    <string name="text_peso">Peso actual:</string>
     <string name="text_tipo_asma">Tipo Asma:</string>
     <string name="text_tipo_diabetes">Tipo Diabetes:</string>
     <string name="text_estcivil">Estado Civil:</string> <!-- CAMBIO AJOB-->
