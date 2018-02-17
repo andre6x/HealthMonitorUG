@@ -65,6 +65,8 @@ public interface IPushNotification {
     }
 
 
+    @POST("controlServices/diabetes/patientUsers/contentFiltering")
+    Call<RecommendationRequest> getFiltering(@Body() ParamRequest parametros);
 
 
     @POST("controlServices/diabetes/patientUsers/recommendations")

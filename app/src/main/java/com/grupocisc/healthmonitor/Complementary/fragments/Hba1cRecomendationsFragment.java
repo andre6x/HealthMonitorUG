@@ -36,6 +36,7 @@ public class Hba1cRecomendationsFragment extends Fragment  {
     private static List<IPushNotification.Recommendation> rowsRecommendations;
     private IPushNotification.RecommendationRequest recomendacionRequest;
     Call<IPushNotification.RecommendationRequest> call_1;
+    Call<IPushNotification.RecommendationRequest> call_2;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -55,19 +56,7 @@ public class Hba1cRecomendationsFragment extends Fragment  {
         View contentView = inflater.inflate(R.layout.fragment_recomendations, container, false);
         recyclerView = (RecyclerView) contentView.findViewById(R.id.recycler_view);
         rowsRecommendations = new ArrayList<>();
-        IPushNotification.Recommendation r1 = new IPushNotification.Recommendation();
-        r1.content = "Su HBA1C está dentro de los parámetros establecidos";
-        //r1.title = "Filtrado de contenido";
-
-        IPushNotification.Recommendation r2 = new IPushNotification.Recommendation();
-        r2.content = "Debe evitar comidas con mucha azucar";
-        //r2.title = "Filtrado de contenido";
-
-
-        rowsRecommendations.add(r1);
-        rowsRecommendations.add(r2);
         selectRecomendationsDB();
-
         return contentView;
     }
 
@@ -97,7 +86,7 @@ public class Hba1cRecomendationsFragment extends Fragment  {
 
                 IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
 
-                call_1 = notifiMensajes.getRecommendations(new IPushNotification.ParamRequest(usuario,4));
+                call_1 = notifiMensajes.getRecommendations(new IPushNotification.ParamRequest(usuario,5));
                 call_1.enqueue(new Callback<IPushNotification.RecommendationRequest>() {
                     @Override
                     public void onResponse(Call<IPushNotification.RecommendationRequest> call, Response<IPushNotification.RecommendationRequest> response) {
@@ -121,10 +110,7 @@ public class Hba1cRecomendationsFragment extends Fragment  {
                                         for(int i = 0 ; i < size ; i++){
                                             Log.e(TAG,"id:" + rowsRecommendations.get(i).id +"-" + rowsRecommendations.get(i).content);
                                         }
-                                        if(size > 0) {
-                                            //setear el adaptador con los datos
-                                            callsetAdapter();
-                                        }
+
                                     }
                                 }
 
@@ -136,6 +122,9 @@ public class Hba1cRecomendationsFragment extends Fragment  {
                         {    //showRetry();
                             Log.e(TAG, "Tips Error en la petición");
                         }
+
+                        //Invocar servicio contentFiltering
+                        selectFiltros();
                     }
 
                     @Override
@@ -144,9 +133,6 @@ public class Hba1cRecomendationsFragment extends Fragment  {
                     }
                 });
 
-                if(rowsRecommendations.size()>0){
-                    callsetAdapter(); // setea los datos quemados
-                }
 
 
 
@@ -155,6 +141,87 @@ public class Hba1cRecomendationsFragment extends Fragment  {
         }
     }
 
+    public  void selectFiltros(){
+
+        try {
+            //validar si en la tabla ahi datos mayor a 0
+
+
+
+            String usuario = "";
+            if(Utils.getAsmaFromPreference(getActivity())!=null) {
+                usuario = Utils.getEmailFromPreference(getActivity());
+            }
+
+
+
+            IPushNotification notifiMensajes = HealthMonitorApplicattion.getApplication().getRetrofitAdapter().create(IPushNotification.class);
+
+            call_2 = notifiMensajes.getFiltering(new IPushNotification.ParamRequest(usuario,5));
+            call_2.enqueue(new Callback<IPushNotification.RecommendationRequest>() {
+                @Override
+                public void onResponse(Call<IPushNotification.RecommendationRequest> call, Response<IPushNotification.RecommendationRequest> response) {
+                    if(response.isSuccessful()) {
+                        Log.e(TAG, "Tips Respuesta exitosa");
+                        recomendacionRequest = response.body();
+                        if (recomendacionRequest != null) {
+                            if(recomendacionRequest.rows!=null){
+                                if(recomendacionRequest.rows.size() > 0 ){
+                                    int idx=0;
+                                    for (IPushNotification.rows registro : recomendacionRequest.rows) {
+                                        idx++;
+                                        IPushNotification.Recommendation rowIngresa  = new IPushNotification.Recommendation();
+                                        rowIngresa.id = idx;
+                                        rowIngresa.content = registro.recommendations;
+                                        rowsRecommendations.add(rowIngresa);
+                                    }
+                                    //showLayout();
+                                    //setear el adaptador con los datos
+                                    int size = rowsRecommendations.size();
+                                    for(int i = 0 ; i < size ; i++){
+                                        Log.e(TAG,"id:" + rowsRecommendations.get(i).id +"-" + rowsRecommendations.get(i).content);
+                                    }
+
+                                }
+                            }
+
+                        }else{
+                            //showRetry();
+                        }
+                    }
+                    else
+                    {    //showRetry();
+                        Log.e(TAG, "Tips Error en la petición");
+                    }
+
+                    //Si no hay recomendaciones de ningun ws agregar por defecto
+                    if(rowsRecommendations.size()==0){
+                        IPushNotification.Recommendation r1 = new IPushNotification.Recommendation();
+                        r1.content = "Su HBA1C está dentro de los parámetros establecidos";
+
+                        IPushNotification.Recommendation r2 = new IPushNotification.Recommendation();
+                        r2.content = "Debe evitar comidas con mucha azucar";
+
+                        rowsRecommendations.add(r1);
+                        rowsRecommendations.add(r2);
+                    }
+                    callsetAdapter(); // Muestra los datos recuperados
+                }
+
+                @Override
+                public void onFailure(Call<IPushNotification.RecommendationRequest> call, Throwable t) {
+                    //showRetry();
+                }
+            });
+
+
+
+
+
+        } catch (Exception e) {
+            Log.e(TAG, "Error" + e.toString());
+        }
+    }
 
     public void callsetAdapter(){
         //validacion si se a iniciado el adapter
