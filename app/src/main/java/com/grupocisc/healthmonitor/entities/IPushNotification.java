@@ -51,6 +51,7 @@ public interface IPushNotification {
 
 
 
+
     @GET("controlProcesos/diabetes/procesos_oap/ejecuta_slc_tips")
     Call<List<TipsMensajes>> getTips (@Query("id_enfermedad") int id);
 
@@ -65,11 +66,18 @@ public interface IPushNotification {
     }
 
 
+    @POST("controlServices/diabetes/patientUsers/Datamining")
+    Call<RecommendationRequest> getDatamining(@Body() ParamRequest parametros);
+
+    @POST("controlServices/diabetes/patientUsers/Estatistics")
+    Call<RecommendationRequest> getEstadisticas(@Body() ParamRequest parametros);
+
+
     @POST("controlServices/diabetes/patientUsers/contentFiltering")
     Call<RecommendationRequest> getFiltering(@Body() ParamRequest parametros);
 
 
-    @POST("controlServices/diabetes/patientUsers/recommendations")
+    @POST("controlServices/diabetes/patientUsers/recommendationsTips")
     Call<RecommendationRequest> getRecommendations(@Body() ParamRequest parametros);
     class RecommendationRequest implements Serializable{
         @Getter
@@ -83,9 +91,6 @@ public interface IPushNotification {
         @Getter
         @Setter
         public List<rows> rows;
-
-
-
 
     }
 
