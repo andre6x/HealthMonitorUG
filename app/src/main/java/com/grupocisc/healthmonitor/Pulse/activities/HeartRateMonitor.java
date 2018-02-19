@@ -61,15 +61,13 @@ public class HeartRateMonitor extends AppCompatActivity implements LabelledSpinn
     private static Camera camera = null;
     private static View image = null;
     private static TextView text = null;
-    private EditText txt_concentration , txt_observation;
+    private EditText txt_observation;
     private EditText txt_maxpressure, txt_minpressure;
     private static String beatsPerMinuteValue="";
     private static PowerManager.WakeLock wakeLock = null;
-   // private static TextView mTxtVwStopWatch;
     private static int averageIndex = 0;
     private static final int averageArraySize = 4;
     private static final int[] averageArray = new int[averageArraySize];
-    private static String strSavedDoctorID="";
     private static Context parentReference = null;
     private int year, month, day, hour, minute;
     private String hora ="", fecha="";
@@ -79,7 +77,7 @@ public class HeartRateMonitor extends AppCompatActivity implements LabelledSpinn
     public static enum TYPE {
         GREEN, RED
     };
-    FloatingActionButton menu1,menu2,menu3 ;
+    FloatingActionButton menu1,menu2;
     private static TYPE currentType = TYPE.GREEN;
 
     public static TYPE getCurrent() {
@@ -499,10 +497,6 @@ public class HeartRateMonitor extends AppCompatActivity implements LabelledSpinn
                 try {
                     if (!txt_maxpressure.getText().toString().isEmpty() && Utils.isNumeric(txt_maxpressure.getText().toString()) &&
                             !txt_minpressure.getText().toString().isEmpty() && Utils.isNumeric(txt_minpressure.getText().toString())) {
-                        float maxpressure = Float.parseFloat(txt_maxpressure.getText().toString());//Float.parseFloat(txt_concentration.getText().toString())
-                        float minpressure = Float.parseFloat(txt_minpressure.getText().toString());
-
-                        if (validaRangos(maxpressure, minpressure)) {
                             //setear datos al objeto y guardar y BD
                             Utils.DbsavePulseFromDatabase(-1,
                                     concent,
@@ -518,30 +512,7 @@ public class HeartRateMonitor extends AppCompatActivity implements LabelledSpinn
 
 
                             nextAction();
-                        } else {
-                            Snackbar.make(view, "\n" + "Su P.A esta mal ingresada: " + "\n" + getString(R.string.ingrese), Snackbar.LENGTH_LONG)
-                                    .setAction("Ok", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                /*Intent it = new Intent(Settings.ACTION_WIFI_SETTINGS);
-                                startActivity(it);*/
-                                        }
-                                    })
-                                    .setActionTextColor(this.getResources().getColor(R.color.greenMenu))
-                                    .show();
-                        }
-                    } else {
-                        Snackbar.make(view, "\n" + "Su P.A esta mal ingresada: " + "\n" + getString(R.string.ingrese), Snackbar.LENGTH_LONG)
-                                .setAction("Ok", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                            /*Intent it = new Intent(Settings.ACTION_WIFI_SETTINGS);
-                            startActivity(it);*/
-                                    }
-                                })
-                                .setActionTextColor(this.getResources().getColor(R.color.greenMenu))
-                                .show();
-                    }
+                       }
 
                 } catch (Exception e) {
                     e.printStackTrace();
