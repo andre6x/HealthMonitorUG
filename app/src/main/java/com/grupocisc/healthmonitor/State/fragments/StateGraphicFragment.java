@@ -353,20 +353,20 @@ public class StateGraphicFragment extends  Fragment implements LabelledSpinner.O
             Log.e(TAG,"Tamaño estado:" + state );
 
             switch (state) {
-                case (1):
+                case (5):
 
                     colors.add(ContextCompat.getColor(getActivity(), R.color.status_orange));
                     break;
-                case 2:
+                case 4:
                     colors.add(ContextCompat.getColor(getActivity(), R.color.status_green));
                     break;
                 case 3:
                     colors.add(ContextCompat.getColor(getActivity(), R.color.status_purple));
                     break;
-                case 4:
+                case 2:
                     colors.add(ContextCompat.getColor(getActivity(), R.color.status_blue));
                     break;
-                case 5:
+                case 1:
                     colors.add(ContextCompat.getColor(getActivity(), R.color.status_silver));
                     break;
             }
