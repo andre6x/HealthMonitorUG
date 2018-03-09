@@ -370,7 +370,7 @@ public class PickFlowRecommendationsFragment extends Fragment {
 
 
                         //Si no hay recomendaciones de ningun ws agregar por defecto
-                        if(rowsRecommendations.size()==0){
+                        /*if(rowsRecommendations.size()==0){
                             IPushNotification.Recommendation r1 = new IPushNotification.Recommendation();
                             r1.content = "Su flujo máximo está dentro de los parámetros establecidos";
 
@@ -379,7 +379,7 @@ public class PickFlowRecommendationsFragment extends Fragment {
 
                             rowsRecommendations.add(r1);
                             rowsRecommendations.add(r2);
-                        }
+                        }*/
                         callsetAdapter(); // Muestra los datos recuperados
 
 
